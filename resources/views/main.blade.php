@@ -82,7 +82,7 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="#" aria-expanded="true">
+                <a class="nav-link" href="/pajak    " aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Pajak</span>
                 </a>
