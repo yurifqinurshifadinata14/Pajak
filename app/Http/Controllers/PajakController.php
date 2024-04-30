@@ -65,9 +65,8 @@ class PajakController extends Controller
      */
     public function edit(Pajak $pajak)
     {
-        $pajak = Pajak::find($pajak);
-        return view('pajak.pajaked',compact('pajaksub'));
         //
+        return view('pajak.pajakEdit', compact('pajak'));
     }
 
     /**
@@ -75,20 +74,8 @@ class PajakController extends Controller
      */
     public function update(Request $request, Pajak $pajak)
     {
-        $request->validate([
-            'nama_wp'=>'required',
-            'npwp'=>'required',
-            'no_hp'=>'required',
-            'no_efin'=>'required',
-            'gmail'=>'required',
-            'password'=>'required',
-            'nik'=>'required',
-            'alamat'=>'required',
-            'merk_dagang'=>'required',
-
-        ]);
-        
-        $result = Pajak::find($pajak)->update([
+        //
+        $pajak->update([
             'nama_wp' => $request->nama_wp,
             'npwp' => $request->npwp,
             'no_hp' => $request->no_hp,
@@ -100,8 +87,7 @@ class PajakController extends Controller
             'merk_dagang' => $request->merk_dagang,
         ]);
 
-        return redirect('/pajaksub')->with('success','Data berhasil diubah');
-        //
+        return redirect()->route('pajakSub');
     }
 
     /**
@@ -110,5 +96,7 @@ class PajakController extends Controller
     public function destroy(Pajak $pajak)
     {
         //
-    }
+        $pajak->delete();
+        return redirect()->route('pajakSub');
+}
 }

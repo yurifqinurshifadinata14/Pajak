@@ -35,7 +35,7 @@
         }
 
         .btn-navy:hover {
-            background-color: #c3d144;
+            background-color: #adbd1e; 
             border-color: #ffffff;
         }
 

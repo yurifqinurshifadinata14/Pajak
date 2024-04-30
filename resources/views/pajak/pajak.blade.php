@@ -52,7 +52,7 @@
                         <label for="merk_dagang">Merk Dagang</label>
                         <input type="text" class="form-control" id="merk_dagang" name="merk_dagang" placeholder="Merk Dagang">
                     </div>
-                    <button type="submit" href="/pajaksub" class="btn btn-navy">Submit</button>
+                    <button type="submit" class="btn btn-navy">Submit</button>
                 </form>
             </div>
         </div>
