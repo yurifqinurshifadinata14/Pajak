@@ -35,7 +35,7 @@
         }
 
         .btn-navy:hover {
-            background-color: #adbd1e; 
+            background-color: #adbd1e;
             border-color: #ffffff;
         }
 
@@ -56,8 +56,9 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-fw fa-user"></i>
+                <div class="sidebar-brand-icon bg-navy">
+                    {{-- <i class="fas fa-fw fa-user"></i> --}}
+                    <img src="logooo.png" class="img-fluid mx-auto bg-navy" alt="...">
                 </div>
                 <div class="sidebar-brand-text mx-3">Wajib Pajak</div>
             </a>
@@ -82,18 +83,23 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="/pajak    " aria-expanded="true">
+                <a class="nav-link" href="/pajak" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Pajak</span>
                 </a>
             </li>
 
-            <!-- Nav Item - Utilities Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
-                    aria-expanded="true" aria-controls="collapseUtilities">
-                    <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utilities</span>
+                <a class="nav-link" href="/jenis" aria-expanded="true">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Jenis Pajak</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/jenis" aria-expanded="true">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Status Pajak</span>
                 </a>
             </li>
 

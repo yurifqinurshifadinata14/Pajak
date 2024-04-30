@@ -3,39 +3,39 @@
 <main>
 <div class="container-fluid px-4">
     <h1 class="mt-4"> Data Diri</h1>
-    
+
     <div class="card mb-4">
         <div class="card-header">
             <i class="fas fa-table me-1"></i>
             Data Diri Pembayar
         </div>
         <div class="card-body">
+            <style>
+                .button-container {
+                    display: flex;
+                }
+
+                .my-table {
+                    width: 100%;
+                }
+
+                .my-table th,
+                .my-table td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: left;
+                }
+
+                .my-table th {
+                    background-color: #12094a;
+                    color: rgb(255, 255, 255);
+                }
+
+                .my-table tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+            </style>
 <table id="datatablesSimple" class="my-table">
-    <style>
-        .button-container {
-            display: flex;
-        }
-
-        .my-table {
-            width: 100%;
-        }
-
-        .my-table th,
-        .my-table td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-
-        .my-table th {
-            background-color: #12094a;
-            color: rgb(255, 255, 255);
-        }
-
-        .my-table tr:nth-child(even) {
-            background-color: #f2f2f2;
-        }
-    </style>
     <thead>
         <tr>
             <th>Nomor</th>
@@ -77,7 +77,7 @@
 
                 </div>
             </td>
-        </tr>       
+        </tr>
         @endforeach
     </tbody>
 </table>
