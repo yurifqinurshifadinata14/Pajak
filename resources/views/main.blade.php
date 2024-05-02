@@ -102,6 +102,12 @@
                     <span>Status Pajak</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/pph" aria-expanded="true">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>PPH</span>
+                </a>
+            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider">
