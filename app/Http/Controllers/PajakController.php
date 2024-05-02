@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Jenis;
 use App\Models\Pajak;
+use App\Models\Status;
 use Illuminate\Http\Request;
 
 class PajakController extends Controller
@@ -30,7 +32,8 @@ class PajakController extends Controller
      */
     public function store(Request $request)
     {
-        Pajak::create([
+        $pajak = Pajak::create([
+            'id_user' => null,
             'nama_wp' => $request->nama_wp,
             'npwp' => $request->npwp,
             'no_hp' => $request->no_hp,
@@ -40,6 +43,24 @@ class PajakController extends Controller
             'nik' => $request->nik,
             'alamat' => $request->alamat,
             'merk_dagang' => $request->merk_dagang,
+        ]);
+
+        Jenis::create([
+            'id_pajak' => $pajak->id,
+            'jenis' => $request->jenis,
+            'alamat' => $request->alamatBadan ? $request->alamatBadan : null,
+            'jabatan' => $request->jabatanBadan ? $request->jabatanBadan : null,
+            'saham' => $request->sahamBadan ? $request->sahamBadan : null,
+            'npwp' => $request->npwpBadan ? $request->npwpBadan : null,
+        ]);
+
+        Status::create([
+            'id_pajak' => $pajak->id,
+            'status' => $request->status,
+            'enofa_password' => $request->enofa_password ? $request->enofa_password : null,
+            'user_efaktur' => $request->user_efaktur ? $request->user_efaktur : null,
+            'passphrese' => $request->passphrese ? $request->passphrese : null,
+            'password_efaktur' => $request->password_efaktur ? $request->password_efaktur : null,
         ]);
 
         return redirect()->route('pajakSub');

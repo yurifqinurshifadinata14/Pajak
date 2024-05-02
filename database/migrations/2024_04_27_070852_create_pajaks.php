@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('pajaks', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('id_user')->nullable()->constrained('users');
             $table->string('nama_wp');
             $table->integer('npwp');
             $table->string('no_hp');
             $table->string('no_efin');
-            $table->string('gmail');
+            $table->string('gmail')->unique();
             $table->string('password');
             $table->integer('nik');
             $table->string('alamat');

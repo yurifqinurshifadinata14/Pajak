@@ -80,7 +80,7 @@ class JenisController extends Controller
     public function update(Request $request, Jenis $jenis)
     {
         //
-        Jenis::where('id', $id)->update([
+        Jenis::where('id', $jenis)->update([
 
         ]);
     }

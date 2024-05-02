@@ -16,6 +16,3 @@ Route::get('/pajaksub', [PajakController::class, 'pajaksub'])->name('pajakSub');
 Route::get('/pajakEdit/{pajak}', [PajakController::class, 'edit'])->name('pajakEdit');
 Route::put('/pajakUpdate/{pajak}', [PajakController::class, 'update'])->name('pajakUpdate');
 Route::delete('/pajakDelete/{pajak}', [PajakController::class, 'destroy'])->name('pajakDestroy');
-Route::get('/jenis', [JenisController::class, 'index'])->name('jenis');
-Route::post('/jenisstore', [JenisController::class, 'store'])->name('jenisStore');
-Route::get('/jenissub', [JenisController::class, 'jenissub'])->name('jenisSub');

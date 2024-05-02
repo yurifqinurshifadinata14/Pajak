@@ -13,11 +13,12 @@ return new class extends Migration
     {
         Schema::create('jenis', function (Blueprint $table) {
             $table->id();
-            $table->enum('jenis', ['Badan', 'Pribadi']);
-            $table->string('alamat');
-            $table->string('jabatan');
-            $table->integer('npwp');
-            $table->string('saham');
+            $table->foreignId('id_pajak')->constrained('pajaks');
+            $table->enum('jenis',['badan', 'pribadi']);
+            $table->string('jabatan')->nullable();
+            $table->string('alamat')->nullable();
+            $table->integer('npwp')->nullable();
+            $table->string('saham')->nullable();
             $table->timestamps();
         });
     }
