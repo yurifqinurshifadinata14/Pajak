@@ -103,6 +103,13 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/pph21" aria-expanded="true">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Pph21</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 

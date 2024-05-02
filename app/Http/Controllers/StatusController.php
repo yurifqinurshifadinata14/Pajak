@@ -12,6 +12,9 @@ class StatusController extends Controller
      */
     public function index()
     {
+        $status=Status::all();
+        return view('status.status', compact('status'));
+        // return view('status.status');
         //
     }
 
@@ -28,9 +31,27 @@ class StatusController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $status = $request->validate([
+        //     'status' => 'required|string',
+        //     'enofaPassword' => 'nullable|string'
+        // ]);
+
+        Status::create([
+            'status' => $request->status,
+            'enofaPassword' => $request->enofaPassword,
+            'passphrasePassword' => $request->passphrasePassword,
+            'userEfaktur' => $request->userEfaktur,
+            'passwordEfaktur' => $request->passwordEfaktur,
+        ]);
+            
+        return redirect()->route('statusSub');
     }
 
+    public function statussub()
+    {
+        $status = Status::all();
+        return view('status.statussub', compact('status'));
+    }
     /**
      * Display the specified resource.
      */
@@ -45,6 +66,8 @@ class StatusController extends Controller
     public function edit(Status $status)
     {
         //
+        $status = Status::find($status);
+        return view('status.statused',compact('statussub'));
     }
 
     /**
@@ -53,7 +76,11 @@ class StatusController extends Controller
     public function update(Request $request, Status $status)
     {
         //
+        Status::where('id', $status)->update([
+
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.
