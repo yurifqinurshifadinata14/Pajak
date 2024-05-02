@@ -35,52 +35,56 @@
                     background-color: #f2f2f2;
                 }
             </style>
-<table id="datatablesSimple" class="my-table">
-    <thead>
-        <tr>
-            <th>Nomor</th>
-            <th>Nama WP</th>
-            <th>NPWP</th>
-            <th>No Hp</th>
-            <th>No EFIN</th>
-            <th>Gmail</th>
-            <th>NIK</th>
-            <th>Alamat</th>
-            <th>Merk Dagang</th>
-            <th>Aksi</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($pajak as $p )
-        <tr>
-            <th scope="row">{{$loop->iteration}}</th>
-            <td>{{ $p->nama_wp }}</td>
-            <td>{{ $p->npwp }}</td>
-            <td>{{ $p->no_hp }}</td>
-            <td>{{ $p->no_efin }}</td>
-            <td>{{ $p->gmail }}</td>
-            <td>{{ $p->nik }}</td>
-            <td>{{ $p->alamat }}</td>
-            <td>{{ $p->merk_dagang }}</td>
-            <td>
-                <div class="button-container">
-                    <a href="{{route('pajakEdit', $p->id)}}" class="btn btn-sm btn-warning"><i
-                        class="fas fa-fw fa-solid fa-pen"></i> </a>
-                <form method="POST" action="{{route('pajakDestroy', $p->id)}}"
-                    style="display:inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-sm btn-danger"
-                        onclick="return confirm('Yakin mau hapus???')"><i
-                            class="fas fa-fw fa-solid fa-trash"></i> </button>
-                </form>
+            <table id="datatablesSimple" class="my-table">
+                <thead>
+                    <tr>
+                        <th>Nomor</th>
+                        <th>Nama WP</th>
+                        <th>Jenis WP</th>
+                        <th>Status WP</th>
+                        <th>NPWP</th>
+                        <th>No Hp</th>
+                        <th>No EFIN</th>
+                        <th>Gmail</th>
+                        <th>NIK</th>
+                        <th>Alamat</th>
+                        <th>Merk Dagang</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($pajak as $p )
+                    <tr>
+                        <th scope="row">{{$loop->iteration}}</th>
+                        <td>{{ $p->nama_wp }}</td>
+                        {{-- <td>{{ $p->jenis_wp }}</td>
+                        <td>{{ $p->status_wp }}</td> --}}
+                        <td>{{ $p->npwp }}</td>
+                        <td>{{ $p->no_hp }}</td>
+                        <td>{{ $p->no_efin }}</td>
+                        <td>{{ $p->gmail }}</td>
+                        <td>{{ $p->nik }}</td>
+                        <td>{{ $p->alamat }}</td>
+                        <td>{{ $p->merk_dagang }}</td>
+                        <td>
+                            <div class="button-container">
+                                <a href="{{route('pajakEdit', $p->id)}}" class="btn btn-sm btn-warning"><i
+                                    class="fas fa-fw fa-solid fa-pen"></i> </a>
+                            <form method="POST" action="{{route('pajakDestroy', $p->id)}}"
+                                style="display:inline;">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-sm btn-danger"
+                                    onclick="return confirm('Yakin mau hapus???')"><i
+                                        class="fas fa-fw fa-solid fa-trash"></i> </button>
+                            </form>
 
-                </div>
-            </td>
-        </tr>
-        @endforeach
-    </tbody>
-</table>
+                            </div>
+                       </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
     </div>
 </div>

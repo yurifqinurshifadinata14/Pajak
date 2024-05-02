@@ -21,6 +21,14 @@
                             <label for="nama">Nama WP</label>
                             <input type="text" class="form-control" id="nama_wp" name="nama_wp" value="{{ $pajak->nama_wp }}" placeholder="Nama WP">
                         </div>
+                        {{-- <div class="form-group">
+                            <label for="nama">Jenis WP</label>
+                            <input type="text" class="form-control" id="nama_wp" name="nama_wp" value="{{ $pajak->nama_wp }}" placeholder="Nama WP">
+                        </div>
+                        <div class="form-group">
+                            <label for="nama">Status WP</label>
+                            <input type="text" class="form-control" id="nama_wp" name="nama_wp" value="{{ $pajak->nama_wp }}" placeholder="Nama WP">
+                        </div> --}}
                         <div class="form-group">
                             <label for="npwp">NPWP</label>
                             <input type="text" class="form-control" id="npwp" name="npwp" value="{{ $pajak->npwp }}" placeholder="NPWP">

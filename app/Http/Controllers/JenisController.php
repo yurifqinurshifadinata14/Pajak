@@ -14,12 +14,6 @@ class JenisController extends Controller
     {
         //
         $jenis=Jenis::all();
-        // $alamat=Jenis::all();
-        // $jabatan=Jenis::all();
-        // $npwp=Jenis::all();
-        // $saham=Jenis::all();
-        // $jenis=DB::table('jenis')->get();
-        // return view('jenis.jenis');
         return view('jenis.jenis', compact('jenis'));
 
     }
@@ -91,5 +85,7 @@ class JenisController extends Controller
     public function destroy(Jenis $jenis)
     {
         //
+        $jenis->delete();
+        return redirect()->route('jenisSub');
     }
 }

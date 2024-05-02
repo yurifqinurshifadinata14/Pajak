@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Wajib Pajak</title>
-
+    <link rel="icon" href="/public/logo.png">
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin2/css/styles.css') }}" rel="stylesheet">
@@ -58,7 +58,7 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
                 <div class="sidebar-brand-icon bg-navy">
                     {{-- <i class="fas fa-fw fa-user"></i> --}}
-                    <img src="logooo.png" class="img-fluid mx-auto bg-navy" alt="...">
+                    <img src="logo.png" class="img-fluid mx-auto bg-navy" alt="...">
                 </div>
                 <div class="sidebar-brand-text mx-3">Wajib Pajak</div>
             </a>
@@ -103,6 +103,20 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/pph" aria-expanded="true">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Pph</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pphunifikasi" aria-expanded="true">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Pph Unifikasi</span>
+                </a>
+            </li>
+
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -144,7 +158,7 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="img/undraw_rocket.svg" alt="...">
+                <img class="sidebar-card-illustration mb-2" src="logo.png" alt="...">
                 <p class="text-center mb-2"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar pajak Anda!</p>
             </div>
 
@@ -270,7 +284,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Wajib Pajak</span>
                                 <img class="img-profile rounded-circle"
-                                    src="img/undraw_profile.svg">
+                                    src="logo.png">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
