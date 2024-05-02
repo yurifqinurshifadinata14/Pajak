@@ -29,26 +29,26 @@
                             </select>
                         </div>
                         <div id="jenisBadan" style="display:none;">
-                            <h6>Bagian Badan</h6>
+                            <h6>-- Bagian Badan --</h6>
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
                                 <input type="text" class="form-control" id="alamat" name="alamatBadan"
-                                placeholder="alamat">
+                                placeholder="Alamat">
                             </div>
                             <div class="form-group">
                                 <label for="jabatan">Jabatan</label>
                                 <input type="text" class="form-control" id="jabatan" name="jabatanBadan"
-                                    placeholder="jabatan">
+                                    placeholder="Jabatan">
                             </div>
                             <div class="form-group">
                                 <label for="npwp">NPWP</label>
                                 <input type="number" class="form-control" id="npwp" name="npwpBadan"
-                                    placeholder="npwp">
+                                    placeholder="NPWP">
                             </div>
                             <div class="form-group">
                                 <label for="saham">Saham</label>
                                 <input type="text" class="form-control" id="saham" name="sahamBadan"
-                                    placeholder="saham">
+                                    placeholder="Saham">
                             </div>
                         </div>
                         <div class="form-group">
@@ -60,29 +60,26 @@
                             </select>
                         </div>
                         <div id="statusPkp" style="display:none;">
-                            <h6>Bagian PKP</h6>
+                            <h6>-- Bagian PKP --</h6>
                             <div class="form-group">
                                 <label for="enofa_password">Enofa Password</label>
                                 <input type="password" class="form-control" id="enofa_password" name="enofa_password"
-                                placeholder="enofa password">
+                                placeholder="Enofa password">
                             </div>
                             <div class="form-group">
                                 <label for="passphrese">Passphrese</label>
                                 <input type="text" class="form-control" id="passphrese" name="passphrese"
-                                placeholder="passphrese">
+                                placeholder="Passphrese">
                             </div>
-                        </div>
-                        <div id="statusNonPkp" style="display:none;">
-                            <h6>Bagian Non PKP</h6>
                             <div class="form-group">
                                 <label for="user_efaktur">User Efaktur</label>
                                 <input type="text" class="form-control" id="user_efaktur" name="user_efaktur"
-                                    placeholder="user efaktur">
+                                    placeholder="User efaktur">
                             </div>
                             <div class="form-group">
                                 <label for="password_efaktur">Password Efaktur</label>
                                 <input type="password" class="form-control" id="password_efaktur" name="password_efaktur"
-                                    placeholder="password efaktur">
+                                    placeholder="Password efaktur">
                             </div>
                         </div>
                         <div class="form-group">
@@ -145,11 +142,6 @@
                 document.getElementById('statusPkp').style.display = 'block';
             } else {
                 document.getElementById('statusPkp').style.display = 'none';
-            }
-            if (value == 'non_pkp') {
-                document.getElementById('statusNonPkp').style.display = 'block';
-            } else {
-                document.getElementById('statusNonPkp').style.display = 'none';
             }
         }
     </script>
