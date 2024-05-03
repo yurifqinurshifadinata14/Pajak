@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,7 +13,7 @@ return new class extends Migration
         Schema::create('pajaks', function (Blueprint $table) {
             $table->id();
             $table->string('id_pajak');
-            $table->foreignId('id_user')->nullable()->constrained('users');
+            $table->string('id_user')->nullable();
             $table->string('nama_wp');
             $table->integer('npwp');
             $table->string('no_hp');

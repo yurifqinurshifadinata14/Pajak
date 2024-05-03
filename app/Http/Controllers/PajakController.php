@@ -15,8 +15,8 @@ class PajakController extends Controller
      */
     public function index()
     {
-        $pajak =  Pajak::all();
-        return view('pajak.pajak', compact ('pajak'));
+        $pajak = Pajak::all();
+        return view('pajak.pajak', compact('pajak'));
         //
     }
 
@@ -35,12 +35,12 @@ class PajakController extends Controller
     {
         $max = DB::table('pajaks')->select(DB::raw('MAX(RIGHT(id_pajak,3)) as autoid'));
         $kd = "";
-        
+
         if ($max->count() > 0) {
             foreach ($max->get() as $a) {
-                $tmp = ((int) $a->max) + 1;
+                $tmp = ((int) $a->autoid) + 1;
                 $kd = sprintf("%03s", $tmp);
-                $id_pajak = "P-".$kd;
+                $id_pajak = "P-" . $kd;
             }
         } else {
             $id_pajak = "P-001";
@@ -57,7 +57,7 @@ class PajakController extends Controller
         $pajak->nik = $request->nik;
         $pajak->alamat = $request->alamat;
         $pajak->merk_dagang = $request->merk_dagang;
-    
+
         $jenis = new Jenis();
         $jenis->id_pajak = $id_pajak;
         $jenis->jenis = $request->jenis;
@@ -65,28 +65,28 @@ class PajakController extends Controller
         $jenis->jabatan = $request->jabatanBadan;
         $jenis->saham = $request->sahamBadan;
         $jenis->npwp = $request->npwpBadan;
-    
-        $status = new Status(); 
+
+        $status = new Status();
         $status->id_pajak = $id_pajak;
         $status->status = $request->status;
         $status->enofa_password = $request->enofa_password;
         $status->user_efaktur = $request->user_efaktur;
-        $status->passphrase = $request->passphrase; 
+        $status->passphrese = $request->passphrese;
         $status->password_efaktur = $request->password_efaktur;
-    
+
         if ($pajak->save() && $jenis->save() && $status->save()) {
-    
-            return response([
-                "message" => "Pajak Created Successfully"
-            ], 201);
+
+            return redirect()->route('pajakSub');
+
         }
-    
-        return redirect()->route('pajakSub');
+
     }
 
     public function pajaksub()
     {
-        $pajak =  Pajak::all();
+        $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
+            ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
+            ->get();
         //dd($pajak);
         return view('pajak.pajaksub', compact('pajak'));
     }
@@ -138,5 +138,5 @@ class PajakController extends Controller
         //
         $pajak->delete();
         return redirect()->route('pajakSub');
-}
+    }
 }
