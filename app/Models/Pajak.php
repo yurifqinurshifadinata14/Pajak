@@ -9,4 +9,13 @@ class Pajak extends Model
 {
     use HasFactory;
     protected $guarded = [];
+    public function jenis()
+    {
+        return $this->hasOne(Jenis::class, 'id_pajak');
+    }
+
+    public function status()
+    {
+        return $this->hasOne(Status::class, 'id_pajak');
+    }
 }

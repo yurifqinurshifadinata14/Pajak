@@ -14,6 +14,8 @@
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin2/css/styles.css') }}" rel="stylesheet">
+    <!-- DataTables CSS -->
+    <link rel="stylesheet" type="css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">    
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" />
@@ -83,25 +85,12 @@
 
             <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link" href="/pajak" aria-expanded="true">
+                <a class="nav-link" href="/pajaksub" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
                     <span>Pajak</span>
                 </a>
             </li>
 
-            <li class="nav-item">
-                <a class="nav-link" href="/jenis" aria-expanded="true">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Jenis Pajak</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/jenis" aria-expanded="true">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Status Pajak</span>
-                </a>
-            </li>
             <li class="nav-item">
                 <a class="nav-link" href="/pph" aria-expanded="true">
                     <i class="fas fa-fw fa-cog"></i>
@@ -109,6 +98,19 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link" href="/pph21" aria-expanded="true">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>PPH 21</span>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="/pphunifikasi" aria-expanded="true">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>PPH Unifikasi</span>
+                </a>
+            </li>
             <!-- Divider -->
             <hr class="sidebar-divider">
 
@@ -355,6 +357,17 @@
             </div>
         </div>
     </div>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- DataTables JavaScript -->
+<script src="https://cdn.datatables.net/1.11.6/js/jquery.dataTables.js"></script>
+
+
+    <script>
+        const dataTable = new DataTable('#example');
+    </script>
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('sbadmin2/vendor/jquery/jquery.min.js') }}"></script>

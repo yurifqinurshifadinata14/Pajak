@@ -6,6 +6,7 @@ use App\Models\Jenis;
 use App\Models\Pajak;
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PajakController extends Controller
 {
@@ -32,43 +33,61 @@ class PajakController extends Controller
      */
     public function store(Request $request)
     {
-        $pajak = Pajak::create([
-            'id_user' => null,
-            'nama_wp' => $request->nama_wp,
-            'npwp' => $request->npwp,
-            'no_hp' => $request->no_hp,
-            'no_efin' => $request->no_efin,
-            'gmail' => $request->gmail,
-            'password' => $request->password,
-            'nik' => $request->nik,
-            'alamat' => $request->alamat,
-            'merk_dagang' => $request->merk_dagang,
-        ]);
+        $max = DB::table('pajaks')->select(DB::raw('MAX(RIGHT(id_pajak,3)) as autoid'));
+        $kd = "";
+        
+        if ($max->count() > 0) {
+            foreach ($max->get() as $a) {
+                $tmp = ((int) $a->max) + 1;
+                $kd = sprintf("%03s", $tmp);
+                $id_pajak = "P-".$kd;
+            }
+        } else {
+            $id_pajak = "P-001";
+        }
 
-        Jenis::create([
-            'id_pajak' => $pajak->id,
-            'jenis' => $request->jenis,
-            'alamat' => $request->alamatBadan ? $request->alamatBadan : null,
-            'jabatan' => $request->jabatanBadan ? $request->jabatanBadan : null,
-            'saham' => $request->sahamBadan ? $request->sahamBadan : null,
-            'npwp' => $request->npwpBadan ? $request->npwpBadan : null,
-        ]);
-
-        Status::create([
-            'id_pajak' => $pajak->id,
-            'status' => $request->status,
-            'enofa_password' => $request->enofa_password ? $request->enofa_password : null,
-            'user_efaktur' => $request->user_efaktur ? $request->user_efaktur : null,
-            'passphrese' => $request->passphrese ? $request->passphrese : null,
-            'password_efaktur' => $request->password_efaktur ? $request->password_efaktur : null,
-        ]);
-
+        $pajak = new Pajak;
+        $pajak->id_pajak = $id_pajak;
+        $pajak->nama_wp = $request->nama_wp;
+        $pajak->npwp = $request->npwp;
+        $pajak->no_hp = $request->no_hp;
+        $pajak->no_efin = $request->no_efin;
+        $pajak->gmail = $request->gmail;
+        $pajak->password = $request->password;
+        $pajak->nik = $request->nik;
+        $pajak->alamat = $request->alamat;
+        $pajak->merk_dagang = $request->merk_dagang;
+    
+        $jenis = new Jenis();
+        $jenis->id_pajak = $id_pajak;
+        $jenis->jenis = $request->jenis;
+        $jenis->alamat = $request->alamatBadan;
+        $jenis->jabatan = $request->jabatanBadan;
+        $jenis->saham = $request->sahamBadan;
+        $jenis->npwp = $request->npwpBadan;
+    
+        $status = new Status(); 
+        $status->id_pajak = $id_pajak;
+        $status->status = $request->status;
+        $status->enofa_password = $request->enofa_password;
+        $status->user_efaktur = $request->user_efaktur;
+        $status->passphrase = $request->passphrase; 
+        $status->password_efaktur = $request->password_efaktur;
+    
+        if ($pajak->save() && $jenis->save() && $status->save()) {
+    
+            return response([
+                "message" => "Pajak Created Successfully"
+            ], 201);
+        }
+    
         return redirect()->route('pajakSub');
     }
 
     public function pajaksub()
     {
         $pajak =  Pajak::all();
+        //dd($pajak);
         return view('pajak.pajaksub', compact('pajak'));
     }
 

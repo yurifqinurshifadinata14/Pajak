@@ -24,8 +24,8 @@
                             <label for="jenis">Jenis WP</label>
                             <select name="jenis" id="jenis" class="form-select" onchange="showInput(this)">
                                 <option selected disabled>--Select--</option>
-                                <option value="badan">Badan</option>
-                                <option value="pribadi">Pribadi</option>
+                                <option value="Badan">Badan</option>
+                                <option value="Pribadi">Pribadi</option>
                             </select>
                         </div>
                         <div id="jenisBadan" style="display:none;">
@@ -55,8 +55,8 @@
                             <label for="status">Status WP</label>
                             <select name="status" id="" class="form-select" onchange="showInput(this)">
                                 <option selected disabled>--Select--</option>
-                                <option value="pkp">PKP</option>
-                                <option value="non_pkp">Non_PKP</option>
+                                <option value="PKP">PKP</option>
+                                <option value="Non PKP">Non PKP</option>
                             </select>
                         </div>
                         <div id="statusPkp" style="display:none;">
@@ -133,12 +133,12 @@
     <script>
         function showInput(selectObject) {
             var value = selectObject.value;
-            if (value == 'badan') {
+            if (value == 'Badan') {
                 document.getElementById('jenisBadan').style.display = 'block';
             } else {
                 document.getElementById('jenisBadan').style.display = 'none';
             }
-            if (value == 'pkp') {
+            if (value == 'PKP') {
                 document.getElementById('statusPkp').style.display = 'block';
             } else {
                 document.getElementById('statusPkp').style.display = 'none';

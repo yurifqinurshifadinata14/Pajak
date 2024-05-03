@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('statuses', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pajak')->constrained('pajaks');
-            $table->enum('status',['pkp','non_pkp']);
+            $table->enum('status',['PKP','Non PKP']);
             $table->string('enofa_password')->nullable();
             $table->string('user_efaktur')->nullable();
             $table->string('passphrese')->nullable();

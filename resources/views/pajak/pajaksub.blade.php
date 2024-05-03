@@ -57,8 +57,8 @@
                     <tr>
                         <th scope="row">{{$loop->iteration}}</th>
                         <td>{{ $p->nama_wp }}</td>
-                        {{-- <td>{{ $p->jenis_wp }}</td>
-                        <td>{{ $p->status_wp }}</td> --}}
+                        <td>{{ $p->jenis->jenis }}</td>
+                        <td>{{ $p->Status->status }}</td>
                         <td>{{ $p->npwp }}</td>
                         <td>{{ $p->no_hp }}</td>
                         <td>{{ $p->no_efin }}</td>

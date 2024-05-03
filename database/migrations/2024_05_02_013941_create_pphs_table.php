@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('pphs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('id_pph')->nullable()->constrained('pph');
+            $table->foreignId('id_pph')->nullable()->constrained('pphs');
             $table->integer('ntpn');
             $table->integer('biaya_bulan');
             $table->integer('jumlah_bayar');

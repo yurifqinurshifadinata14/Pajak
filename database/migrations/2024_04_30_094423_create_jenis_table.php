@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jenis', function (Blueprint $table) {
             $table->id();
             $table->foreignId('id_pajak')->constrained('pajaks');
-            $table->enum('jenis',['badan', 'pribadi']);
+            $table->enum('jenis',['Badan', 'Pribadi']);
             $table->string('jabatan')->nullable();
             $table->string('alamat')->nullable();
             $table->integer('npwp')->nullable();

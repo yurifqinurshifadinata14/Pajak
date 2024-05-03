@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('pajaks', function (Blueprint $table) {
             $table->id();
+            $table->string('id_pajak');
             $table->foreignId('id_user')->nullable()->constrained('users');
             $table->string('nama_wp');
             $table->integer('npwp');
