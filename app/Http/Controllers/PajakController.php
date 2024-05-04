@@ -61,10 +61,10 @@ class PajakController extends Controller
         $jenis = new Jenis();
         $jenis->id_pajak = $id_pajak;
         $jenis->jenis = $request->jenis;
-        $jenis->alamat = $request->alamatBadan;
+        $jenis->alamatBadan = $request->alamatBadan;
         $jenis->jabatan = $request->jabatanBadan;
         $jenis->saham = $request->sahamBadan;
-        $jenis->npwp = $request->npwpBadan;
+        $jenis->npwpBadan = $request->npwpBadan;
 
         $status = new Status();
         $status->id_pajak = $id_pajak;
@@ -74,6 +74,7 @@ class PajakController extends Controller
         $status->passphrese = $request->passphrese;
         $status->password_efaktur = $request->password_efaktur;
 
+        //dd($pajak, $jenis, $status);
         if ($pajak->save() && $jenis->save() && $status->save()) {
 
             return redirect()->route('pajakSub');
@@ -91,6 +92,17 @@ class PajakController extends Controller
         return view('pajak.pajaksub', compact('pajak'));
     }
 
+    // public function jenissub()
+    // {
+    //     $jenis =  Pajak::all();
+    //     return view('jenis.jenissub', compact('jenis'));
+    // }
+
+    // public function statussub()
+    // {
+    //     $status = Pajak::all();
+    //     return view('status.statussub', compact('status'));
+    // }
 
     /**
      * Display the specified resource.

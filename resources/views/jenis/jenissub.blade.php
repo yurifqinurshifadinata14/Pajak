@@ -17,7 +17,7 @@
                     </h6>
                 </div>
                 <div class="card-body">
-                    <style>
+                    {{-- <style>
                         .button-container {
                             display: flex;
                         }
@@ -41,8 +41,8 @@
                         .my-table tr:nth-child(even) {
                             background-color: #f2f2f2;
                         }
-                    </style>
-                        <table id="datatablesSimple" class="my-table">
+                    </style> --}}
+                        <table id="datatables" class="table table-striped" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -59,12 +59,13 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$j->jenis}}</td>
-                                    <td>{{$j->alamat}}</td>
+                                    <td>{{$j->alamatBadan}}</td>
                                     <td>{{$j->jabatan}}</td>
-                                    <td>{{$j->npwp}}</td>
+                                    <td>{{$j->npwpBadan}}</td>
                                     <td>{{$j->saham}}</td>
                                     <td>
-                                        <a href="/hapus/{{ $j->id }}"class="btn btn-sm btn-danger"><i class="fas fa-fw fa-solid fa-trash"></i></a>
+                                        {{-- <a href="/hapus/{{ $j->id }}"class="btn btn-sm btn-danger"><i class="fas fa-fw fa-solid fa-trash"></i></a> --}}
+                                        {{-- <a href="{{ route('jenisEdit', $j->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a> --}}
                                     </td>
                                 </tr>
                                 @endforeach

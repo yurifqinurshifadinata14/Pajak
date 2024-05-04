@@ -52,13 +52,13 @@
                                 <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$s->status }}</td>
-                                    <td>{{$s->enofaPassword}}</td>
-                                    <td>{{$s->passphrasePassword }}</td>
-                                    <td>{{$s->userEfaktur }}</td>
-                                    <td>{{$s->passwordEfaktur}}</td>
+                                    <td>{{$s->enofa_password}}</td>
+                                    <td>{{$s->passphrese }}</td>
+                                    <td>{{$s->user_efaktur }}</td>
+                                    <td>{{$s->password_efaktur}}</td>
                                     <td>
-                                        <a href="/hapus/{{ $s->id }}" class=" btn btn-sm btn-danger">Hapus</a>
-                                    </td>
+                                        {{-- <a href="/hapus/{{ $j->id }}"class="btn btn-sm btn-danger"><i class="fas fa-fw fa-solid fa-trash"></i></a> --}}
+                                        {{-- <a href="{{ route('statusEdit', $s->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>                                    </td> --}}
                                 </tr>
                                 @endforeach
                             </tbody>

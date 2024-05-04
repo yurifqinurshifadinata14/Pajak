@@ -14,10 +14,10 @@ return new class extends Migration {
             $table->id();
             $table->string('id_pajak');
             $table->enum('jenis', ['Badan', 'Pribadi']);
-            $table->string('jabatan')->nullable();
-            $table->string('alamat')->nullable();
-            $table->integer('npwp')->nullable();
-            $table->string('saham')->nullable();
+            $table->string('jabatan') ->nullable();
+            $table->string('alamatBadan') ->nullable();
+            $table->integer('npwpBadan') ->nullable();
+            $table->string('saham') ->nullable();
             $table->timestamps();
         });
     }

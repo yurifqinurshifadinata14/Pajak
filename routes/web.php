@@ -3,6 +3,7 @@
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\PajakController;
 use App\Http\Controllers\JenisController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\Pph21Controller;
 use App\Http\Controllers\PphController;
 use App\Http\Controllers\PphunifikasiController;
@@ -11,8 +12,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-
-
 
 Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 
@@ -43,3 +42,9 @@ Route::get('/pph21sub', [Pph21Controller::class, 'pph21sub'])->name('pph21Sub');
 Route::delete('/pph21Delete/{ppph21}', [Pph21Controller::class, 'destroy'])->name('pph21Destroy');
 Route::get('/pph21Edit/{pph21}', [Pph21Controller::class, 'edit'])->name('pph21Edit');
 Route::put('/pph21iUpdate/{pph21}', [Pph21Controller::class, 'update'])->name('pph21Update');
+
+Route::post('/pajakstore', [PajakController::class,'store'])->name('pajakStore');
+
+Route::get('/jenissub', [JenisController::class, 'jenissub'])->name('jenisSub');
+
+Route::get('/statussub', [StatusController::class, 'statussub'])->name('statusSub');

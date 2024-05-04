@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->integer('npwp');
             $table->string('no_hp');
             $table->string('no_efin');
-            $table->string('gmail')->unique();
+            $table->string('gmail');
             $table->string('password');
             $table->integer('nik');
             $table->string('alamat');
