@@ -36,9 +36,9 @@ class JenisController extends Controller
         //dd($request);
         Jenis::create([
             'jenis' => $request->jenis,
-            'alamat' => $request->alamat,
+            'alamatBadan' => $request->alamatBadan,
             'jabatan' => $request->jabatan,
-            'npwp' => $request->npwp,
+            'npwpBadan' => $request->npwpBadan,
             'saham' => $request->saham,
         ]);
         return redirect()->route('jenisSub');
@@ -65,7 +65,7 @@ class JenisController extends Controller
     {
         //
         $jenis = Jenis::find($jenis);
-        return view('jenis.jenised', compact('jenissub'));
+        return view('jenis.jenisEdit', compact('jenis'));
     }
 
     /**
@@ -76,7 +76,9 @@ class JenisController extends Controller
         //
         Jenis::where('id', $jenis)->update([
 
-        ]);
+            ]);
+
+            return redirect()->route('jenisSub');
     }
 
     /**

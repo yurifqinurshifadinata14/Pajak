@@ -22,14 +22,14 @@
                         <label for="jenis">Jenis</label>
                         <select class="form-select" id="jenis" name="jenis" value="{{ $jenis->jenis }}">
                             <option selected disabled>--- Select Jenis ---</option>
-                            <option value="badan" @if ($jenis->badan == 'badan') @endif>Badan</option>
-                            <option value="pribadi" @if ($jenis->pribadi == 'pribadi') @endif>Pribadi</option>
+                            <option value="Badan" @if ($jenis->Badan == 'Badan') @endif>Badan</option>
+                            <option value="Pribadi" @if ($jenis->Pribadi == 'Pribadi') @endif>Pribadi</option>
                         </select>
 
                         <div id="jenisBadan" style="display:none;" class="mt-3">
                             <div class="form-group">
                                 <label for="alamat">Alamat</label>
-                                <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $jenis->alamat }}" placeholder="Masukkan Alamat">
+                                <input type="text" class="form-control" id="alamat" name="alamatBadan" value="{{ $jenis->alamatBadan }}" placeholder="Masukkan Alamat">
                             </div>
                             <div class="form-group">
                                 <label for="jabatan">Jabatan</label>
@@ -37,7 +37,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="npwp">NPWP</label>
-                                <input type="number" class="form-control" id="npwp" name="npwp" value="{{ $jenis->npwp }}" placeholder="Masukkan NPWP">
+                                <input type="number" class="form-control" id="npwp" name="npwpBadan" value="{{ $jenis->npwpBadan }}" placeholder="Masukkan NPWP">
                             </div>
                             <div class="form-group">
                                 <label for="saham">Saham</label>
@@ -50,7 +50,7 @@
                                 var value = this.value;
                                 var badanInputs = document.getElementById('jenisBadan');
 
-                                if (value === 'badan') {
+                                if (value === 'Badan') {
                                     badanInputs.style.display = 'block';
                                 } else {
                                     badanInputs.style.display = 'none';

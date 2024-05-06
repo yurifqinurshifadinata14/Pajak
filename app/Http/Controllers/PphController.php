@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pph;
+use App\Models\Pajak;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PphController extends Controller
 {
@@ -13,7 +15,8 @@ class PphController extends Controller
     public function index()
     {
         $pph =  Pph::all();
-        return view ('pph.pph',compact('pph'));
+        $pajaks = Pajak::all();
+        return view ('pph.pph',compact('pph', 'pajaks'));
         //
     }
 
@@ -30,8 +33,22 @@ class PphController extends Controller
      */
     public function store(Request $request)
     {
+        $max = DB::table('pphs')->select(DB::raw('MAX(RIGHT(id_pph,3)) as autoid'));
+        $kd = "";
+
+        if ($max->count() > 0) {
+            foreach ($max->get() as $a) {
+                $tmp = ((int) $a->autoid) + 1;
+                $kd = sprintf("%03s", $tmp);
+                $id_pph = "PPH-" . $kd;
+            }
+        } else {
+            $id_pph = "PPH-001";
+        }
+
         $pph = Pph::create([
-            'id_pph' => null,
+            'id_pajak' => $request->id_pajak,
+            'id_pph' => $id_pph,
             'ntpn' => $request->ntpn,
             'biaya_bulan' => $request->biaya_bulan,
             'jumlah_bayar' => $request->jumlah_bayar,
@@ -43,7 +60,7 @@ class PphController extends Controller
 
     public function pphsub()
     {
-        $pph =  Pph::all();
+        $pph =  Pph::with('pajak')->get();
         return view('pph.pphsub', compact('pph'));
     }
 

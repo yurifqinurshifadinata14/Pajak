@@ -164,63 +164,66 @@
                             background-color: #f2f2f2;
                         }
                     </style>
-                    <table id="datatablesSimple" class="my-table">
-                        <thead>
-                            <tr>
-                                <th>Nomor</th>
-                                <th>Nama WP</th>
-                                <th>Jenis WP</th>
-                                <th>Status WP</th>
-                                <th>NPWP</th>
-                                <th>No Hp</th>
-                                <th>No EFIN</th>
-                                <th>Gmail</th>
-                                <th>NIK</th>
-                                <th>Alamat</th>
-                                <th>Merk Dagang</th>
-                                <th>Aksi</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($pajak as $p)
-                                <tr>
-                                    <th scope="row">{{ $loop->iteration }}</th>
-                                    <td>{{ $p->nama_wp }}</td>
-                                    <td>{{ $p->jenis }}</td>
-                                    <td>{{ $p->status }}</td>
-                                    <td>{{ $p->npwp }}</td>
-                                    <td>{{ $p->no_hp }}</td>
-                                    <td>{{ $p->no_efin }}</td>
-                                    <td>{{ $p->gmail }}</td>
-                                    <td>{{ $p->nik }}</td>
-                                    <td>{{ $p->alamat }}</td>
-                                    <td>{{ $p->merk_dagang }}</td>
-                                    <td>
-                                        <div class="button-container">
-                                            <div class="dropdown">
-                                                <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="fas fa-fw fa-solid fa-search"></i> </button>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                  <li><a class="dropdown-item" href="{{ route('jenisSub') }}" >Detail Jenis</a></li>
-                                                  <li><a class="dropdown-item" href="{{ route('statusSub') }}">Detail Status</a></li>
-                                                </ul>
-                                            </div>
-                                            <a href="{{ route('pajakEdit', $p->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                                            <form method="POST" action="{{ route('pajakDestroy', $p->id) }}"
-                                                style="display:inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                    onclick="return confirm('Yakin mau hapus???')"><i class="fas fa-fw fa-solid fa-trash"></i> </button>
-                                            </form>
-                                        </div>
+                    <div class="table-responsive">
 
-                                    </td>
+                        <table id="pajakTable" class="my-table">
+                            <thead>
+                                <tr>
+                                    <th>Nomor</th>
+                                    <th>Nama WP</th>
+                                    <th>Jenis WP</th>
+                                    <th>Status WP</th>
+                                    <th>NPWP</th>
+                                    <th>No Hp</th>
+                                    <th>No EFIN</th>
+                                    <th>Gmail</th>
+                                    <th>NIK</th>
+                                    <th>Alamat</th>
+                                    <th>Merk Dagang</th>
+                                    <th>Aksi</th>
                                 </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                            </thead>
+                            {{-- <tbody>
+                                @foreach ($pajak as $p)
+                                    <tr>
+                                        <th scope="row">{{ $loop->iteration }}</th>
+                                        <td>{{ $p->nama_wp }}</td>
+                                        <td>{{ $p->jenis }}</td>
+                                        <td>{{ $p->status }}</td>
+                                        <td>{{ $p->npwp }}</td>
+                                        <td>{{ $p->no_hp }}</td>
+                                        <td>{{ $p->no_efin }}</td>
+                                        <td>{{ $p->gmail }}</td>
+                                        <td>{{ $p->nik }}</td>
+                                        <td>{{ $p->alamat }}</td>
+                                        <td>{{ $p->merk_dagang }}</td>
+                                        <td>
+                                            <div class="button-container">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-fw fa-solid fa-search"></i> </button>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                      <li><a class="dropdown-item" href="{{ route('jenisSub') }}" >Detail Jenis</a></li>
+                                                      <li><a class="dropdown-item" href="{{ route('statusSub') }}">Detail Status</a></li>
+                                                    </ul>
+                                                </div>
+                                                <a href="{{ route('pajakEdit', $p->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                <form method="POST" action="{{ route('pajakDestroy', $p->id) }}"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Yakin mau hapus???')"><i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                                </form>
+                                            </div>
+    
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody> --}}
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
@@ -238,6 +241,97 @@
                     document.getElementById('statusPkp').style.display = 'none';
                 }
             }
+            
+            </script>
+        @push('script')
+        <script>
+            let pajak ={!! json_encode($pajak) !!}
+            console.log('ini pajak:',pajak)
+
+           $('#click').on('click',()=>{
+            alert('test')
+           })
+
+  
+
+           
+            $(document).ready( function () {
+                 const table = new DataTable('#pajakTable',{
+                        data:pajak,
+                        columns:[
+                            {
+                           data:'id'
+                        },
+                            {
+                            data:'nama_wp'
+                        },
+                            {
+                            data:'jenis'
+                        },
+                            {
+                            data:'status'
+                        },
+                            {
+                            data:'npwp'
+                        },
+                            {
+                            data:'no_hp'
+                        },
+                            {
+                            data:'no_efin'
+                        },
+                            {
+                            data:'gmail'
+                        },
+                            {
+                            data:'nik'
+                        },
+                            {
+                            data:'alamat'
+                        },
+                            {
+                            data:'merk_dagang'
+                        },
+                            {
+                                data:'id',
+                            render:(data)=>{
+                                return `<div class="button-container">
+                                                <div class="dropdown">
+                                                    <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="fas fa-fw fa-solid fa-search"></i> </button>
+                                                    </button>
+                                                    <ul class="dropdown-menu">
+                                                      <li><a class="dropdown-item" href="{{ route('jenisSub') }}" >Detail Jenis</a></li>
+                                                      <li><a class="dropdown-item" href="{{ route('statusSub') }}">Detail Status</a></li>
+                                                    </ul>
+                                                </div>
+                                                <a href="{{ route('pajakEdit', '') }}/${data}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                <form method="POST" action="{{ route('pajakDestroy', '') }}/${data}"
+                                                    style="display:inline;">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" class="btn btn-sm btn-danger"
+                                                        onclick="return confirm('Yakin mau hapus???')"><i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                                </form>
+                                            </div>`
+                            }
+                        },
+                    ]
+                    });
+
+                    let i = 1;
+ 
+ table
+     .cells(null, 0, { search: 'applied', order: 'applied' })
+     .every(function (cell) {
+         this.data(i++);
+     });
+        } );
+
+      
         </script>
+        
+
+        @endpush
     </main>
 @endsection

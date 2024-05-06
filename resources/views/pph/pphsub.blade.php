@@ -39,6 +39,7 @@
     <thead>
         <tr>
             <th>Nomor</th>
+            {{-- <th>Nama WP</th> --}}
             <th>NTPN</th>
             <th>Biaya Bulan</th>
             <th>Jumlah Bayar</th>
@@ -49,6 +50,7 @@
         @foreach ($pph as $pph )
         <tr>
             <th scope="row">{{$loop->iteration}}</th>
+            {{-- <td>{{ $pph->pajak->nama_wp }}</td> --}}
             <td>{{ $pph->ntpn }}</td>
             <td>{{ $pph->biaya_bulan }}</td>
             <td>{{ $pph->jumlah_bayar }}</td>
@@ -66,7 +68,7 @@
                 </form>
 
                 </div>
-            </td>
+            </td>
         </tr>
         @endforeach
     </tbody>

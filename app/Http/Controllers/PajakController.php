@@ -149,6 +149,8 @@ class PajakController extends Controller
     {
         //
         $pajak->delete();
+        Jenis::where('id_pajak', $pajak->id_pajak)->delete();
+        Status::where('id_pajak', $pajak->id_pajak)->delete();
         return redirect()->route('pajakSub');
     }
 }

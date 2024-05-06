@@ -51,7 +51,7 @@
                                     <th>Jabatan</th>
                                     <th>NPWP</th>
                                     <th>Saham</th>
-                                    <th>Aksi</th>
+                                    {{-- <th>Aksi</th> --}}
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,9 +64,17 @@
                                     <td>{{$j->npwpBadan}}</td>
                                     <td>{{$j->saham}}</td>
                                     <td>
-                                        {{-- <a href="/hapus/{{ $j->id }}"class="btn btn-sm btn-danger"><i class="fas fa-fw fa-solid fa-trash"></i></a> --}}
-                                        {{-- <a href="{{ route('jenisEdit', $j->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a> --}}
-                                    </td>
+                                        {{-- <div class="button-container">
+                                            <a href="{{ route('jenisEdit', $j->id) }}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                            <form method="POST" action="{{ route('pajakDestroy', $j->id) }}"
+                                                style="display:inline;">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                    onclick="return confirm('Yakin mau hapus???')"><i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                            </form>
+                                        </div> --}}
+
                                 </tr>
                                 @endforeach
                             </tbody>

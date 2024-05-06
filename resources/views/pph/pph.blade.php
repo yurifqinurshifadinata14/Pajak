@@ -17,6 +17,14 @@
                 <form action="{{route('pphStore')}}" method="post">
                     @csrf <!-- Laravel CSRF Protection -->
                     <div class="form-group">
+                        <label for="id_pajak">Nama WP</label>
+                        <select name="id_pajak" id="id_pajak" class="form-select">
+                            @foreach ($pajaks as $pajak)
+                                <option value="{{$pajak->id_pajak}}">{{$pajak->nama_wp}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="ntpn">NTPN</label>
                         <input type="number" class="form-control" id="ntpn" name="ntpn" placeholder="NTPN">
                     </div>
