@@ -107,8 +107,14 @@ class PajakController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Pajak $pajak)
+    public function show($id_pajak)
     {
+        $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
+            ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
+            ->where('pajaks.id_pajak', $id_pajak)
+            ->first();
+        // dd($pajak);
+        return view('pajak.pajakDetail', compact('pajak'));
         //
     }
 

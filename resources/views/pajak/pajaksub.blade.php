@@ -293,16 +293,15 @@
                             data:'merk_dagang'
                         },
                             {
-                                data:'id',
+                                data:'id_pajak',
                             render:(data)=>{
-                                return `<div class="button-container">
+                                return /*html*/`<div class="button-container">
                                                 <div class="dropdown">
                                                     <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="fas fa-fw fa-solid fa-search"></i> </button>
                                                     </button>
                                                     <ul class="dropdown-menu">
-                                                      <li><a class="dropdown-item" href="{{ route('jenisSub') }}" >Detail Jenis</a></li>
-                                                      <li><a class="dropdown-item" href="{{ route('statusSub') }}">Detail Status</a></li>
+                                                      <li><a class="dropdown-item" href="{{ route('pajak.Detail', '') }}/${data}" >Detail Jenis & Status</a></li>
                                                     </ul>
                                                 </div>
                                                 <a href="{{ route('pajakEdit', '') }}/${data}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
