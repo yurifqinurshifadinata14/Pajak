@@ -305,12 +305,11 @@
                                                     </ul>
                                                 </div>
                                                 <a href="{{ route('pajakEdit', '') }}/${data}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                                                <form method="POST" action="{{ route('pajakDestroy', '') }}/${data}"
-                                                    style="display:inline;">
+                                                <form method="POST" action="{{ route('pajakDestroy', '') }}/${data}" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger"
-                                                        onclick="return confirm('Yakin mau hapus???')"><i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Yakin mau hapus???')"> 
+                                                        <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                 </form>
                                             </div>`
                             }
