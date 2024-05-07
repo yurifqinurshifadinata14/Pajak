@@ -138,7 +138,8 @@
                         </div>
                     </div>
                     <!-- Modal Button Edit -->
-                    <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+                    @foreach ($pajak as $p)
+                    <div class="modal fade" id="edit{{$p->id_pajak}}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -146,7 +147,6 @@
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
                                 <div class="modal-body">
-                                    @foreach ($pajak as $p)
                                     <form action="{{ route('pajakUpdate', $p->id_pajak) }}" method="post">
                                         @csrf
                                         @method('PUT')
@@ -255,11 +255,11 @@
                                             <button type="submit" class="btn btn-primary">Simpan</button>
                                         </div>
                                     </form>
-                                    @endforeach
                                 </div>
                             </div>
                         </div>
                     </div>
+                    @endforeach
 
                 </div>
                 <div class="card-body">
@@ -443,7 +443,8 @@
                                                       <li><a class="dropdown-item" href="{{ route('pajak.Detail', '') }}/${data}" >Detail Jenis & Status</a></li>
                                                     </ul>
                                                 </div>
-                                                <a href="{{ route('pajakEdit', '') }}/${data}" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                <a href="{{ route('pajakEdit', '') }}/${data}" data-bs-toggle="modal" data-bs-target="#edit${data}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                
                                                 <form method="POST" action="{{ route('pajakDestroy', '') }}/${data}" style="display:inline;">
                                                     @csrf
                                                     @method('DELETE')

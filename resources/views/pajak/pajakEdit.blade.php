@@ -2,20 +2,20 @@
 @section('konten')
     <main>
 
-        <div class="container-fluid">
+        <!-- <div class="container-fluid">
 
-            <!-- Page Heading -->
+             Page Heading 
             <h1 class="h3 mb-2 text-gray-800">Formulir</h1>
             <p class="mb-4">Isi formulir di bawah ini :</p>
 
-            <!-- Formulir Example -->
+             Formulir Example 
             <div class="card shadow mb-4">
                 <div class="card-header py-3">
                     <h6 class="m-0 font-weight-bold text-primary">Formulir Data Diri</h6>
                 </div>
                 <div class="card-body">
                     <form action="{{ route('pajakUpdate', $pajak->id) }}" method="POST">
-                        @csrf <!-- Laravel CSRF Protection -->
+                        @csrf  Laravel CSRF Protection 
                         @method('PUT')
                         <div class="form-group">
                             <label for="nama">Nama WP</label>
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-        </div>
-
+        </div> -->
+                            
     </main>
 @endsection
