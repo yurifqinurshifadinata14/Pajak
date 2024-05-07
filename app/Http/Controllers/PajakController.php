@@ -130,23 +130,41 @@ class PajakController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pajak $pajak)
-    {
-        //
-        $pajak->update([
-            'nama_wp' => $request->nama_wp,
-            'npwp' => $request->npwp,
-            'no_hp' => $request->no_hp,
-            'no_efin' => $request->no_efin,
-            'gmail' => $request->gmail,
-            'password' => $request->password,
-            'nik' => $request->nik,
-            'alamat' => $request->alamat,
-            'merk_dagang' => $request->merk_dagang,
+    public function update(Request $request, Pajak $pajak, $id_pajak)
+    { 
+        //dd($request);
+
+        $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
+        ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
+        ->where('pajaks.id_pajak', $id_pajak)
+        ->update([
+
+            'nama_wp'=> $request->nama_wp,
+            'jenis' => $request->jenis,
+            'alamatBadan' => $request->alamatBadan,
+            'jabatan' => $request->jabatan,
+            'saham' => $request->saham,
+            'npwpBadan' => $request->npwpBadan,
+            'status'=>$request->status,
+            'enofa_password'=>$request->enofa_password,
+            'user_efaktur'=>$request->user_efaktur,
+            'passphrese'=>$request->passphrese,
+            'password_efaktur'=>$request->password_efaktur,
+            'npwp'=> $request->npwp,
+            'no_hp'=> $request->no_hp,
+            'no_efin'=> $request->no_efin,
+            'gmail'=> $request->gmail,
+            'password'=> $request->password,
+            'nik'=> $request->nik,
+            'alamat'=> $request->alamat,
+            'merk_dagang'=> $request->merk_dagang,
+         
         ]);
 
         return redirect()->route('pajakSub');
     }
+
+    
 
     /**
      * Remove the specified resource from storage.
