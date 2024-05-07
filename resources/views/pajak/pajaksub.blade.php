@@ -9,16 +9,19 @@
                     <i class="fas fa-table me-1"></i>
                     Data Diri Pembayar
                     <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-sm btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">
+                    <button type="button" class="btn btn-sm btn-primary float-end" data-bs-toggle="modal"
+                        data-bs-target="#tambah">
                         <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
                     </button>
                     <!-- Modal Button Tambah -->
-                    <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel"
+                        aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h1 class="modal-title fs-5" id="tambahModalLabel"><b>Tambah Data Pajak</b></h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
                                 </div>
                                 <form action="{{ route('pajakStore') }}" method="post">
                                     <div class="modal-body">
@@ -26,11 +29,13 @@
                                         <!-- Input Data -->
                                         <div class="form-group">
                                             <label for="nama"><b>Nama WP</b></label>
-                                            <input type="text" class="form-control" id="nama_wp" name="nama_wp" placeholder="Nama WP">
+                                            <input type="text" class="form-control" id="nama_wp" name="nama_wp"
+                                                placeholder="Nama WP">
                                         </div>
                                         <div class="form-group">
                                             <label for="jenis">Jenis WP</label>
-                                            <select name="jenis" id="jenis" class="form-select" onchange="showInput(this)">
+                                            <select name="jenis" id="jenis" class="form-select"
+                                                onchange="showInput(this)">
                                                 <option selected disabled>--Select--</option>
                                                 <option value="Badan">Badan</option>
                                                 <option value="Pribadi">Pribadi</option>
@@ -40,13 +45,13 @@
                                             <h6>-- Bagian Badan --</h6>
                                             <div class="form-group">
                                                 <label for="alamatBadan">Alamat</label>
-                                                <input type="text" class="form-control" id="alamatBadan" name="alamatBadan"
-                                                placeholder="Alamat">
+                                                <input type="text" class="form-control" id="alamatBadan"
+                                                    name="alamatBadan" placeholder="Alamat">
                                             </div>
                                             <div class="form-group">
                                                 <label for="jabatan">Jabatan</label>
-                                                <input type="text" class="form-control" id="jabatan" name="jabatanBadan"
-                                                    placeholder="Jabatan">
+                                                <input type="text" class="form-control" id="jabatan"
+                                                    name="jabatanBadan" placeholder="Jabatan">
                                             </div>
                                             <div class="form-group">
                                                 <label for="npwpBadan">NPWP</label>
@@ -61,7 +66,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="status">Status WP</label>
-                                            <select name="status" id="status" class="form-select" onchange="showInput(this)">
+                                            <select name="status" id="status" class="form-select"
+                                                onchange="showInput(this)">
                                                 <option selected disabled>--Select--</option>
                                                 <option value="PKP">PKP</option>
                                                 <option value="Non PKP">Non PKP</option>
@@ -71,28 +77,29 @@
                                             <h6>-- Bagian PKP --</h6>
                                             <div class="form-group">
                                                 <label for="enofa_password">Enofa Password</label>
-                                                <input type="password" class="form-control" id="enofa_password" name="enofa_password"
-                                                placeholder="Enofa password">
+                                                <input type="password" class="form-control" id="enofa_password"
+                                                    name="enofa_password" placeholder="Enofa password">
                                             </div>
                                             <div class="form-group">
                                                 <label for="passphrese">Passphrese</label>
                                                 <input type="text" class="form-control" id="passphrese" name="passphrese"
-                                                placeholder="Passphrese">
+                                                    placeholder="Passphrese">
                                             </div>
                                             <div class="form-group">
                                                 <label for="user_efaktur">User Efaktur</label>
-                                                <input type="text" class="form-control" id="user_efaktur" name="user_efaktur"
-                                                    placeholder="User efaktur">
+                                                <input type="text" class="form-control" id="user_efaktur"
+                                                    name="user_efaktur" placeholder="User efaktur">
                                             </div>
                                             <div class="form-group">
                                                 <label for="password_efaktur">Password Efaktur</label>
-                                                <input type="password" class="form-control" id="password_efaktur" name="password_efaktur"
-                                                    placeholder="Password efaktur">
+                                                <input type="password" class="form-control" id="password_efaktur"
+                                                    name="password_efaktur" placeholder="Password efaktur">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label for="npwp">NPWP</label>
-                                            <input type="number" class="form-control" id="npwp" name="npwp" placeholder="NPWP">
+                                            <input type="number" class="form-control" id="npwp" name="npwp"
+                                                placeholder="NPWP">
                                         </div>
                                         <div class="form-group">
                                             <label for="no_hp">No Hp</label>
@@ -116,7 +123,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="nik">NIK</label>
-                                            <input type="number" class="form-control" id="nik" name="nik" placeholder="NIK">
+                                            <input type="number" class="form-control" id="nik" name="nik"
+                                                placeholder="NIK">
                                         </div>
                                         <div class="form-group">
                                             <label for="alamat">Alamat</label>
@@ -125,12 +133,13 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="merk_dagang">Merk Dagang</label>
-                                            <input type="text" class="form-control" id="merk_dagang" name="merk_dagang"
-                                                placeholder="Merk Dagang">
+                                            <input type="text" class="form-control" id="merk_dagang"
+                                                name="merk_dagang" placeholder="Merk Dagang">
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Batal</button>
                                         <button type="submit" class="btn btn-primary">Simpan</button>
                                     </div>
                                 </form>
@@ -139,126 +148,146 @@
                     </div>
                     <!-- Modal Button Edit -->
                     @foreach ($pajak as $p)
-                    <div class="modal fade" id="edit{{$p->id_pajak}}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h1 class="modal-title fs-5" id="editModalLabel"><b>Edit Data Pajak</b></h1>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('pajakUpdate', $p->id_pajak) }}" method="post">
-                                        @csrf
-                                        @method('PUT')
-                                        <!--input data-->
-                                        <div class="form-group">
-                                            <label for="nama">Nama WP</label>
-                                            <input type="text" class="form-control" id="nama_wp" name="nama_wp" value="{{ $p->nama_wp }}" placeholder="Nama WP">
-                                        </div>
-                                        <label for="jenis">Jenis WP</label>
-                                        <select name="jenis" id="jenis" class="form-select" value="{{$p->jenis}}" onchange="showEditInput(this)">
-                                            <option selected disabled>--Select--</option>
-                                            <option value="editBadan">Badan</option>
-                                            <option value="Pribadi" >Pribadi</option>    
-                                        </select>
-                                        <div id="editjenisBadan" style="display:none;">
-                                            <h6>-- Bagian Badan --</h6>
+                        <div class="modal fade" id="edit{{ $p->id_pajak }}" tabindex="-1"
+                            aria-labelledby="editModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h1 class="modal-title fs-5" id="editModalLabel"><b>Edit Data Pajak</b></h1>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{ route('pajakUpdate', $p->id_pajak) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <!--input data-->
                                             <div class="form-group">
-                                                <label for="alamatBadan">Alamat</label>
-                                                <input type="text" class="form-control" id="alamatBadan" name="alamatBadan"
-                                                value="{{ $p->alamatBadan }}"placeholder="Alamat">
+                                                <label for="nama">Nama WP</label>
+                                                <input type="text" class="form-control" id="nama_wp" name="nama_wp"
+                                                    value="{{ $p->nama_wp }}" placeholder="Nama WP">
                                             </div>
-                                            <div class="form-group">
-                                                <label for="jabatan">Jabatan</label>
-                                                <input type="text" class="form-control" id="jabatan" name="jabatan"
-                                                value="{{ $p->jabatan}}"  placeholder="Jabatan">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="npwpBadan">NPWP</label>
-                                                <input type="number" class="form-control" id="npwpBadan" name="npwpBadan"
-                                                value="{{ $p->npwpBadan }}"   placeholder="NPWP">
-                                            </div>
-                                            <div class="form-group">
-                                                <label for="saham">Saham</label>
-                                                <input type="text" class="form-control" id="saham" name="saham"
-                                                value="{{ $p->saham }}"   placeholder="Saham">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="status">Status WP</label>
-                                            <select name="status" id="editstatus" class="form-select" value="{{$p->status}}" onchange="showEditInput(this)">
+                                            <label for="jenis">Jenis WP</label>
+                                            <select name="jenis" id="editjenis" class="form-select"
+                                                value="{{ $p->jenis }}" onchange="showEditInput(this)">
                                                 <option selected disabled>--Select--</option>
-                                                <option value="editPKP">PKP</option>
-                                                <option value="Non PKP">Non PKP</option>
-                                                <!-- @if($p->PKP == 'PKP') checked @endif -->
+                                                <option value="Badan">Badan</option>
+                                                <option value="Pribadi">Pribadi</option>
                                             </select>
-                                        </div>
-                                        <div id="editstatusPkp" style="display:none;">
-                                            <h6>-- Bagian PKP --</h6>
-                                            <div class="form-group">
-                                                <label for="enofa_password">Enofa Password</label>
-                                                <input type="password" class="form-control" id="enofa_password" name="enofa_password"
-                                                value="{{ $p->enofa_password }}" placeholder="Enofa password">
+                                            <div id="editjenisBadan" style="display:none;">
+                                                <h6>-- Bagian Badan --</h6>
+                                                <div class="form-group">
+                                                    <label for="alamatBadan">Alamat</label>
+                                                    <input type="text" class="form-control" id="alamatBadan"
+                                                        name="alamatBadan"
+                                                        value="{{ $p->alamatBadan }}"placeholder="Alamat">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="jabatan">Jabatan</label>
+                                                    <input type="text" class="form-control" id="jabatan"
+                                                        name="jabatan" value="{{ $p->jabatan }}" placeholder="Jabatan">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="npwpBadan">NPWP</label>
+                                                    <input type="number" class="form-control" id="npwpBadan"
+                                                        name="npwpBadan" value="{{ $p->npwpBadan }}" placeholder="NPWP">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="saham">Saham</label>
+                                                    <input type="text" class="form-control" id="saham"
+                                                        name="saham" value="{{ $p->saham }}" placeholder="Saham">
+                                                </div>
                                             </div>
                                             <div class="form-group">
-                                                <label for="passphrese">Passphrese</label>
-                                                <input type="text" class="form-control" id="passphrese" name="passphrese"
-                                                value="{{ $p->passphrese }}"placeholder="Passphrese">
+                                                <label for="status">Status WP</label>
+                                                <select name="status" id="editstatus" class="form-select"
+                                                    value="{{ $p->status }}" onchange="showEditInput(this)">
+                                                    <option selected disabled>--Select--</option>
+                                                    <option value="PKP" id="editPKP">PKP</option>
+                                                    <option value="Non PKP">Non PKP</option>
+                                                    <!-- @if ($p->PKP == 'PKP')
+    checked
+    @endif -->
+                                                </select>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="user_efaktur">User Efaktur</label>
-                                                <input type="text" class="form-control" id="user_efaktur" name="user_efaktur"
-                                                value="{{ $p->user_efaktur }}" placeholder="User efaktur">
+                                            <div id="editstatusPkp" style="display:none;">
+                                                <h6>-- Bagian PKP --</h6>
+                                                <div class="form-group">
+                                                    <label for="enofa_password">Enofa Password</label>
+                                                    <input type="password" class="form-control" id="enofa_password"
+                                                        name="enofa_password" value="{{ $p->enofa_password }}"
+                                                        placeholder="Enofa password">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="passphrese">Passphrese</label>
+                                                    <input type="text" class="form-control" id="passphrese"
+                                                        name="passphrese"
+                                                        value="{{ $p->passphrese }}"placeholder="Passphrese">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="user_efaktur">User Efaktur</label>
+                                                    <input type="text" class="form-control" id="user_efaktur"
+                                                        name="user_efaktur" value="{{ $p->user_efaktur }}"
+                                                        placeholder="User efaktur">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="password_efaktur">Password Efaktur</label>
+                                                    <input type="password" class="form-control" id="password_efaktur"
+                                                        name="password_efaktur" value="{{ $p->password_efaktur }}"
+                                                        placeholder="Password efaktur">
+                                                </div>
                                             </div>
-                                            <div class="form-group">
-                                                <label for="password_efaktur">Password Efaktur</label>
-                                                <input type="password" class="form-control" id="password_efaktur" name="password_efaktur"
-                                                value="{{ $p->password_efaktur }}" placeholder="Password efaktur">
+                                            <div class="mb-3 row">
+                                                <label for="npwp">NPWP</label>
+                                                <input type="text" class="form-control" id="npwp" name="npwp"
+                                                    value="{{ $p->npwp }}" placeholder="NPWP">
                                             </div>
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="npwp">NPWP</label>
-                                            <input type="text" class="form-control" id="npwp" name="npwp" value="{{ $p->npwp }}" placeholder="NPWP">
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="no_hp">No Hp</label>
-                                            <input type="text" class="form-control" id="no_hp" name="no_hp" value="{{ $p->no_hp }}" placeholder="No Hp">
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="no_efin">No EFIN</label>
-                                            <input type="text" class="form-control" id="no_efin" name="no_efin" value="{{ $p->no_efin }}" placeholder="No EFIN">
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="gmail">Gmail</label>
-                                            <input type="email" class="form-control" id="gmail" name="gmail" value="{{ $p->gmail }}" placeholder="Gmail">
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="password">Password</label>
-                                            <input type="password" class="form-control" id="password" name="password" value="{{ $p->password }}"
-                                                placeholder="Password">
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="nik">NIK</label>
-                                            <input type="text" class="form-control" id="nik" name="nik" value="{{ $p->nik }}" placeholder="NIK">
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="alamat">Alamat</label>
-                                            <input type="text" class="form-control" id="alamat" name="alamat" value="{{ $p->alamat }}" placeholder="Alamat">
-                                        </div>
-                                        <div class="mb-3 row">
-                                            <label for="merk_dagang">Merk Dagang</label>
-                                            <input type="text" class="form-control" id="merk_dagang" name="merk_dagang" value="{{ $p->merk_dagang }}"
-                                                placeholder="Merk Dagang">
-                                        </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary">Simpan</button>
-                                        </div>
-                                    </form>
+                                            <div class="mb-3 row">
+                                                <label for="no_hp">No Hp</label>
+                                                <input type="text" class="form-control" id="no_hp" name="no_hp"
+                                                    value="{{ $p->no_hp }}" placeholder="No Hp">
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="no_efin">No EFIN</label>
+                                                <input type="text" class="form-control" id="no_efin" name="no_efin"
+                                                    value="{{ $p->no_efin }}" placeholder="No EFIN">
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="gmail">Gmail</label>
+                                                <input type="email" class="form-control" id="gmail" name="gmail"
+                                                    value="{{ $p->gmail }}" placeholder="Gmail">
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="password">Password</label>
+                                                <input type="password" class="form-control" id="password"
+                                                    name="password" value="{{ $p->password }}" placeholder="Password">
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="nik">NIK</label>
+                                                <input type="text" class="form-control" id="nik" name="nik"
+                                                    value="{{ $p->nik }}" placeholder="NIK">
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="alamat">Alamat</label>
+                                                <input type="text" class="form-control" id="alamat" name="alamat"
+                                                    value="{{ $p->alamat }}" placeholder="Alamat">
+                                            </div>
+                                            <div class="mb-3 row">
+                                                <label for="merk_dagang">Merk Dagang</label>
+                                                <input type="text" class="form-control" id="merk_dagang"
+                                                    name="merk_dagang" value="{{ $p->merk_dagang }}"
+                                                    placeholder="Merk Dagang">
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                            </div>
+                                        </form>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                     @endforeach
 
                 </div>
@@ -365,76 +394,80 @@
                     document.getElementById('statusPkp').style.display = 'none';
                 }
             }
+
             function showEditInput(selectObject) {
+                var id = selectObject.id;
                 var value = selectObject.value;
-                if (value == 'editBadan') {
-                    document.getElementById('editjenisBadan').style.display = 'block';
-                } else {
-                    document.getElementById('editjenisBadan').style.display = 'none';
+
+                if (id == 'editjenis') {
+                    if (value == 'Badan') {
+                        document.getElementById('editjenisBadan').style.display = 'block';
+                    } else {
+                        document.getElementById('editjenisBadan').style.display = 'none';
+                    }
                 }
-                if (value == 'editPKP') {
-                    document.getElementById('editstatusPkp').style.display = 'block';
-                } else {
-                    document.getElementById('editstatusPkp').style.display = 'none';
+
+                if (id == 'editstatus') {
+                    if (value == 'PKP') {
+                        document.getElementById('editstatusPkp').style.display = 'block';
+                    } else {
+                        document.getElementById('editstatusPkp').style.display = 'none';
+                    }
                 }
-                console.log(document.getElementById('editjenisBadan'))
             }
-
-            
-            </script>
+        </script>
         @push('script')
-        <script>
-            let pajak ={!! json_encode($pajak) !!}
-            console.log('ini pajak:',pajak)
+            <script>
+                let pajak = {!! json_encode($pajak) !!}
+                console.log('ini pajak:', pajak)
 
-           $('#click').on('click',()=>{
-            alert('test')
-           })
+                $('#click').on('click', () => {
+                    alert('test')
+                })
 
-  
 
-           
-            $(document).ready( function () {
-                 const table = new DataTable('#pajakTable',{
-                        data:pajak,
-                        columns:[
+
+
+                $(document).ready(function() {
+                    const table = new DataTable('#pajakTable', {
+                        data: pajak,
+                        columns: [{
+                                data: 'id'
+                            },
                             {
-                           data:'id'
-                        },
+                                data: 'nama_wp'
+                            },
                             {
-                            data:'nama_wp'
-                        },
+                                data: 'jenis'
+                            },
                             {
-                            data:'jenis'
-                        },
+                                data: 'status'
+                            },
                             {
-                            data:'status'
-                        },
+                                data: 'npwp'
+                            },
                             {
-                            data:'npwp'
-                        },
+                                data: 'no_hp'
+                            },
                             {
-                            data:'no_hp'
-                        },
+                                data: 'no_efin'
+                            },
                             {
-                            data:'no_efin'
-                        },
+                                data: 'gmail'
+                            },
                             {
-                            data:'gmail'
-                        },
+                                data: 'nik'
+                            },
                             {
-                            data:'nik'
-                        },
+                                data: 'alamat'
+                            },
                             {
-                            data:'alamat'
-                        },
+                                data: 'merk_dagang'
+                            },
                             {
-                            data:'merk_dagang'
-                        },
-                            {
-                                data:'id_pajak',
-                            render:(data)=>{
-                                return /*html*/`<div class="button-container">
+                                data: 'id_pajak',
+                                render: (data) => {
+                                    return /*html*/ `<div class="button-container">
                                                 <div class="dropdown">
                                                     <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                                         <i class="fas fa-fw fa-solid fa-search"></i> </button>
@@ -452,24 +485,23 @@
                                                         <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                 </form>
                                             </div>`
-                            }
-                        },
-                    ]
+                                }
+                            },
+                        ]
                     });
 
                     let i = 1;
- 
- table
-     .cells(null, 0, { search: 'applied', order: 'applied' })
-     .every(function (cell) {
-         this.data(i++);
-     });
-        } );
 
-      
-        </script>
-        
-
+                    table
+                        .cells(null, 0, {
+                            search: 'applied',
+                            order: 'applied'
+                        })
+                        .every(function(cell) {
+                            this.data(i++);
+                        });
+                });
+            </script>
         @endpush
     </main>
 @endsection

@@ -131,40 +131,57 @@ class PajakController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Pajak $pajak, $id_pajak)
-    { 
+    {
         //dd($request);
 
-        $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
-        ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
-        ->where('pajaks.id_pajak', $id_pajak)
-        ->update([
+        $pajak = Pajak::where('id_pajak', $id_pajak)->first();
+        //dd($pajak);
+        $pajak->nama_wp = $request->nama_wp;
+        $pajak->npwp = $request->npwp;
+        $pajak->no_hp = $request->no_hp;
+        $pajak->no_efin = $request->no_efin;
+        $pajak->gmail = $request->gmail;
+        $pajak->password = $request->password;
+        $pajak->nik = $request->nik;
+        $pajak->alamat = $request->alamat;
+        $pajak->merk_dagang = $request->merk_dagang;
 
-            'nama_wp'=> $request->nama_wp,
-            'jenis' => $request->jenis,
-            'alamatBadan' => $request->alamatBadan,
-            'jabatan' => $request->jabatan,
-            'saham' => $request->saham,
-            'npwpBadan' => $request->npwpBadan,
-            'status'=>$request->status,
-            'enofa_password'=>$request->enofa_password,
-            'user_efaktur'=>$request->user_efaktur,
-            'passphrese'=>$request->passphrese,
-            'password_efaktur'=>$request->password_efaktur,
-            'npwp'=> $request->npwp,
-            'no_hp'=> $request->no_hp,
-            'no_efin'=> $request->no_efin,
-            'gmail'=> $request->gmail,
-            'password'=> $request->password,
-            'nik'=> $request->nik,
-            'alamat'=> $request->alamat,
-            'merk_dagang'=> $request->merk_dagang,
-         
-        ]);
+        $jenis = Jenis::where('id_pajak', $id_pajak)->first();
+        if ($request->jenis == 'Pribadi') {
+            $jenis->jenis = $request->jenis;
+            $jenis->alamatBadan = null;
+            $jenis->jabatan = null;
+            $jenis->saham = null;
+            $jenis->npwpBadan = null;
+        } else {
+            $jenis->jenis = $request->jenis;
+            $jenis->alamatBadan = $request->alamatBadan;
+            $jenis->jabatan = $request->jabatanBadan;
+            $jenis->saham = $request->sahamBadan;
+            $jenis->npwpBadan = $request->npwpBadan;
+        }
 
-        return redirect()->route('pajakSub');
+        $status = Status::where('id_pajak', $id_pajak)->first();
+        if ($request->status == 'Non PKP') {
+            $status->status = $request->status;
+            $status->enofa_password = $request->enofa_password;
+            $status->user_efaktur = $request->user_efaktur;
+            $status->passphrese = $request->passphrese;
+            $status->password_efaktur = $request->password_efaktur;
+        } else {
+            $status->status = $request->status;
+            $status->enofa_password = null;
+            $status->user_efaktur = null;
+            $status->passphrese = null;
+            $status->password_efaktur = null;
+        }
+
+        if ($pajak->save() && $jenis->save() && $status->save()) {
+            return redirect()->route('pajakSub');
+        }
     }
 
-    
+
 
     /**
      * Remove the specified resource from storage.
