@@ -162,7 +162,7 @@ class PajakController extends Controller
         }
 
         $status = Status::where('id_pajak', $id_pajak)->first();
-        if ($request->status == 'Non PKP') {
+        if ($request->status == 'PKP') {
             $status->status = $request->status;
             $status->enofa_password = $request->enofa_password;
             $status->user_efaktur = $request->user_efaktur;
