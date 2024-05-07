@@ -469,7 +469,6 @@
       
         </script>
         
-
         @endpush
     </main>
 @endsection
