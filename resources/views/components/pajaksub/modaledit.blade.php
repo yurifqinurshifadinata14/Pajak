@@ -1,6 +1,4 @@
-@props(['p'])
-
-<div class="modal fade" id="edit{{ $p->id_pajak }}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"
+<div class="modal fade" id="edit" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"
     x-data="formEdit">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -9,18 +7,18 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <form action="{{ route('pajakUpdate', $p->id_pajak) }}" method="post">
+                <form {{-- action="{{ route('pajakUpdate', $p->id_pajak) }}" method="post" --}} @submit.prevent="editSubmit">
                     @csrf
                     @method('PUT')
                     <!--input data-->
                     <div class="form-group">
                         <label for="nama">Nama WP</label>
-                        <input type="text" class="form-control" id="nama_wp" name="nama_wp"
-                            value="{{ $p->nama_wp }}" placeholder="Nama WP">
+                        <input type="text" class="form-control" id="nama_wp" name="nama_wp" :value="data.nama_wp"
+                            placeholder="Nama WP" x-model="data.nama_wp">
                     </div>
                     <label for="jenis">Jenis WP</label>
-                    <select name="jenis" id="editjenis" class="form-select" value="{{ $p->jenis }}"
-                        onchange="showEditInput(this)">
+                    <select name="jenis" id="editjenis" class="form-select" :value="data.jenis"
+                        onchange="showEditInput(this)" x-model="data.jenis">
                         <option disabled>--Select--</option>
                         <option value="Badan">Badan</option>
                         <option value="Pribadi">Pribadi</option>
@@ -30,28 +28,28 @@
                         <div class="form-group">
                             <label for="alamatBadan">Alamat</label>
                             <input type="text" class="form-control" id="alamatBadan" name="alamatBadan"
-                                value="{{ $p->alamatBadan }}"placeholder="Alamat">
+                                :value="data.alamatBadan" placeholder="Alamat" x-model="data.alamatBadan">
                         </div>
                         <div class="form-group">
                             <label for="jabatan">Jabatan</label>
                             <input type="text" class="form-control" id="jabatan" name="jabatan"
-                                value="{{ $p->jabatan }}" placeholder="Jabatan">
+                                :value="data.jabatan" placeholder="Jabatan" x-model="data.jabatan">
                         </div>
                         <div class="form-group">
                             <label for="npwpBadan">NPWP</label>
                             <input type="number" class="form-control" id="npwpBadan" name="npwpBadan"
-                                value="{{ $p->npwpBadan }}" placeholder="NPWP">
+                                :value="data.npwpBadan" placeholder="NPWP" x-model="data.npwpBadan">
                         </div>
                         <div class="form-group">
                             <label for="saham">Saham</label>
                             <input type="text" class="form-control" id="saham" name="saham"
-                                value="{{ $p->saham }}" placeholder="Saham">
+                                :value="data.saham" placeholder="Saham" x-model="data.saham">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="status">Status WP</label>
-                        <select name="status" id="editstatus" class="form-select" value="{{ $p->status }}"
-                            onchange="showEditInput(this)">
+                        <select name="status" id="editstatus" class="form-select" :value="data.status"
+                            onchange="showEditInput(this)" x-model="data.status">
                             <option disabled>--Select--</option>
                             <option value="PKP" id="editPKP">PKP</option>
                             <option value="Non PKP">Non PKP</option>
@@ -62,64 +60,64 @@
                         <div class="form-group">
                             <label for="enofa_password">Enofa Password</label>
                             <input type="password" class="form-control" id="enofa_password" name="enofa_password"
-                                value="{{ $p->enofa_password }}" placeholder="Enofa password">
+                                :value="data.enofa_password" placeholder="Enofa password" x-model="data.enofa_password">
                         </div>
                         <div class="form-group">
                             <label for="passphrese">Passphrese</label>
                             <input type="text" class="form-control" id="passphrese" name="passphrese"
-                                value="{{ $p->passphrese }}"placeholder="Passphrese">
+                                :value="data.passphrese" placeholder="Passphrese" x-model="data.passphrese">
                         </div>
                         <div class="form-group">
                             <label for="user_efaktur">User Efaktur</label>
                             <input type="text" class="form-control" id="user_efaktur" name="user_efaktur"
-                                value="{{ $p->user_efaktur }}" placeholder="User efaktur">
+                                :value="data.user_efaktur" placeholder="User efaktur" x-model="data.user_efaktur">
                         </div>
                         <div class="form-group">
                             <label for="password_efaktur">Password Efaktur</label>
                             <input type="password" class="form-control" id="password_efaktur"
-                                name="password_efaktur" value="{{ $p->password_efaktur }}"
-                                placeholder="Password efaktur">
+                                name="password_efaktur" :value="data.password_efaktur" placeholder="Password efaktur"
+                                x-model="data.password_efaktur">
                         </div>
                     </div>
-                    <div class="mb-3 row">
+                    <div class="row mb-3">
                         <label for="npwp">NPWP</label>
                         <input type="text" class="form-control" id="npwp" name="npwp"
-                            value="{{ $p->npwp }}" placeholder="NPWP">
+                            :value="data.npwp" placeholder="NPWP" x-model="data.npwp">
                     </div>
-                    <div class="mb-3 row">
+                    <div class="row mb-3">
                         <label for="no_hp">No Hp</label>
                         <input type="text" class="form-control" id="no_hp" name="no_hp"
-                            value="{{ $p->no_hp }}" placeholder="No Hp">
+                            :value="data.no_hp" placeholder="No Hp" x-model="data.no_hp">
                     </div>
-                    <div class="mb-3 row">
+                    <div class="row mb-3">
                         <label for="no_efin">No EFIN</label>
                         <input type="text" class="form-control" id="no_efin" name="no_efin"
-                            value="{{ $p->no_efin }}" placeholder="No EFIN">
+                            :value="data.no_efin" placeholder="No EFIN" x-model="data.no_efin">
                     </div>
-                    <div class="mb-3 row">
+                    <div class="row mb-3">
                         <label for="gmail">Gmail</label>
                         <input type="email" class="form-control" id="gmail" name="gmail"
-                            value="{{ $p->gmail }}" placeholder="Gmail">
+                            :value="data.gmail" placeholder="Gmail" x-model="data.gmail">
                     </div>
-                    <div class="mb-3 row">
+                    <div class="row mb-3">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password"
-                            value="{{ $p->password }}" placeholder="Password">
+                            :value="data.password" placeholder="Password" x-model="data.password">
                     </div>
-                    <div class="mb-3 row">
+                    <div class="row mb-3">
                         <label for="nik">NIK</label>
                         <input type="text" class="form-control" id="nik" name="nik"
-                            value="{{ $p->nik }}" placeholder="NIK">
+                            :value="data.nik" placeholder="NIK" x-model="data.nik">
                     </div>
-                    <div class="mb-3 row">
+                    <div class="row mb-3">
                         <label for="alamat">Alamat</label>
                         <input type="text" class="form-control" id="alamat" name="alamat"
-                            value="{{ $p->alamat }}" placeholder="Alamat">
+                            :value="data.alamat" placeholder="Alamat" x-model="data.alamat">
                     </div>
-                    <div class="mb-3 row">
+                    <div class="row mb-3">
                         <label for="merk_dagang">Merk Dagang</label>
                         <input type="text" class="form-control" id="merk_dagang" name="merk_dagang"
-                            value="{{ $p->merk_dagang }}" placeholder="Merk Dagang">
+                            :value="data.merk_dagang" placeholder="Merk Dagang" x-model="data.merk_dagang">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

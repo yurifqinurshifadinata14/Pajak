@@ -1,7 +1,7 @@
 @extends ('main')
 @section('konten')
     <main x-data="{ pilih: '' }">
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-4" x-data="app">
             <h1 class="mt-4"> Data Diri</h1>
             <div class="card mb-4">
                 <div class="card-header">
@@ -16,13 +16,10 @@
                     <x-pajaksub.modalTambah />
 
                     <!-- Modal Button Edit -->
-                    @foreach ($pajak as $p)
+                    {{--  @foreach ($pajak as $p)
                         <x-pajaksub.modaledit :p="$p" />
-                    @endforeach
-                    <template>
-
-                    </template>
-
+                    @endforeach --}}
+                    <x-pajaksub.modaledit />
 
                 </div>
                 <div class="card-body">
@@ -123,7 +120,10 @@
                             "Content-Type": "application/json",
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         }
-                    }).then(res => res.json()).then(res => initTable(res.pajak))
+                    }).then(res => res.json()).then(res => {
+                        i = 1
+                        initTable(res.pajak)
+                    })
                 };
 
                 var deleteData = async (id) => {
@@ -187,7 +187,7 @@
                                                           <li><a class="dropdown-item" href="{{ route('pajak.Detail', '') }}/${data}" >Detail Jenis & Status</a></li>
                                                         </ul>
                                                     </div>
-                                                    <a href="{{ route('pajakEdit', '') }}/${data}" data-bs-toggle="modal" data-bs-target="#edit${data}" class="btn btn-sm btn-warning"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                    <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                             <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
                                                                 <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                 </div>`
@@ -235,19 +235,39 @@
                                 },
                                 body: JSON.stringify(this.formData)
                             }).then(res => {
-                                getPajak()
                                 $('#tambah').modal('hide');
+                                getPajak()
                             }).catch(err => console.log(err))
                         },
 
                     }))
 
 
-                    Alpine.data('formEdit', () => ({
+                    Alpine.data('app', () => ({
+                        data: [],
+                        editId: '',
+                        select(id) {
+                            this.data = pajak.filter(item => item.id_pajak == id)
+                            this.data = this.data[0]
+                        },
+
+                        editSubmit() {
+                            fetch(`{{ route('pajakUpdate', '') }}/${this.data.id_pajak}`, {
+                                method: 'PUT',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify(this.data)
+                            }).then(res => {
+                                $('#edit').modal('hide');
+                                getPajak()
+                            }).catch(err => console.log(err))
+                        },
+
                         init() {
-                            // This code will be executed before Alpine
-                            // initializes the rest of the component.
-                        }
+                            console.log('data:', this.data)
+                        },
                     }))
                 })
             </script>
