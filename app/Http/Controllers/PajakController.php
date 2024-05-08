@@ -20,6 +20,8 @@ class PajakController extends Controller
         //
     }
 
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -90,6 +92,13 @@ class PajakController extends Controller
             ->get();
         //dd($pajak);
         return view('pajak.pajaksub', compact('pajak'));
+    }
+
+    public function getPajakSub(){
+         $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
+            ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
+            ->get();
+        return response()->json(['pajak'=>$pajak]);
     }
 
     // public function jenissub()
@@ -186,12 +195,13 @@ class PajakController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pajak $pajak)
+    public function destroy($id_pajak)
     {
         //
-        $pajak->delete();
-        Jenis::where('id_pajak', $pajak->id_pajak)->delete();
-        Status::where('id_pajak', $pajak->id_pajak)->delete();
+        /* $id_pajak->delete(); */
+        $pajak = Pajak::where('id_pajak',$id_pajak)->delete();
+        Jenis::where('id_pajak', $id_pajak)->delete();
+        Status::where('id_pajak', $id_pajak)->delete();
         return redirect()->route('pajakSub');
     }
 }

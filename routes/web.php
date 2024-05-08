@@ -21,7 +21,7 @@ Route::get('/pajaksub', [PajakController::class, 'pajaksub'])->name('pajakSub');
 Route::get('/pajak/pajakDetail/{id_pajak}', [PajakController::class, 'show'])->name('pajak.Detail');
 Route::get('/pajakEdit/{pajak}', [PajakController::class, 'edit'])->name('pajakEdit');
 Route::put('/pajakUpdate/{id_pajak}', [PajakController::class, 'update'])->name('pajakUpdate');
-Route::delete('/pajakDelete/{pajak}', [PajakController::class, 'destroy'])->name('pajakDestroy');
+Route::delete('/pajakDelete/{id_pajak}', [PajakController::class, 'destroy'])->name('pajakDestroy');
 
 Route::get('/pph', [PphController::class, 'index'])->name('pph');
 Route::post('/pphstore', [PphController::class, 'store'])->name('pphStore');
@@ -44,6 +44,7 @@ Route::delete('/pph21Delete/{ppph21}', [Pph21Controller::class, 'destroy'])->nam
 Route::get('/pph21Edit/{pph21}', [Pph21Controller::class, 'edit'])->name('pph21Edit');
 Route::put('/pph21iUpdate/{pph21}', [Pph21Controller::class, 'update'])->name('pph21Update');
 
+Route::get('/getpajaksub', [PajakController::class,'getPajakSub'])->name('getpajaksub');
 Route::post('/pajakstore', [PajakController::class,'store'])->name('pajakStore');
 
 Route::get('/jenissub', [JenisController::class, 'jenissub'])->name('jenisSub');
