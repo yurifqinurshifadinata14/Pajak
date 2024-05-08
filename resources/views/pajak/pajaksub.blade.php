@@ -122,7 +122,8 @@
                         }
                     }).then(res => res.json()).then(res => {
                         i = 1
-                        initTable(res.pajak)
+                        pajak = res.pajak
+                        initTable(pajak)
                     })
                 };
 
@@ -229,6 +230,18 @@
                                 body: JSON.stringify(this.formData)
                             }).then(res => {
                                 $('#tambah').modal('hide');
+                                this.formData = {
+                                    nama_wp: '',
+                                    jenis: '',
+                                    status: '',
+                                    npwp: '',
+                                    no_hp: '',
+                                    no_efin: '',
+                                    gmail: '',
+                                    nik: '',
+                                    alamat: '',
+                                    merk_dagang: ''
+                                }
                                 getPajak()
                             }).catch(err => console.log(err))
                         },
