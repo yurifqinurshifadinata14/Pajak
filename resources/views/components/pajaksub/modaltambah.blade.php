@@ -13,7 +13,7 @@ aria-hidden="true" x-data="formTambah">
                 @csrf
                 <!-- Input Data -->
                 <div class="form-group">
-                    <label for="nama"><b>Nama WP</b></label>
+                    <label for="nama">Nama WP</label>
                     <input type="text" class="form-control" id="nama_wp" name="nama_wp"
                         placeholder="Nama WP" x-model="formData.nama_wp">
                 </div>
@@ -45,7 +45,7 @@ aria-hidden="true" x-data="formTambah">
                     </div>
                     <div class="form-group">
                         <label for="saham">Saham</label>
-                        <input type="text" class="form-control" id="saham" name="sahamBadan"
+                        <input type="text" class="form-control" id="saham" name="saham"
                             placeholder="Saham" x-model="formData.sahamBadan">
                     </div>
                 </div>

@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Wajib Pajak</title>
-    <link rel="icon" href="/public/logo.png">
+    <link rel="icon" href="{{asset('logo.png')}}" type="gambar/tipe ikon">
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin2/css/styles.css') }}" rel="stylesheet">
@@ -27,8 +27,8 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.dataTables.css" />
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>   
- 
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
     <style>
         .bg-navy {
             background-color: #12094a;
@@ -63,60 +63,61 @@
         <ul class="navbar-nav sidebar sidebar-dark bg-navy" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
                 <div class="sidebar-brand-icon bg-navy">
                     {{-- <i class="fas fa-fw fa-user"></i> --}}
-                    <img src="logo.png" class="img-fluid mx-auto bg-navy" alt="...">
+                    <img src="{{asset('logo.png')}}" class="img-fluid mx-auto bg-navy" alt="...">
                 </div>
                 <div class="sidebar-brand-text mx-3">Wajib Pajak</div>
             </a>
 
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
+            <div class="sidebar-menu">
+                <!-- Nav Item - Dashboard -->
+                <li class="nav-item {{ Route::is('beranda') ? 'active' : '' }}">
+                    <a class="nav-link" href="/beranda">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                </li>
 
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href="/beranda">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
+                <!-- Divider -->
+                <hr class="sidebar-divider">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
+                <!-- Heading -->
+                <div class="sidebar-heading">
+                    Interface
+                </div>
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Interface
+                <!-- Nav Item - Pages Collapse Menu -->
+                <li class="nav-item  {{ request()->routeIs('pajak.pajaksub') ? 'active' : '' }}">
+                    <a class="nav-link" href="/pajaksub" aria-expanded="true">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>Pajak</span>
+                    </a>
+                </li>
+
+                <li class="nav-item  {{ Route::is('pph') ? 'active' : '' }}">
+                    <a class="nav-link" href="/pph" aria-expanded="true">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>PPH</span>
+                    </a>
+                </li>
+
+                <li class="nav-item {{ Route::is('pph21') ? 'active' : '' }}">
+                    <a class="nav-link" href="/pph21" aria-expanded="true">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>PPH 21</span>
+                    </a>
+                </li>
+
+                <li class="nav-item  {{ Route::is('pphunifikasi') ? 'active' : '' }}">
+                    <a class="nav-link" href="/pphunifikasi" aria-expanded="true">
+                        <i class="fas fa-fw fa-briefcase"></i>
+                        <span>PPH Unifikasi</span>
+                    </a>
+                </li>
             </div>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link" href="/pajaksub" aria-expanded="true">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Pajak</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/pph" aria-expanded="true">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>PPH</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/pph21" aria-expanded="true">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>PPH 21</span>
-                </a>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link" href="/pphunifikasi" aria-expanded="true">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>PPH Unifikasi</span>
-                </a>
-            </li>
             <!-- Divider -->
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -128,7 +129,7 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="logo.png" alt="...">
+                <img class="sidebar-card-illustration mb-2" src="{{asset('logo.png')}}" alt="...">
                 <p class="text-center mb-2"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar pajak Anda!</p>
             </div>
 
@@ -254,7 +255,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Wajib Pajak</span>
                                 <img class="img-profile rounded-circle"
-                                    src="logo.png">
+                                    src="{{ asset('logo.png')}}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -272,7 +273,7 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="/login" data-toggle="modal" data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -328,7 +329,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <a class="btn btn-primary" href="/login">Logout</a>
                 </div>
             </div>
         </div>
@@ -344,9 +345,36 @@
     <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
     <script src="https://cdn.datatables.net/2.0.6/js/dataTables.bootstrap5.js"></script>
     <script src="/public/datatables.js"></script>
-    
+
     <script>
         const dataTable = new DataTable('datatables');
+    </script>
+
+    <script>
+        $(document).ready(function() {
+            // Tambahkan kelas aktif ke elemen menu yang sesuai dengan halaman saat ini
+            $('.sidebar-menu li').removeClass('active');
+            $('.sidebar-menu li').each(function() {
+                if ($(this).find('a').attr('href') === window.location.pathname) {
+                    $(this).addClass('active');
+                }
+            });
+
+            // Tangani navigasi internal (misalnya: saat tombol di dalam halaman diklik)
+            $('.internal-link').click(function(event) {
+                event.preventDefault(); // Hindari navigasi bawaan
+                var targetUrl = $(this).attr('href');
+                // Lakukan navigasi ke halaman baru
+                window.location.href = targetUrl;
+                // Tambahkan kelas aktif ke elemen menu yang sesuai dengan halaman yang baru dimuat
+                $('.sidebar-menu li').removeClass('active');
+                $('.sidebar-menu li').each(function() {
+                    if ($(this).find('a').attr('href') === targetUrl) {
+                        $(this).addClass('active');
+                    }
+                });
+            });
+        });
     </script>
 
     <!-- Bootstrap core JavaScript-->
@@ -365,7 +393,7 @@
     <!-- Page level custom scripts -->
     <script src="{{ asset('sbadmin2/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('sbadmin2/js/demo/chart-pie-demo.js') }}"></script>
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
     @stack('script')

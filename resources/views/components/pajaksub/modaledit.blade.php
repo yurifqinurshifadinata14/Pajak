@@ -16,13 +16,15 @@
                         <input type="text" class="form-control" id="nama_wp" name="nama_wp" :value="data.nama_wp"
                             placeholder="Nama WP" x-model="data.nama_wp">
                     </div>
-                    <label for="jenis">Jenis WP</label>
-                    <select name="jenis" id="editjenis" class="form-select" :value="data.jenis"
-                        onchange="showEditInput(this)" x-model="data.jenis">
-                        <option disabled>--Select--</option>
-                        <option value="Badan">Badan</option>
-                        <option value="Pribadi">Pribadi</option>
-                    </select>
+                    <div class="form-group">
+                        <label for="jenis">Jenis WP</label>
+                        <select name="jenis" id="editjenis" class="form-select" :value="data.jenis"
+                            onchange="showEditInput(this)" x-model="data.jenis">
+                            <option disabled>--Select--</option>
+                            <option value="Badan">Badan</option>
+                            <option value="Pribadi">Pribadi</option>
+                        </select>
+                    </div>
                     <div id="editjenisBadan" style="display:none;">
                         <h6>-- Bagian Badan --</h6>
                         <div class="form-group">
@@ -79,42 +81,42 @@
                                 x-model="data.password_efaktur">
                         </div>
                     </div>
-                    <div class="row mb-3">
+                    <div class="form-group">
                         <label for="npwp">NPWP</label>
                         <input type="text" class="form-control" id="npwp" name="npwp"
                             :value="data.npwp" placeholder="NPWP" x-model="data.npwp">
                     </div>
-                    <div class="row mb-3">
+                    <div class="form-group">
                         <label for="no_hp">No Hp</label>
                         <input type="text" class="form-control" id="no_hp" name="no_hp"
                             :value="data.no_hp" placeholder="No Hp" x-model="data.no_hp">
                     </div>
-                    <div class="row mb-3">
+                    <div class="form-group">
                         <label for="no_efin">No EFIN</label>
                         <input type="text" class="form-control" id="no_efin" name="no_efin"
                             :value="data.no_efin" placeholder="No EFIN" x-model="data.no_efin">
                     </div>
-                    <div class="row mb-3">
+                    <div class="form-group">
                         <label for="gmail">Gmail</label>
                         <input type="email" class="form-control" id="gmail" name="gmail"
                             :value="data.gmail" placeholder="Gmail" x-model="data.gmail">
                     </div>
-                    <div class="row mb-3">
+                    <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password"
                             :value="data.password" placeholder="Password" x-model="data.password">
                     </div>
-                    <div class="row mb-3">
+                    <div class="form-group">
                         <label for="nik">NIK</label>
                         <input type="text" class="form-control" id="nik" name="nik"
                             :value="data.nik" placeholder="NIK" x-model="data.nik">
                     </div>
-                    <div class="row mb-3">
+                    <div class="form-group">
                         <label for="alamat">Alamat</label>
                         <input type="text" class="form-control" id="alamat" name="alamat"
                             :value="data.alamat" placeholder="Alamat" x-model="data.alamat">
                     </div>
-                    <div class="row mb-3">
+                    <div class="form-group">
                         <label for="merk_dagang">Merk Dagang</label>
                         <input type="text" class="form-control" id="merk_dagang" name="merk_dagang"
                             :value="data.merk_dagang" placeholder="Merk Dagang" x-model="data.merk_dagang">

@@ -16,7 +16,7 @@ class PajakController extends Controller
     public function index()
     {
         $pajak = Pajak::all();
-        return view('pajak.pajak', compact('pajak'));
+        return view('pajak.pajaksub', compact('pajak'));
         //
     }
 
@@ -64,8 +64,8 @@ class PajakController extends Controller
         $jenis->id_pajak = $id_pajak;
         $jenis->jenis = $request->jenis;
         $jenis->alamatBadan = $request->alamatBadan;
-        $jenis->jabatan = $request->jabatanBadan;
-        $jenis->saham = $request->sahamBadan;
+        $jenis->jabatan = $request->jabatan;
+        $jenis->saham = $request->saham;
         $jenis->npwpBadan = $request->npwpBadan;
 
         $status = new Status();
@@ -165,8 +165,8 @@ class PajakController extends Controller
         } else {
             $jenis->jenis = $request->jenis;
             $jenis->alamatBadan = $request->alamatBadan;
-            $jenis->jabatan = $request->jabatanBadan;
-            $jenis->saham = $request->sahamBadan;
+            $jenis->jabatan = $request->jabatan;
+            $jenis->saham = $request->saham;
             $jenis->npwpBadan = $request->npwpBadan;
         }
 

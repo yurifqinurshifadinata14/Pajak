@@ -1,4 +1,4 @@
-@extends('main')
+@extends ('main')
 @section('konten')
     <main>
         <div class="container-fluid px-4">

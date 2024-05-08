@@ -179,14 +179,7 @@
                                     data: 'id_pajak',
                                     render: (data) => {
                                         return /*html*/ `<div class="button-container">
-                                                    <div class="dropdown">
-                                                        <button class="btn btn-info dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                            <i class="fas fa-fw fa-solid fa-search"></i> </button>
-                                                        </button>
-                                                        <ul class="dropdown-menu">
-                                                          <li><a class="dropdown-item" href="{{ route('pajak.Detail', '') }}/${data}" >Detail Jenis & Status</a></li>
-                                                        </ul>
-                                                    </div>
+                                               <a class="btn btn-sm btn-info" href="{{ route('pajak.Detail', '') }}/${data}" ><i class="fas fa-fw fa-solid fa-search"></i></a>
                                                     <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                             <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
                                                                 <i class="fas fa-fw fa-solid fa-trash"></i> </button>

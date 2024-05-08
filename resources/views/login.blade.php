@@ -29,7 +29,7 @@
             width: 115%;
             height: auto;
         }
-        
+
         .bg-navy {
             background-color: #12094a;
             padding: 10px;
@@ -92,7 +92,7 @@
                                                     Me</label>
                                             </div>
                                         </div>
-                                        <a href="/login" class="btn btn-navy btn-user btn-block">
+                                        <a href="/pajaksub" class="btn btn-navy btn-user btn-block">
                                             Login
                                         </a>
                                         {{-- <hr> --}}
