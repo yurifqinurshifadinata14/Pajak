@@ -121,6 +121,10 @@
 
             var initTable = (pphunifikasi) => {
                 $('#pphuniTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'excel', 'pdf'
+                        ],
                         destroy: true,
                         data: pphunifikasi,
                         columns: [
