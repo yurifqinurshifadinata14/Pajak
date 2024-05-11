@@ -20,7 +20,7 @@
                     <label for="jenis">Jenis WP</label>
                     <select name="jenis" id="jenis" class="form-select"
                         onchange="showInput(this)"  x-model="formData.jenis">
-                        <option selected disabled>--Select--</option>
+                        <option disabled>--Select--</option>
                         <option value="Badan" @click="showJenis=!showJenis">Badan</option>
                         <option value="Pribadi">Pribadi</option>
                     </select>
@@ -45,14 +45,14 @@
                     <div class="form-group">
                         <label for="saham">Saham</label>
                         <input type="text" class="form-control" id="saham" name="saham"
-                            placeholder="Saham" x-model="formData.sahamBadan">
+                            placeholder="Saham" x-model="formData.saham">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="status">Status WP</label>
                     <select name="status" id="status" class="form-select"
                         onchange="showInput(this)" x-model="formData.status">
-                        <option selected disabled>--Select--</option>
+                        <option disabled>--Select--</option>
                         <option value="PKP" @click="showStatus=!showStatus">PKP</option>
                         <option value="Non PKP">Non PKP</option>
                     </select>

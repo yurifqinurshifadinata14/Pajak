@@ -41,11 +41,12 @@ Route::get('/pphEdit/{pph}', [PphController::class, 'edit'])->name('pphEdit');
 Route::put('/pphUpdate/{id_pph}', [PphController::class, 'update'])->name('pphUpdate');
 Route::delete('/pphDelete/{pph}', [PphController::class, 'destroy'])->name('pphDestroy');
 
-Route::get('/pphunifikasi', [PphunifikasiController::class, 'index'])->name('pphunifikasi');
+Route::get('/pphunifikasi', [PphunifikasiController::class, 'index'])->name('getpphunifikasisub');
+Route::get('/getpphunifikasi', [PphunifikasiController::class, 'getPphunifikasi'])->name('getPphunifikasi');
 Route::post('/pphunifikasistore', [PphunifikasiController::class, 'store'])->name('pphunifikasiStore');
 Route::get('/pphunifikasisub', [PphunifikasiController::class, 'pphunifikasisub'])->name('pphunifikasiSub');
 Route::get('/pphunifikasiEdit/{pphunifikasi}', [PphunifikasiController::class, 'edit'])->name('pphunifikasiEdit');
-Route::put('/pphunifikasiUpdate/{pphunifikasi}', [PphunifikasiController::class, 'update'])->name('pphunifikasiUpdate');
+Route::put('/pphunifikasiUpdate/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('pphunifikasiUpdate');
 Route::delete('/pphunifikasiDelete/{pphunifikasi}', [PphunifikasiController::class, 'destroy'])->name('pphunifikasiDestroy');
 
 Route::get('/pph21', [Pph21Controller::class, 'index'])->name('pph21');

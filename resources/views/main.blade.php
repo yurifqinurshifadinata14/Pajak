@@ -113,8 +113,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item  {{ Route::is('pphunifikasi') ? 'active' : '' }}">
-                    <a class="nav-link" href="/pphunifikasi" aria-expanded="true">
+                <li class="nav-item  {{ Route::is('pphunifikasi.pphunifikasisub') ? 'active' : '' }}">
+                    <a class="nav-link" href="/pphunifikasisub" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH Unifikasi</span>
                     </a>

@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('pphunifikasis', function (Blueprint $table) {
             $table->id();
+            $table->string('id_pajak');
+            $table->string('id_pphuni');
             $table->integer('ntpn')->nullable();
             $table->integer('jumlah_bayar')->nullable();
             $table->integer('biaya_bulan')->nullable();

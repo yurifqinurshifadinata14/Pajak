@@ -53,7 +53,7 @@
                         <table id="pajakTable" class="my-table">
                             <thead>
                                 <tr>
-                                    <th>Nomor</th>
+                                    <th>No</th>
                                     <th>Nama WP</th>
                                     <th>Jenis WP</th>
                                     <th>Status WP</th>
