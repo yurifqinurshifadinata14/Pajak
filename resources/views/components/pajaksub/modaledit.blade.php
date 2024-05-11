@@ -17,7 +17,7 @@
                             placeholder="Nama WP" x-model="data.nama_wp">
                     </div>
 
-                    
+
                     <div class="form-group">
                         <label for="jenis">Jenis WP</label>
                         <select name="jenis" id="editjenis" class="form-select" :value="data.jenis"

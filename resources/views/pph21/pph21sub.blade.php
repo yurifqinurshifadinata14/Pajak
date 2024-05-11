@@ -1,7 +1,7 @@
 @extends ('main')
 @section('konten')
-    <main>
-        <div class="container-fluid px-4">
+    <main x-data="{ pilih: '' }">
+        <div class="container-fluid px-4" x-data="app">
             <h1 class="mt-4">Data Pph21</h1>
             <div class="card mb-4">
                 <div class="card-header">
@@ -13,11 +13,13 @@
                     </button>
 
                     <!-- modal button tambah-->
-                    <x-pph21sub.modalTambah :karyawan="$karyawan" />
+                    <x-pph21sub.modalTambah :pajaks="$pajaks" />
 
                     <!-- modal button edit-->
                     <x-pph21sub.modaledit />
+
                 </div>
+
                 <div class="card-body">
                     <style>
                         .button-container {
@@ -44,51 +46,52 @@
                             background-color: #f2f2f2;
                         }
                     </style>
+                    <div class="table-responsive">
+                        <table id="pph21Table" class="my-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Jumlah Bayar</th>
+                                    <th>BPF</th>
+                                    <th>Biaya Bulan</th>
+                                    <th>Daftar Karyawan</th>
+                                    <th>Aksi</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
 
                 </div>
             </div>
         </div>
-        <div class="table-responsive">
-            <table id="pph21Table" class="my-table">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Jumlah Bayar</th>
-                        <th>BPF</th>
-                        <th>Biaya Bulan</th>
-                        <th>Daftar Karyawan</th>
-                        <th>Aksi</th>
 
-                    </tr>
-                </thead>
-            </table>
-        </div>
         <script>
             function showInput(selectObject) {
                 var value = selectObject.value;
                 if (value == 'NIK') {
-                    document.getElementById('nikKaryawan').style.display = 'block';
+                    document.getElementById('nik').style.display = 'block';
                 } else {
-                    document.getElementById('nikKaryawan').style.display = 'none';
+                    document.getElementById('nik').style.display = 'none';
                 }
                 if (value == 'NPWP') {
-                    document.getElementById('npwpKaryawan').style.display = 'block';
+                    document.getElementById('npwp').style.display = 'block';
                 } else {
-                    document.getElementById('npwpKaryawan').style.display = 'none';
+                    document.getElementById('npwp').style.display = 'none';
                 }
             }
 
             function showEditInput(selectObject) {
                 var value = selectObject.value;
                 if (value == 'NIK') {
-                    document.getElementById('nikKaryawan').style.display = 'block';
+                    document.getElementById('nik').style.display = 'block';
                 } else {
-                    document.getElementById('nikKaryawan').style.display = 'none';
+                    document.getElementById('nik').style.display = 'none';
                 }
                 if (value == 'NPWP') {
-                    document.getElementById('npwpKaryawan').style.display = 'block';
+                    document.getElementById('npwp').style.display = 'block';
                 } else {
-                    document.getElementById('npwpKaryawan').style.display = 'none';
+                    document.getElementById('npwp').style.display = 'none';
                 }
             }
         </script>
@@ -107,6 +110,7 @@
                         i = 1
                         pph21 = res.pph21
                         initTable(pph21)
+                        console.log(pph21)
                     })
                 };
                 var deleteData = async (id) => {
@@ -129,7 +133,7 @@
                                     data: 'id'
                                 },
                                 {
-                                    data: 'jumlah_baayar'
+                                    data: 'jumlah_bayar'
                                 },
                                 {
                                     data: 'bpf'
@@ -138,13 +142,13 @@
                                     data: 'biaya_bulan'
                                 },
                                 {
-                                    data: 'Karyawan'
+                                    data: 'nik'
                                 },
                                 {
                                     data: 'id_pph21',
                                     render: (data) => {
                                         return /*html*/ `<div class="button-container">
-                                                    <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                    <a href="#" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
                                                             <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                             </div>`
@@ -163,6 +167,7 @@
                 document.addEventListener('alpine:init', () => {
                     Alpine.data('formTambah', () => ({
                         formData: {
+                            id_pajak: '',
                             jumlah_bayar: '',
                             bpf: '',
                             biaya_bulan: '',
@@ -172,6 +177,7 @@
 
 
                         handleSubmit() {
+                            console.log(this.formData)
                             fetch("{{ route('pph21Store') }}", {
                                 method: 'POST',
                                 headers: {
@@ -183,13 +189,14 @@
                                 console.log(res.json)
                                 $('#tambah').modal('hide');
                                 this.formData = {
+                                    id_pajak: '',
                                     jumlah_bayar: '',
                                     bpf: '',
                                     biaya_bulan: '',
                                     nik: '',
                                     npwp: ''
                                 }
-                                /*  getPph21() */
+                                getpph21()
                             }).catch(err => console.log(err))
                         },
 
@@ -202,9 +209,12 @@
                         select(id) {
                             this.data = pph21.filter(item => item.id_pph21 == id)
                             this.data = this.data[0]
+                            console.log(this.data)
+                            /*  this.data = pph21[id] */
                         },
 
                         editSubmit() {
+                            console.log(this.data)
                             fetch(`{{ route('pph21Update', '') }}/${this.data.id_pph21}`, {
                                 method: 'PUT',
                                 headers: {
@@ -214,7 +224,7 @@
                                 body: JSON.stringify(this.data)
                             }).then(res => {
                                 $('#edit').modal('hide');
-                                getPph21()
+                                getpph21()
                             }).catch(err => console.log(err))
                         },
 
