@@ -16,6 +16,8 @@
                         <input type="text" class="form-control" id="nama_wp" name="nama_wp" :value="data.nama_wp"
                             placeholder="Nama WP" x-model="data.nama_wp">
                     </div>
+
+                    
                     <div class="form-group">
                         <label for="jenis">Jenis WP</label>
                         <select name="jenis" id="editjenis" class="form-select" :value="data.jenis"
@@ -81,6 +83,8 @@
                                 x-model="data.password_efaktur">
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <label for="npwp">NPWP</label>
                         <input type="text" class="form-control" id="npwp" name="npwp"

@@ -40,8 +40,6 @@
                                 <th>No</th>
                                 <th>NIK</th>
                                 <th>NPWP</th>
-                                <th>Aksi</th>
-
                             </tr>
                         </thead>
                             <tbody>

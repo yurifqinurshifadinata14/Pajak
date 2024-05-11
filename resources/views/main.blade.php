@@ -10,7 +10,7 @@
     <meta name="author" content="">
 
     <title>Wajib Pajak</title>
-    <link rel="icon" href="{{asset('logo.png')}}" type="gambar/tipe ikon">
+    <link rel="icon" href="{{ asset('logo.png') }}" type="gambar/tipe ikon">
     <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('css/styles.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin2/css/styles.css') }}" rel="stylesheet">
@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.css">
     <link rel="stylesheet" type="css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
     {{-- <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" /> --}}
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -66,7 +68,7 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
                 <div class="sidebar-brand-icon bg-navy">
                     {{-- <i class="fas fa-fw fa-user"></i> --}}
-                    <img src="{{asset('logo.png')}}" class="img-fluid mx-auto bg-navy" alt="...">
+                    <img src="{{ asset('logo.png') }}" class="img-fluid mx-auto bg-navy" alt="...">
                 </div>
                 <div class="sidebar-brand-text mx-3">Wajib Pajak</div>
             </a>
@@ -104,8 +106,8 @@
                     </a>
                 </li>
 
-                <li class="nav-item {{ Route::is('pph21') ? 'active' : '' }}">
-                    <a class="nav-link" href="/pph21" aria-expanded="true">
+                <li class="nav-item {{ Route::is('pph21.pph21sub') ? 'active' : '' }}">
+                    <a class="nav-link" href="/pph21sub" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH 21</span>
                     </a>
@@ -129,8 +131,9 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="{{asset('logo.png')}}" alt="...">
-                <p class="text-center mb-2"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar pajak Anda!</p>
+                <img class="sidebar-card-illustration mb-2" src="{{ asset('logo.png') }}" alt="...">
+                <p class="text-center mb-2"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar pajak
+                    Anda!</p>
             </div>
 
         </ul>
@@ -151,10 +154,11 @@
                     </button>
 
                     <!-- Topbar Search -->
-                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <form
+                        class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
                         <div class="input-group">
-                            <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..."
-                                aria-label="Search" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control bg-light border-0 small"
+                                placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
                             <div class="input-group-append">
                                 <button class="btn btn-navy" type="button">
                                     <i class="fas fa-search fa-sm"></i>
@@ -212,7 +216,8 @@
                                     </div>
                                     <div>
                                         <div class="small text-gray-500">December 12, 2019</div>
-                                        <span class="font-weight-bold">A new monthly report is ready to download!</span>
+                                        <span class="font-weight-bold">A new monthly report is ready to
+                                            download!</span>
                                     </div>
                                 </a>
                                 <!-- Add other alert items here -->
@@ -235,8 +240,7 @@
                                 </h6>
                                 <a class="dropdown-item d-flex align-items-center" href="#">
                                     <div class="dropdown-list-image mr-3">
-                                        <img class="rounded-circle" src="img/undraw_profile_1.svg"
-                                            alt="...">
+                                        <img class="rounded-circle" src="img/undraw_profile_1.svg" alt="...">
                                         <div class="status-indicator bg-success"></div>
                                     </div>
                                     <div class="font-weight-bold">
@@ -254,8 +258,7 @@
                             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">Wajib Pajak</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('logo.png')}}">
+                                <img class="img-profile rounded-circle" src="{{ asset('logo.png') }}">
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
@@ -273,7 +276,8 @@
                                     Activity Log
                                 </a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="/login" data-toggle="modal" data-target="#logoutModal">
+                                <a class="dropdown-item" href="/login" data-toggle="modal"
+                                    data-target="#logoutModal">
                                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                     Logout
                                 </a>
@@ -335,7 +339,7 @@
         </div>
     </div>
 
-<!-- jQuery -->
+    <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- DataTables JavaScript -->
@@ -394,7 +398,9 @@
     <script src="{{ asset('sbadmin2/js/demo/chart-area-demo.js') }}"></script>
     <script src="{{ asset('sbadmin2/js/demo/chart-pie-demo.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script>
     <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
     @stack('script')
 </body>

@@ -6,6 +6,7 @@ use App\Http\Controllers\JenisController;
 use App\Http\Controllers\StatusController;
 use App\Http\Controllers\Pph21Controller;
 use App\Http\Controllers\PphController;
+use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PphunifikasiController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,10 +53,13 @@ Route::get('/pph21sub', [Pph21Controller::class, 'pph21sub'])->name('pph21Sub');
 Route::delete('/pph21Delete/{ppph21}', [Pph21Controller::class, 'destroy'])->name('pph21Destroy');
 Route::get('/pph21Edit/{pph21}', [Pph21Controller::class, 'edit'])->name('pph21Edit');
 Route::put('/pph21iUpdate/{pph21}', [Pph21Controller::class, 'update'])->name('pph21Update');
+Route::get('/getpph21sub', [Pph21Controller::class, 'getPph21Sub'])->name('getpph21sub');
 
-Route::get('/getpajaksub', [PajakController::class,'getPajakSub'])->name('getpajaksub');
-Route::post('/pajakstore', [PajakController::class,'store'])->name('pajakStore');
+Route::get('/getpajaksub', [PajakController::class, 'getPajakSub'])->name('getpajaksub');
+Route::post('/pajakstore', [PajakController::class, 'store'])->name('pajakStore');
 
 Route::get('/jenissub', [JenisController::class, 'jenissub'])->name('jenisSub');
 
 Route::get('/statussub', [StatusController::class, 'statussub'])->name('statusSub');
+
+Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
