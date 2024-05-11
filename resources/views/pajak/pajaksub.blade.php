@@ -181,7 +181,8 @@
                                     render: (data) => {
                                         return /*html*/ `<div class="button-container">
                                                <a class="btn btn-sm btn-info" href="{{ route('pajak.Detail', '') }}/${data}" ><i class="fas fa-fw fa-solid fa-search"></i></a>
-                                                    <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                    <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')">
+                                                        <i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                             <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
                                                                 <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                 </div>`
@@ -252,6 +253,8 @@
                     Alpine.data('app', () => ({
                         data: [],
                         editId: '',
+
+                        
                         select(id) {
                             this.data = pajak.filter(item => item.id_pajak == id)
                             this.data = this.data[0]

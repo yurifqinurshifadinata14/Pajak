@@ -32,11 +32,12 @@ Route::get('/pajakEdit/{pajak}', [PajakController::class, 'edit'])->name('pajakE
 Route::put('/pajakUpdate/{id_pajak}', [PajakController::class, 'update'])->name('pajakUpdate');
 Route::delete('/pajakDelete/{id_pajak}', [PajakController::class, 'destroy'])->name('pajakDestroy');
 
-Route::get('/pph', [PphController::class, 'index'])->name('pph');
+Route::get('/pph', [PphController::class, 'index'])->name('getpphsub');
+Route::get('/getpph', [PphController::class, 'getPph'])->name('getPph');
 Route::post('/pphstore', [PphController::class, 'store'])->name('pphStore');
 Route::get('/pphsub', [PphController::class, 'pphsub'])->name('pphSub');
 Route::get('/pphEdit/{pph}', [PphController::class, 'edit'])->name('pphEdit');
-Route::put('/pphUpdate/{pph}', [PphController::class, 'update'])->name('pphUpdate');
+Route::put('/pphUpdate/{id_pph}', [PphController::class, 'update'])->name('pphUpdate');
 Route::delete('/pphDelete/{pph}', [PphController::class, 'destroy'])->name('pphDestroy');
 
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'index'])->name('pphunifikasi');
