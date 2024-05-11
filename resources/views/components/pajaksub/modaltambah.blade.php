@@ -1,5 +1,4 @@
-<div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel"
-aria-hidden="true" x-data="formTambah">
+<div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true" x-data="formTambah">
 <div class="modal-dialog">
     <div class="modal-content">
         <div class="modal-header">

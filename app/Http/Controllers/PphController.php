@@ -16,7 +16,7 @@ class PphController extends Controller
     {
         $pph =  Pph::all();
         $pajaks = Pajak::all();
-        return view ('pph.pph',compact('pph', 'pajaks'));
+        return view('pph.pph', compact('pph', 'pajaks'));
         //
     }
 
@@ -49,9 +49,9 @@ class PphController extends Controller
         $pph = Pph::create([
             'id_pajak' => $request->id_pajak,
             'id_pph' => $id_pph,
-            'ntpn' => $request->ntpn,
-            'biaya_bulan' => $request->biaya_bulan,
-            'jumlah_bayar' => $request->jumlah_bayar,
+            'ntpn' => (int)$request->ntpn,
+            'biaya_bulan' => (int)$request->biaya_bulan,
+            'jumlah_bayar' => (int)$request->jumlah_bayar,
         ]);
 
         return redirect()->route('pphSub');
@@ -60,8 +60,15 @@ class PphController extends Controller
 
     public function pphsub()
     {
-        $pph =  Pph::with('pajak')->get();
-        return view('pph.pphsub', compact('pph'));
+       /*  $pph =  Pph::with('pajak')->get();*/
+        $pajaks =  Pajak::get(['id_pajak','nama_wp']);
+        $pph = Pph::join('pajaks','pphs.id_pajak','=','pajaks.id_pajak')->get(['pphs.id','id_pph','pphs.id_pajak','nama_wp','ntpn','biaya_bulan','jumlah_bayar']);
+        return view('pph.pphsub', compact(['pph','pajaks']));
+    }
+
+    public function getPph(){
+        $pph = Pph::join('pajaks','pphs.id_pajak','=','pajaks.id_pajak')->get(['pphs.id','id_pph','pphs.id_pajak','nama_wp','ntpn','biaya_bulan','jumlah_bayar']);
+        return $pph;
     }
 
     /**
@@ -77,19 +84,20 @@ class PphController extends Controller
      */
     public function edit(Pph $pph)
     {
-        return view('pph.pphEdit', compact('pph'));
+        return response()->json($pph);
+        // return view('pph.pphEdit', compact('pph'));
         //
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pph $pph)
+    public function update(Request $request, $id_pph)
     {
-        $pph->update([
-            'ntpn' => $request->ntpn,
-            'biaya_bulan' => $request->biaya_bulan,
-            'jumlah_bayar' => $request->jumlah_bayar,
+        $pph=Pph::where('id_pph',$id_pph)->update([
+            'ntpn' => (int)$request->ntpn,
+            'biaya_bulan' => (int)$request->biaya_bulan,
+            'jumlah_bayar' => (int)$request->jumlah_bayar,
         ]);
 
         return redirect()->route('pphSub');
@@ -99,9 +107,10 @@ class PphController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pph $pph)
+    public function destroy($id)
     {
-        $pph->delete();
+ 
+        $pph = Pph::where('id_pph',$id)->delete();
         return redirect()->route('pphSub');
         //
     }

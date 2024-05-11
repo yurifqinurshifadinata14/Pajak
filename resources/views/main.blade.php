@@ -100,7 +100,7 @@
                 </li>
 
                 <li class="nav-item  {{ Route::is('pph') ? 'active' : '' }}">
-                    <a class="nav-link" href="/pph" aria-expanded="true">
+                    <a class="nav-link" href="/pphsub" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH</span>
                     </a>
