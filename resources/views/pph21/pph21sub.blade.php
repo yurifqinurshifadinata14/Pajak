@@ -51,6 +51,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
+                                    <th>Nama WP</th>
                                     <th>Jumlah Bayar</th>
                                     <th>BPF</th>
                                     <th>Biaya Bulan</th>
@@ -125,21 +126,41 @@
 
                 let i = 1;
 
+
+                let rupiah = new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0
+                })
                 var initTable = (pph21) => {
                     $('#pph21Table').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'excel', 'pdf'
+                            ],
                             destroy: true,
                             data: pph21,
                             columns: [{
                                     data: 'id'
                                 },
+
                                 {
-                                    data: 'jumlah_bayar'
+                                    data: 'nama_wp'
+                                },
+                                {
+                                    data: 'jumlah_bayar',
+                                    render: (data) => {
+                                        return rupiah.format(data)
+                                    }
                                 },
                                 {
                                     data: 'bpf'
                                 },
                                 {
-                                    data: 'biaya_bulan'
+                                    data: 'biaya_bulan',
+                                    render: (data) => {
+                                        return rupiah.format(data)
+                                    }
                                 },
                                 {
                                     data: 'nik'
