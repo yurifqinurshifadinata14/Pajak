@@ -13,7 +13,8 @@
                     <div class="form-group">
                         <label for="jumlah">Jumlah Bayar</label>
                         <input type="text" class="form-control" id="jumlah_bayar" name="jumlah_bayar"
-                            {{-- value="data.jumlah_bayar" --}} placeholder="Jumlah Bayar" x-model="data.jumlah_bayar">
+                            {{-- value="data.jumlah_bayar" --}} placeholder="Jumlah Bayar" x-model="data.jumlah_bayar"
+                            x-mask:dynamic="$money($input, ',')">
                     </div>
                     <div class="form-group">
                         <label for="bpf">BPF</label>
@@ -23,7 +24,8 @@
                     <div class="form-group">
                         <label for="biaya">Biaya Bulan</label>
                         <input type="text" class="form-control" id="biaya_bulan" name="biaya_bulan"
-                            {{-- value="data.biaya_bulan" --}} placeholder="Biaya Bulan" x-model="data.biaya_bulan">
+                            {{-- value="data.biaya_bulan" --}} placeholder="Biaya Bulan" x-model="data.biaya_bulan"
+                            x-mask:dynamic="$money($input, ',')">
                     </div>
                     <h6>-- Karyawan --</h6>
                     <div class="form-group">

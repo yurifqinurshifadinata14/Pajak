@@ -35,7 +35,6 @@ class Pph21Controller extends Controller
      */
     public function store(Request $request)
     {
-        Log::info('request store : ', $request->all());
         $max = DB::table('pph21s')->select(DB::raw('MAX(RIGHT(id_pph21,3)) as autoid'));
         $kd = "";
 
@@ -46,7 +45,7 @@ class Pph21Controller extends Controller
                 $id_pph21 = "Pph21-" . $kd;
             }
         } else {
-            $id_pph21 = "P-001";
+            $id_pph21 = "Pph21-001";
         }
         //
         $pph21 = new Pph21;
@@ -85,14 +84,14 @@ class Pph21Controller extends Controller
     {
 
         $pajaks = Pajak::get(['id_pajak', 'nama_wp']);
-        $pph21 = Pph21::join('karyawans', 'karyawans.id_pph21', '=', 'pph21s.id_pph21')
+        $pph21 = Pph21::join('karyawans', 'karyawans.id_pph21', '=', 'pph21s.id_pph21')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
             ->get();
-        //dd($pph21);
+        //dd($pph21)
         return view('pph21.pph21sub', compact(['pph21', 'pajaks']));
     }
     public function getPph21Sub()
     {
-        $pph21 = Pph21::join('karyawans', 'karyawans.id_pph21', '=', 'pph21s.id_pph21')
+        $pph21 = Pph21::join('karyawans', 'karyawans.id_pph21', '=', 'pph21s.id_pph21')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
             ->get();
         return response()->json(['pph21' => $pph21]);
     }

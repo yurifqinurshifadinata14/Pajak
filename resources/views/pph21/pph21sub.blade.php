@@ -198,14 +198,21 @@
 
 
                         handleSubmit() {
-                            console.log(this.formData)
+                            const data = {
+                                id_pajak: this.formData.id_pajak,
+                                jumlah_bayar: this.formData.jumlah_bayar.replaceAll('.', ''),
+                                bpf: this.formData.bpf,
+                                biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
+                                nik: this.formData.nik,
+                                npwp: this.formData.npwp
+                            }
                             fetch("{{ route('pph21Store') }}", {
                                 method: 'POST',
                                 headers: {
                                     "Content-Type": "application/json",
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
-                                body: JSON.stringify(this.formData)
+                                body: JSON.stringify(data)
                             }).then(res => {
                                 console.log(res.json)
                                 $('#tambah').modal('hide');
