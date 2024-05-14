@@ -129,7 +129,8 @@
                     }).then(res => {
                         this.handleReset()
                         getKaryawan()
-                    })
+
+                    }).then(res => getpph21())
                 },
 
                 handleDelete(id) {

@@ -30,41 +30,35 @@
         <!-- Custom styles for this template -->
         <link href="{{ asset('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.dataTables.css" />
-        <<<<<<< HEAD <link
-            href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css"
+        <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css"
             rel="stylesheet">
-            <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
-            =======
-            <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css"
-                rel="stylesheet">
-            <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 
-            >>>>>>> 15e1abb62b46434ea97c2b9402c9ff25be59e64a
-            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-            <style>
-                .bg-navy {
-                    background-color: #12094a;
-                    padding: 10px;
-                    border-radius: 5px;
-                }
+        <style>
+            .bg-navy {
+                background-color: #12094a;
+                padding: 10px;
+                border-radius: 5px;
+            }
 
-                .btn-navy {
-                    background-color: #12094a;
-                    color: #ffffff;
-                    transition: background-color 0.3s ease;
-                }
+            .btn-navy {
+                background-color: #12094a;
+                color: #ffffff;
+                transition: background-color 0.3s ease;
+            }
 
-                .btn-navy:hover {
-                    background-color: #adbd1e;
-                    border-color: #ffffff;
-                }
+            .btn-navy:hover {
+                background-color: #adbd1e;
+                border-color: #ffffff;
+            }
 
-                .font-color {
-                    color: #12094a;
-                }
-            </style>
-            {{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+            .font-color {
+                color: #12094a;
+            }
+        </style>
+        {{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     </head>
 
     <body id="page-top">

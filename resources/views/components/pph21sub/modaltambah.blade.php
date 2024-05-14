@@ -41,8 +41,8 @@
                     </div>
                     <div class="form-group">
                         <label for="karyawan">Daftar Karyawan</label>
-                        <select name="karyawan" id="karyawan" class="form-select" x-model="formData.nik">
-                            <option disabled>--Select--</option>
+                        <select name="karyawan" id="karyawan" class="form-select" x-model="formData.nik" required>
+                            <option value="">--Select--</option>
                             {{--  @foreach ($karyawan as $k)
                                 <option value="{{ $k->nik }}">{{ $k->nama }}
                                 </option>
