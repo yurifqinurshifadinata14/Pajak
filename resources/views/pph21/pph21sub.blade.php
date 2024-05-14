@@ -4,19 +4,28 @@
         <div class="container-fluid px-4" x-data="app">
             <h1 class="mt-4">Data Pph21</h1>
             <div class="card mb-4">
-                <div class="card-header">
-                    <i class="fas fa-table me-1"></i>
-                    Data Pph21
-                    <button type="button" class="btn btn-sm btn-primary float-end mb-2" data-bs-toggle="modal"
-                        data-bs-target="#tambah">
-                        <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
-                    </button>
+                <div class="card-header d-flex justify-content-between">
+                    <div>
+                        <i class="fas fa-table me-1"></i>
+                        Data Pph21
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" data-bs-toggle="modal"
+                            data-bs-target="#tambahkaryawan" onclick="setTimeout(()=>tableKaryawan(karyawan),200)">
+                            <i class="fas fa-fw fa-solid fa-plus"></i> Karyawan
+                        </button>
+                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" data-bs-toggle="modal"
+                            data-bs-target="#tambah" @click="getDataKaryawan">
+                            <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
+                        </button>
+                    </div>
 
                     <!-- modal button tambah-->
                     <x-pph21sub.modalTambah :pajaks="$pajaks" />
 
                     <!-- modal button edit-->
                     <x-pph21sub.modaledit />
+                    <x-pph21sub.modalkaryawan :karyawan="$karyawan" />
 
                 </div>
 
@@ -65,6 +74,7 @@
 
                 </div>
             </div>
+
         </div>
 
         <script>
@@ -124,7 +134,7 @@
                     }).then(res => getpph21()).catch(err => console.log(err));
                 }
 
-                let i = 1;
+                /* let i = 1; */
 
 
                 let rupiah = new Intl.NumberFormat("id-ID", {
@@ -134,69 +144,92 @@
                 })
                 var initTable = (pph21) => {
                     $('#pph21Table').DataTable({
-                            dom: 'Bfrtip',
-                            buttons: [
-                                'copy', 'excel', 'pdf'
-                            ],
-                            destroy: true,
-                            data: pph21,
-                            columns: [{
-                                    data: 'id'
-                                },
+                        dom: 'Bfrtip',
+                        buttons: [
+                            'copy', 'excel', 'pdf'
+                        ],
+                        destroy: true,
+                        data: pph21,
+                        columns: [{
+                                data: 'null',
+                                render: (data, type, row, meta) => {
+                                    return meta.row + 1
+                                }
+                            },
 
-                                {
-                                    data: 'nama_wp'
-                                },
-                                {
-                                    data: 'jumlah_bayar',
-                                    render: (data) => {
-                                        return rupiah.format(data)
-                                    }
-                                },
-                                {
-                                    data: 'bpf'
-                                },
-                                {
-                                    data: 'biaya_bulan',
-                                    render: (data) => {
-                                        return rupiah.format(data)
-                                    }
-                                },
-                                {
-                                    data: 'nik'
-                                },
-                                {
-                                    data: 'id_pph21',
-                                    render: (data) => {
-                                        return /*html*/ `<div class="button-container">
+                            {
+                                data: 'nama_wp'
+                            },
+                            {
+                                data: 'jumlah_bayar',
+                                render: (data) => {
+                                    return rupiah.format(data)
+                                }
+                            },
+                            {
+                                data: 'bpf'
+                            },
+                            {
+                                data: 'biaya_bulan',
+                                render: (data) => {
+                                    return rupiah.format(data)
+                                }
+                            },
+                            {
+                                data: 'nik',
+                                render: (data) => {
+                                    const findKaryawan = karyawan.find(item => item.nik === data)
+                                    return /* html */ `<span>${data} - ${findKaryawan.nama}</span>`
+                                }
+                            },
+                            {
+                                data: 'id',
+                                render: (data) => {
+                                    return /*html*/ `<div class="button-container">
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
                                                             <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                             </div>`
-                                    }
-                                },
-                            ]
-                        }).cells(null, 0, {
-                            search: 'applied',
-                            order: 'applied'
-                        })
-                        .every(function(cell) {
-                            this.data(i++);
-                        });;
+                                }
+                            },
+                        ]
+                    })
                 }
                 initTable(pph21)
+
+                const getDataKaryawan = async () => {
+                    await fetch("{{ route('getKaryawan') }}", {
+                        method: 'GET',
+                    }).then(res => res.json()).then(res => {
+                        return res
+                    })
+                }
+
                 document.addEventListener('alpine:init', () => {
                     Alpine.data('formTambah', () => ({
+                        init() {
+
+                        },
+
                         formData: {
                             id_pajak: '',
                             jumlah_bayar: '',
                             bpf: '',
                             biaya_bulan: '',
                             nik: '',
-                            npwp: ''
                         },
 
+                        karyawan: [],
 
+                        getKaryawan() {
+                            console.log('get karyawan')
+                            fetch("{{ route('getKaryawan') }}", {
+                                method: 'GET',
+                            }).then(res => res.json()).then(res => {
+                                console.log('get karyawan')
+                                this.karyawan = res
+                            })
+                        },
                         handleSubmit() {
                             const data = {
                                 id_pajak: this.formData.id_pajak,
@@ -204,7 +237,6 @@
                                 bpf: this.formData.bpf,
                                 biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
                                 nik: this.formData.nik,
-                                npwp: this.formData.npwp
                             }
                             fetch("{{ route('pph21Store') }}", {
                                 method: 'POST',
@@ -222,7 +254,6 @@
                                     bpf: '',
                                     biaya_bulan: '',
                                     nik: '',
-                                    npwp: ''
                                 }
                                 getpph21()
                             }).catch(err => console.log(err))
@@ -232,33 +263,53 @@
 
 
                     Alpine.data('app', () => ({
-                        data: [],
+                        pajaks: {!! json_encode($pajaks) !!},
+                        data: {},
                         editId: '',
+                        dataKaryawan: [],
                         select(id) {
-                            this.data = pph21.filter(item => item.id_pph21 == id)
-                            this.data = this.data[0]
-                            console.log(this.data)
+                            const findData = pph21.find(item => item.id == id)
+                            this.data = {
+                                id: findData.id,
+                                id_pajak: findData.id_pajak,
+                                nama_wp: findData.nama_wp,
+                                jumlah_bayar: rupiah.format(findData.jumlah_bayar),
+                                bpf: findData.bpf,
+                                biaya_bulan: rupiah.format(findData.biaya_bulan),
+                                nik: findData.nik,
+                            }
+                            this.dataKaryawan = karyawan
                             /*  this.data = pph21[id] */
                         },
 
+                        getDataKaryawan() {
+                            this.dataKaryawan = karyawan
+                        },
+
                         editSubmit() {
-                            console.log(this.data)
-                            fetch(`{{ route('pph21Update', '') }}/${this.data.id_pph21}`, {
+                            const dataSubmit = {
+                                id_pajak: this.data.id_pajak,
+                                nama_wp: this.data.nama_wp,
+                                jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '')
+                                    .trim()),
+                                bpf: this.data.bpf,
+                                biaya_bulan: Number(this.data.biaya_bulan.replaceAll(/[.Rp_]/g, '').trim()),
+                                nik: this.data.nik,
+                            }
+                            fetch(`{{ route('pph21Update', '') }}/${this.data.id}`, {
                                 method: 'PUT',
                                 headers: {
                                     "Content-Type": "application/json",
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
-                                body: JSON.stringify(this.data)
+                                body: JSON.stringify(dataSubmit)
                             }).then(res => {
                                 $('#edit').modal('hide');
                                 getpph21()
                             }).catch(err => console.log(err))
                         },
 
-                        init() {
-                            console.log('data:', this.data)
-                        },
+
                     }))
                 })
             </script>

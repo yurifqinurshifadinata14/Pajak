@@ -11,10 +11,21 @@
                     @method('PUT')
                     <!--input data-->
                     <div class="form-group">
+                        <label for="id_pajak">Nama WP</label>
+                        <select name="id_pajak" id="id_pajak" class="form-select" x-model="data.id_pajak">
+                            <option value="" disabled selected>Pilih Nama</option>
+                            {{-- @foreach ($pajaks as $pajak)
+                                <option value="{{ $pajak->id_pajak }}">{{ $pajak->nama_wp }}</option>
+                            @endforeach --}}
+                            <template x-for="pajak in pajaks">
+                                <option :value="pajak.id_pajak" x-text="pajak.nama_wp"></option>
+                            </template>
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="jumlah">Jumlah Bayar</label>
                         <input type="text" class="form-control" id="jumlah_bayar" name="jumlah_bayar"
-                            {{-- value="data.jumlah_bayar" --}} placeholder="Jumlah Bayar" x-model="data.jumlah_bayar"
-                            x-mask:dynamic="$money($input, ',')">
+                            placeholder="Jumlah Bayar" x-model="data.jumlah_bayar" x-mask:dynamic="$money($input, ',')">
                     </div>
                     <div class="form-group">
                         <label for="bpf">BPF</label>
@@ -27,16 +38,30 @@
                             {{-- value="data.biaya_bulan" --}} placeholder="Biaya Bulan" x-model="data.biaya_bulan"
                             x-mask:dynamic="$money($input, ',')">
                     </div>
-                    <h6>-- Karyawan --</h6>
+                    {{--  <h6>-- Karyawan --</h6>
                     <div class="form-group">
                         <label for="nik">NIK</label>
-                        <input type="text" class="form-control" id="nik" name="nik" {{--   value="data.nik" --}}
+                        <input type="text" class="form-control" id="nik" name="nik" 
                             placeholder="NIK" x-model="data.nik">
                     </div>
                     <div class="form-group">
                         <label for="npwp">NPWP</label>
-                        <input type="text" class="form-control" id="npwp" name="npwp" {{--  value="data.npwp" --}}
+                        <input type="text" class="form-control" id="npwp" name="npwp" 
                             placeholder="NPWP" x-model="data.npwp">
+                    </div> --}}
+                    <div class="form-group">
+                        <label for="karyawan">Daftar Karyawan</label>
+                        <select name="karyawan" id="karyawan" class="form-select" x-model="data.nik">
+                            <option disabled>--Select--</option>
+                            {{--  @foreach ($karyawan as $k)
+                                <option value="{{ $k->nik }}">{{ $k->nama }}
+                                </option>
+                            @endforeach --}}
+                            <template x-for="karyawan in dataKaryawan">
+                                <option :value="karyawan.nik" x-text="karyawan.nama">
+                                </option>
+                            </template>
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
