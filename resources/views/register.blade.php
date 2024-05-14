@@ -73,7 +73,8 @@
                                     <div class="text-center mt-3">
                                         <h1 class="h4 text-gray-900 mb-4"><b>Create an Account!</b></h1>
                                     </div>
-                                    <form class="user">
+                                    <form action="{{ route('register') }}" method="POST">
+                                        @csrf
                                         {{-- <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="text" class="form-control form-control-user" id="exampleFirstName"
@@ -86,25 +87,25 @@
                                         </div> --}}
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" id="examplenama"
-                                                placeholder="Name">
+                                                placeholder="Name" name="name">
                                         </div>
                                         <div class="form-group">
                                             <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                                placeholder="Email">
+                                                placeholder="Email" name="email">
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-sm-6 mb-3 mb-sm-0">
                                                 <input type="password" class="form-control form-control-user"
-                                                    id="exampleInputPassword" placeholder="Password">
+                                                    id="exampleInputPassword" placeholder="Password" name="password">
                                             </div>
                                             <div class="col-sm-6">
                                                 <input type="password" class="form-control form-control-user"
-                                                    id="exampleRepeatPassword" placeholder="Repeat Password">
+                                                    id="exampleRepeatPassword" placeholder="Repeat Password" name="password_confirmation">
                                             </div>
                                         </div>
-                                        <a href="/login" class="btn btn-navy btn-user btn-block">
+                                        <button type="submit" class="btn btn-navy btn-user btn-block">
                                             Register Account
-                                        </a>
+                                        </button>
                                         {{-- <hr>
                                         {{-- <a href="index.html" class="btn btn-google btn-user btn-block">
                                             <i class="fab fa-google fa-fw"></i> Register with Google

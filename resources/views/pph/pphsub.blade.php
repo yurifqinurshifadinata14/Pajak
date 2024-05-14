@@ -62,6 +62,12 @@
 
         @push('script')
             <script>
+                let rupiah = new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0    
+                })
+
                 let pph = {!! json_encode($pph) !!}
                 console.log('pph: ',pph)
 
@@ -70,6 +76,8 @@
 
                 var initTable = (pph) => {
                     $('#pphTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: ['copy', 'excel', 'pdf' ],
                             destroy: true,
                             data: pph,
                             columns: [{
@@ -82,10 +90,16 @@
                                     data: 'ntpn'
                                 },
                                 {
-                                    data: 'biaya_bulan'
+                                    data: 'biaya_bulan',
+                                    render: ( data, type, full, meta) => {
+                                        return rupiah.format(data)
+                                    }
                                 },
                                 {
-                                    data: 'jumlah_bayar'
+                                    data: 'jumlah_bayar',
+                                    render: ( data, type, full, meta) => {
+                                        return rupiah.format(data)
+                                    }
                                 },
 
                                 {
@@ -94,8 +108,10 @@
                                         return /*html*/ `<div class="button-container">
                                         <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"  @click="select('${meta.row}')">
                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
-                                        <i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                            @if (auth()->user()->role == 'admin')
+                                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
+                                                            <i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                                        @endif
                                     </div>`
                                     }
                                 },
@@ -140,6 +156,12 @@
                         },
 
                         handleSubmit() {
+                            const data ={
+                                id_pajak: this.formData.id_pajak,
+                                ntpn: this.formData.ntpn,
+                                biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
+                                jumlah_bayar: this.formData.tarif_bulan.replaceAll('.', ''),
+                            }
                             console.log(this.formData)
                             fetch("{{ route('pphStore') }}", {
                                 method: 'POST',
@@ -147,7 +169,7 @@
                                     "Content-Type": "application/json",
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
-                                body: JSON.stringify(this.formData)
+                                body: JSON.stringify(data)
                             }).then(res => {
                                 $('#tambah').modal('hide');
                                 console.log(res)

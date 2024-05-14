@@ -30,35 +30,41 @@
         <!-- Custom styles for this template -->
         <link href="{{ asset('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.dataTables.css" />
-        <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css"
+        <<<<<<< HEAD <link
+            href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css"
             rel="stylesheet">
-        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+            <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
+            =======
+            <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css"
+                rel="stylesheet">
+            <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 
-        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+            >>>>>>> 15e1abb62b46434ea97c2b9402c9ff25be59e64a
+            <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-        <style>
-            .bg-navy {
-                background-color: #12094a;
-                padding: 10px;
-                border-radius: 5px;
-            }
+            <style>
+                .bg-navy {
+                    background-color: #12094a;
+                    padding: 10px;
+                    border-radius: 5px;
+                }
 
-            .btn-navy {
-                background-color: #12094a;
-                color: #ffffff;
-                transition: background-color 0.3s ease;
-            }
+                .btn-navy {
+                    background-color: #12094a;
+                    color: #ffffff;
+                    transition: background-color 0.3s ease;
+                }
 
-            .btn-navy:hover {
-                background-color: #adbd1e;
-                border-color: #ffffff;
-            }
+                .btn-navy:hover {
+                    background-color: #adbd1e;
+                    border-color: #ffffff;
+                }
 
-            .font-color {
-                color: #12094a;
-            }
-        </style>
-        {{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+                .font-color {
+                    color: #12094a;
+                }
+            </style>
+            {{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     </head>
 
     <body id="page-top">
@@ -287,8 +293,7 @@
                                         Activity Log
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item" href="/login" data-toggle="modal"
-                                        data-target="#logoutModal">
+                                    <a class="dropdown-item" data-toggle="modal" data-target="#logoutModal">
                                         <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Logout
                                     </a>
@@ -344,7 +349,10 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="/login">Logout</a>
+                        <form action="{{ route('logout') }}" method="POST">
+                            @csrf
+                            <button type="submit" class="btn btn-primary">Logout</button>
+                        </form>
                     </div>
                 </div>
             </div>

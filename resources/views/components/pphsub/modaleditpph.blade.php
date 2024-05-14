@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5"><b>Edit Data Pajak</b></h1>
+                <h1 class="modal-title fs-5"><b>Edit Data PPH</b></h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -17,7 +17,7 @@
                     <div class="form-group">
                         <label for="biaya_bulan">Biaya Bulan</label>
                         <input type="number" class="form-control" id="biaya_bulan"
-                            value="biaya_bulan" placeholder="Biaya Bulan" x-model="data.biaya_bulan">
+                            value="biaya_bulan" placeholder="Biaya Bulan" x-model=" data.biaya_bulan">
                     </div>
                     <div class="form-group">
                         <label for="jumlah_bayar">Jumlah Bayar</label>
