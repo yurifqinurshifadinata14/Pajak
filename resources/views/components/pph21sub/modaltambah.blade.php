@@ -39,18 +39,21 @@
                             placeholder="Biaya Bulan" x-model="formData.biaya_bulan"
                             x-mask:dynamic="$money($input, ',')">
                     </div>
-                    {{--  <div class="form-group">
+                    <div class="form-group">
                         <label for="karyawan">Daftar Karyawan</label>
-                        <select name="karyawan" id="karyawan" class="form-select" onchange="showEditInput(this)"
-                            x-model="formData.karyawan">
+                        <select name="karyawan" id="karyawan" class="form-select" x-model="formData.nik">
                             <option disabled>--Select--</option>
-                            @foreach ($karyawan as $k)
+                            {{--  @foreach ($karyawan as $k)
                                 <option value="{{ $k->nik }}">{{ $k->nama }}
                                 </option>
-                            @endforeach
+                            @endforeach --}}
+                            <template x-for="karyawan in dataKaryawan">
+                                <option :value="karyawan.nik" x-text="karyawan.nama">
+                                </option>
+                            </template>
                         </select>
-                    </div> --}}
-                    <div id="karyawan">
+                    </div>
+                    {{--  <div id="karyawan">
                         <h6>-- Karyawan --</h6>
                         <div class="form-group">
                             <label for="nik">NIK</label>
@@ -62,7 +65,7 @@
                             <input type="text" class="form-control" id="npwp" name="npwp" placeholder="npwp"
                                 x-model="formData.npwp">
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

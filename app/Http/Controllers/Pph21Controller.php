@@ -35,7 +35,7 @@ class Pph21Controller extends Controller
      */
     public function store(Request $request)
     {
-        $max = DB::table('pph21s')->select(DB::raw('MAX(RIGHT(id_pph21,3)) as autoid'));
+        /*  $max = DB::table('pph21s')->select(DB::raw('MAX(RIGHT(id_pph21,3)) as autoid'));
         $kd = "";
 
         if ($max->count() > 0) {
@@ -46,21 +46,22 @@ class Pph21Controller extends Controller
             }
         } else {
             $id_pph21 = "Pph21-001";
-        }
+        } */
         //
         $pph21 = new Pph21;
         $pph21->id_pajak = $request->id_pajak;
-        $pph21->id_pph21 = $id_pph21;
+        $pph21->nik = (int) $request->nik;
         $pph21->jumlah_bayar = (int) $request->jumlah_bayar;
         $pph21->bpf = (int) $request->bpf;
         $pph21->biaya_bulan = (int) $request->biaya_bulan;
         $pph21->save();
 
-        $karyawan = new Karyawan();
+        /*  $karyawan = new Karyawan();
+        $karyawan->id_pph21 = $id_pph21;
         $karyawan->id_pph21 = $id_pph21;
         $karyawan->npwp = (int) $request->npwp;
         $karyawan->nik = (int) $request->nik;
-        $karyawan->save();
+        $karyawan->save(); */
 
         /* if ($pph21->save() && $karyawan->save()) {
 
@@ -77,22 +78,38 @@ class Pph21Controller extends Controller
         //     'karyawan' => $request->karyawan,
         // ]);
         return response()->json('success');
+    }
 
+    public function addKaryawan(Request $request)
+    {
+        Karyawan::updateOrCreate(['id' => $request->id], $request->all());
+    }
+
+    public function deleteKaryawan($id)
+    {
+        Karyawan::where('id', $id)->delete();
+    }
+
+    public function getKaryawan()
+    {
+        $karyawan = Karyawan::all();
+        return $karyawan;
     }
 
     public function pph21sub()
     {
 
         $pajaks = Pajak::get(['id_pajak', 'nama_wp']);
-        $pph21 = Pph21::join('karyawans', 'karyawans.id_pph21', '=', 'pph21s.id_pph21')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
-            ->get();
-        //dd($pph21)
-        return view('pph21.pph21sub', compact(['pph21', 'pajaks']));
+        $karyawan = Karyawan::all();
+        $pph21 = Pph21::join('karyawans', 'karyawans.nik', '=', 'pph21s.nik')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
+            ->get(['pph21s.id', 'pph21s.id_pajak', 'karyawans.nik', 'jumlah_bayar', 'biaya_bulan', 'bpf', 'nama_wp']);
+        // dd($pph21);
+        return view('pph21.pph21sub', compact(['pph21', 'pajaks', 'karyawan']));
     }
     public function getPph21Sub()
     {
-        $pph21 = Pph21::join('karyawans', 'karyawans.id_pph21', '=', 'pph21s.id_pph21')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
-            ->get();
+        $pph21 = Pph21::join('karyawans', 'karyawans.nik', '=', 'pph21s.nik')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
+            ->get(['pph21s.id', 'pph21s.id_pajak', 'karyawans.nik', 'jumlah_bayar', 'biaya_bulan', 'bpf', 'nama_wp']);
         return response()->json(['pph21' => $pph21]);
     }
 
@@ -122,19 +139,20 @@ class Pph21Controller extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Pph21 $pph21, $id_pph21)
+    public function update(Request $request, Pph21 $pph21, $id)
     {
         //
-        $pph21 = Pph21::where('id_pph21', $id_pph21)->first();
+        $pph21 = Pph21::where('id', $id)->first();
         $pph21->jumlah_bayar = $request->jumlah_bayar;
         $pph21->bpf = $request->bpf;
+        $pph21->nik = $request->nik;
         $pph21->biaya_bulan = $request->biaya_bulan;
         $pph21->save();
 
-        $karyawan = Karyawan::where('id_pph21', $id_pph21)->first();
+        /*  $karyawan = Karyawan::where('id_pph21', $id_pph21)->first();
         $karyawan->nik = $request->nik;
         $karyawan->npwp = $request->npwp;
-        $karyawan->save();
+        $karyawan->save(); */
 
 
         // $pph21->update([
@@ -153,7 +171,7 @@ class Pph21Controller extends Controller
     public function destroy($id)
     {
         //
-        $pph21 = Pph21::where('id_pph21', $id)->delete();
+        $pph21 = Pph21::where('id', $id)->delete();
         // $pph21->delete();
         return redirect()->route('pph21Sub');
     }
