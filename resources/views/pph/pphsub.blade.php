@@ -1,6 +1,6 @@
 @extends ('main')
 @section('konten')
-    <main>
+    <main x-data="{ pilih: '' }">
         <div class="container-fluid px-4" x-data="app">
             <h1 class="mt-4"> PPH </h1>
             <div class="card mb-4">
@@ -80,8 +80,12 @@
                         buttons: ['copy', 'excel', 'pdf' ],
                             destroy: true,
                             data: pph,
-                            columns: [{
-                                    data: 'id'
+                            columns: [
+                                {
+                                    data: 'null',
+                                    render:(data,type,row,meta)=>{
+                                        return meta.row+1
+                                    }
                                 },
                                 {
                                     data: 'nama_wp'
@@ -106,7 +110,7 @@
                                     data: 'id_pph',
                                     render: ( data, type, full, meta) => {
                                         return /*html*/ `<div class="button-container">
-                                        <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"  @click="select('${meta.row}')">
+                                        <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"  @click="select('${data}')">
                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                             @if (auth()->user()->role == 'admin')
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
@@ -116,13 +120,7 @@
                                     }
                                 },
                             ]
-                        }).cells(null, 0, {
-                            search: 'applied',
-                            order: 'applied'
                         })
-                        .every(function(cell) {
-                            this.data(i++);
-                        });;
                 }
 
                 initTable(pph)
@@ -187,21 +185,38 @@
 
 
                     Alpine.data('app', () => ({
-                        data: [],
+                        data: {},
                         editId: '',
                         select(id) {
-                            this.data = pph[id]
+                            const findData = pph.find(item => item.id_pph == id)
+                            this.data = {
+                                //id: findData.id,
+                                id_pph:findData.id_pph,
+                                id_pajak: findData.id_pajak,
+                                //nama_wp: findData.nama_wp,
+                                ntpn: findData.ntpn,
+                                jumlah_bayar: rupiah.format(findData.jumlah_bayar),
+                                biaya_bulan: rupiah.format(findData.biaya_bulan),
+                            }
+                            //this.data = pph[id]
                         },
 
                         editSubmit() {
-                            console.log(this.data)
+                            const Data = {
+                                id_pajak: this.data.id_pph,
+                                //nama_wp: this.data.nama_wp,
+                                ntpn: this.data.ntpn,
+                                biaya_bulan: Number(this.data.biaya_bulan.replaceAll(/[.Rp_]/g, '').trim()),
+                                jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '').trim()),
+                            }
+                            console.log(this.data.id_pph)
                             fetch(`{{ route('pphUpdate', '') }}/${this.data.id_pph}`, {
                                 method: 'PUT',
                                 headers: {
                                     "Content-Type": "application/json",
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
-                                body: JSON.stringify(this.data)
+                                body: JSON.stringify(Data)
                             }).then(res => {
                                 $('#edit').modal('hide');
                                 getData()

@@ -16,13 +16,13 @@
                     </div>
                     <div class="form-group">
                         <label for="biaya_bulan">Biaya Bulan</label>
-                        <input type="number" class="form-control" id="biaya_bulan"
-                            value="biaya_bulan" placeholder="Biaya Bulan" x-model=" data.biaya_bulan">
+                        <input type="text" class="form-control" id="biaya_bulan"
+                            value="biaya_bulan" placeholder="Biaya Bulan" x-model="data.biaya_bulan" x-mask:dynamic="$money($input,',')">
                     </div>
                     <div class="form-group">
                         <label for="jumlah_bayar">Jumlah Bayar</label>
-                        <input type="number" class="form-control" id="jumlah_bayar" name="jumlah_bayar"
-                            value="jumlah_bayar" placeholder="Jumlah Bayar" x-model="data.jumlah_bayar">
+                        <input type="text" class="form-control" id="jumlah_bayar" name="jumlah_bayar"
+                            value="jumlah_bayar" placeholder="Jumlah Bayar" x-model="data.jumlah_bayar" x-mask:dynamic="$money($input,',')">
                     </div>
 
                     <div class="modal-footer">

@@ -6,6 +6,7 @@ use App\Models\Pphunifikasi;
 use App\Models\Pajak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 
 class PphunifikasiController extends Controller
@@ -103,7 +104,12 @@ class PphunifikasiController extends Controller
     public function update(Request $request, $id_pphuni)
     {
         //
-
+        // $pphunifikasi = Pphunifikasi::where('id', $id)->first();
+        // $pphunifikasi->ntpn = $request->ntpn;
+        // $pphunifikasi->jumlah_bayar = $request->jumlah_bayar;
+        // $pphunifikasi->bayar_bulan = $request->bayar_bulan;
+        // $pphunifikasi->bpf = $request->bpf;
+        Log::info($id_pphuni);
         $pphunifikasi=Pphunifikasi::where('id_pphuni',$id_pphuni)->update([
             'ntpn' => (int)$request->ntpn,
             'jumlah_bayar' => (int)$request->jumlah_bayar,

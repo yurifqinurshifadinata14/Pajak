@@ -21,7 +21,7 @@
                 <style>
                     .button-container {
                         display: flex;
-                    }
+                    } 
 
                     .my-table {
                         width: 100%;
@@ -146,7 +146,10 @@
                         data: pphunifikasi,
                         columns: [
                             {
-                                data: 'id'
+                                data: 'null',
+                                render:(data,type,row,meta)=>{
+                                    return meta.row+1
+                                }
                             },
                             {
                                 data: 'nama_wp'
@@ -173,7 +176,7 @@
                                 data: 'id_pphuni',
                                 render: (data, type, full, meta) => {
                                     return /*html*/ `<div class="button-container">
-                                                        <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"  @click="select('${meta.row}')">
+                                                        <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"  @click="select('${data}')">
                                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                             @if (auth()->user()->role == 'admin')
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
@@ -184,13 +187,8 @@
                                 }
                             },
                         ]
-                    }).cells(null, 0, {
-                        search: 'applied',
-                        order: 'applied'
                     })
-                    .every(function(cell) {
-                        this.data(i++);
-                    });;
+
             }
 
             initTable(pphunifikasi)
@@ -239,23 +237,37 @@
 
 
                 Alpine.data('app', () => ({
-                    data: [],
+                    //pajaks: {!! json_encode($pajaks) !!},
+                    //data: [],
+                    data: {},
                     editId: '',
                     select(id) {
                         //this.data = pphunifikasi.filter(item => item.id_pajak == id)
                         //this.data = this.data[0]
-                        this.data = pphunifikasi[id]
+                        const findData = pphunifikasi.find(item => item.id_pphuni == id)
+                            this.data = {
+                                //id: findData.id,
+                                id_pphuni:findData.id_pphuni,
+                                id_pajak: findData.id_pajak,
+                                //nama_wp: findData.nama_wp,
+                                ntpn: findData.ntpn,
+                                jumlah_bayar: rupiah.format(findData.jumlah_bayar),
+                                biaya_bulan: rupiah.format(findData.biaya_bulan),
+                                bpf: findData.bpf,
+                            }
+                        //this.data = pphunifikasi[id]
                     },
 
                     editSubmit() {
-                        const Data ={
-                            id_pajak: this.data.id_pajak,
+                        const Data = {
+                            id_pajak: this.data.id_pphuni,
+                            //nama_wp: this.data.nama_wp,
                             ntpn: this.data.ntpn,
-                            jumlah_bayar: this.data.jumlah_bayar.replaceAll('.', ''),
-                            biaya_bulan: this.data.biaya_bulan.replaceAll('.', ''),
+                            jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '').trim()),
+                            biaya_bulan: Number(this.data.biaya_bulan.replaceAll(/[.Rp_]/g, '').trim()),
                             bpf: this.data.bpf,
                         }
-                        console.log(this.data)
+                        console.log(this.data.id_pphuni)
                         fetch(`{{ route('pphunifikasiUpdate', '') }}/${this.data.id_pphuni}`, {
                             method: 'PUT',
                             headers: {
