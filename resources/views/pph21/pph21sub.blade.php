@@ -228,7 +228,7 @@
                             {
                                 data: 'id',
                                 render: (data) => {
-                                    return /*html*/ `<div class="button-container">
+                                    return /*html*/ `<div class="button-container gap-2">
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                         @if (auth()->user()->role == 'admin')
                                                             <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
