@@ -65,13 +65,13 @@
                 let rupiah = new Intl.NumberFormat("id-ID", {
                     style: "currency",
                     currency: "IDR",
-                    minimumFractionDigits: 0    
+                    minimumFractionDigits: 0
                 })
 
                 let pph = {!! json_encode($pph) !!}
                 console.log('pph: ',pph)
 
-                
+
                 let i = 1;
 
                 var initTable = (pph) => {
@@ -160,7 +160,7 @@
                                 id_pajak: this.formData.id_pajak,
                                 ntpn: this.formData.ntpn,
                                 biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
-                                jumlah_bayar: this.formData.tarif_bulan.replaceAll('.', ''),
+                                jumlah_bayar: this.formData.jumlah_bayar.replaceAll('.', ''),
                             }
                             console.log(this.formData)
                             fetch("{{ route('pphStore') }}", {
@@ -213,7 +213,7 @@
                         },
                     }))
                 })
-                
+
             </script>
         @endpush
     </main>

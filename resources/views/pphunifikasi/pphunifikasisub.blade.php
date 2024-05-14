@@ -119,11 +119,28 @@
                 }
             }
 
+            let rupiah = new Intl.NumberFormat("id-ID", {
+                style: "currency",
+                currency: "IDR",
+                minimumFractionDigits: 0
+            })
+
             var initTable = (pphunifikasi) => {
                 $('#pphuniTable').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copy', 'excel', 'pdf'
+                            //'copy', 'excel', 'pdf'
+                            {
+                                extend: 'copy'
+                            },
+                            {
+                                extend: 'excel',
+                                className: 'btn-success' // Menambahkan kelas 'btn-success' untuk tombol Excel
+                            },
+                            {
+                                extend: 'pdf',
+                                className: 'btn-danger' // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                            }
                         ],
                         destroy: true,
                         data: pphunifikasi,
@@ -138,10 +155,16 @@
                                 data: 'ntpn'
                             },
                             {
-                                data: 'jumlah_bayar'
+                                data: 'jumlah_bayar',
+                                render: ( data, type, full, meta) => {
+                                    return rupiah.format(data)
+                                }
                             },
                             {
-                                data: 'biaya_bulan'
+                                data: 'biaya_bulan',
+                                render: ( data, type, full, meta) => {
+                                    return rupiah.format(data)
+                                }
                             },
                             {
                                 data: 'bpf'
@@ -183,6 +206,14 @@
                     },
 
                     handleSubmit() {
+                        const data ={
+                            id_pajak: this.formData.id_pajak,
+                            ntpn: this.formData.ntpn,
+                            jumlah_bayar: this.formData.jumlah_bayar.replaceAll('.', ''),
+                            biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
+                            bpf: this.formData.bpf,
+                        }
+                        //console.log(data)
                         console.log(this.formData)
                         fetch("{{ route('pphunifikasiStore') }}", {
                             method: 'POST',
@@ -190,7 +221,7 @@
                                 "Content-Type": "application/json",
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
-                            body: JSON.stringify(this.formData)
+                            body: JSON.stringify(data)
                         }).then(res => {
                             $('#tambah').modal('hide');
                             this.formData = {
@@ -217,6 +248,13 @@
                     },
 
                     editSubmit() {
+                        const Data ={
+                            id_pajak: this.data.id_pajak,
+                            ntpn: this.data.ntpn,
+                            jumlah_bayar: this.data.jumlah_bayar.replaceAll('.', ''),
+                            biaya_bulan: this.data.biaya_bulan.replaceAll('.', ''),
+                            bpf: this.data.bpf,
+                        }
                         console.log(this.data)
                         fetch(`{{ route('pphunifikasiUpdate', '') }}/${this.data.id_pphuni}`, {
                             method: 'PUT',
@@ -224,7 +262,7 @@
                                 "Content-Type": "application/json",
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             },
-                            body: JSON.stringify(this.data)
+                            body: JSON.stringify(Data)
                         }).then(res => {
                             $('#edit').modal('hide');
                             getPphunifikasi()
