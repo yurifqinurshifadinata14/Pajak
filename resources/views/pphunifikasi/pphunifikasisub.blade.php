@@ -152,8 +152,10 @@
                                     return /*html*/ `<div class="button-container">
                                                         <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"  @click="select('${meta.row}')">
                                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                            @if (auth()->user()->role == 'admin')
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
-                                                        <i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                                            <i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                                        @endif
                                                     </div>`
 
                                 }
