@@ -13,15 +13,15 @@
 
                     <h4>
                         @if(Auth::check())
-                            Selamat Datang 
-                            <b>{{ Auth::user()->name }}</b>, 
-                            Anda Login sebagai 
+                            Selamat Datang
+                            <b>{{ Auth::user()->name }}</b>,
+                            Anda Login sebagai
                             <b>{{ Auth::user()->role }}</b>
                         @else
                             Anda belum login.
                         @endif
                     </h4>
-
+                    <br>
                     <!-- Content Row -->
                     <div class="row">
 
