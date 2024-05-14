@@ -27,36 +27,38 @@
         {{-- <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" /> --}}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for this template -->
-    <link href="{{ asset('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.dataTables.css" />
-    <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css" rel="stylesheet">
-    <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+        <!-- Custom styles for this template -->
+        <link href="{{ asset('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.dataTables.css" />
+        <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css"
+            rel="stylesheet">
+        <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
 
-            <style>
-                .bg-navy {
-                    background-color: #12094a;
-                    padding: 10px;
-                    border-radius: 5px;
-                }
+        <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
-                .btn-navy {
-                    background-color: #12094a;
-                    color: #ffffff;
-                    transition: background-color 0.3s ease;
-                }
+        <style>
+            .bg-navy {
+                background-color: #12094a;
+                padding: 10px;
+                border-radius: 5px;
+            }
 
-                .btn-navy:hover {
-                    background-color: #adbd1e;
-                    border-color: #ffffff;
-                }
+            .btn-navy {
+                background-color: #12094a;
+                color: #ffffff;
+                transition: background-color 0.3s ease;
+            }
 
-                .font-color {
-                    color: #12094a;
-                }
-            </style>
-            {{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+            .btn-navy:hover {
+                background-color: #adbd1e;
+                border-color: #ffffff;
+            }
+
+            .font-color {
+                color: #12094a;
+            }
+        </style>
+        {{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     </head>
 
     <body id="page-top">
@@ -409,14 +411,14 @@
         <script src="{{ asset('sbadmin2/js/demo/chart-area-demo.js') }}"></script>
         <script src="{{ asset('sbadmin2/js/demo/chart-pie-demo.js') }}"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
-    </script>
-    <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.js"></script>
-    @stack('script')
-</body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.js"></script>
+        @stack('script')
+    </body>
 
 </html>

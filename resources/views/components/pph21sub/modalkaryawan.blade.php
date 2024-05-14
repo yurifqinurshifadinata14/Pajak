@@ -26,7 +26,7 @@
                     </div> --}}
                 </form>
                 <div class="table-responsive mt-3">
-                    <table class="table" id="tableKaryawan">
+                    <table class="my-table" id="tableKaryawan">
                         <thead>
                             <th>No</th>
                             <th>Nama</th>
@@ -70,7 +70,7 @@
                     {
                         data: 'id',
                         render: (data) => {
-                            return /*html*/ `<div class="button-container">
+                            return /*html*/ `<div class="button-container gap-2">
                                                 <a href="#" class="btn btn-sm btn-warning" @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                     <button type="button" class="btn btn-sm btn-danger" @click="handleDelete(${data})">
                                                         <i class="fas fa-fw fa-solid fa-trash"></i> </button>
@@ -129,7 +129,8 @@
                     }).then(res => {
                         this.handleReset()
                         getKaryawan()
-                    })
+
+                    }).then(res => getpph21())
                 },
 
                 handleDelete(id) {
