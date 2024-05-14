@@ -84,9 +84,7 @@ class Pph21Controller extends Controller
     {
         $karyawan = Karyawan::where('id', $request->id)->first();
         Karyawan::updateOrCreate(['id' => $request->id], $request->all());
-        $pph21 = Pph21::where('nik', $karyawan->nik)->first();
-        $pph21->nik = $request->nik;
-        $pph21->save();
+        $pph21 = Pph21::where('nik', $karyawan->nik)->update(['nik' => $request->nik]);
     }
 
     public function deleteKaryawan($id)
