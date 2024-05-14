@@ -63,6 +63,53 @@
                     </table>
                 </div>
 
+<<<<<<< HEAD
+=======
+                <div class="card-body">
+                    <style>
+                        .button-container {
+                            display: flex;
+                        }
+
+                        .my-table {
+                            width: 100%;
+                        }
+
+                        .my-table th,
+                        .my-table td {
+                            border: 1px solid #ddd;
+                            padding: 8px;
+                            text-align: left;
+                        }
+
+                        .my-table th {
+                            background-color: #12094a;
+                            color: rgb(255, 255, 255);
+                        }
+
+                        .my-table tr:nth-child(even) {
+                            background-color: #f2f2f2;
+                        }
+                    </style>
+                    <div class="table-responsive">
+                        <table id="pph21Table" class="my-table">
+                            <thead>
+                                <tr>
+                                    <th>No</th>
+                                    <th>Nama WP</th>
+                                    <th>Jumlah Bayar</th>
+                                    <th>BPF</th>
+                                    <th>Biaya Bulan</th>
+                                    <th>Daftar Karyawan</th>
+                                    <th>Aksi</th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+
+                </div>
+>>>>>>> 15e1abb62b46434ea97c2b9402c9ff25be59e64a
             </div>
         </div>
     </div>
@@ -129,6 +176,7 @@
 
         let i = 1;
 
+<<<<<<< HEAD
         var initTable = (pph21) => {
             $('#pph21Table').DataTable({
                     destroy: true,
@@ -152,6 +200,51 @@
                             data: 'id_pph21',
                             render: (data) => {
                                 return /*html*/ `<div class="button-container">
+=======
+
+                let rupiah = new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                    minimumFractionDigits: 0
+                })
+                var initTable = (pph21) => {
+                    $('#pph21Table').DataTable({
+                            dom: 'Bfrtip',
+                            buttons: [
+                                'copy', 'excel', 'pdf'
+                            ],
+                            destroy: true,
+                            data: pph21,
+                            columns: [{
+                                    data: 'id'
+                                },
+
+                                {
+                                    data: 'nama_wp'
+                                },
+                                {
+                                    data: 'jumlah_bayar',
+                                    render: (data) => {
+                                        return rupiah.format(data)
+                                    }
+                                },
+                                {
+                                    data: 'bpf'
+                                },
+                                {
+                                    data: 'biaya_bulan',
+                                    render: (data) => {
+                                        return rupiah.format(data)
+                                    }
+                                },
+                                {
+                                    data: 'nik'
+                                },
+                                {
+                                    data: 'id_pph21',
+                                    render: (data) => {
+                                        return /*html*/ `<div class="button-container">
+>>>>>>> 15e1abb62b46434ea97c2b9402c9ff25be59e64a
                                                     <a href="#" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                     @if (auth()->user()->role == 'admin')
                                                         <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
@@ -241,7 +334,77 @@
             }))
         })
 
+<<<<<<< HEAD
     </script>
     @endpush
 </main>
+=======
+                        handleSubmit() {
+                            const data = {
+                                id_pajak: this.formData.id_pajak,
+                                jumlah_bayar: this.formData.jumlah_bayar.replaceAll('.', ''),
+                                bpf: this.formData.bpf,
+                                biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
+                                nik: this.formData.nik,
+                                npwp: this.formData.npwp
+                            }
+                            fetch("{{ route('pph21Store') }}", {
+                                method: 'POST',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify(data)
+                            }).then(res => {
+                                console.log(res.json)
+                                $('#tambah').modal('hide');
+                                this.formData = {
+                                    id_pajak: '',
+                                    jumlah_bayar: '',
+                                    bpf: '',
+                                    biaya_bulan: '',
+                                    nik: '',
+                                    npwp: ''
+                                }
+                                getpph21()
+                            }).catch(err => console.log(err))
+                        },
+
+                    }))
+
+
+                    Alpine.data('app', () => ({
+                        data: [],
+                        editId: '',
+                        select(id) {
+                            this.data = pph21.filter(item => item.id_pph21 == id)
+                            this.data = this.data[0]
+                            console.log(this.data)
+                            /*  this.data = pph21[id] */
+                        },
+
+                        editSubmit() {
+                            console.log(this.data)
+                            fetch(`{{ route('pph21Update', '') }}/${this.data.id_pph21}`, {
+                                method: 'PUT',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify(this.data)
+                            }).then(res => {
+                                $('#edit').modal('hide');
+                                getpph21()
+                            }).catch(err => console.log(err))
+                        },
+
+                        init() {
+                            console.log('data:', this.data)
+                        },
+                    }))
+                })
+            </script>
+        @endpush
+    </main>
+>>>>>>> 15e1abb62b46434ea97c2b9402c9ff25be59e64a
 @endsection
