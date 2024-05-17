@@ -51,7 +51,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                                 Total Pembayaran PPH</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalbayarpph}}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($totalbayarpph, 0, ',', '.') }}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -69,7 +69,7 @@
                                         <div class="col mr-2">
                                             <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                                 Total Pembayaran PPH21</div>
-                                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{$totalbayarpph21}}</div>
+                                            <div class="h5 mb-0 font-weight-bold text-gray-800">Rp {{ number_format($totalbayarpph21, 0, ',', '.') }}</div>
                                         </div>
                                         <div class="col-auto">
                                             <i class="fas fa-comments fa-2x text-gray-300"></i>
