@@ -19,7 +19,7 @@ class BerandaController extends Controller
         $totalpembayar = Pajak::count();
         $jumlahkaryawan = Karyawan::count();
         $totalbayarpph = Pph::sum('jumlah_bayar');
-        $totalbayarpph21 = Pph::sum('jumlah_bayar');
+        $totalbayarpph21 = Pph21::sum('jumlah_bayar');
 
 
 
