@@ -2,19 +2,23 @@
 @section('konten')
     <main x-data="{ pilih: '' }">
         <div class="container-fluid px-4" x-data="app">
-            <h1 class="mt-4">Data Pph21</h1>
+            <h1 class="mt-4">Pph21</h1>
             <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between">
+                <div class="card-header d-flex justify-content-between align-items-center">
                     <div>
                         <i class="fas fa-table me-1"></i>
                         Data Pph21
                     </div>
-                    <div class="d-flex gap-2">
-                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" data-bs-toggle="modal"
+
+                    <div class="d-flex align-items-center gap-2">
+                        <button type="button" class="btn btn-sm btn-success float-end mb-2" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
+                            <i class="fas fa-file-excel"></i> Import Excel
+                        </button>
+                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Karyawan" data-bs-toggle="modal"
                             data-bs-target="#tambahkaryawan" onclick="setTimeout(()=>tableKaryawan(karyawan),200)">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Karyawan
                         </button>
-                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Pph 21" data-bs-toggle="modal"
                             data-bs-target="#tambah" @click="getDataKaryawan">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
                         </button>
@@ -25,50 +29,12 @@
 
                     <!-- modal button edit-->
                     <x-pph21sub.modaledit />
+
                     <x-pph21sub.modalkaryawan :karyawan="$karyawan" />
+                     <!-- Modal Button import -->
+                    <x-pph21sub.modalimportpph21/>
 
                 </div>
-
-                {{--  <style>
-                        .button-container {
-                            display: flex;
-                        }
-
-                        .my-table {
-                            width: 100%;
-                        }
-
-                        .my-table th,
-                        .my-table td {
-                            border: 1px solid #ddd;
-                            padding: 8px;
-                            text-align: left;
-                        }
-
-                        .my-table th {
-                            background-color: #12094a;
-                            color: rgb(255, 255, 255);
-                        }
-
-                        .my-table tr:nth-child(even) {
-                            background-color: #f2f2f2;
-                        }
-                    </style>
-                    <div class="table-responsive">
-                        <table id="pph21Table" class="my-table">
-                            <thead>
-                                <tr>
-                                    <th>No</th>
-                                    <th>Jumlah Bayar</th>
-                                    <th>BPF</th>
-                                    <th>Biaya Bulan</th>
-                                    <th>Daftar Karyawan</th>
-                                    <th>Aksi</th>
-
-                                </tr>
-                            </thead>
-                        </table>
-                    </div> --}}
 
                 <div class="card-body">
                     <style>
@@ -107,7 +73,6 @@
                                     <th>Biaya Bulan</th>
                                     <th>Daftar Karyawan</th>
                                     <th>Aksi</th>
-
                                 </tr>
                             </thead>
                         </table>
@@ -167,13 +132,15 @@
                 };
 
                 var deleteData = async (id) => {
-                    await fetch(`{{ route('pph21Destroy', '') }}/${id}`, {
-                        method: 'DELETE',
-                        headers: {
-                            "Content-Type": "application/json",
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
-                    }).then(res => getpph21()).catch(err => console.log(err));
+                    if (confirm('Apakah anda ingin menghapus?')==true){
+                        await fetch(`{{ route('pph21Destroy', '') }}/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            }
+                        }).then(res => getpph21()).catch(err => console.log(err));
+                    }
                 }
 
                 /* let i = 1; */
@@ -189,18 +156,7 @@
                     $('#pph21Table').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            // 'copy', 'excel', 'pdf'
-                            {
-                                extend: 'copy'
-                            },
-                            {
-                                extend: 'excel',
-                                className: 'btn-success' // Menambahkan kelas 'btn-success' untuk tombol Excel
-                            },
-                            {
-                                extend: 'pdf',
-                                className: 'btn-danger' // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                            }
+                            'copy', 'excel', 'pdf'
                         ],
                         destroy: true,
                         data: pph21,
@@ -239,10 +195,10 @@
                             {
                                 data: 'id',
                                 render: (data) => {
-                                    return /*html*/ `<div class="button-container">
-                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                    return /*html*/ `<div class="button-container gap-2">
+                                                        <a href="#" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                         @if (auth()->user()->role == 'admin')
-                                                            <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
+                                                            <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
                                                                 <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                             @endif
 

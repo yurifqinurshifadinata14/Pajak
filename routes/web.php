@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\DataadminController;
 use App\Http\Controllers\PajakController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\StatusController;
@@ -87,3 +88,9 @@ Route::middleware('auth')->group(function () {
         Route::delete('/karyawanDelete/{id}', [KaryawanController::class, 'destroy'])->name('karyawanDestroy');
     });
 });
+
+//Route untuk semua import
+Route::post('/pphunifikasi/import_excel', [PphunifikasiController::class, 'import_excel'])->name('pphunifikasi.import_excel');
+Route::post('/pph/import_excel', [PphController::class, 'import_excel'])->name('pph.import_excel');
+Route::post('/pph21/import_excel', [Pph21Controller::class, 'import_excel'])->name('pph21.import_excel');
+Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel');

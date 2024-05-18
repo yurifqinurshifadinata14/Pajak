@@ -1,7 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Pajak;
+use App\Models\Karyawan;
+use App\Models\Pph;
+use App\Models\Pph21;
 use App\Models\Beranda;
 use Illuminate\Http\Request;
 
@@ -12,7 +15,22 @@ class BerandaController extends Controller
      */
     public function index()
     {
-        return view('beranda');
+        $pembayar = Pajak::all();
+        $totalpembayar = Pajak::count();
+        $jumlahkaryawan = Karyawan::count();
+        $totalbayarpph = Pph::sum('jumlah_bayar');
+        $totalbayarpph21 = Pph21::sum('jumlah_bayar');
+
+
+
+        return view('beranda',[
+            'totalpembayar' => $totalpembayar,
+            'jumlahkaryawan'=> $jumlahkaryawan,
+            'totalbayarpph'=> $totalbayarpph,
+            'totalbayarpph21'=> $totalbayarpph21
+        ]
+    
+    );
         //
     }
 

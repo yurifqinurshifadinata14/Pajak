@@ -6,6 +6,9 @@ use App\Models\Pphunifikasi;
 use App\Models\Pajak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+use App\Imports\PphuImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class PphunifikasiController extends Controller
@@ -19,6 +22,27 @@ class PphunifikasiController extends Controller
         $pphunifikasi=Pphunifikasi::all();
         $pajaks = Pajak::all();
         return view('pphunifikasi.pphunifikasisub', compact('pphunifikasi', 'pajaks'));
+    }
+
+    public function import_excel(Request $request)
+	{
+        $file = $request->file('file');
+        // membuat nama file unik
+        $nama_file = $file->hashName();
+        //temporary file
+        $path = $file->storeAs('public/excel/',$nama_file);
+        //dd($path);
+        // import data
+        $import = Excel::import(new PphuImport(), $path);
+        //remove from server
+        //Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
+        } else {
+            //redirect
+            return redirect()->back()->with(['error' => 'Data Gagal Diimport!']);
+        }
     }
 
     /**
@@ -42,10 +66,10 @@ class PphunifikasiController extends Controller
             foreach ($max->get() as $a) {
                 $tmp = ((int) $a->autoid) + 1;
                 $kd = sprintf("%03s", $tmp);
-                $id_pphuni = "PPH-" . $kd;
+                $id_pphuni = "PPHU-" . $kd;
             }
         } else {
-            $id_pphuni = "PPH-001";
+            $id_pphuni = "PPHU-001";
         }
 
         $pphunifikasi = Pphunifikasi::create([
@@ -103,7 +127,12 @@ class PphunifikasiController extends Controller
     public function update(Request $request, $id_pphuni)
     {
         //
-
+        // $pphunifikasi = Pphunifikasi::where('id', $id)->first();
+        // $pphunifikasi->ntpn = $request->ntpn;
+        // $pphunifikasi->jumlah_bayar = $request->jumlah_bayar;
+        // $pphunifikasi->bayar_bulan = $request->bayar_bulan;
+        // $pphunifikasi->bpf = $request->bpf;
+        Log::info($id_pphuni);
         $pphunifikasi=Pphunifikasi::where('id_pphuni',$id_pphuni)->update([
             'ntpn' => (int)$request->ntpn,
             'jumlah_bayar' => (int)$request->jumlah_bayar,

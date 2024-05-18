@@ -20,19 +20,19 @@
                         </select>
                     </div> --}}
                     <div class="form-group">
-                        <label for="nama">NTPN</label>
+                        <label for="ntpn">NTPN</label>
                         <input type="number" class="form-control" id="ntpn" name="ntpn" placeholder="NTPN" value="ntpn" x-model="data.ntpn">
                     </div>
                     <div class="form-group">
-                        <label for="nama">Jumlah Bayar</label>
+                        <label for="jumlah_bayar">Jumlah Bayar</label>
                         <input type="text" class="form-control" id="jumlah_bayar" name="jumlah_bayar" placeholder="Jumlah Bayar" value="jumlah_bayar" x-model="data.jumlah_bayar"  x-mask:dynamic="$money($input,',')">
                     </div>
                     <div class="form-group">
-                        <label for="nama">Biaya Bulan</label>
+                        <label for="biaya_bulan">Biaya Bulan</label>
                         <input type="text" class="form-control" id="biaya_bulan" name="biaya_bulan" placeholder="Biaya Bulan" value="biaya_bulan" x-model="data.biaya_bulan"  x-mask:dynamic="$money($input,',')">
                     </div>
                     <div class="form-group">
-                        <label for="nama">BPF</label>
+                        <label for="bpf">BPF</label>
                         <input type="text" class="form-control" id="bpf" name="bpf" placeholder="BPF" x-model="data.bpf" value="bpf">
                     </div>
                     <div class="modal-footer">

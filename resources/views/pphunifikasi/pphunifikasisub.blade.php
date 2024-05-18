@@ -2,20 +2,30 @@
 @section('konten')
 <main x-data="{ pilih: '' }">
     <div class="container-fluid px-4" x-data="app">
-        <h1 class="mt-4"> Data Pph Unifikasi</h1>
+        <h1 class="mt-4"> Pph Unifikasi</h1>
 
         <div class="card mb-4">
-            <div class="card-header">
-                <i class="fas fa-table me-1"></i>
-                Data Pph Unifikasi
-                <!-- Button trigger modal -->
-                <button type="button" class="btn btn-sm btn-primary float-end" data-bs-toggle="modal" data-bs-target="#tambah">
-                    <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
-                </button>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-table me-1"></i>
+                    Data Pph Unifikasi
+                </div>
+                <div class="d-flex gap-2">
+                     <!-- Button trigger modal Import-->
+                     <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
+                        <i class="fas fa-file-excel"></i> Import Excel
+                    </button>
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Pph Unifikasi" data-bs-toggle="modal" data-bs-target="#tambah">
+                        <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
+                    </button>
+                </div>
                 <!-- Modal Button Tambah -->
                 <x-pphunifikasisub.modalTambahuni :pajaks="$pajaks"/>
                 <!-- Modal Button edit -->
                 <x-pphunifikasisub.modaledituni />
+                <!-- Modal Button import -->
+                <x-pphunifikasisub.modalimportpphu/>
             </div>
             <div class="card-body">
                 <style>
@@ -56,31 +66,7 @@
                                 <th>Aksi</th>
                             </tr>
                         </thead>
-                        {{-- <tbody>
-                            @foreach ($pphunifikasi as $pphuni )
-                            <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
-                                <td>{{ $pphuni->ntpn }}</td>
-                                <td>{{ $pphuni->jumlah_bayar }}</td>
-                                <td>{{ $pphuni->biaya_bulan }}</td>
-                                <td>{{ $pphuni->bpf }}</td>
-                                <td>
-                                    <div class="button-container">
-                                        <a href="{{route('pphunifikasiEdit', $pphuni->id)}}" class="btn btn-sm btn-warning"><i
-                                            class="fas fa-fw fa-solid fa-pen"></i> </a>
-                                        <form method="POST" action="{{route('pphunifikasiDestroy', $pphuni->id)}}"
-                                            style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger"
-                                                onclick="return confirm('Yakin mau hapus???')"><i
-                                                    class="fas fa-fw fa-solid fa-trash"></i> </button>
-                                        </form>
-                                    </div>
-                               </td>
-                            </tr>
-                            @endforeach
-                        </tbody> --}}
+
                     </table>
                 </div>
             </div>
@@ -131,22 +117,32 @@
                         buttons: [
                             //'copy', 'excel', 'pdf'
                             {
-                                extend: 'copy'
+                                extend: 'copy',
+                                text: '<i class="fas fa-copy"> </i> Copy',
+                                className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
                             },
                             {
                                 extend: 'excel',
-                                className: 'btn-success' // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                text: '<i class="fas fa-file-excel"> </i> Excel',
+                                className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
                             },
                             {
                                 extend: 'pdf',
-                                className: 'btn-danger' // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                                text: '<i class="fas fa-file-pdf"> </i> PDF',
+                                className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                                titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
                             }
                         ],
                         destroy: true,
                         data: pphunifikasi,
                         columns: [
                             {
-                                data: 'id'
+                                data: 'null',
+                                render: (data, type, row, meta)=>{
+                                    return meta.row+1
+                                }
                             },
                             {
                                 data: 'nama_wp'
@@ -172,11 +168,11 @@
                             {
                                 data: 'id_pphuni',
                                 render: (data, type, full, meta) => {
-                                    return /*html*/ `<div class="button-container">
-                                                        <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"  @click="select('${meta.row}')">
+                                    return /*html*/ `<div class="button-container gap-2">
+                                                        <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
                                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                                             @if (auth()->user()->role == 'admin')
-                                                        <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
+                                                        <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
                                                             <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                         @endif
                                                     </div>`
@@ -184,13 +180,8 @@
                                 }
                             },
                         ]
-                    }).cells(null, 0, {
-                        search: 'applied',
-                        order: 'applied'
                     })
-                    .every(function(cell) {
-                        this.data(i++);
-                    });;
+
             }
 
             initTable(pphunifikasi)
@@ -213,7 +204,7 @@
                             biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
                             bpf: this.formData.bpf,
                         }
-                        //console.log(data)
+                        console.log(data)
                         console.log(this.formData)
                         fetch("{{ route('pphunifikasiStore') }}", {
                             method: 'POST',
@@ -239,23 +230,37 @@
 
 
                 Alpine.data('app', () => ({
-                    data: [],
+                    //pajaks: {!! json_encode($pajaks) !!},
+                    //data: [],
+                    data: {},
                     editId: '',
                     select(id) {
                         //this.data = pphunifikasi.filter(item => item.id_pajak == id)
                         //this.data = this.data[0]
-                        this.data = pphunifikasi[id]
+                        const findData = pphunifikasi.find(item => item.id_pphuni == id)
+                            this.data = {
+                                //id: findData.id,
+                                id_pphuni:findData.id_pphuni,
+                                id_pajak: findData.id_pajak,
+                                //nama_wp: findData.nama_wp,
+                                ntpn: findData.ntpn,
+                                jumlah_bayar: rupiah.format(findData.jumlah_bayar),
+                                biaya_bulan: rupiah.format(findData.biaya_bulan),
+                                bpf: findData.bpf,
+                            }
+                        //this.data = pphunifikasi[id]
                     },
 
                     editSubmit() {
-                        const Data ={
-                            id_pajak: this.data.id_pajak,
+                        const Data = {
+                            id_pajak: this.data.id_pphuni,
+                            //nama_wp: this.data.nama_wp,
                             ntpn: this.data.ntpn,
-                            jumlah_bayar: this.data.jumlah_bayar.replaceAll('.', ''),
-                            biaya_bulan: this.data.biaya_bulan.replaceAll('.', ''),
+                            jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '').trim()),
+                            biaya_bulan: Number(this.data.biaya_bulan.replaceAll(/[.Rp_]/g, '').trim()),
                             bpf: this.data.bpf,
                         }
-                        console.log(this.data)
+                        console.log(this.data.id_pphuni)
                         fetch(`{{ route('pphunifikasiUpdate', '') }}/${this.data.id_pphuni}`, {
                             method: 'PUT',
                             headers: {

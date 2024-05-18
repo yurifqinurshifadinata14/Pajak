@@ -2,7 +2,6 @@
 <html lang="en">
 
     <head>
-
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -14,6 +13,7 @@
         <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/styles.min.css') }}" rel="stylesheet">
         <link href="{{ asset('sbadmin2/css/styles.css') }}" rel="stylesheet">
+
         <!-- DataTables CSS -->
         <link rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
@@ -21,19 +21,15 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.css">
         <link rel="stylesheet" type="css" href="https://cdn.datatables.net/1.11.6/css/jquery.dataTables.css">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
-        <link
-            href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-            rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
         {{-- <link href="https://cdn.jsdelivr.net/npm/daisyui@4.10.2/dist/full.min.css" rel="stylesheet" type="text/css" /> --}}
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
         <!-- Custom styles for this template -->
         <link href="{{ asset('sbadmin2/css/sb-admin-2.min.css') }}" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.dataTables.css" />
-        <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css"
-            rel="stylesheet">
+        <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.css" rel="stylesheet">
         <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js"></script>
-
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
         <style>
@@ -57,6 +53,12 @@
             .font-color {
                 color: #12094a;
             }
+
+            .img-fluid {
+                width: 100%;
+                height: auto;
+            }
+
         </style>
         {{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     </head>
@@ -88,15 +90,7 @@
                             <span>Dashboard</span></a>
                     </li>
 
-                    <!-- Divider -->
-                    <hr class="sidebar-divider">
-
-                    <!-- Heading -->
-                    <div class="sidebar-heading">
-                        Interface
-                    </div>
-
-                    <!-- Nav Item - Pages Collapse Menu -->
+                    <!-- Nav Item - Pajak -->
                     <li class="nav-item {{ request()->routeIs('pajak.pajaksub') ? 'active' : '' }}">
                         <a class="nav-link" href="/pajaksub" aria-expanded="true">
                             <i class="fas fa-fw fa-briefcase"></i>
@@ -104,6 +98,7 @@
                         </a>
                     </li>
 
+                    <!-- Nav Item - Pph -->
                     <li class="nav-item {{ Route::is('pph') ? 'active' : '' }}">
                         <a class="nav-link" href="/pphsub" aria-expanded="true">
                             <i class="fas fa-fw fa-briefcase"></i>
@@ -111,6 +106,7 @@
                         </a>
                     </li>
 
+                    <!-- Nav Item - Pph 21 -->
                     <li class="nav-item {{ Route::is('pph21.pph21sub') ? 'active' : '' }}">
                         <a class="nav-link" href="/pph21sub" aria-expanded="true">
                             <i class="fas fa-fw fa-briefcase"></i>
@@ -125,12 +121,22 @@
                         </a>
                     </li>
 
+                    <!-- Nav Item - Pph Unifikasi -->
                     <li class="nav-item {{ Route::is('pphunifikasi.pphunifikasisub') ? 'active' : '' }}">
                         <a class="nav-link" href="/pphunifikasisub" aria-expanded="true">
                             <i class="fas fa-fw fa-briefcase"></i>
                             <span>PPH Unifikasi</span>
                         </a>
                     </li>
+
+                    @if (auth()->user()->role == 'admin')
+                    <li class="nav-item {{ Route::is('dataadmin') ? 'active' : '' }}">
+                        <a class="nav-link" href="/dataadmin" aria-expanded="true">
+                            <i class="fas fa-fw fa-database"></i>
+                            <span>Data Admin</span>
+                        </a>
+                    </li>
+                    @endif
                 </div>
                 <!-- Divider -->
                 <!-- Divider -->
@@ -144,9 +150,7 @@
                 <!-- Sidebar Message -->
                 <div class="sidebar-card d-none d-lg-flex">
                     <img class="sidebar-card-illustration mb-2" src="{{ asset('logo.png') }}" alt="...">
-                    <p class="mb-2 text-center"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar
-                        pajak
-                        Anda!</p>
+                    <p class="mb-2 text-center"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar pajak Anda!</p>
                 </div>
 
             </ul>
@@ -418,8 +422,7 @@
         <script src="{{ asset('sbadmin2/js/demo/chart-area-demo.js') }}"></script>
         <script src="{{ asset('sbadmin2/js/demo/chart-pie-demo.js') }}"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
         <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
