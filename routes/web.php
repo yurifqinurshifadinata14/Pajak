@@ -74,6 +74,14 @@ Route::middleware('auth')->group(function () {
         Route::put('/pph21Update/{id}', [Pph21Controller::class, 'update'])->name('pph21Update');
         Route::get('/getpph21sub', [Pph21Controller::class, 'getPph21Sub'])->name('getpph21sub');
 
+        Route::get('/getDataadmin', [DataadminController::class, 'getDataadmin'])->name('getDataadmin');
+        Route::get('/dataadmin', [DataadminController::class, 'index'])->name('dataadmin');
+        Route::post('/dataadmin', [DataadminController::class, 'store'])->name('dataadminStore');
+        Route::get('/dataadminDelete/{id}', [DataadminController::class, 'destroy']);
+        Route::get('/dataadminEdit/{id}', [DataadminController::class, 'edit'])->name('dataadminEdit');
+        Route::put('/dataadminUpdate/{id}', [DataadminController::class, 'update'])->name('dataadminUpdate');
+         
+
         Route::get('/getpajaksub', [PajakController::class, 'getPajakSub'])->name('getpajaksub');
         Route::post('/pajakstore', [PajakController::class, 'store'])->name('pajakStore');
 
