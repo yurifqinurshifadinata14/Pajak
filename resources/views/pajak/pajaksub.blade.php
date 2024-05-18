@@ -12,11 +12,13 @@
 
                     <div class="d-flex gap-2">
                         <!-- Button trigger modal Import-->
-                        <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
+                        <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal"
+                            data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i> Import Excel
                         </button>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Pajak" data-bs-toggle="modal" data-bs-target="#tambah">
+                        <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Pajak"
+                            data-bs-toggle="modal" data-bs-target="#tambah">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
                         </button>
                     </div>
@@ -26,7 +28,7 @@
                     <!-- Modal Button Edit -->
                     <x-pajaksub.modaledit />
                     <!-- Modal Button import -->
-                    <x-pajaksub.modalimportpajak/>
+                    <x-pajaksub.modalimportpajak />
 
                 </div>
                 <div class="card-body">
@@ -54,7 +56,6 @@
                         .my-table tr:nth-child(even) {
                             background-color: #f2f2f2;
                         }
-
                     </style>
                     <div class="table-responsive">
 
@@ -136,7 +137,7 @@
                 };
 
                 var deleteData = async (id) => {
-                    if (confirm('Apakah anda ingin menghapus?')==true){
+                    if (confirm('Apakah anda ingin menghapus?') == true) {
                         await fetch(`{{ route('pajakDestroy', '') }}/${id}`, {
                             method: 'DELETE',
                             headers: {
@@ -151,30 +152,30 @@
 
                 var initTable = (pajak) => {
                     $('#pajakTable').DataTable({
-                        dom: 'Bfrtip',
-                        //lengthMenu: [10, 25, 50, 100], // Menentukan daftar jumlah entri yang ingin ditampilkan
-                        //lengthChange: true,
-                        buttons: [
-                            //'copy', 'excel', 'pdf'
-                            {
-                                extend: 'copy',
-                                text: '<i class="fas fa-copy"> </i> Copy',
-                                className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                                titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
-                            },
-                            {
-                                extend: 'excel',
-                                text: '<i class="fas fa-file-excel"> </i> Excel',
-                                className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                                titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
-                            },
-                            {
-                                extend: 'pdf',
-                                text: '<i class="fas fa-file-pdf"> </i> PDF',
-                                className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                                titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
-                            }
-                        ],
+                            dom: 'Bfrtip',
+                            //lengthMenu: [10, 25, 50, 100], // Menentukan daftar jumlah entri yang ingin ditampilkan
+                            //lengthChange: true,
+                            buttons: [
+                                //'copy', 'excel', 'pdf'
+                                {
+                                    extend: 'copy',
+                                    text: '<i class="fas fa-copy"> </i> Copy',
+                                    className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                    titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
+                                },
+                                {
+                                    extend: 'excel',
+                                    text: '<i class="fas fa-file-excel"> </i> Excel',
+                                    className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                    titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
+                                },
+                                {
+                                    extend: 'pdf',
+                                    text: '<i class="fas fa-file-pdf"> </i> PDF',
+                                    className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                                    titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
+                                }
+                            ],
                             destroy: true,
                             data: pajak,
                             columns: [{
@@ -313,13 +314,17 @@
                         },
 
                         handleImport() {
+                            let formData = new FormData();
+                            formData.append('file', this.file[0]);
+                            console.log(formData)
+
                             fetch("{{ route('pajak.import_excel') }}", {
                                 method: 'POST',
                                 headers: {
-                                    "Content-Type": "application/json",
+                                    /*  "Content-Type": "application/json", */
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
-                                body: JSON.stringify(this.file)
+                                body: formData
                             })
                         },
 
