@@ -8,7 +8,6 @@
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
                 Data Admin Rekap
-
                 <button type="button" class="btn btn-sm btn-primary float-end" data-bs-toggle="modal"
                     data-bs-target="#tambah">
                     <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
@@ -48,6 +47,7 @@
                     }
 
                 </style>
+                <div class="table-responsive">
                 <table id="dataadminTable" class="my-table">
                     <thead>
                         <tr>
@@ -66,7 +66,6 @@
                             <td>{{ $dataadmin->name }}</td>
                             <td>{{ $dataadmin->email }}</td>
                             <td>{{ $dataadmin->password }}</td>
-
                             <td>{{ $dataadmin->role }}</td>
                             <td>
                                 <!-- Buttons for actions -->
@@ -90,8 +89,7 @@
                                                 <div class="modal-header">
                                                     <h5 class="modal-title" id="edit{{ $dataadmin->id }}Label">Edit Data
                                                         Admin</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                        aria-label="Close"></button>
+                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     <form action="/dataadminUpdate/{{ $dataadmin->id }}" method="POST">
@@ -161,6 +159,7 @@
                         @endforeach
                     </tbody>
                 </table>
+            </div>
             </div>
         </div>
     </div>
