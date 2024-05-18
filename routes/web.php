@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BerandaController;
+use App\Http\Controllers\DataadminController;
 use App\Http\Controllers\PajakController;
 use App\Http\Controllers\JenisController;
 use App\Http\Controllers\StatusController;

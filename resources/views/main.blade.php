@@ -121,6 +121,15 @@
                             <span>PPH Unifikasi</span>
                         </a>
                     </li>
+                    
+                    @if (auth()->user()->role == 'admin')
+                    <li class="nav-item {{ Route::is('dataadmin') ? 'active' : '' }}">
+                        <a class="nav-link" href="/dataadmin" aria-expanded="true">
+                            <i class="fas fa-fw fa-database"></i>
+                            <span>Data Admin</span>
+                        </a>
+                    </li>
+                    @endif
                 </div>
                 <!-- Divider -->
                 <!-- Divider -->
@@ -406,8 +415,7 @@
         <script src="{{ asset('sbadmin2/js/demo/chart-area-demo.js') }}"></script>
         <script src="{{ asset('sbadmin2/js/demo/chart-pie-demo.js') }}"></script>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
         </script>
         <script src="https://cdn.datatables.net/2.0.6/js/dataTables.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
