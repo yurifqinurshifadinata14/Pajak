@@ -77,7 +77,20 @@
                 var initTable = (pph) => {
                     $('#pphTable').DataTable({
                         dom: 'Bfrtip',
-                        buttons: ['copy', 'excel', 'pdf' ],
+                        buttons: [
+                            // 'copy', 'excel', 'pdf' 
+                        {
+                            extend:'copy'
+                        },
+                        {
+                            extend: 'excel',
+                                className: 'btn-success'                        
+                        },
+                        {
+                            extend: 'pdf',
+                                className: 'btn-danger'                        
+                        }
+                        ],
                             destroy: true,
                             data: pph,
                             columns: [

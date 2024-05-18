@@ -124,6 +124,15 @@
                             <span>PPH Unifikasi</span>
                         </a>
                     </li>
+                    
+                    @if (auth()->user()->role == 'admin')
+                    <li class="nav-item {{ Route::is('dataadmin') ? 'active' : '' }}">
+                        <a class="nav-link" href="/dataadmin" aria-expanded="true">
+                            <i class="fas fa-fw fa-database"></i>
+                            <span>Data Admin</span>
+                        </a>
+                    </li>
+                    @endif
                 </div>
                 <!-- Divider -->
                 <!-- Divider -->
