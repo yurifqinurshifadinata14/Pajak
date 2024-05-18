@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Imports;
+
 use App\Models\Pph21;
 use App\Imports\Pph21Import;
 use Maatwebsite\Excel\Concerns\ToModel;
@@ -9,13 +10,13 @@ use App\Models\Pajak;
 use App\Models\Karyawan;
 use Illuminate\Support\Facades\DB;
 
-class Pph21Import implements ToModel,WithHeadingRow
+class Pph21Import implements ToModel, WithHeadingRow
 {
     /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
+     * @param array $row
+     *
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
     public function model(array $row)
     {
         // $max = DB::table('pph21s')->select(DB::raw('MAX(RIGHT(id_pph21,3)) as autoid'));
