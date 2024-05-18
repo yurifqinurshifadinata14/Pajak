@@ -221,6 +221,8 @@
                     Alpine.data('app', () => ({
                         data: {},
                         editId: '',
+                        file: null,
+
                         select(id) {
                             const findData = pph.find(item => item.id_pph == id)
                             this.data = {
@@ -255,6 +257,23 @@
                                 $('#edit').modal('hide');
                                 getData()
                             }).catch(err => console.log(err))
+                        },
+
+                        handleImport() {
+                            let formData = new FormData();
+                            formData.append('file', this.file[0]);
+
+                            fetch("{{ route('pph.import_excel') }}", {
+                                method: 'POST',
+                                headers: {
+                                    /*  "Content-Type": "application/json", */
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: formData
+                            }).then(res => {
+                                getData()
+                                $('#importExcel').modal('hide')
+                            })
                         },
 
                         init() {

@@ -316,7 +316,6 @@
                         handleImport() {
                             let formData = new FormData();
                             formData.append('file', this.file[0]);
-                            console.log(formData)
 
                             fetch("{{ route('pajak.import_excel') }}", {
                                 method: 'POST',
@@ -325,6 +324,9 @@
                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                 },
                                 body: formData
+                            }).then(res => {
+                                getPajak()
+                                $('#importExcel').modal('hide')
                             })
                         },
 

@@ -81,7 +81,6 @@ Route::middleware('auth')->group(function () {
         Route::get('/dataadminEdit/{id}', [DataadminController::class, 'edit'])->name('dataadminEdit');
         Route::put('/dataadminUpdate/{id}', [DataadminController::class, 'update'])->name('dataadminUpdate');
          
-
         Route::get('/getpajaksub', [PajakController::class, 'getPajakSub'])->name('getpajaksub');
         Route::post('/pajakstore', [PajakController::class, 'store'])->name('pajakStore');
 

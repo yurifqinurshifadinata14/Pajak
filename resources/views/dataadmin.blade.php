@@ -169,17 +169,17 @@
                     $('#dataadminTable').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            // 'copy', 'excel', 'pdf' 
+                            // 'copy', 'excel', 'pdf'
                         {
                             extend:'copy'
                         },
                         {
                             extend: 'excel',
-                                className: 'btn-success'                        
+                                className: 'btn-success'
                         },
                         {
                             extend: 'pdf',
-                                className: 'btn-danger'                        
+                                className: 'btn-danger'
                         }
                         ],
 
@@ -273,7 +273,7 @@
 
                 // editSubmit() {
                 //     console.log(this.data.id_dataadmin);
-                //     fetch("{{ url('/dataadminUpdate/') }}/${this.data.id_dataadmin}", { 
+                //     fetch("{{ url('/dataadminUpdate/') }}/${this.data.id_dataadmin}", {
                 //         method: 'PUT',
                 //         headers: {
                 //             "Content-Type": "application/json",

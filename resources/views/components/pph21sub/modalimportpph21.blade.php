@@ -20,13 +20,13 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Import Excel</h5>
             </div>
-            <form method="post" action="{{ route('pph21.import_excel') }}" enctype="multipart/form-data">
+            <form @submit.prevent="handleImport" enctype="multipart/form-data">
             {{-- <form method="post" action="#" enctype="multipart/form-data"> --}}
                 @csrf
                 <div class="modal-body">
                     <label>Pilih file excel</label>
                     <div class="form-group">
-                        <input type="file" name="file" required="required">
+                        <input type="file" name="file" required="required" @change="file=Object.values($event.target.files)">
                     </div>
 
                 </div>
