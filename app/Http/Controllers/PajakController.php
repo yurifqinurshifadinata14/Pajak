@@ -6,7 +6,11 @@ use App\Models\Jenis;
 use App\Models\Pajak;
 use App\Models\Status;
 use Illuminate\Http\Request;
+use App\Imports\PajakImport;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Facades\Log;
+
 
 class PajakController extends Controller
 {
@@ -20,7 +24,27 @@ class PajakController extends Controller
         //
     }
 
-
+    public function import_excel(Request $request)
+	{
+        LOG::info($request->all());
+        $file = $request->file('file');
+        // membuat nama file unik
+        $nama_file = $file->hashName();
+        //temporary file
+        $path = $file->storeAs('public/excel/',$nama_file);
+        //dd($path);
+        // import data
+        $import = Excel::import(new PajakImport(), $path);
+        //remove from server
+        //Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
+        } else {
+            //redirect
+            return redirect()->back()->with(['error' => 'Data Gagal Diimport!']);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.

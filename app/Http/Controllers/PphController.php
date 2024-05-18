@@ -6,6 +6,8 @@ use App\Models\Pph;
 use App\Models\Pajak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Imports\PphImport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PphController extends Controller
 {
@@ -18,6 +20,27 @@ class PphController extends Controller
         $pajaks = Pajak::all();
         return view('pph.pph', compact('pph', 'pajaks'));
         //
+    }
+
+    public function import_excel(Request $request)
+	{
+        $file = $request->file('file');
+        // membuat nama file unik
+        $nama_file = $file->hashName();
+        //temporary file
+        $path = $file->storeAs('public/excel/',$nama_file);
+        //dd($path);
+        // import data
+        $import = Excel::import(new PphImport(), $path);
+        //remove from server
+        //Storage::delete($path);
+        if($import) {
+            //redirect
+            return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
+        } else {
+            //redirect
+            return redirect()->back()->with(['error' => 'Data Gagal Diimport!']);
+        }
     }
 
     /**
@@ -109,7 +132,7 @@ class PphController extends Controller
      */
     public function destroy($id)
     {
- 
+
         $pph = Pph::where('id_pph',$id)->delete();
         return redirect()->route('pphSub');
         //
