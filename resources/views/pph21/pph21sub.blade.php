@@ -189,7 +189,18 @@
                     $('#pph21Table').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copy', 'excel', 'pdf'
+                            // 'copy', 'excel', 'pdf'
+                            {
+                                extend: 'copy'
+                            },
+                            {
+                                extend: 'excel',
+                                className: 'btn-success' // Menambahkan kelas 'btn-success' untuk tombol Excel
+                            },
+                            {
+                                extend: 'pdf',
+                                className: 'btn-danger' // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                            }
                         ],
                         destroy: true,
                         data: pph21,
@@ -234,7 +245,7 @@
                                                             <button type="button" class="btn btn-sm btn-danger" onclick="deleteData('${data}')">
                                                                 <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                             @endif
-    
+
                                                 </div>`
                                 }
                             },
