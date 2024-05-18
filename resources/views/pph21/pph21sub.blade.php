@@ -278,6 +278,8 @@
                         data: {},
                         editId: '',
                         dataKaryawan: [],
+                        file: null,
+
                         select(id) {
                             const findData = pph21.find(item => item.id == id)
                             this.data = {
@@ -318,6 +320,23 @@
                                 $('#edit').modal('hide');
                                 getpph21()
                             }).catch(err => console.log(err))
+                        },
+
+                        handleImport() {
+                            let formData = new FormData();
+                            formData.append('file', this.file[0]);
+
+                            fetch("{{ route('pph21.import_excel') }}", {
+                                method: 'POST',
+                                headers: {
+                                    /*  "Content-Type": "application/json", */
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: formData
+                            }).then(res => {
+                                getpph21()
+                                $('#importExcel').modal('hide')
+                            })
                         },
 
 

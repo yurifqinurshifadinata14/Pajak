@@ -25,19 +25,18 @@ class PajakController extends Controller
     }
 
     public function import_excel(Request $request)
-	{
-        LOG::info($request->all());
+    {
         $file = $request->file('file');
         // membuat nama file unik
         $nama_file = $file->hashName();
         //temporary file
-        $path = $file->storeAs('public/excel/',$nama_file);
+        $path = $file->storeAs('public/excel/', $nama_file);
         //dd($path);
         // import data
         $import = Excel::import(new PajakImport(), $path);
         //remove from server
         //Storage::delete($path);
-        if($import) {
+        if ($import) {
             //redirect
             return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
         } else {
@@ -104,9 +103,7 @@ class PajakController extends Controller
         if ($pajak->save() && $jenis->save() && $status->save()) {
 
             return redirect()->route('pajakSub');
-
         }
-
     }
 
     public function pajaksub()
@@ -118,11 +115,12 @@ class PajakController extends Controller
         return view('pajak.pajaksub', compact('pajak'));
     }
 
-    public function getPajakSub(){
-         $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
+    public function getPajakSub()
+    {
+        $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
             ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
             ->get();
-        return response()->json(['pajak'=>$pajak]);
+        return response()->json(['pajak' => $pajak]);
     }
 
     // public function jenissub()
@@ -223,7 +221,7 @@ class PajakController extends Controller
     {
         //
         /* $id_pajak->delete(); */
-        $pajak = Pajak::where('id_pajak',$id_pajak)->delete();
+        $pajak = Pajak::where('id_pajak', $id_pajak)->delete();
         Jenis::where('id_pajak', $id_pajak)->delete();
         Status::where('id_pajak', $id_pajak)->delete();
         return redirect()->route('pajakSub');

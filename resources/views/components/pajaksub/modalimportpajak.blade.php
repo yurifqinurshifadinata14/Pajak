@@ -1,20 +1,21 @@
 {{-- notifikasi form validasi --}}
 @if ($errors->has('file'))
-<span class="invalid-feedback" role="alert">
-    <strong>{{ $errors->first('file') }}</strong>
-</span>
+    <span class="invalid-feedback" role="alert">
+        <strong>{{ $errors->first('file') }}</strong>
+    </span>
 @endif
 
 {{-- notifikasi sukses --}}
 @if ($sukses = Session::get('sukses'))
-<div class="alert alert-success alert-block">
-    <button type="button" class="close" data-dismiss="alert">×</button>
-    <strong>{{ $sukses }}</strong>
-</div>
+    <div class="alert alert-success alert-block">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>{{ $sukses }}</strong>
+    </div>
 @endif
 
 <!-- Import Excel -->
-<div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="importExcel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -22,12 +23,13 @@
             </div>
             <form @submit.prevent="handleImport" enctype="multipart/form-data">
                 {{-- method="post" action="{{ route('pajak.import_excel') }}" --}}
-            {{-- <form method="post" action="#" enctype="multipart/form-data"> --}}
+                {{-- <form method="post" action="#" enctype="multipart/form-data"> --}}
                 @csrf
                 <div class="modal-body">
                     <label>Pilih file excel</label>
                     <div class="form-group">
-                        <input type="file" name="file" required="required" @change="file=Object.values($event.target.files)">
+                        <input type="file" name="file" required="required"
+                            @change="file=Object.values($event.target.files)">
                     </div>
 
                 </div>

@@ -87,8 +87,7 @@
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="edit{{ $dataadmin->id }}Label">Edit Data
-                                                        Admin</h5>
+                                                    <h5 class="modal-title" id="edit{{ $dataadmin->id }}Label">Edit Data Admin</h5>
                                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
@@ -166,6 +165,51 @@
 
     @push('script')
     <script>
+          var initTable = (dataadmin) => {
+                    $('#dataadminTable').DataTable({
+                        dom: 'Bfrtip',
+                        buttons: [
+                            // 'copy', 'excel', 'pdf'
+                        {
+                            extend:'copy'
+                        },
+                        {
+                            extend: 'excel',
+                                className: 'btn-success'
+                        },
+                        {
+                            extend: 'pdf',
+                                className: 'btn-danger'
+                        }
+                        ],
+
+                        destroy: true,
+                            data: dataadmin,
+                            columns: [
+                                {
+                                    data: 'null',
+                                    render:(data,type,row,meta)=>{
+                                        return meta.row+1
+                                    }
+                                },
+                                {
+                                    data: 'nama'
+                                },
+                                {
+                                    data: 'email'
+                                },
+                                {
+                                    data: 'password'
+                                },
+                                {
+                                    data: 'repeat_pw'
+                                },
+                                {
+                                    data: 'role'
+                                },
+                            ]
+                        })
+                }
         document.addEventListener('alpine:init', () => {
             Alpine.data('formTambah', () => ({
                 formData: {
@@ -229,7 +273,7 @@
 
                 // editSubmit() {
                 //     console.log(this.data.id_dataadmin);
-                //     fetch("{{ url('/dataadminUpdate/') }}/${this.data.id_dataadmin}", { 
+                //     fetch("{{ url('/dataadminUpdate/') }}/${this.data.id_dataadmin}", {
                 //         method: 'PUT',
                 //         headers: {
                 //             "Content-Type": "application/json",

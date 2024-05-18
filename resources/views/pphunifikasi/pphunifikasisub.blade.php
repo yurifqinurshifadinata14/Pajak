@@ -234,6 +234,8 @@
                     //data: [],
                     data: {},
                     editId: '',
+                    file: null,
+
                     select(id) {
                         //this.data = pphunifikasi.filter(item => item.id_pajak == id)
                         //this.data = this.data[0]
@@ -273,6 +275,23 @@
                             getPphunifikasi()
                         }).catch(err => console.log(err))
                     },
+
+                    handleImport() {
+                            let formData = new FormData();
+                            formData.append('file', this.file[0]);
+
+                            fetch("{{ route('pphunifikasi.import_excel') }}", {
+                                method: 'POST',
+                                headers: {
+                                    /*  "Content-Type": "application/json", */
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: formData
+                            }).then(res => {
+                                getPphunifikasi()
+                                $('#importExcel').modal('hide')
+                            })
+                        },
 
                     init() {
                         console.log('data:', this.data)
