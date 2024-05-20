@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/dataadminDelete/{id}', [DataadminController::class, 'destroy']);
         Route::get('/dataadminEdit/{id}', [DataadminController::class, 'edit'])->name('dataadminEdit');
         Route::put('/dataadminUpdate/{id}', [DataadminController::class, 'update'])->name('dataadminUpdate');
-         
+
         Route::get('/getpajaksub', [PajakController::class, 'getPajakSub'])->name('getpajaksub');
         Route::post('/pajakstore', [PajakController::class, 'store'])->name('pajakStore');
 
@@ -92,6 +92,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/addkaryawan', [Pph21Controller::class, 'addKaryawan'])->name('addKaryawan');
         Route::delete('/deletekaryawan/{id}', [Pph21Controller::class, 'deleteKaryawan'])->name('deleteKaryawan');
         Route::get('/getkaryawansub', [KaryawanController::class, 'getKaryawanSub'])->name('getkaryawansub');
+        Route::get('/karyawanEdit/{karyawan}', [KaryawanController::class, 'edit'])->name('karyawanEdit');
+        Route::put('/karyawanUpdate/{karyawan}', [KaryawanController::class, 'update'])->name('karyawanUpdate');
         Route::delete('/karyawanDelete/{id}', [KaryawanController::class, 'destroy'])->name('karyawanDestroy');
     });
 });

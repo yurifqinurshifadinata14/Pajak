@@ -2,12 +2,12 @@
     x-data="modalKaryawan">
     <div class="modal-dialog modal-xl">
         <div class="modal-content">
-            <div class="modal-header">
+            {{-- <div class="modal-header">
                 <h1 class="modal-title fs-5" id="exampleModalLabel">Karyawan</h1>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
+            </div> --}}
             <div class="modal-body">
-                <form @submit.prevent="handleSubmit">
+                {{-- <form @submit.prevent="handleSubmit">
                     <div class="d-flex justify-content-center gap-3">
                         <div style="width: 7%">
                             <x-pph21sub.formkaryawan type="text" title="ID" model="formData.id"
@@ -22,9 +22,10 @@
                         <button type="button" class="btn btn-primary" @click="handleReset">Reset</button>
                         <button type="submit" class="btn btn-primary">Simpan</button>
                     </div>
-                    {{-- <div class="d-flex justify-content-end gap-2">
-                    </div> --}}
-                </form>
+                    <div class="d-flex justify-content-end gap-2">
+                    </div>
+                </form> --}}
+
                 <div class="table-responsive mt-3">
                     <table class="my-table" id="tableKaryawan">
                         <thead>

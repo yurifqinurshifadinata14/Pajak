@@ -3,7 +3,6 @@
 namespace App\Imports;
 
 use App\Models\Pph21;
-use App\Imports\Pph21Import;
 use Maatwebsite\Excel\Concerns\ToModel;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use App\Models\Pajak;
@@ -17,6 +16,7 @@ class Pph21Import implements ToModel, WithHeadingRow
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
+
     public function model(array $row)
     {
         // $max = DB::table('pph21s')->select(DB::raw('MAX(RIGHT(id_pph21,3)) as autoid'));
@@ -33,6 +33,7 @@ class Pph21Import implements ToModel, WithHeadingRow
         // }
 
         $pajak = Pajak::where('nama_wp', $row['nama_wp'])->first();
+
         $karyawan = Karyawan::where('nik', $row['nik'])->first();
         return new Pph21([
             'id_pajak' => $pajak->id_pajak,

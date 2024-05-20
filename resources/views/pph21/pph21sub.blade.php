@@ -11,15 +11,17 @@
                     </div>
 
                     <div class="d-flex align-items-center gap-2">
-                        <button type="button" class="btn btn-sm btn-success float-end mb-2" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
+                        <button type="button" class="btn btn-sm btn-success float-end mb-2" title="Import Excel"
+                            data-bs-toggle="modal" data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i> Import Excel
                         </button>
-                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Karyawan" data-bs-toggle="modal"
-                            data-bs-target="#tambahkaryawan" onclick="setTimeout(()=>tableKaryawan(karyawan),200)">
+                        {{-- <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Karyawan"
+                            data-bs-toggle="modal" data-bs-target="#tambahkaryawan"
+                            onclick="setTimeout(()=>tableKaryawan(karyawan),200)">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Karyawan
-                        </button>
-                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Pph 21" data-bs-toggle="modal"
-                            data-bs-target="#tambah" @click="getDataKaryawan">
+                        </button> --}}
+                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Pph 21"
+                            data-bs-toggle="modal" data-bs-target="#tambah" @click="getDataKaryawan">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
                         </button>
                     </div>
@@ -31,8 +33,8 @@
                     <x-pph21sub.modaledit />
 
                     <x-pph21sub.modalkaryawan :karyawan="$karyawan" />
-                     <!-- Modal Button import -->
-                    <x-pph21sub.modalimportpph21/>
+                    <!-- Modal Button import -->
+                    <x-pph21sub.modalimportpph21 />
 
                 </div>
 
@@ -132,7 +134,7 @@
                 };
 
                 var deleteData = async (id) => {
-                    if (confirm('Apakah anda ingin menghapus?')==true){
+                    if (confirm('Apakah anda ingin menghapus?') == true) {
                         await fetch(`{{ route('pph21Destroy', '') }}/${id}`, {
                             method: 'DELETE',
                             headers: {
@@ -156,7 +158,25 @@
                     $('#pph21Table').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-                            'copy', 'excel', 'pdf'
+                            //'copy', 'excel', 'pdf'
+                            {
+                                extend: 'copy',
+                                text: '<i class="fas fa-copy"> </i> Copy',
+                                className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fas fa-file-excel"> </i> Excel',
+                                className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
+                            },
+                            {
+                                extend: 'pdf',
+                                text: '<i class="fas fa-file-pdf"> </i> PDF',
+                                className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                                titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
+                            }
                         ],
                         destroy: true,
                         data: pph21,

@@ -28,7 +28,7 @@
                             placeholder="Nama" x-model="formData.nama">
                     </div>
                     <div class="form-group">
-                        <label for="nik">NIK</label>
+                        <label for="id_pph21">NIK</label>
                         <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK"
                             x-model="formData.nik">
                     </div>
