@@ -35,13 +35,13 @@ class KaryawanController extends Controller
             'id_pph' => null,
             'nik' => $request->nik,
             'npwp' => $request->npwp,
-            
+
         ]);
         return redirect()->route('karyawanSub');
     }
     public function karyawansub()
     {
-        $karyawan =  karyawan::all();
+        $karyawan = karyawan::all();
         return view('karyawan.karyawansub', compact('karyawan'));
     }
 

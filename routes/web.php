@@ -64,9 +64,6 @@ Route::middleware('auth')->group(function () {
         Route::middleware('role:admin')->delete('/pphunifikasiDelete/{pphunifikasi}', [PphunifikasiController::class, 'destroy'])->name('pphunifikasiDestroy');
 
         Route::get('/pph21', [Pph21Controller::class, 'index'])->name('pph21');
-        Route::get('/getkaryawan', [Pph21Controller::class, 'getKaryawan'])->name('getKaryawan');
-        Route::post('/addkaryawan', [Pph21Controller::class, 'addKaryawan'])->name('addKaryawan');
-        Route::delete('/deletekaryawan/{id}', [Pph21Controller::class, 'deleteKaryawan'])->name('deleteKaryawan');
         Route::post('/pph21store', [Pph21Controller::class, 'store'])->name('pph21Store');
         Route::get('/pph21sub', [Pph21Controller::class, 'pph21sub'])->name('pph21Sub');
         Route::delete('/pph21Delete/{ppph21}', [Pph21Controller::class, 'destroy'])->name('pph21Destroy');
@@ -89,6 +86,13 @@ Route::middleware('auth')->group(function () {
         Route::get('/statussub', [StatusController::class, 'statussub'])->name('statusSub');
 
         Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
+        Route::get('/karyawansub', [KaryawanController::class, 'karyawansub'])->name('karyawanSub');
+        Route::post('/karyawanstore', [KaryawanController::class, 'store'])->name('karyawanStore');
+        Route::get('/getkaryawan', [Pph21Controller::class, 'getKaryawan'])->name('getKaryawan');
+        Route::post('/addkaryawan', [Pph21Controller::class, 'addKaryawan'])->name('addKaryawan');
+        Route::delete('/deletekaryawan/{id}', [Pph21Controller::class, 'deleteKaryawan'])->name('deleteKaryawan');
+        Route::get('/getkaryawansub', [KaryawanController::class, 'getKaryawanSub'])->name('getkaryawansub');
+        Route::delete('/karyawanDelete/{id}', [KaryawanController::class, 'destroy'])->name('karyawanDestroy');
     });
 });
 

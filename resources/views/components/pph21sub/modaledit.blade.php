@@ -41,12 +41,12 @@
                     {{--  <h6>-- Karyawan --</h6>
                     <div class="form-group">
                         <label for="nik">NIK</label>
-                        <input type="text" class="form-control" id="nik" name="nik" 
+                        <input type="text" class="form-control" id="nik" name="nik"
                             placeholder="NIK" x-model="data.nik">
                     </div>
                     <div class="form-group">
                         <label for="npwp">NPWP</label>
-                        <input type="text" class="form-control" id="npwp" name="npwp" 
+                        <input type="text" class="form-control" id="npwp" name="npwp"
                             placeholder="NPWP" x-model="data.npwp">
                     </div> --}}
                     <div class="form-group">

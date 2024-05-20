@@ -114,6 +114,13 @@
                         </a>
                     </li>
 
+                    <li class="nav-item {{ Route::is('pph21.pph21sub') ? 'active' : '' }}">
+                        <a class="nav-link" href="/karyawansub" aria-expanded="true">
+                            <i class="fas fa-fw fa-briefcase"></i>
+                            <span>Daftar Karyawan</span>
+                        </a>
+                    </li>
+
                     <!-- Nav Item - Pph Unifikasi -->
                     <li class="nav-item {{ Route::is('pphunifikasi.pphunifikasisub') ? 'active' : '' }}">
                         <a class="nav-link" href="/pphunifikasisub" aria-expanded="true">
@@ -121,7 +128,7 @@
                             <span>PPH Unifikasi</span>
                         </a>
                     </li>
-                    
+
                     @if (auth()->user()->role == 'admin')
                     <li class="nav-item {{ Route::is('dataadmin') ? 'active' : '' }}">
                         <a class="nav-link" href="/dataadmin" aria-expanded="true">
