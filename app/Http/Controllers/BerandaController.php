@@ -29,7 +29,7 @@ class BerandaController extends Controller
             'totalbayarpph'=> $totalbayarpph,
             'totalbayarpph21'=> $totalbayarpph21
         ]
-    
+
     );
         //
     }

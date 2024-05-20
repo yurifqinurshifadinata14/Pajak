@@ -63,13 +63,9 @@ Route::middleware('auth')->group(function () {
 
         Route::middleware('role:admin')->delete('/pphunifikasiDelete/{pphunifikasi}', [PphunifikasiController::class, 'destroy'])->name('pphunifikasiDestroy');
 
-        Route::get('/pph21', [Pph21Controller::class, 'index'])->name('pph21');
-        Route::post('/pph21store', [Pph21Controller::class, 'store'])->name('pph21Store');
-        Route::get('/pph21sub', [Pph21Controller::class, 'pph21sub'])->name('pph21Sub');
-        Route::delete('/pph21Delete/{ppph21}', [Pph21Controller::class, 'destroy'])->name('pph21Destroy');
-        Route::get('/pph21Edit/{pph21}', [Pph21Controller::class, 'edit'])->name('pph21Edit');
-        Route::put('/pph21Update/{id}', [Pph21Controller::class, 'update'])->name('pph21Update');
-        Route::get('/getpph21sub', [Pph21Controller::class, 'getPph21Sub'])->name('getpph21sub');
+
+
+
 
         Route::get('/getDataadmin', [DataadminController::class, 'getDataadmin'])->name('getDataadmin');
         Route::get('/dataadmin', [DataadminController::class, 'index'])->name('dataadmin');

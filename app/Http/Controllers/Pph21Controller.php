@@ -25,18 +25,18 @@ class Pph21Controller extends Controller
     }
 
     public function import_excel(Request $request)
-	{
+    {
         $file = $request->file('file');
         // membuat nama file unik
         $nama_file = $file->hashName();
         //temporary file
-        $path = $file->storeAs('public/excel/',$nama_file);
+        $path = $file->storeAs('public/excel/', $nama_file);
         //dd($path);
         // import data
         $import = Excel::import(new Pph21Import(), $path);
         //remove from server
         //Storage::delete($path);
-        if($import) {
+        if ($import) {
             //redirect
             return redirect()->back()->with(['success' => 'Data Berhasil Diimport!']);
         } else {
