@@ -29,10 +29,14 @@ class BerandaController extends Controller
             'totalbayarpph'=> $totalbayarpph,
             'totalbayarpph21'=> $totalbayarpph21
         ]
-    
+
     );
         //
     }
+
+   
+
+
 
     /**
      * Show the form for creating a new resource.
