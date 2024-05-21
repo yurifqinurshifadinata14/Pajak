@@ -104,3 +104,4 @@ Route::post('/pph/import_excel', [PphController::class, 'import_excel'])->name('
 Route::post('/pph21/import_excel', [Pph21Controller::class, 'import_excel'])->name('pph21.import_excel');
 Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel');
 Route::post('/karyawan/import_excel', [KaryawanController::class, 'import_excel'])->name('karyawan.import_excel');
+Route::post('/dataadmin/import', [DataadminController::class, 'import'])->name('dataadmin.import');

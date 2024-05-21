@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\DataadminImport;
 use Illuminate\Validation\Rule;
 
 class DataadminController extends Controller
@@ -18,6 +20,16 @@ class DataadminController extends Controller
         return view('dataadmin', compact('dataadmins'));
     }
 
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xlsx,xls'
+        ]);
+
+        Excel::import(new DataadminImport, $request->file('file'));
+
+        return redirect()->route('dataadmin')->with('success', 'Data admin berhasil diimpor!');
+    }
     /**
      * Show the form for creating a new resource.
      */
