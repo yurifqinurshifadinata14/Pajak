@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\api\BerandaController;
 use App\Http\Controllers\api\DataadminController;
 use App\Http\Controllers\api\KaryawanController;
@@ -14,7 +15,7 @@ use App\Http\Controllers\Api\StatusController;
 
 Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get');
 Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get');
-Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get');
+Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware(['staff:sanctum']);
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
 Route::post('/pphunifikasi', [PphunifikasiController::class, 'store'])->name('api.pphunifikasi.post');
 Route::put('/pphunifikasi/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('api.pphunifikasi.put');
@@ -24,6 +25,8 @@ Route::get('/beranda', [BerandaController::class, 'get'])->name('api.beranda.get
 Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get');
 Route::post('/dataadmin', [DataadminController::class, 'store'])->name('api.dataadmin.post');
 Route::get('/status', [StatusController::class, 'get'])->name('api.status.post');
+Route::post('/login', [AuthController::class, 'login'])->name('api.login.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout')->middleware('multi:sanctum');
 /* Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
