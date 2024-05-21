@@ -58,7 +58,7 @@
                             <th>Nama</th>
                             <th>NIK</th>
                             <th>NPWP</th>
-                            <th>Action</th>
+                            <th>Aksi</th>
                         </thead>
                     </table>
                 </div>
@@ -114,7 +114,7 @@
                     {
                         data: 'id',
                         render: (data) => {
-                            return /*html*/`<div class="button-container">
+                            return /*html*/`<div class="button-container gap-2">
                                 <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
                                     @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                 <button type="button" class="btn btn-sm btn-danger"

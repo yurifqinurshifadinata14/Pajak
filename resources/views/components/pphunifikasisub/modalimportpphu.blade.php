@@ -11,9 +11,9 @@
             {{-- <form method="post" action="#" enctype="multipart/form-data"> --}}
                 @csrf
                 <div class="modal-body">
-                    <label>Pilih file excel</label>
                     <div class="form-group">
-                        <input type="file" name="file" required="required" @change="file=Object.values($event.target.files)">
+                        <label for="formfile" class="form-label">Upload File Excel</label>
+                        <input class="form-control" id="formfile" type="file" name="file" required="required" @change="file=Object.values($event.target.files)">
                     </div>
 
                 </div>
