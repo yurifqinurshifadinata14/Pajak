@@ -14,6 +14,9 @@ use App\Http\Controllers\Api\StatusController;
 
 Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get');
 Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get');
+Route::post('/pph21', [Pph21Controller::class, 'store'])->name('api.pph21.post');
+Route::put('/pph21/{id}', [Pph21Controller::class, 'update'])->name('api.pph21.put');
+Route::delete('/pph21/{id}', [Pph21Controller::class, 'destroy']);
 Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get');
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
 Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get');
