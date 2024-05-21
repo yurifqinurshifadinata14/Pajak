@@ -10,15 +10,17 @@ use App\Http\Controllers\Api\PphController;
 use App\Http\Controllers\Api\Pph21Controller;
 use App\Http\Controllers\Api\PajakController;
 use App\Http\Controllers\Api\PphunifikasiController;
+use App\Http\Controllers\Api\StatusController;
 
-
-Route::get('/pph',[PphController::class,'get'])->name('api.pph.get');
-Route::get('/pph21',[Pph21Controller::class,'get'])->name('api.pph21.get');
-Route::get('/pajak',[PajakController::class,'get'])->name('api.pajak.get');
-Route::get('/pphunifikasi',[PphunifikasiController::class,'get'])->name('api.pphunifikasi.get');
-Route::get('/karyawan',[KaryawanController::class,'get'])->name('api.karyawan.get');
-Route::get('/beranda',[BerandaController::class,'get'])->name('api.beranda.get');
-Route::get('/dataadmin',[DataadminController::class,'get'])->name('api.dataadmin.get');
+Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get');
+Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get');
+Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get');
+Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
+Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get');
+Route::get('/beranda', [BerandaController::class, 'get'])->name('api.beranda.get');
+Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get');
+Route::post('/dataadmin', [DataadminController::class, 'store'])->name('api.dataadmin.post');
+Route::get('/status', [StatusController::class, 'get'])->name('api.status.post');
 /* Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');

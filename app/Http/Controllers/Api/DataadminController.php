@@ -5,6 +5,7 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class DataadminController extends Controller
 {
@@ -32,6 +33,29 @@ class DataadminController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email:dns|unique:users,email',
+            'password' => 'required|min:5|max:255',
+            'role' => 'required',
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json([
+                'message' => $validated->messages(),
+            ]);
+        } else {
+            User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => $request->password,
+                'role' => $request->role,
+            ]);
+
+            return response()->json([
+                'message' => "Data telah tersimpan",
+            ]);
+        }
     }
 
     /**

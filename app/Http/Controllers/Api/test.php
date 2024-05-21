@@ -8,4 +8,8 @@ use Illuminate\Http\Request;
 class test extends Controller
 {
     //
+    public function store(Request $request)
+    {
+        //
+    }
 }
