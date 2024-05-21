@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Pph;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 class PphController extends Controller
 {
@@ -33,6 +35,45 @@ class PphController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = Validator::make($request->all(), [
+            'id_pajak' => 'required|max:255',
+            'id_pph' => 'required',
+            'ntpn' => 'required',
+            'biaya_bulan' => 'required',
+            'jumlah_bayar' => 'required',
+     ]);
+
+        if ($validated->fails()) {
+            return response()->json([
+                'message' => $validated->messages(),
+            ]);
+        } else {
+
+            $max = DB::table('pphs')->select(DB::raw('MAX(RIGHT(id_pph,3)) as autoid'));
+            $kd = "";
+    
+            if ($max->count() > 0) {
+                foreach ($max->get() as $a) {
+                    $tmp = ((int) $a->autoid) + 1;
+                    $kd = sprintf("%03s", $tmp);
+                    $id_pph = "PPH-" . $kd;
+                }
+            } else {
+                $id_pph = "PPH-001";
+            }
+            
+            Pph::create([
+            'id_pajak' => $request->id_pajak,
+            'id_pph' => $id_pph,
+            'ntpn' => $request->ntpn,
+            'biaya_bulan' => $request->biaya_bulan,
+            'jumlah_bayar' => $request->jumlah_bayar,
+            ]);
+
+            return response()->json([
+                'message' => "Data telah tersimpan",
+            ]);
+        }
     }
 
     /**
@@ -54,16 +95,54 @@ class PphController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id_pph)
     {
         //
+        $validated = Validator::make($request->all(), [
+            'ntpn' => 'numeric',
+            'biaya_bulan' => 'numeric',
+            'jumlah_bayar' => 'numeric',
+     ]);
+
+        if ($validated->fails()) {
+            return response()->json([
+                'message' => $validated->messages(),
+            ]);
+        } else {
+
+            $pph=Pph::where('id_pph',$id_pph)->update([
+                'ntpn' => (int)$request->ntpn,
+                'biaya_bulan' => (int)$request->biaya_bulan,
+                'jumlah_bayar' => (int)$request->jumlah_bayar,
+            ]);
+
+            return response()->json([
+                'message' => "Data telah tersimpan",
+            ]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id_pph)
     {
-        //
+        // Temukan data Pajak berdasarkan id_pajak
+        $pph = Pph::where('id_pph', $id_pph)->first();
+    
+        // Periksa apakah data Pajak ditemukan
+        if (!$pph) {
+            return response()->json([
+                'message' => "Data PPH dengan ID $id_pph tidak ditemukan",
+            ], 404);
+        }
+    
+        // Hapus data Pajak
+        $pph->delete();
+    
+        // Kembalikan respons sukses
+        return response()->json([
+            'message' => "Data PPH dengan ID $id_pph berhasil dihapus",
+        ]);
     }
 }
