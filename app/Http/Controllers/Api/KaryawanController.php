@@ -5,6 +5,8 @@ namespace App\Http\Controllers\api;
 use App\Http\Controllers\Controller;
 use App\Models\Karyawan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+
 
 class KaryawanController extends Controller
 {
@@ -33,6 +35,27 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         //
+        $validated = Validator::make($request->all(), [
+            'nama' => 'required|max:255',
+            'nik' => 'required',
+            'npwp' => 'required',
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json([
+                'message' => $validated->messages(),
+            ]);
+        } else {
+            Karyawan::create([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'npwp' => $request->npwp,
+            ]);
+
+            return response()->json([
+                'message' => "Data telah tersimpan",
+            ]);
+        }
     }
 
     /**

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\api\BerandaController;
 use App\Http\Controllers\api\DataadminController;
 use App\Http\Controllers\api\KaryawanController;
@@ -19,11 +20,16 @@ Route::put('/pph21/{id}', [Pph21Controller::class, 'update'])->name('api.pph21.p
 Route::delete('/pph21/{id}', [Pph21Controller::class, 'destroy']);
 Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get');
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
+Route::post('/pphunifikasi', [PphunifikasiController::class, 'store'])->name('api.pphunifikasi.post');
+Route::put('/pphunifikasi/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('api.pphunifikasi.put');
 Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get');
+Route::post('/karyawan', [KaryawanController::class, 'store'])->name('api.karyawan.post');
 Route::get('/beranda', [BerandaController::class, 'get'])->name('api.beranda.get');
 Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get');
 Route::post('/dataadmin', [DataadminController::class, 'store'])->name('api.dataadmin.post');
 Route::get('/status', [StatusController::class, 'get'])->name('api.status.post');
+Route::post('/login', [AuthController::class, 'login'])->name('api.login.post');
+Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout')->middleware('multi:sanctum');
 /* Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
@@ -97,3 +103,4 @@ Route::post('/pphunifikasi/import_excel', [PphunifikasiController::class, 'impor
 Route::post('/pph/import_excel', [PphController::class, 'import_excel'])->name('pph.import_excel');
 Route::post('/pph21/import_excel', [Pph21Controller::class, 'import_excel'])->name('pph21.import_excel');
 Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel'); */
+
