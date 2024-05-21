@@ -14,12 +14,21 @@ use App\Http\Controllers\Api\StatusController;
 
 Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get');
 Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get');
+
 Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get');
+
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
 Route::post('/pphunifikasi', [PphunifikasiController::class, 'store'])->name('api.pphunifikasi.post');
 Route::put('/pphunifikasi/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('api.pphunifikasi.put');
+Route::delete('/pphunifikasi/{id_pphuni}', [PphunifikasiController::class, 'destroy']);
+Route::post('/pphunifikasi/import_excel', [PphunifikasiController::class, 'import_excel']);
+
 Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get');
 Route::post('/karyawan', [KaryawanController::class, 'store'])->name('api.karyawan.post');
+Route::put('/karyawan/{id}', [KaryawanController::class, 'update'])->name('api.karyawan.put');
+Route::delete('/karyawan/{id}', [KaryawanController::class, 'destroy']);
+Route::post('/karyawan/import_excel', [KaryawanController::class, 'import_excel']);
+
 Route::get('/beranda', [BerandaController::class, 'get'])->name('api.beranda.get');
 Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get');
 Route::post('/dataadmin', [DataadminController::class, 'store'])->name('api.dataadmin.post');

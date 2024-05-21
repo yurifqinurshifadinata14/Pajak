@@ -77,16 +77,50 @@ class KaryawanController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
         //
+        $validated = Validator::make($request->all(), [
+            'nama' => 'string|max:255',
+            'nik' => 'numeric',
+            'npwp' => 'numeric',
+        ]);
+
+        if ($validated->fails()) {
+            return response()->json([
+                'message' => $validated->messages(),
+            ]);
+        } else {
+            $karyawan = Karyawan::where('id', $id)->update([
+                'nama' => $request->nama,
+                'nik' => $request->nik,
+                'npwp' => $request->npwp,
+            ]);
+
+            return response()->json([
+                'message' => "Data telah tersimpan",
+            ]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
         //
+        $karyawan = Karyawan::where('id', $id)->first();
+
+        if (!$karyawan) {
+            return response()->json([
+                'message' => "Data tidak bisa terhapus",
+            ]);
+        }
+
+        $karyawan->delete();
+
+        return response()->json([
+            'message' => "Data telah terhapus"
+        ]);
     }
 }
