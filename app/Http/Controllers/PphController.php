@@ -21,6 +21,14 @@ class PphController extends Controller
         return view('pph.pph', compact('pph', 'pajaks'));
         //
     }
+    // public function getPph()
+    // {
+    //     return response()->json([
+    //         'pph' => $pph,
+    //         'pajaks'=> $pajaks,
+    //     ]);
+    //     //
+    // }
 
     public function import_excel(Request $request)
 	{

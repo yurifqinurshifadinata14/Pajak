@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
-use App\Models\Pajak;
+namespace App\Http\Controllers\api;
+
+use App\Http\Controllers\Controller;
 use App\Models\Karyawan;
+use App\Models\Pajak;
 use App\Models\Pph;
 use App\Models\Pph21;
-use App\Models\Beranda;
 use Illuminate\Http\Request;
 
 class BerandaController extends Controller
@@ -13,28 +14,7 @@ class BerandaController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $pembayar = Pajak::all();
-        $totalpembayar = Pajak::count();
-        $jumlahkaryawan = Karyawan::count();
-        $totalbayarpph = Pph::sum('jumlah_bayar');
-        $totalbayarpph21 = Pph21::sum('jumlah_bayar');
-
-
-
-        return view('beranda',[
-            'totalpembayar' => $totalpembayar,
-            'jumlahkaryawan'=> $jumlahkaryawan,
-            'totalbayarpph'=> $totalbayarpph,
-            'totalbayarpph21'=> $totalbayarpph21
-        ]
-    
-    );
-        //
-    }
-
-    public function getData()
+    public function get()
     {
         $pembayar = Pajak::all();
         $totalpembayar = Pajak::count();
@@ -51,9 +31,7 @@ class BerandaController extends Controller
             'totalbayarpph21'=> $totalbayarpph21
             
         ]);
-    
-    
-        //
+        
     }
 
     /**
@@ -75,7 +53,7 @@ class BerandaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Beranda $beranda)
+    public function show(string $id)
     {
         //
     }
@@ -83,7 +61,7 @@ class BerandaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Beranda $beranda)
+    public function edit(string $id)
     {
         //
     }
@@ -91,7 +69,7 @@ class BerandaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Beranda $beranda)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -99,7 +77,7 @@ class BerandaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Beranda $beranda)
+    public function destroy(string $id)
     {
         //
     }
