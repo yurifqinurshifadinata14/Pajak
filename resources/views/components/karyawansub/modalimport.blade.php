@@ -9,7 +9,6 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form @submit.prevent="handleImport" enctype="multipart/form-data">
-                {{-- method="post" action="{{ route('pajak.import_excel') }}" --}}
                 {{-- <form method="post" action="#" enctype="multipart/form-data"> --}}
                 @csrf
                 <div class="modal-body">

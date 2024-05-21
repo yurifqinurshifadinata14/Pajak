@@ -19,6 +19,36 @@
                 <!-- Modal Button Edit -->
                 <x-dataadmin.modaleditdataadmin />
 
+                <!-- Import Button -->
+                <button type="button" class="btn btn-sm btn-success float-end me-2" data-bs-toggle="modal"
+                    data-bs-target="#import">
+                    <i class="fas fa-fw fa-file-excel"></i> Import Excel
+                </button>
+
+                <!-- Modal Import -->
+                <div class="modal fade" id="import" tabindex="-1" aria-labelledby="importLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="importLabel">Import Data Admin</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form action="{{ route('dataadmin.import') }}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="mb-3">
+                                        <label for="formFile" class="form-label">Upload File Excel</label>
+                                        <input class="form-control" type="file" id="formFile" name="file" required>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Import</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="card-body">
                 <style>
@@ -204,14 +234,14 @@
                         render: function (data, type, row, meta) {
                             return `
                             <div class="button-container">
-                                        <button type="button" class="btn btn-warning"
-                                            @click="select('${data}')"
-                                            data-bs-toggle="modal"
-                                            :data-bs-target="'#edit' + '${data}'">
+                                        <button type="button"
+                                            class="btn btn-warning float-end ms-2"
+                                            @click="select(${data})"
+                                            data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
                                             <i class="fas fa-fw fa-solid fa-pen"></i>
-                                        </button>   &nbsp;  &nbsp;
-                                        <a href="/dataadminDelete/${data}"
-                                            class="btn btn-danger "
+                                        </button> &nbsp;  &nbsp;
+
+                                        <a href="/dataadminDelete/${data}" class="btn btn-danger "
                                             onclick="return confirm('Yakin ingin menghapus data ?')">
                                             <i class="fa fa-trash"></i>
                                         </a>
