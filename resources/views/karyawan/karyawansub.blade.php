@@ -87,7 +87,7 @@
                     {
                         data: 'id',
                         render: (data) => {
-                            return `<div class="button-container">
+                            return /*html*/`<div class="button-container">
                                 <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
                                     @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                 <button type="button" class="btn btn-sm btn-danger"

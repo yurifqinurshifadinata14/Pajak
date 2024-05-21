@@ -24,6 +24,17 @@ class PajakController extends Controller
         //
     }
 
+    // public function getpajak()
+    // {
+    //     return response()->json([
+
+    //     ]);
+
+    //     //
+    // }
+
+
+
     public function import_excel(Request $request)
     {
         $file = $request->file('file');
