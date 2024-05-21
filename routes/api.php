@@ -14,19 +14,27 @@ use App\Http\Controllers\Api\PphunifikasiController;
 use App\Http\Controllers\Api\StatusController;
 
 Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get');
+Route::post('/pph', [PphController::class, 'store'])->name('api.pph.post');
+Route::delete('/pph/{id_pph}', [PphController::class, 'destroy'])->name('api.pph.destroy');
+
 Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get');
 Route::post('/pph21', [Pph21Controller::class, 'store'])->name('api.pph21.post');
 Route::put('/pph21/{id}', [Pph21Controller::class, 'update'])->name('api.pph21.put');
 Route::delete('/pph21/{id}', [Pph21Controller::class, 'destroy']);
 Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get');
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
-Route::post('/pphunifikasi', [PphunifikasiController::class, 'store'])->name('api.pphunifikasi.post');
-Route::put('/pphunifikasi/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('api.pphunifikasi.put');
+
 Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get');
 Route::post('/karyawan', [KaryawanController::class, 'store'])->name('api.karyawan.post');
+
 Route::get('/beranda', [BerandaController::class, 'get'])->name('api.beranda.get');
+
 Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get');
 Route::post('/dataadmin', [DataadminController::class, 'store'])->name('api.dataadmin.post');
+
+Route::put('/dataadmin/{id}', [DataadminController::class, 'update'])->name('api.dataadmin.put');
+Route::put('/pph/{id_pph}', [PphController::class, 'update'])->name('api.pph.put');
+
 Route::get('/status', [StatusController::class, 'get'])->name('api.status.post');
 Route::post('/login', [AuthController::class, 'login'])->name('api.login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout')->middleware('multi:sanctum');
@@ -102,5 +110,9 @@ Route::middleware('auth')->group(function () {
 Route::post('/pphunifikasi/import_excel', [PphunifikasiController::class, 'import_excel'])->name('pphunifikasi.import_excel');
 Route::post('/pph/import_excel', [PphController::class, 'import_excel'])->name('pph.import_excel');
 Route::post('/pph21/import_excel', [Pph21Controller::class, 'import_excel'])->name('pph21.import_excel');
+
+Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel'); */
+
+
 Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel'); */
 
