@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Pph21;
 use Illuminate\Http\Request;
 
-class pph21Controller extends Controller
+class Pph21Controller extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function get()
     {
-        //
-        $pph21 = Pph21::all();
+        $pph21 =  Pph21::all();
         return response()->json([
-            $pph21 =>'pph21'
+            'pph21' => $pph21
         ]);
     }
 
