@@ -11,6 +11,10 @@
                     Data Karyawan
                 </div>
                 <div class="d-flex gap-2">
+                     <!-- Button trigger modal Import-->
+                     <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
+                        <i class="fas fa-file-excel"></i> Import Excel
+                    </button>
                     <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Karyawan"
                         data-bs-toggle="modal" data-bs-target="#tambah">
                         <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
@@ -19,6 +23,7 @@
 
                 <x-karyawansub.modaltambah />
                 <x-karyawansub.modaledit />
+                <x-karyawansub.modalimport />
             </div>
             <div class="card-body">
                 <style>
@@ -67,6 +72,28 @@
 
         let tableKaryawan = (karyawan) => {
             $('#tableKaryawan').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    //'copy', 'excel', 'pdf'
+                    {
+                        extend: 'copy',
+                        text: '<i class="fas fa-copy"> </i> Copy',
+                        className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                        titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"> </i> Excel',
+                        className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                        titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"> </i> PDF',
+                        className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                        titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
+                    }
+                ],
                 destroy: true,
                 data: karyawan,
                 columns: [{
@@ -122,6 +149,7 @@
             });
 
             Alpine.data('karyawan', () => ({
+                file: null,
                 formData: {
                     id: '',
                     nama: '',
@@ -167,7 +195,24 @@
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
                         }
                     }).then(res => getKaryawan()).catch(err => console.log(err))
-                }
+                },
+
+                handleImport() {
+                    let formData = new FormData();
+                    formData.append('file', this.file[0]);
+
+                    fetch("{{ route('karyawan.import_excel') }}", {
+                        method: 'POST',
+                        headers: {
+                            /*  "Content-Type": "application/json", */
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: formData
+                    }).then(res => {
+                        getKaryawan()
+                        $('#importExcel').modal('hide')
+                    })
+                },
             }))
 
             Alpine.data('formEdit', () => ({
