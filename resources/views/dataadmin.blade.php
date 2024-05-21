@@ -189,7 +189,7 @@
         function initTable(data) {
             $('#dataadminTable').DataTable({
                 dom: 'Bfrtip',
-             
+
                 buttons: [
                             //'copy', 'excel', 'pdf'
                             {

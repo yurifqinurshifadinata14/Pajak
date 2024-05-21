@@ -114,5 +114,5 @@ Route::post('/pph21/import_excel', [Pph21Controller::class, 'import_excel'])->na
 Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel'); */
 
 
-Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel'); 
+Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel');
 
