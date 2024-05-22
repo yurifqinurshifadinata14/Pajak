@@ -13,17 +13,26 @@ use App\Http\Controllers\Api\PajakController;
 use App\Http\Controllers\Api\PphunifikasiController;
 use App\Http\Controllers\Api\StatusController;
 
-//test
 Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get');
 Route::post('/pph', [PphController::class, 'store'])->name('api.pph.post');
 Route::delete('/pph/{id_pph}', [PphController::class, 'destroy'])->name('api.pph.destroy');
 
 Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get');
-Route::post('/pph21', [Pph21Controller::class, 'store'])->name('api.pph21.post');
-Route::put('/pph21/{id}', [Pph21Controller::class, 'update'])->name('api.pph21.put');
-Route::delete('/pph21/{id}', [Pph21Controller::class, 'destroy']);
-Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware('admin:sanctum');
-Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware('admin:sanctum');
+
+Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware('multi:sanctum');
+Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get')->middleware('multi:sanctum');
+Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get')->middleware('multi:sanctum');
+Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get')->middleware('multi:sanctum');
+Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get')->middleware('multi:sanctum');
+
+Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get')->middleware('admin:sanctum');
+
+Route::delete('/pajak/{id_pajak}', [PajakController::class, 'destroy']);
+Route::delete('/dataadmin/{id}', [DataadminController::class, 'destroy']);
+
+Route::post('/pajak', [PajakController::class, 'store'])->name('api.pajak.post');
+Route::put('/pajak/{id_pajak}', [PajakController::class, 'update'])->name('api.pajak.put');
+
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
 
 Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get');
@@ -112,8 +121,4 @@ Route::middleware('auth')->group(function () {
 Route::post('/pphunifikasi/import_excel', [PphunifikasiController::class, 'import_excel'])->name('pphunifikasi.import_excel');
 Route::post('/pph/import_excel', [PphController::class, 'import_excel'])->name('pph.import_excel');
 Route::post('/pph21/import_excel', [Pph21Controller::class, 'import_excel'])->name('pph21.import_excel');
-
 Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel'); */
-
-
-Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel');
