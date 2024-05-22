@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\KaryawanController;
 use App\Http\Controllers\Api\PphController;
 use App\Http\Controllers\Api\Pph21Controller;
 use App\Http\Controllers\Api\PajakController;
-use App\Http\Controllers\api\DataadminController;
+use App\Http\Controllers\Api\DataadminController;
 use App\Http\Controllers\Api\PphunifikasiController;
 use App\Http\Controllers\Api\StatusController;
 
