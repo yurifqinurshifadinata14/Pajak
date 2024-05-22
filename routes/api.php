@@ -4,12 +4,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\Api\AuthController;
-use App\Http\Controllers\api\BerandaController;
-use App\Http\Controllers\api\DataadminController;
-use App\Http\Controllers\api\KaryawanController;
+use App\Http\Controllers\Api\BerandaController;
+use App\Http\Controllers\Api\KaryawanController;
 use App\Http\Controllers\Api\PphController;
 use App\Http\Controllers\Api\Pph21Controller;
 use App\Http\Controllers\Api\PajakController;
+use App\Http\Controllers\api\DataadminController;
 use App\Http\Controllers\Api\PphunifikasiController;
 use App\Http\Controllers\Api\StatusController;
 
