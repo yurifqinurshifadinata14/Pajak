@@ -38,9 +38,9 @@ class PphController extends Controller
         $validated = Validator::make($request->all(), [
             'id_pajak' => 'required|max:255',
             'id_pph' => 'required',
-            'ntpn' => 'required',
-            'biaya_bulan' => 'required',
-            'jumlah_bayar' => 'required',
+            'ntpn' => 'required|numeric',
+            'biaya_bulan' => 'required|numeric',
+            'jumlah_bayar' => 'required|numeric',
      ]);
 
         if ($validated->fails()) {
@@ -51,7 +51,7 @@ class PphController extends Controller
 
             $max = DB::table('pphs')->select(DB::raw('MAX(RIGHT(id_pph,3)) as autoid'));
             $kd = "";
-    
+
             if ($max->count() > 0) {
                 foreach ($max->get() as $a) {
                     $tmp = ((int) $a->autoid) + 1;
@@ -61,7 +61,7 @@ class PphController extends Controller
             } else {
                 $id_pph = "PPH-001";
             }
-            
+
             Pph::create([
             'id_pajak' => $request->id_pajak,
             'id_pph' => $id_pph,
@@ -129,17 +129,17 @@ class PphController extends Controller
     {
         // Temukan data Pajak berdasarkan id_pajak
         $pph = Pph::where('id_pph', $id_pph)->first();
-    
+
         // Periksa apakah data Pajak ditemukan
         if (!$pph) {
             return response()->json([
                 'message' => "Data PPH dengan ID $id_pph tidak ditemukan",
             ], 404);
         }
-    
+
         // Hapus data Pajak
         $pph->delete();
-    
+
         // Kembalikan respons sukses
         return response()->json([
             'message' => "Data PPH dengan ID $id_pph berhasil dihapus",

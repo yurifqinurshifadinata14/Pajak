@@ -37,9 +37,9 @@ class PphunifikasiController extends Controller
 {
     $validated = Validator::make($request->all(), [
         'id_pajak' => 'required',
-        'ntpn' => 'required',
-        'jumlah_bayar' => 'required',
-        'biaya_bulan' => 'required',
+        'ntpn' => 'required|numeric',
+        'jumlah_bayar' => 'required|numeric',
+        'biaya_bulan' => 'required|numeric',
         'bpf' => 'required',
     ]);
 
@@ -77,7 +77,7 @@ class PphunifikasiController extends Controller
 
     /**
      * Display the specified resource.
-     */
+     */ 
     public function show(string $id)
     {
         //
