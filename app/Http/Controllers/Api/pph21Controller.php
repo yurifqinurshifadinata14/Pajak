@@ -116,6 +116,7 @@ class Pph21Controller extends Controller
     public function destroy($id)
     {
         //
+        $test = '';
         $pph21 = Pph21::where('id', $id)->first();
 
         if (!$pph21) {
