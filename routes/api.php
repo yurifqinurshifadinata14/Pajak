@@ -25,8 +25,8 @@ Route::delete('/pph/{id_pph}', [PphController::class, 'destroy'])->name('api.pph
 //pph21
 Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get')->middleware('multi:sanctum');
 Route::post('/pph21', [Pph21Controller::class, 'store'])->name('api.pph21.post');
-Route::put('/pph21{id}', [Pph21Controller::class, 'update'])->name('api.pph21.put');
-Route::delete('/pph21{id}', [Pph21Controller::class, 'destroy']);
+Route::put('/pph21/{id}', [Pph21Controller::class, 'update'])->name('api.pph21.put');
+Route::delete('/pph21/{id}', [Pph21Controller::class, 'destroy']);
 
 //pajak
 Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware('multi:sanctum');
