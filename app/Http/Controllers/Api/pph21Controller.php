@@ -12,6 +12,8 @@ class Pph21Controller extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    //jhvjhjh
     public function get()
     {
         $pph21 = Pph21::all();
