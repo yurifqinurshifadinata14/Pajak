@@ -23,6 +23,7 @@ Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->mi
 Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get')->middleware('multi:sanctum');
 Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get')->middleware('multi:sanctum');
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get')->middleware('multi:sanctum');
+
 Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get')->middleware('multi:sanctum');
 
 Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get')->middleware('admin:sanctum');
