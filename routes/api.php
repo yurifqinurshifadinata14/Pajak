@@ -1,55 +1,64 @@
 <?php
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\api\BerandaController;
 use App\Http\Controllers\api\DataadminController;
 use App\Http\Controllers\api\KaryawanController;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\Api\PphController;
 use App\Http\Controllers\Api\Pph21Controller;
 use App\Http\Controllers\Api\PajakController;
 use App\Http\Controllers\Api\PphunifikasiController;
 use App\Http\Controllers\Api\StatusController;
 
-Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get');
-Route::post('/pph', [PphController::class, 'store'])->name('api.pph.post');
-Route::delete('/pph/{id_pph}', [PphController::class, 'destroy'])->name('api.pph.destroy');
-
-Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get');
-
-Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware('multi:sanctum');
-Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get')->middleware('multi:sanctum');
-Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get')->middleware('multi:sanctum');
-Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get')->middleware('multi:sanctum');
-
-Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get')->middleware('multi:sanctum');
-
-Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get')->middleware('admin:sanctum');
-
-Route::delete('/pajak/{id_pajak}', [PajakController::class, 'destroy']);
-Route::delete('/dataadmin/{id}', [DataadminController::class, 'destroy']);
-
-Route::post('/pajak', [PajakController::class, 'store'])->name('api.pajak.post');
-Route::put('/pajak/{id_pajak}', [PajakController::class, 'update'])->name('api.pajak.put');
-
-Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
-
-Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get');
-Route::post('/karyawan', [KaryawanController::class, 'store'])->name('api.karyawan.post');
-
+//beranda
 Route::get('/beranda', [BerandaController::class, 'get'])->name('api.beranda.get');
 
-Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get');
-Route::post('/dataadmin', [DataadminController::class, 'store'])->name('api.dataadmin.post');
-
-Route::put('/dataadmin/{id}', [DataadminController::class, 'update'])->name('api.dataadmin.put');
+//pph
+Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get')->middleware('multi:sanctum');
+Route::post('/pph', [PphController::class, 'store'])->name('api.pph.post');
 Route::put('/pph/{id_pph}', [PphController::class, 'update'])->name('api.pph.put');
+Route::delete('/pph/{id_pph}', [PphController::class, 'destroy'])->name('api.pph.destroy');
 
-Route::get('/status', [StatusController::class, 'get'])->name('api.status.post');
+//pph21
+Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get')->middleware('multi:sanctum');
+Route::post('/pph21', [Pph21Controller::class, 'store'])->name('api.pph21.post');
+Route::put('/pph21{id}', [Pph21Controller::class, 'update'])->name('api.pph21.put');
+Route::delete('/pph21{id}', [Pph21Controller::class, 'destroy']);
+
+//pajak
+Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware('multi:sanctum');
+Route::post('/pajak', [PajakController::class, 'store'])->name('api.pajak.post');
+Route::put('/pajak/{id_pajak}', [PajakController::class, 'update'])->name('api.pajak.put');
+Route::delete('/pajak/{id_pajak}', [PajakController::class, 'destroy']);
+
+//pphunifikasi
+Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get')->middleware('multi:sanctum');
+Route::post('/pphunifikasi', [PphunifikasiController::class, 'store'])->name('api.pphunifikasi.post');
+Route::put('/pphunifikasi/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('api.pphunifikasi.put');
+Route::delete('/pphunifikasi/{id_pphuni}', [PphunifikasiController::class, 'destroy']);
+
+//karyawan
+Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get')->middleware('multi:sanctum');
+Route::post('/karyawan', [KaryawanController::class, 'store'])->name('api.karyawan.post');
+Route::put('/karyawan/{id}', [KaryawanController::class, 'update'])->name('api.karyawan.put');
+Route::delete('/karyawan/{id}', [KaryawanController::class, 'destroy']);
+
+//dataadmin
+Route::get('/dataadmin', [DataadminController::class, 'get'])->name('api.dataadmin.get')->middleware('admin:sanctum');
+Route::post('/dataadmin', [DataadminController::class, 'store'])->name('api.dataadmin.post');
+Route::put('/dataadmin/{id}', [DataadminController::class, 'update'])->name('api.dataadmin.put');
+Route::delete('/dataadmin/{id}', [DataadminController::class, 'destroy']);
+
+//login&logout
 Route::post('/login', [AuthController::class, 'login'])->name('api.login.post');
 Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout')->middleware('multi:sanctum');
+
+
+//Route::get('/status', [StatusController::class, 'get'])->name('api.status.post');
+
 /* Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
