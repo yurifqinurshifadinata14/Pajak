@@ -36,29 +36,8 @@ class KaryawanController extends Controller
         //
         $validated = Validator::make($request->all(), [
             'nama' => 'required|max:255',
-            'nik' => 'required',
-            'npwp' => 'required',
-        ]);
-
-        if ($validated->fails()) {
-            return response()->json([
-                'message' => $validated->messages(),
-            ]);
-        } else {
-            Karyawan::create([
-                'nama' => $request->nama,
-                'nik' => $request->nik,
-                'npwp' => $request->npwp,
-            ]);
-
-            return response()->json([
-                'message' => "Data telah tersimpan",
-            ]);
-        }
-        $validated = Validator::make($request->all(), [
-            'nama' => 'required|max:255',
-            'nik' => 'required',
-            'npwp' => 'required',
+            'nik' => 'required|numeric',
+            'npwp' => 'required|numeric',
         ]);
 
         if ($validated->fails()) {

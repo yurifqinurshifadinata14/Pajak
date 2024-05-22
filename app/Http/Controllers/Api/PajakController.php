@@ -39,13 +39,13 @@ class PajakController extends Controller
         $validated = Validator::make($request->all(), [
             'id_pajak' => 'required',
             'nama_wp' => 'required|max:255',
-            'npwp' => 'required',
-            'no_hp' => 'required', 
-            'no_efin' => 'required', 
-            'gmail' => 'required', 
-            'password' => 'required', 
+            'npwp' => 'required|',
+            'no_hp' => 'required',
+            'no_efin' => 'required',
+            'gmail' => 'required',
+            'password' => 'required',
             'nik' => 'required' ,
-            'alamat' => 'required', 
+            'alamat' => 'required',
             'merk_dagang' => 'required',
      ]);
 
@@ -98,41 +98,41 @@ class PajakController extends Controller
         $validated = Validator::make($request->all(), [
             'nama_wp' => 'string|max:255',
             'npwp' => 'string|max:255',
-            'no_hp' => 'string|max:255', 
-            'no_efin' => 'string|max:255', 
-            'gmail' => 'email', 
-            'password' => 'string', 
+            'no_hp' => 'string|max:255',
+            'no_efin' => 'string|max:255',
+            'gmail' => 'email',
+            'password' => 'string',
             'nik' => 'string|max:255',
-            'alamat' => 'string|max:255', 
+            'alamat' => 'string|max:255',
             'merk_dagang' => 'string|max:255',
         ]);
-    
+
         // Jika validasi gagal, kembalikan pesan kesalahan
         if ($validated->fails()) {
             return response()->json([
                 'message' => $validated->messages(),
             ], 400);
         }
-    
+
         // Temukan data Pajak berdasarkan id_pajak
         $pajak = Pajak::where('id_pajak', $id_pajak)->first();
-    
+
         // Perbarui data Pajak dengan data yang diterima dari request
         if(!$pajak) {
             return response()->json([
                 'message' => "Data pajak dengan ID $id_pajak tidak ditemukan",
             ], 404);
         }
-    
+
         $pajak->update($request->all());
-    
+
         // Kembalikan respons JSON yang menyatakan data telah tersimpan
         return response()->json([
             'message' => "Data telah tersimpan",
         ]);
     }
-    
-    
+
+
 
     /**
      * Remove the specified resource from storage.
@@ -141,21 +141,21 @@ class PajakController extends Controller
     {
         // Temukan data Pajak berdasarkan id_pajak
         $pajak = Pajak::where('id_pajak', $id_pajak)->first();
-    
+
         // Periksa apakah data Pajak ditemukan
         if (!$pajak) {
             return response()->json([
                 'message' => "Data pajak dengan ID $id_pajak tidak ditemukan",
             ], 404);
         }
-    
+
         // Hapus data Pajak
         $pajak->delete();
-    
+
         // Kembalikan respons sukses
         return response()->json([
             'message' => "Data pajak dengan ID $id_pajak berhasil dihapus",
         ]);
     }
-    
+
 }
