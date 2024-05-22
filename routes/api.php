@@ -13,29 +13,21 @@ use App\Http\Controllers\Api\PajakController;
 use App\Http\Controllers\Api\PphunifikasiController;
 use App\Http\Controllers\Api\StatusController;
 
+
 Route::get('/pph', [PphController::class, 'get'])->name('api.pph.get');
 Route::post('/pph', [PphController::class, 'store'])->name('api.pph.post');
 Route::delete('/pph/{id_pph}', [PphController::class, 'destroy'])->name('api.pph.destroy');
 
 Route::get('/pph21', [Pph21Controller::class, 'get'])->name('api.pph21.get');
-
+Route::post('/pph21', [Pph21Controller::class, 'store'])->name('api.pph21.post');
+Route::put('/pph21/{id}', [Pph21Controller::class, 'update'])->name('api.pph21.put');
+Route::delete('/pph21/{id}', [Pph21Controller::class, 'destroy']);
 Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware('admin:sanctum');
-
-Route::delete('/pajak/{id_pajak}', [PajakController::class, 'destroy']);
-Route::delete('/dataadmin/{id}', [DataadminController::class, 'destroy']);
-
-Route::post('/pajak', [PajakController::class, 'store'])->name('api.pajak.post');
-Route::put('/pajak/{id_pajak}', [PajakController::class, 'update'])->name('api.pajak.put');
-
+Route::get('/pajak', [PajakController::class, 'get'])->name('api.pajak.get')->middleware('admin:sanctum');
 Route::get('/pphunifikasi', [PphunifikasiController::class, 'get'])->name('api.pphunifikasi.get');
-Route::post('/pphunifikasi', [PphunifikasiController::class, 'store'])->name('api.pphunifikasi.post');
-Route::put('/pphunifikasi{id_pphuni}', [PphunifikasiController::class, 'update'])->name('api.pphunifikasi.put');
-Route::delete('/pphunifikasi{id_pphuni}', [PphunifikasiController::class, 'destroy']);
 
 Route::get('/karyawan', [KaryawanController::class, 'get'])->name('api.karyawan.get');
 Route::post('/karyawan', [KaryawanController::class, 'store'])->name('api.karyawan.post');
-Route::put('/karyawan{id}', [KaryawanController::class, 'update'])->name('api.karyawan.put');
-Route::delete('/karyawan{id}', [KaryawanController::class, 'destroy']);
 
 Route::get('/beranda', [BerandaController::class, 'get'])->name('api.beranda.get');
 
@@ -124,5 +116,4 @@ Route::post('/pph21/import_excel', [Pph21Controller::class, 'import_excel'])->na
 Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel'); */
 
 
-Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel.post');
-
+Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel');
