@@ -25,7 +25,6 @@ class Pph21Controller extends Controller
     public function create()
     {
         //
-        $test = '';
     }
 
     /**
