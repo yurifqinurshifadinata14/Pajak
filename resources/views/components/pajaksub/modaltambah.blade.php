@@ -20,9 +20,10 @@
                     <label for="jenis">Jenis WP</label>
                     <select name="jenis" id="jenis" class="form-select"
                         onchange="showInput(this)"  x-model="formData.jenis">
-                        <option selected>--Select--</option>
-                        <option value="Badan" @click="showJenis=!showJenis">Badan</option>
+                        {{-- <option selected>--Select--</option> --}}
                         <option value="Pribadi">Pribadi</option>
+                        <option value="Badan" @click="showJenis=!showJenis">Badan</option>
+
                     </select>
                 </div>
                 <div id="jenisBadan" x-show="showJenis">
@@ -52,9 +53,9 @@
                     <label for="status">Status WP</label>
                     <select name="status" id="status" class="form-select"
                         onchange="showInput(this)" x-model="formData.status">
-                        <option selected>--Select--</option>
-                        <option value="PKP" @click="showStatus=!showStatus">PKP</option>
                         <option value="Non PKP">Non PKP</option>
+                        <option value="PKP" @click="showStatus=!showStatus">PKP</option>
+
                     </select>
                 </div>
                 <div id="statusPkp" x-show="showStatus">
