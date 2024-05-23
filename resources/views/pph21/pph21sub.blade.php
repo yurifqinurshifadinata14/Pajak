@@ -27,7 +27,7 @@
                     </div>
 
                     <!-- modal button tambah-->
-                    <x-pph21sub.modalTambah :pajaks="$pajaks" />
+                    <x-pph21sub.modaltambah :pajaks="$pajaks" />
 
                     <!-- modal button edit-->
                     <x-pph21sub.modaledit />
