@@ -35,43 +35,39 @@ class PajakController extends Controller
      */
     public function store(Request $request)
     {
-        //
         $validated = Validator::make($request->all(), [
             'id_pajak' => 'required',
             'nama_wp' => 'required|max:255',
-            'npwp' => 'required|',
+            'npwp' => 'required',
             'no_hp' => 'required',
             'no_efin' => 'required',
             'gmail' => 'required',
             'password' => 'required',
-            'nik' => 'required' ,
+            'nik' => 'required',
             'alamat' => 'required',
             'merk_dagang' => 'required',
-     ]);
+        ]);
 
         if ($validated->fails()) {
             return response()->json([
-                'message' => $validated->messages(),
-            ]);
-        } else {
-            Pajak::create([
-                'id_pajak' => $request->id_pajak,
-                'nama_wp' => $request->nama_wp,
-                'npwp' => $request->npwp,
-                'no_hp' => $request->no_hp,
-                'no_efin' => $request->no_efin,
-                'gmail' => $request->gmail,
-                'password' => $request->password,
-                'nik' => $request->nik,
-                'alamat' => $request->alamat,
-                'merk_dagang' => $request->merk_dagang,
-            ]);
+                'error' => $validated->errors()->first(),
+            ], 422);
+        }
 
+        $pajak = Pajak::create($request->all());
+
+        if ($pajak) {
             return response()->json([
                 'message' => "Data telah tersimpan",
-            ]);
+                'pajak' => $pajak,
+            ], 201);
+        } else {
+            return response()->json([
+                'error' => "Gagal menyimpan data",
+            ], 500);
         }
     }
+
 
     /**
      * Display the specified resource.
