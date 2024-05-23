@@ -24,7 +24,7 @@
                     </div>
 
                     <!-- Modal Button Tambah -->
-                    <x-pajaksub.modalTambah />
+                    <x-pajaksub.modaltambah />
                     <!-- Modal Button Edit -->
                     <x-pajaksub.modaledit />
                     <!-- Modal Button import -->
