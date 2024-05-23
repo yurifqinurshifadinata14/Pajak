@@ -61,15 +61,17 @@
             height: auto;
         }
 
-        .sidebar-brand-icon img {
-            max-width: 120px;
+        /* .sidebar-brand-icon img {
+            max-width: 70%;
             height: auto;
+            margin-bottom: 20px;
+            margin-top: 20px;
         }
 
         .sidebar-card img{
             max-width: 100%;
             height: auto;
-        }
+        } */
 
 
 
@@ -89,7 +91,7 @@
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
                 <div class="sidebar-brand-icon">
                     {{-- <i class="fas fa-fw fa-user"></i> --}}
-                    <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="...">
+                    <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..." style="width: 100px; height:auto;">
                 </div>
                 {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
             </a>
@@ -166,7 +168,7 @@
 
             <!-- Sidebar Message -->
             <div class="sidebar-card d-none d-lg-flex">
-                <img class="sidebar-card-illustration mb-2" src="{{ asset('KKPLOGO.png') }}" style="width: 100%; height:auto;" alt="...">
+                {{-- <img class="sidebar-card-illustration mb-2" src="{{ asset('KKPLOGO.png') }}" style="width: 100%; height:auto;" alt="..."> --}}
                 <p class="mb-2 text-center"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar pajak Anda!</p>
             </div>
 
