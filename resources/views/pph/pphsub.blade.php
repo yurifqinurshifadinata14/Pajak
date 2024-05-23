@@ -12,20 +12,22 @@
 
                     <div class="d-flex gap-2">
                         <!-- Button trigger modal Import-->
-                        <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
+                        <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal"
+                            data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i> Import Excel
                         </button>
-                         <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Pph" data-bs-toggle="modal" data-bs-target="#tambah">
+                        <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Pph"
+                            data-bs-toggle="modal" data-bs-target="#tambah">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
                         </button>
                     </div>
 
                     <!-- Modal Button Tambah -->
-                    <x-pphsub.modalTambahpph :pajaks="$pajaks" />
+                    <x-pphsub.modaltambahpph :pajaks="$pajaks" />
                     <!-- Modal Button Edit -->
-                    <x-pphsub.modaleditpph  />
+                    <x-pphsub.modaleditpph />
                     <!-- Modal Button import -->
-                    <x-pphsub.modalimportpph/>
+                    <x-pphsub.modalimportpph />
 
                 </div>
                 <div class="card-body">
@@ -81,7 +83,7 @@
                 })
 
                 let pph = {!! json_encode($pph) !!}
-                console.log('pph: ',pph)
+                console.log('pph: ', pph)
 
 
                 let i = 1;
@@ -112,38 +114,37 @@
                                 titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
                             }
                         ],
-                            destroy: true,
-                            data: pph,
-                            columns: [
-                                {
-                                    data: 'null',
-                                    render:(data,type,row,meta)=>{
-                                        return meta.row+1
-                                    }
-                                },
-                                {
-                                    data: 'nama_wp'
-                                },
-                                {
-                                    data: 'ntpn'
-                                },
-                                {
-                                    data: 'biaya_bulan',
-                                    render: ( data, type, full, meta) => {
-                                        return rupiah.format(data)
-                                    }
-                                },
-                                {
-                                    data: 'jumlah_bayar',
-                                    render: ( data, type, full, meta) => {
-                                        return rupiah.format(data)
-                                    }
-                                },
+                        destroy: true,
+                        data: pph,
+                        columns: [{
+                                data: 'null',
+                                render: (data, type, row, meta) => {
+                                    return meta.row + 1
+                                }
+                            },
+                            {
+                                data: 'nama_wp'
+                            },
+                            {
+                                data: 'ntpn'
+                            },
+                            {
+                                data: 'biaya_bulan',
+                                render: (data, type, full, meta) => {
+                                    return rupiah.format(data)
+                                }
+                            },
+                            {
+                                data: 'jumlah_bayar',
+                                render: (data, type, full, meta) => {
+                                    return rupiah.format(data)
+                                }
+                            },
 
-                                {
-                                    data: 'id_pph',
-                                    render: ( data, type, full, meta) => {
-                                        return /*html*/ `<div class="button-container gap-2">
+                            {
+                                data: 'id_pph',
+                                render: (data, type, full, meta) => {
+                                    return /*html*/ `<div class="button-container gap-2">
                                         <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                             @if (auth()->user()->role == 'admin')
@@ -151,19 +152,19 @@
                                                             <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                         @endif
                                     </div>`
-                                    }
-                                },
-                            ]
-                        })
+                                }
+                            },
+                        ]
+                    })
                 }
 
                 initTable(pph)
 
-                async function deleteData(id){
-                    if (confirm('Apakah anda yakin ingin menghapus data ini?')==true){
-                        await fetch(`{{ route('pphDestroy','') }}/${id}`,{
-                            method:'DELETE',
-                            headers:{
+                async function deleteData(id) {
+                    if (confirm('Apakah anda yakin ingin menghapus data ini?') == true) {
+                        await fetch(`{{ route('pphDestroy', '') }}/${id}`, {
+                            method: 'DELETE',
+                            headers: {
                                 "Content-Type": "application/json",
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             }
@@ -171,11 +172,11 @@
                     }
                 };
 
-                async function getData(){
-                   await fetch(`{{ route('getPph') }}`).then(res => res.json()).then(data => {
-                    i=1
-                    initTable(data)
-                })
+                async function getData() {
+                    await fetch(`{{ route('getPph') }}`).then(res => res.json()).then(data => {
+                        i = 1
+                        initTable(data)
+                    })
                 }
 
                 document.addEventListener('alpine:init', () => {
@@ -188,7 +189,7 @@
                         },
 
                         handleSubmit() {
-                            const data ={
+                            const data = {
                                 id_pajak: this.formData.id_pajak,
                                 ntpn: this.formData.ntpn,
                                 biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
@@ -227,7 +228,7 @@
                             const findData = pph.find(item => item.id_pph == id)
                             this.data = {
                                 //id: findData.id,
-                                id_pph:findData.id_pph,
+                                id_pph: findData.id_pph,
                                 id_pajak: findData.id_pajak,
                                 //nama_wp: findData.nama_wp,
                                 ntpn: findData.ntpn,
@@ -243,7 +244,8 @@
                                 //nama_wp: this.data.nama_wp,
                                 ntpn: this.data.ntpn,
                                 biaya_bulan: Number(this.data.biaya_bulan.replaceAll(/[.Rp_]/g, '').trim()),
-                                jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '').trim()),
+                                jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '')
+                                    .trim()),
                             }
                             console.log(this.data.id_pph)
                             fetch(`{{ route('pphUpdate', '') }}/${this.data.id_pph}`, {
@@ -281,7 +283,6 @@
                         },
                     }))
                 })
-
             </script>
         @endpush
     </main>
