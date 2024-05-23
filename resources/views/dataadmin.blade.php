@@ -98,15 +98,14 @@
                                 <td>
                                     <!-- Buttons for actions -->
                                     <div class="button-container">
-                                        <button type="button"
-                                            class="btn btn-warning float-end ms-2"
-                                            @click="select('{{ $dataadmin->id }}')"
-                                            data-bs-toggle="modal" :data-bs-target="'#edit' + '{{ $dataadmin->id }}'">
-                                            <i class="fas fa-fw fa-solid fa-pen"></i>
-                                        </button> &nbsp;  &nbsp;
+                                        <button type="button" class="btn btn-warning float-end ms-2"
+                                        @click="select('{{ $dataadmin->id }}')"
+                                        data-bs-toggle="modal" :data-bs-target="'{{ route('dataadminEdit', ['id' => $dataadmin->id]) }}'">
+                                        <i class="fas fa-fw fa-solid fa-pen"></i>
+                                    </button> &nbsp;  &nbsp;
 
-                                        <a href="/dataadminDelete/{{$dataadmin->id}}" class="btn btn-danger "
-                                            onclick="return confirm('Yakin ingin menghapus data ?')">
+                                        <a href="{{ route('dataadminDelete', ['id' => $dataadmin->id]) }}"
+                                             class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ?')">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>

@@ -15,7 +15,7 @@
                     <!-- Input Data -->
                     <div class="form-group">
                         <label for="id_pajak">Nama WP</label>
-                        <select name="id_pajak" id="id_pajak" class="form-select" x-model="formData.id_pajak">
+                        <select name="id_pajak" id="id_pajak" class="form-select" x-model="formData.id_pajak" required>
                             <option value="" disabled selected>Pilih Nama</option>
                             @foreach ($pajaks as $pajak)
                                 <option value="{{ $pajak->id_pajak }}">{{ $pajak->nama_wp }}</option>
@@ -26,18 +26,18 @@
                         <label for="jumlah">Jumlah Bayar</label>
                         <input type="text" class="form-control" id="jumlah_bayar" name="jumlah_bayar"
                             placeholder="Jumlah Bayar" x-model="formData.jumlah_bayar"
-                            x-mask:dynamic="$money($input, ',')">
+                            x-mask:dynamic="$money($input, ',')" required>
                     </div>
                     <div class="form-group">
                         <label for="bpf">BPF</label>
                         <input type="text" class="form-control" id="bpf" name="bpf" placeholder="BPF"
-                            x-model="formData.bpf">
+                            x-model="formData.bpf" required>
                     </div>
                     <div class="form-group">
                         <label for="biaya">Biaya Bulan</label>
                         <input type="text" class="form-control" id="biaya_bulan" name="biaya_bulan"
                             placeholder="Biaya Bulan" x-model="formData.biaya_bulan"
-                            x-mask:dynamic="$money($input, ',')">
+                            x-mask:dynamic="$money($input, ',')" required>
                     </div>
                     <div class="form-group">
                         <label for="karyawan">Daftar Karyawan</label>
@@ -47,7 +47,7 @@
                                 <option value="{{ $k->nik }}">{{ $k->nama }}
                                 </option>
                             @endforeach --}}
-                            <template x-for="karyawan in dataKaryawan">
+                            <template x-for="karyawan in dataKaryawan" required>
                                 <option :value="karyawan.nik" x-text="karyawan.nama">
                                 </option>
                             </template>

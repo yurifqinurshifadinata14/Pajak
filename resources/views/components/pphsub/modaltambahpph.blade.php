@@ -12,7 +12,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="id_pajak">Nama WP</label>
-                        <select name="id_pajak" id="id_pajak" class="form-select" x-model="formData.id_pajak">
+                        <select name="id_pajak" id="id_pajak" class="form-select" x-model="formData.id_pajak" required>
                             <option value="" disabled selected>Pilih Nama</option>
                             @foreach ($pajaks as $pajak)
                             <option value="{{$pajak->id_pajak}}">{{$pajak->nama_wp}}</option>
@@ -21,18 +21,18 @@
                     </div>
                     <div class="form-group">
                         <label for="ntpn">NTPN</label>
-                        <input type="number" class="form-control" id="ntpn" name="ntpn" placeholder="NTPN" x-model="formData.ntpn">
+                        <input type="number" class="form-control" id="ntpn" name="ntpn" placeholder="NTPN" x-model="formData.ntpn" required>
                     </div>
                     <div class="form-group">
                         <label for="biaya_bulan">Biaya Bulan</label>
-                        <input type="text" class="form-control" id="biaya_bulan" name="biaya_bulan" placeholder="Biaya Bulan" x-model="formData.biaya_bulan" x-mask:dynamic="$money($input,',')">
+                        <input type="text" class="form-control" id="biaya_bulan" name="biaya_bulan" placeholder="Biaya Bulan" x-model="formData.biaya_bulan" x-mask:dynamic="$money($input,',')" required>
                     </div>
                     <div class="form-group">
                         <label for="jumlah_bayar">Jumlah Bayar</label>
-                        <input type="text" class="form-control" id="jumlah_bayar" name="jumlah_bayar" placeholder="Jumlah Bayar" x-model="formData.jumlah_bayar" x-mask:dynamic="$money($input,',')">
+                        <input type="text" class="form-control" id="jumlah_bayar" name="jumlah_bayar" placeholder="Jumlah Bayar" x-model="formData.jumlah_bayar" x-mask:dynamic="$money($input,',')" required>
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-navy">Submit</button>    
+                        <button type="submit" class="btn btn-navy">Submit</button>
                     </div>
                 </form>
             </div>

@@ -11,7 +11,7 @@
 
     <title>Wajib Pajak - Register</title>
 
-    <link rel="icon" href="{{asset('logo.png')}}" type="gambar/tipe ikon">
+    <link rel="icon" href="{{asset('KKP.png')}}" type="gambar/tipe ikon">
     <!-- Custom fonts for this template-->
     <link href="{{asset ('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
     <link
@@ -69,7 +69,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="p-5">
-                                    <img src="{{ asset('logo.png') }}" class="rounded mx-auto d-block" alt="..." width="60" height="60">
+                                    <img src="{{ asset('KKP.png') }}" style="width: 150px; height:auto;" class="rounded mx-auto d-block" alt="..." width="60" height="60">
                                     <div class="text-center mt-3">
                                         <h1 class="h4 text-gray-900 mb-4"><b>Create an Account!</b></h1>
                                     </div>

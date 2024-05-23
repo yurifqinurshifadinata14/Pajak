@@ -25,17 +25,17 @@
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama"
-                            placeholder="Nama" x-model="formData.nama">
+                            placeholder="Nama" x-model="formData.nama" required>
                     </div>
                     <div class="form-group">
                         <label for="id_pph21">NIK</label>
                         <input type="text" class="form-control" id="nik" name="nik" placeholder="NIK"
-                            x-model="formData.nik">
+                            x-model="formData.nik" required>
                     </div>
                     <div class="form-group">
                         <label for="npwp">NPWP</label>
                         <input type="text" class="form-control" id="npwp" name="npwp"
-                            placeholder="NPWP" x-model="formData.npwp">
+                            placeholder="NPWP" x-model="formData.npwp" required>
                     </div>
                     {{--  <div id="karyawan">
                         <h6>-- Karyawan --</h6>
