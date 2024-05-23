@@ -19,7 +19,7 @@
                 <div class="form-group">
                     <label for="jenis">Jenis WP</label>
                     <select name="jenis" id="jenis" class="form-select"
-                        onchange="showInput(this)"  x-model="formData.jenis" required>
+                        onchange="showInput(this)"  x-model="formData.jenis">
                         <option selected>--Select--</option>
                         <option value="Badan" @click="showJenis=!showJenis">Badan</option>
                         <option value="Pribadi">Pribadi</option>
@@ -30,28 +30,28 @@
                     <div class="form-group">
                         <label for="alamatBadan">Alamat</label>
                         <input type="text" class="form-control" id="alamatBadan"
-                            name="alamatBadan" placeholder="Alamat"  x-model="formData.alamatBadan" required>
+                            name="alamatBadan" placeholder="Alamat"  x-model="formData.alamatBadan">
                     </div>
                     <div class="form-group">
                         <label for="jabatan">Jabatan</label>
                         <input type="text" class="form-control" id="jabatan"
-                            name="jabatanBadan" placeholder="Jabatan"  x-model="formData.jabatan" required>
+                            name="jabatanBadan" placeholder="Jabatan"  x-model="formData.jabatan">
                     </div>
                     <div class="form-group">
                         <label for="npwpBadan">NPWP</label>
                         <input type="number" class="form-control" id="npwpBadan" name="npwpBadan"
-                            placeholder="NPWP" x-model="formData.npwpBadan" required>
+                            placeholder="NPWP" x-model="formData.npwpBadan">
                     </div>
                     <div class="form-group">
                         <label for="saham">Saham</label>
                         <input type="text" class="form-control" id="saham" name="saham"
-                            placeholder="Saham" x-model="formData.saham" required>
+                            placeholder="Saham" x-model="formData.saham">
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="status">Status WP</label>
                     <select name="status" id="status" class="form-select"
-                        onchange="showInput(this)" x-model="formData.status" required>
+                        onchange="showInput(this)" x-model="formData.status">
                         <option selected>--Select--</option>
                         <option value="PKP" @click="showStatus=!showStatus">PKP</option>
                         <option value="Non PKP">Non PKP</option>
@@ -62,22 +62,22 @@
                     <div class="form-group">
                         <label for="enofa_password">Enofa Password</label>
                         <input type="password" class="form-control" id="enofa_password"
-                            name="enofa_password" placeholder="Enofa password" x-model="formData.enofa_password" required>
+                            name="enofa_password" placeholder="Enofa password" x-model="formData.enofa_password">
                     </div>
                     <div class="form-group">
                         <label for="passphrese">Passphrese</label>
                         <input type="text" class="form-control" id="passphrese" name="passphrese"
-                            placeholder="Passphrese" x-model="formData.passphrese" required>
+                            placeholder="Passphrese" x-model="formData.passphrese">
                     </div>
                     <div class="form-group">
                         <label for="user_efaktur">User Efaktur</label>
                         <input type="text" class="form-control" id="user_efaktur"
-                            name="user_efaktur" placeholder="User efaktur" x-model="formData.user_efaktur" required>
+                            name="user_efaktur" placeholder="User efaktur" x-model="formData.user_efaktur">
                     </div>
                     <div class="form-group">
                         <label for="password_efaktur">Password Efaktur</label>
                         <input type="password" class="form-control" id="password_efaktur"
-                            name="password_efaktur" placeholder="Password efaktur" x-model="formData.password_efaktur" required>
+                            name="password_efaktur" placeholder="Password efaktur" x-model="formData.password_efaktur">
                     </div>
                 </div>
                 <div class="form-group">
