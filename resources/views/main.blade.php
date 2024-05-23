@@ -110,7 +110,7 @@
 
 
                 <!-- Nav Item - Pajak -->
-                <li class="nav-item {{ request()->routeIs('pajak.pajaksub') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('pajakSub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Pajak</span>
@@ -118,30 +118,30 @@
                 </li>
 
                 <!-- Nav Item - Pph -->
-                <li class="nav-item {{ Route::is('pph') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('pphSub') }}" aria-expanded="true">
+                <li class="nav-item {{ Request::is('pphsub*') ? 'active' : '' }}">
+                 <a class="nav-link" href="{{ route('pphSub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH</span>
                     </a>
                 </li>
 
                 <!-- Nav Item - Pph 21 -->
-                <li class="nav-item {{ Route::is('pph21.pph21sub') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('pph21sub*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('pph21Sub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH 21</span>
                     </a>
                 </li>
 
-                <li class="nav-item {{ Route::is('karyawansub') ? 'active' : '' }}">
-                    <a class="nav-link" href="{{ route('karyawanSub') }}" aria-expanded="true">
+                <li class="nav-item {{ Request::is('karyawansub*') ? 'active' : '' }}">
+                <a class="nav-link" href="{{ route('karyawanSub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Daftar Karyawan</span>
                     </a>
                 </li>
 
                 <!-- Nav Item - Pph Unifikasi -->
-                <li class="nav-item {{ Route::is('pphunifikasi.pphunifikasisub') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('pphunifikasisub*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('pphunifikasiSub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH Unifikasi</span>
@@ -149,7 +149,7 @@
                 </li>
 
                 @if (auth()->user()->role == 'admin')
-                <li class="nav-item {{ Route::is('dataadmin') ? 'active' : '' }}">
+                <li class="nav-item {{ Request::is('dataadmin*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('dataadmin') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-database"></i>
                         <span>Data Admin</span>
@@ -393,7 +393,7 @@
         const dataTable = new DataTable('datatables');
 
     </script>
-
+{{--
     <script>
         $(document).ready(function () {
             // Tambahkan kelas aktif ke elemen menu yang sesuai dengan halaman saat ini
@@ -420,7 +420,23 @@
             });
         });
 
-    </script>
+    </script> --}}
+
+{{-- <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Periksa apakah halaman saat ini adalah halaman Beranda
+        var isBeranda = "{{ Request::is('beranda*') ? 'true' : 'false' }}";
+
+        // Ambil elemen item sidebar Beranda
+        var sidebarItem = document.querySelector('.nav-item[href="{{ route('beranda') }}"]');
+
+        // Jika halaman saat ini adalah halaman Beranda, tambahkan kelas 'active' pada item sidebar
+        if (isBeranda === 'true' && sidebarItem) {
+            sidebarItem.classList.add('active');
+        }
+    });
+</script> --}}
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('sbadmin2/vendor/jquery/jquery.min.js') }}"></script>
@@ -447,6 +463,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.0.7/b-3.0.2/b-html5-3.0.2/datatables.min.js">
     </script>
+
+
     @stack('script')
 </body>
 
