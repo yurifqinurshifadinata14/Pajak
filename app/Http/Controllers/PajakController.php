@@ -17,13 +17,13 @@ class PajakController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $pajak = Pajak::all();
-        ($pajak);
-        return view('pajak.pajaksub', compact('pajak'));
-        //
-    }
+    // public function index()
+    // {
+    //     $pajak = Pajak::all();
+    //     ($pajak);
+    //     return view('pajak.pajaksub', compact('pajak'));
+    //     //
+    // }
 
     // public function getpajak()
     // {
@@ -123,7 +123,7 @@ class PajakController extends Controller
         $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
             ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
             ->get();
-        dd($pajak);
+        // dd($pajak);
         return view('pajak.pajaksub', compact('pajak'));
     }
 
