@@ -9,6 +9,7 @@
         <meta name="author" content="">
 
         <title>Wajib Pajak</title>
+       
         <link rel="icon" href="{{ asset('KKP.png') }}" type="gambar/tipe ikon">
         <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/styles.min.css') }}" rel="stylesheet">
@@ -393,8 +394,13 @@
                 </div>
             </div>
         </div>
-
         
+        <!-- Script Export Responsive -->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
 
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
