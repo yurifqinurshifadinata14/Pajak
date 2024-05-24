@@ -78,6 +78,12 @@
                 height: auto;
             }
 
+            @media (min-width: 400px) {
+                .sidebar-card {
+                    display: none;
+                }
+            }
+
             /* .sidebar-brand-icon img {
             max-width: 70%;
             height: auto;
@@ -101,37 +107,15 @@
             <!-- Sidebar -->
             <ul class="navbar-nav sidebar sidebar-dark bg-navy" id="accordionSidebar">
 
-
-                <!-- Sidebar - Brand -->
-                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
-                    <div class="sidebar-brand-icon">
-                        {{-- <i class="fas fa-fw fa-user"></i> --}}
-                        <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..."
-                            style="width: 100px; height:auto;">
-                    </div>
-                    {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
-                </a>
-
-                <!-- Divider -->
-                <hr class="sidebar-divider my-0">
-
-                <div class="sidebar-menu">
-                    <!-- Nav Item - Dashboard -->
-                    <!-- <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('beranda') }}">
-                            <i class="fas fa-fw fa-tachometer-alt"></i>
-                            <span>Dashboard</span>
-                        </a>
-                    </li> -->
                     <!-- Sidebar - Brand -->
-                    <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
                         <div class="sidebar-brand-icon">
                             {{-- <i class="fas fa-fw fa-user"></i> --}}
                             <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..."
                                 style="width: 100px; height:auto;">
                         </div>
                         {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
-                    </a> -->
+                    </a>
 
                     <!-- Divider -->
                     <hr class="sidebar-divider my-0">
@@ -420,7 +404,6 @@
                 </div>
             </div>
         </div>
-<<<<<<< HEAD
 
         <!-- Script Export Responsive -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
@@ -428,8 +411,6 @@
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
-=======
->>>>>>> c29270e9509b4281575da0e8a70c7f9a4531ada2
 
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
