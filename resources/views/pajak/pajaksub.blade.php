@@ -1,6 +1,6 @@
 @extends ('main')
 @section('konten')
-{{-- <style>
+    {{-- <style>
     @media (max-width: 767px) {
         #accordionSidebar {
         display: none;
@@ -27,20 +27,21 @@
                         Data Diri Pembayar
                     </div>
 
-                    <div class="d-flex flex-column flex-sm-row gap-2 align-items-center align-items-sm-end justify-content-between">
+                    <div
+                        class="d-flex flex-column flex-sm-row align-items-center align-items-sm-end justify-content-between gap-2">
                         <!-- Button trigger modal Import-->
-                        <button type="button" class="btn btn-sm btn-success mb-0 mb-sm-0" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
-                            <span class="d-none d-sm-inline ">Import Excel</span>
+                        <button type="button" class="btn btn-sm btn-success mb-sm-0 mb-0" title="Import Excel"
+                            data-bs-toggle="modal" data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i>
+                            <span class="d-none d-sm-inline">Import Excel</span>
                         </button>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-sm btn-primary" title="Tambah Data Pajak" data-bs-toggle="modal" data-bs-target="#tambah">
-                            <span class="d-none d-sm-inline">Tambah</span>
+                        <button type="button" class="btn btn-sm btn-primary" title="Tambah Data Pajak"
+                            data-bs-toggle="modal" data-bs-target="#tambah">
                             <i class="fas fa-fw fa-solid fa-plus"></i>
+                            <span class="d-none d-sm-inline">Tambah</span>
                         </button>
                     </div>
-
-
 
                     <!-- Modal Button Tambah -->
                     <x-pajaksub.modaltambah />
@@ -195,26 +196,26 @@
                                 }
                             ],
                             responsive: {
-                            details: {
-                                renderer: (api, rowIdx, columns) => {
-                                    let data = columns
-                                        .map((col, i) => {
-                                            return col.hidden ? /*html*/ `
+                                details: {
+                                    renderer: (api, rowIdx, columns) => {
+                                        let data = columns
+                                            .map((col, i) => {
+                                                return col.hidden ? /*html*/ `
                                                 <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
                                                     <th>${col.title}</th>
                                                     <td style="width: 100%;">${col.data}</td>
                                                 </tr>
                                             ` : ``;
-                                        })
-                                        .join('');
+                                            })
+                                            .join('');
 
-                                    let table = document.createElement('table');
-                                    table.innerHTML = data;
+                                        let table = document.createElement('table');
+                                        table.innerHTML = data;
 
-                                    return data ? table : false;
+                                        return data ? table : false;
+                                    }
                                 }
-                            }
-                        },
+                            },
                             destroy: true,
                             data: pajak,
                             columns: [{
@@ -376,7 +377,6 @@
                     }))
                 })
             </script>
-
         @endpush
     </main>
 @endsection

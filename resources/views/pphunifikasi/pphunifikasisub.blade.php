@@ -56,7 +56,7 @@
                         }
                     </style>
                     <div class="table-responsive">
-                        <table id="pphuniTable" class="my-table">
+                        <table id="pphuniTable" class="my-table responsive" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
