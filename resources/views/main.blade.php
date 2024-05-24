@@ -46,6 +46,12 @@
         <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
         <style>
+            body {
+                min-width: 360px;
+                !important
+                /* desired pixel value */
+            }
+
             .bg-navy {
                 background-color: #12094a;
                 padding: 10px;
@@ -95,22 +101,19 @@
             <!-- Sidebar -->
             <ul class="navbar-nav sidebar sidebar-dark bg-navy" id="accordionSidebar">
 
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
-                <div class="sidebar-brand-icon">
-                    {{-- <i class="fas fa-fw fa-user"></i> --}}
-                    <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..." style="width: 100px; height:auto;">
-                </div>
-                {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
-            </a>
+                <!-- Sidebar - Brand -->
+                <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
+                    <div class="sidebar-brand-icon">
+                        {{-- <i class="fas fa-fw fa-user"></i> --}}
+                        <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..."
+                            style="width: 100px; height:auto;">
+                    </div>
+                    {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
+                </a>
 
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <div class="sidebar-menu" >
                 <!-- Divider -->
                 <hr class="sidebar-divider my-0">
+
                 <div class="sidebar-menu">
                     <!-- Nav Item - Dashboard -->
                     <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
@@ -119,70 +122,90 @@
                             <span>Dashboard</span>
                         </a>
                     </li>
+                    <!-- Sidebar - Brand -->
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
+                        <div class="sidebar-brand-icon">
+                            {{-- <i class="fas fa-fw fa-user"></i> --}}
+                            <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..."
+                                style="width: 100px; height:auto;">
+                        </div>
+                        {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
+                    </a>
 
-                    <!-- Nav Item - Pajak -->
-                    <li class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('pajakSub') }}" aria-expanded="true">
-                            <i class="fas fa-fw fa-briefcase"></i>
-                            <span>Pajak</span>
-                        </a>
-                    </li>
-
-                    <!-- Nav Item - Pph -->
-                    <li class="nav-item {{ Request::is('pphsub*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('pphSub') }}" aria-expanded="true">
-                            <i class="fas fa-fw fa-briefcase"></i>
-                            <span>PPH</span>
-                        </a>
-                    </li>
-
-                    <!-- Nav Item - Pph 21 -->
-                    <li class="nav-item {{ Request::is('pph21sub*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('pph21Sub') }}" aria-expanded="true">
-                            <i class="fas fa-fw fa-briefcase"></i>
-                            <span>PPH 21</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item {{ Request::is('karyawansub*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('karyawanSub') }}" aria-expanded="true">
-                            <i class="fas fa-fw fa-briefcase"></i>
-                            <span>Daftar Karyawan</span>
-                        </a>
-                    </li>
-
-                    <!-- Nav Item - Pph Unifikasi -->
-                    <li class="nav-item {{ Request::is('pphunifikasisub*') ? 'active' : '' }}">
-                        <a class="nav-link" href="{{ route('pphunifikasiSub') }}" aria-expanded="true">
-                            <i class="fas fa-fw fa-briefcase"></i>
-                            <span>PPH Unifikasi</span>
-                        </a>
-                    </li>
-
-                    @if (auth()->user()->role == 'admin')
-                        <li class="nav-item {{ Request::is('dataadmin*') ? 'active' : '' }}">
-                            <a class="nav-link" href="{{ route('dataadmin') }}" aria-expanded="true">
-                                <i class="fas fa-fw fa-database"></i>
-                                <span>Data Admin</span>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider my-0">
+                    <div class="sidebar-menu">
+                        <!-- Nav Item - Dashboard -->
+                        <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('beranda') }}">
+                                <i class="fas fa-fw fa-tachometer-alt"></i>
+                                <span>Dashboard</span>
                             </a>
                         </li>
-                    @endif
-                </div>
-                <!-- Divider -->
-                <!-- Divider -->
-                <hr class="sidebar-divider d-none d-md-block">
 
-                <!-- Sidebar Toggler (Sidebar) -->
-                <div class="d-none d-md-inline text-center">
-                    <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                </div>
+                        <!-- Nav Item - Pajak -->
+                        <li class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('pajakSub') }}" aria-expanded="true">
+                                <i class="fas fa-fw fa-briefcase"></i>
+                                <span>Pajak</span>
+                            </a>
+                        </li>
 
-                <!-- Sidebar Message -->
-                <div class="sidebar-card d-none d-lg-flex">
-                    {{-- <img class="sidebar-card-illustration mb-2" src="{{ asset('KKPLOGO.png') }}" style="width: 100%; height:auto;" alt="..."> --}}
-                    <p class="mb-2 text-center"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar
-                        pajak Anda!</p>
-                </div>
+                        <!-- Nav Item - Pph -->
+                        <li class="nav-item {{ Request::is('pphsub*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('pphSub') }}" aria-expanded="true">
+                                <i class="fas fa-fw fa-briefcase"></i>
+                                <span>PPH</span>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - Pph 21 -->
+                        <li class="nav-item {{ Request::is('pph21sub*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('pph21Sub') }}" aria-expanded="true">
+                                <i class="fas fa-fw fa-briefcase"></i>
+                                <span>PPH 21</span>
+                            </a>
+                        </li>
+
+                        <li class="nav-item {{ Request::is('karyawansub*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('karyawanSub') }}" aria-expanded="true">
+                                <i class="fas fa-fw fa-briefcase"></i>
+                                <span>Daftar Karyawan</span>
+                            </a>
+                        </li>
+
+                        <!-- Nav Item - Pph Unifikasi -->
+                        <li class="nav-item {{ Request::is('pphunifikasisub*') ? 'active' : '' }}">
+                            <a class="nav-link" href="{{ route('pphunifikasiSub') }}" aria-expanded="true">
+                                <i class="fas fa-fw fa-briefcase"></i>
+                                <span>PPH Unifikasi</span>
+                            </a>
+                        </li>
+
+                        @if (auth()->user()->role == 'admin')
+                            <li class="nav-item {{ Request::is('dataadmin*') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ route('dataadmin') }}" aria-expanded="true">
+                                    <i class="fas fa-fw fa-database"></i>
+                                    <span>Data Admin</span>
+                                </a>
+                            </li>
+                        @endif
+                    </div>
+                    <!-- Divider -->
+                    <!-- Divider -->
+                    <hr class="sidebar-divider d-none d-md-block">
+
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="d-none d-md-inline text-center">
+                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                    </div>
+
+                    <!-- Sidebar Message -->
+                    <div class="sidebar-card d-none d-lg-flex">
+                        {{-- <img class="sidebar-card-illustration mb-2" src="{{ asset('KKPLOGO.png') }}" style="width: 100%; height:auto;" alt="..."> --}}
+                        <p class="mb-2 text-center"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar
+                            pajak Anda!</p>
+                    </div>
 
             </ul>
             <!-- End of Sidebar -->
@@ -394,6 +417,7 @@
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
         
         <!-- Script Export Responsive -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
@@ -401,6 +425,8 @@
 
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.3/html2pdf.bundle.min.js"></script>
+=======
+>>>>>>> c29270e9509b4281575da0e8a70c7f9a4531ada2
 
         <!-- jQuery -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
