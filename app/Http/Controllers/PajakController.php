@@ -123,7 +123,7 @@ class PajakController extends Controller
         $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
             ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
             ->get();
-        dd($pajak);
+        // dd($pajak);
         return view('pajak.pajaksub', compact('pajak'));
     }
 
