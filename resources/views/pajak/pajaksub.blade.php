@@ -30,7 +30,7 @@
                     <div class="d-flex flex-column flex-sm-row gap-2 align-items-center align-items-sm-end justify-content-between">
                         <!-- Button trigger modal Import-->
                         <button type="button" class="btn btn-sm btn-success mb-0 mb-sm-0" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
-                            <span class="d-none d-sm-inline">Import Excel</span>
+                            <span class="d-none d-sm-inline ">Import Excel</span>
                             <i class="fas fa-file-excel"></i>
                         </button>
                         <!-- Button trigger modal -->

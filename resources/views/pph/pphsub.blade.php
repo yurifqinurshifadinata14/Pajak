@@ -57,7 +57,7 @@
                         }
                     </style>
                     <div class="table-responsive">
-                        <table id="pphTable" class="my-table">
+                        <table id="pphTable" class="my-table nowrap" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -114,10 +114,11 @@
                                 titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
                             }
                         ],
+                        responsive: true,
                         destroy: true,
                         data: pph,
                         columns: [{
-                                data: 'null',
+                                data: 'id_pph',
                                 render: (data, type, row, meta) => {
                                     return meta.row + 1
                                 }
