@@ -91,8 +91,7 @@
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
-                                                <label class="custom-control-label" for="customCheck">Remember
-                                                    Me</label>
+                                                <label class="custom-control-label" for="customCheck" style="line-height: 1.5rem;">Remember Me</label>
                                             </div>
                                         </div>
                                         <button type="submit" class="btn btn-navy btn-user btn-block">
