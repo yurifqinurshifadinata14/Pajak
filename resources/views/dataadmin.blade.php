@@ -172,61 +172,61 @@
             </div>
         </div>
 
-        <!-- Modal Edit -->
-        @foreach ($dataadmins as $dataadmin)
-            <div class="modal fade" id="edit{{ $dataadmin->id }}" tabindex="-1"
-                aria-labelledby="edit{{ $dataadmin->id }}Label" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="edit{{ $dataadmin->id }}Label">Edit Data Admin</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/dataadminUpdate/{{ $dataadmin->id }}" method="POST">
-                                @csrf
-                                @method('PUT')
-                                <div class="form-group">
-                                    <input type="text" class="form-control form-control-user" id="examplenama"
-                                        placeholder="Name" name="name" value="{{ $dataadmin->name }}">
-                                </div>
-                                <div class="form-group">
-                                    <input type="email" class="form-control form-control-user" id="exampleInputEmail"
-                                        placeholder="Email" name="email" value="{{ $dataadmin->email }}">
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-sm-6 mb-sm-0 mb-3">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password" name="password">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleRepeatPassword" placeholder="Repeat Password"
-                                            name="password_confirmation">
-                                    </div>
-                                </div>
-                                <div class="form-group mt-3">
-                                    <select name="role" id="exampleInputRole" class="form-select">
-                                        <option value="" disabled>Pilih Role</option>
-                                        <option value="admin" {{ $dataadmin->role == 'admin' ? 'selected' : '' }}>
-                                            Admin</option>
-                                        <option value="staff" {{ $dataadmin->role == 'staff' ? 'selected' : '' }}>
-                                            Staff</option>
-                                    </select>
-                                </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="submit" class="btn btn-primary">Simpan</button>
-                        </div>
-                        </form>
-                    </div>
+    <!-- Modal Edit -->
+    @foreach($dataadmins as $dataadmin)
+    <div class="modal fade" id="edit{{ $dataadmin->id }}" tabindex="-1" aria-labelledby="edit{{ $dataadmin->id }}Label"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edit{{ $dataadmin->id }}Label">Edit Data Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
+                <div class="modal-body">
+                    <form action="/dataadminUpdate/{{ $dataadmin->id }}" method="POST">
+                        @csrf
+                        @method('PUT')
+                        <div class="form-group">
+                            <input type="text" class="form-control form-control-user" id="examplenama"
+                                placeholder="Name" name="name" value="{{ $dataadmin->name }}">
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control form-control-user" id="exampleInputEmail"
+                                placeholder="Email" name="email" value="{{ $dataadmin->email }}">
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6 mb-3 mb-sm-0">
+                                <input type="password" class="form-control form-control-user" id="exampleInputPassword"
+                                    placeholder="Password" name="password">
+                            </div>
+                            <div class="col-sm-6">
+                                <input type="password" class="form-control form-control-user" id="exampleRepeatPassword"
+                                    placeholder="Repeat Password" name="password_confirmation">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <select name="role" id="exampleInputRole" class="form-select">
+                                <option value="" disabled>Pilih Role</option>
+                                <option value="admin" {{ $dataadmin->role == 'admin' ? 'selected' : '' }}>
+                                    Admin</option>
+                                <option value="staff" {{ $dataadmin->role == 'staff' ? 'selected' : '' }}>
+                                    Staff</option>
+                            </select>
+                        </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+                </form>
             </div>
-        @endforeach
-        @push('script')
-            <script>
-                let dataadmins = {!! json_encode($dataadmins) !!};
+        </div>
+    </div>
+
+    @endforeach
+    @push('script')
+<script>
+    let dataadmins = {!! json_encode($dataadmins) !!};
 
         <!-- Export Button (Hidden on Desktop) -->
         <div class="d-sm-none">
@@ -443,6 +443,7 @@
 
 
 
+
                 function initTable(data) {
                     $('#dataadminTable').DataTable({
                         dom: 'Bfrtip',
@@ -540,36 +541,32 @@
                                 </a>
                             </div>
                         `;
-                                }
-                            }
-                        ]
-                    });
+                    }
                 }
+            ]
+        });
+    }
 
-                function exportPDF() {
-                    const element = document.getElementById('dataadminTable');
-                    const {
-                        jsPDF
-                    } = window.jspdf;
-                    const doc = new jsPDF();
-                    doc.text('Data Admin', 14, 20);
-                    doc.autoTable({
-                        head: [
-                            ['No', 'Nama', 'Email', 'Role']
-                        ],
-                        body: [...element.querySelectorAll('tbody tr')].map(row => [
-                            row.cells[0].textContent,
-                            row.cells[1].textContent,
-                            row.cells[2].textContent,
-                            row.cells[3].textContent
-                        ]),
-                        styles: {
-                            fontSize: 12,
-                            overflow: 'linebreak'
-                        }
-                    });
-                    doc.save('dataadmin.pdf');
+    function exportPDF() {
+            const element = document.getElementById('dataadminTable');
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            doc.text('Data Admin', 14, 20);
+            doc.autoTable({
+                head: [['No', 'Nama', 'Email', 'Role']],
+                body: [...element.querySelectorAll('tbody tr')].map(row => [
+                    row.cells[0].textContent,
+                    row.cells[1].textContent,
+                    row.cells[2].textContent,
+                    row.cells[3].textContent
+                ]),
+                styles: {
+                    fontSize: 12,
+                    overflow: 'linebreak'
                 }
+            });
+            doc.save('dataadmin.pdf');
+        }
 
                 function copyToClipboard(selector) {
                     var element = document.querySelector(selector);
