@@ -18,6 +18,9 @@
                         <button id="importButton" aria-label="Import Excel" class="btn btn-sm btn-success float-end mb-2"
                             title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i>
+                            <span class="d-none d-md-inline">
+                                Import Excel
+                            </span>
                         </button>
                         {{-- <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Karyawan"
                             data-bs-toggle="modal" data-bs-target="#tambahkaryawan"
@@ -32,6 +35,9 @@
                             title="Tambah Data Pph 21" data-bs-toggle="modal" data-bs-target="#tambah"
                             @click="getDataKaryawan">
                             <i class="fas fa-plus"></i>
+                            <span class="d-none d-md-inline">
+                                Tambah
+                            </span>
                         </button>
                     </div>
 
@@ -74,7 +80,7 @@
                         }
                     </style>
                     <div class="table-responsive">
-                        <table id="pph21Table" class="my-table" style="width: 100%">
+                        <table id="pph21Table" class="my-table responsive" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>No</th>

@@ -14,11 +14,17 @@
                         <!-- Button trigger modal Import-->
                         <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal"
                             data-bs-target="#importExcel">
-                            <i class="fas fa-file-excel"></i> Import Excel
+                            <i class="fas fa-file-excel"></i>
+                            <span class="d-none d-md-inline">
+                                Import Excel
+                            </span>
                         </button>
                         <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Pph"
                             data-bs-toggle="modal" data-bs-target="#tambah">
-                            <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
+                            <i class="fas fa-fw fa-solid fa-plus"></i>
+                            <span class="d-none d-md-inline">
+                                Tambah
+                            </span>
                         </button>
                     </div>
 
