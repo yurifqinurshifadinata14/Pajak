@@ -95,9 +95,10 @@
                 </div>
                 {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
             </a>
-
+            <br>
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
+
             <div class="sidebar-menu">
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
@@ -106,8 +107,6 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
-
-
 
                 <!-- Nav Item - Pajak -->
                 <li class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }}">
