@@ -1,6 +1,6 @@
 @extends('main')
 @section('konten')
-{{-- <style>
+    {{-- <style>
     @media (max-width: 767px) {
         #accordionSidebar {
         display: none;

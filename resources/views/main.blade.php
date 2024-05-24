@@ -78,7 +78,7 @@
                 height: auto;
             }
 
-            @media (min-width: 400px) {
+            @media (min-width: 10px) {
                 .sidebar-card {
                     display: none;
                 }

@@ -1,33 +1,65 @@
 @extends ('main')
 @section('konten')
     <main x-data="{ pilih: '' }">
-        <div class="container-fluid px-4" x-data="app">
-            <h1 class="mt-4"> Pph Unifikasi</h1>
+        <div class="container-fluid px-0" x-data="app">
+            <h5 class="mt-4 d-inline d-md-none"> Pph Unifikasi</h5>
+            <h1 class="mt-4 d-none d-md-block"> Pph Unifikasi</h1>
 
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div>
                         <i class="fas fa-table me-1"></i>
-                        Data Pph Unifikasi
+                        <span class="d-inline d-md-none">PphU</span>
+                        <span class="d-none d-md-inline">Data Pph Unifikasi</span>
                     </div>
-                    <div class="d-flex gap-2">
+                    <div class="d-flex align-items-center">
                         <!-- Button trigger modal Import-->
-                        <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal"
+                        <button type="button" class="btn btn-sm btn-success me-2" title="Import Excel" data-bs-toggle="modal"
                             data-bs-target="#importExcel">
-                            <i class="fas fa-file-excel"></i> Import Excel
+                            <i class="fas fa-file-excel"></i>
+                            <span class="d-none d-md-inline">Import Excel</span>
                         </button>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Pph Unifikasi"
+                        <button type="button" class="btn btn-sm btn-primary me-2" title="Tambah Data Pph Unifikasi"
                             data-bs-toggle="modal" data-bs-target="#tambah">
-                            <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
+                            <i class="fas fa-fw fa-solid fa-plus"></i>
+                            <span class="d-none d-md-inline">Tambah</span>
                         </button>
+                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#exportModal">
+                            <i class="fas fa-fw fa-file-export"></i>
+                            <span class="d-none d-md-inline">Export</span>
+                        </button>
+
+                        <!-- Modal Button Tambah -->
+                        <x-pphunifikasisub.modaltambahuni :pajaks="$pajaks" />
+                        <!-- Modal Button edit -->
+                        <x-pphunifikasisub.modaledituni />
+                        <!-- Modal Button import -->
+                        <x-pphunifikasisub.modalimportpphu />
+
+                        <!-- Export Button (Hidden on Desktop) -->
+                        <div class="d-sm-flex">
+                            <!-- Modal Export Mobile -->
+                            <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exportModalLabel">Export Data Admin</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <a href="{{ route('export.excel') }}" class="btn btn-success">Export to Excel</a>
+                                            <button class="btn btn-danger" x-on:click="exportPDF()">Export to PDF</button>
+                                            <button class="btn btn-secondary text-light" x-on:click="copyToClipboard('#pphuniTable')">Copy Data</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <!-- Modal Button Tambah -->
-                    <x-pphunifikasisub.modaltambahuni :pajaks="$pajaks" />
-                    <!-- Modal Button edit -->
-                    <x-pphunifikasisub.modaledituni />
-                    <!-- Modal Button import -->
-                    <x-pphunifikasisub.modalimportpphu />
                 </div>
                 <div class="card-body">
                     <style>
@@ -54,9 +86,21 @@
                         .my-table tr:nth-child(even) {
                             background-color: #f2f2f2;
                         }
+
+                        @media (max-width: 768px) {
+                            #exportButtons {
+                                float: none;
+                                text-align: left;
+                            }
+
+                            #exportDropdown {
+                                width: 100%;
+                                margin-bottom: 5px;
+                            }
+                        }
                     </style>
                     <div class="table-responsive">
-                        <table id="pphuniTable" class="my-table">
+                        <table id="pphuniTable" class="my-table responsive" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -137,6 +181,19 @@
                                 titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
                             }
                         ],
+                        initComplete: function () {
+                            // Menambahkan event listener untuk tombol "Export Excel"
+                            $('#exportExcelBtn').on('click', function (event) {
+                                event.preventDefault();
+                                window.location.href = '{{ route("export.excel") }}';
+                            });
+
+                            // Menambahkan event listener untuk tombol "Export PDF"
+                            $('#exportPdfBtn').on('click', function (event) {
+                                event.preventDefault();
+                                // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
+                            });
+                        },
                         // responsive: true,
                         responsive: {
                             details: {
@@ -319,6 +376,61 @@
 
                         init() {
                             console.log('data:', this.data)
+                        },
+
+                        exportPDF() {
+                            const element = document.getElementById('pphuniTable');
+                            const { jsPDF } = window.jspdf;
+                            const doc = new jsPDF();
+                            doc.text('Data Pph Unifikasi', 14, 20);
+                            doc.autoTable({
+                                head: [['No', 'Nama', 'NTPN', 'Jumlah Bayar', 'Biaya_bulan', 'BPF']],
+                                body: [...element.querySelectorAll('tbody tr')].map(row => [
+                                    row.cells[0].textContent,
+                                    row.cells[1].textContent,
+                                    row.cells[2].textContent,
+                                    row.cells[3].textContent,
+                                    row.cells[4].textContent,
+                                    row.cells[5].textContent
+                                ]),
+                                styles: {
+                                    fontSize: 12,
+                                    overflow: 'linebreak'
+                                }
+                            });
+                            doc.save('pphunifikasi.pdf');
+
+                            getPphunifikasi()
+                            $('#excelModal').modal('hide')
+                        },
+
+                        copyToClipboard(selector) {
+                            var element = document.querySelector(selector);
+
+                            if (element) {
+                                var range = document.createRange();
+                                var selection = window.getSelection();
+
+                                selection.removeAllRanges();
+
+                                range.selectNodeContents(element);
+
+                                selection.addRange(range);
+
+                                try {
+                                    document.execCommand('copy');
+                                    alert('Data copied to clipboard!');
+                                } catch (err) {
+                                    alert('Oops, unable to copy');
+                                }
+
+                                selection.removeAllRanges();
+                            } else {
+                                alert('Element not found');
+                            }
+
+                            getPphunifikasi()
+                            $('#excelModal').modal('hide')
                         },
                     }))
                 })
