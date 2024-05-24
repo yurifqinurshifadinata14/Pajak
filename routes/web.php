@@ -111,3 +111,6 @@ Route::post('/dataadmin/import', [DataadminController::class, 'import'])->name('
 //Export Excel
 Route::get('/export-excel', [ExportController::class, 'export_excel_dataadmin'])->name('export.excel');
 Route::get('/export-pdf-dataadmin', [ExportController::class, 'exportPDF_dataadmin'])->name('export.pdf');
+
+Route::get('/export_excelpajak', [ExportController::class, 'export_excelpajak'])->name('export.excelpajak');
+Route::get('/export-pdf-pajak', [ExportController::class, 'exportPDF_pajak'])->name('export.pajak');

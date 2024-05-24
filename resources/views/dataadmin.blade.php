@@ -270,8 +270,8 @@
                 });
 
                 // Menambahkan event listener untuk tombol "Export PDF"
-                $('#exportPdfBtn').on('click', function (event) {
-                    event.preventDefault();
+                // $('#exportPdfBtn').on('click', function (event) {
+                //     event.preventDefault();
                     // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
                 });
             },
