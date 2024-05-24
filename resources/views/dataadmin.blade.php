@@ -274,8 +274,27 @@
                     // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
                 });
             },
-            responsive:true,
-            data: data,
+            responsive: {
+                            details: {
+                                renderer: (api, rowIdx, columns) => {
+                                    let data = columns
+                                        .map((col, i) => {
+                                            return col.hidden ? /*html*/ `
+                                                <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
+                                                    <th>${col.title}</th>
+                                                    <td style="width: 100%;">${col.data}</td>
+                                                </tr>
+                                            ` : ``;
+                                        })
+                                        .join('');
+
+                                    let table = document.createElement('table');
+                                    table.innerHTML = data;
+
+                                    return data ? table : false;
+                                }
+                            }
+                        },            data: data,
             columns: [{
                     data: null,
                     render: (data, type, row, meta) => {
