@@ -137,10 +137,11 @@
                                 titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
                             }
                         ],
+                        responsive: true,
                         destroy: true,
                         data: pphunifikasi,
                         columns: [{
-                                data: 'null',
+                                data: 'id_pphuni',
                                 render: (data, type, row, meta) => {
                                     return meta.row + 1
                                 }
