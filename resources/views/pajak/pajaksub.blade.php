@@ -1,7 +1,24 @@
 @extends ('main')
 @section('konten')
+{{-- <style>
+    @media (max-width: 767px) {
+        #accordionSidebar {
+        display: none;
+    }
+
+
+        #content-wrapper {
+            margin-left: 0;
+        }
+
+        /* .sidebar-card {
+            display: none;
+        } */
+    }
+</style> --}}
+
     <main x-data="{ pilih: '' }">
-        <div class="container-fluid px-4" x-data="app">
+        <div class="container-fluid px-2" x-data="app">
             <h1 class="mt-4"> Data Diri</h1>
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
@@ -10,18 +27,20 @@
                         Data Diri Pembayar
                     </div>
 
-                    <div class="d-flex gap-2">
+                    <div class="d-flex flex-column flex-sm-row gap-2 align-items-center align-items-sm-end justify-content-between">
                         <!-- Button trigger modal Import-->
-                        <button type="button" class="btn btn-sm btn-success" title="Import Excel" data-bs-toggle="modal"
-                            data-bs-target="#importExcel">
-                            <i class="fas fa-file-excel"></i> Import Excel
+                        <button type="button" class="btn btn-sm btn-success mb-0 mb-sm-0" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
+                            <span class="d-none d-sm-inline ">Import Excel</span>
+                            <i class="fas fa-file-excel"></i>
                         </button>
                         <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-sm btn-primary float-end" title="Tambah Data Pajak"
-                            data-bs-toggle="modal" data-bs-target="#tambah">
-                            <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
+                        <button type="button" class="btn btn-sm btn-primary" title="Tambah Data Pajak" data-bs-toggle="modal" data-bs-target="#tambah">
+                            <span class="d-none d-sm-inline">Tambah</span>
+                            <i class="fas fa-fw fa-solid fa-plus"></i>
                         </button>
                     </div>
+
+
 
                     <!-- Modal Button Tambah -->
                     <x-pajaksub.modaltambah />
@@ -58,7 +77,6 @@
                         }
                     </style>
                     <div class="table-responsive">
-
                         <table id="pajakTable" class="my-table">
                             <thead>
                                 <tr>
@@ -337,6 +355,7 @@
                     }))
                 })
             </script>
+
         @endpush
     </main>
 @endsection

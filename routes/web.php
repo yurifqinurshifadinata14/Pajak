@@ -22,8 +22,8 @@ Route::get('/', function () {
 // Route::get('/register', function () {
 //     return view('register');
 // });
-// Route::get('/forgot-password', function () {
-//     return view('forgot-password');
+// Route::get('/coba', function () {
+//     return view('coba');
 // });
 
 Route::get('/login', [AuthController::class, 'login'])->name('loginView');

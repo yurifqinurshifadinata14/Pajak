@@ -17,13 +17,13 @@ class PajakController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $pajak = Pajak::all();
-        ($pajak);
-        return view('pajak.pajaksub', compact('pajak'));
-        //
-    }
+    // public function index()
+    // {
+    //     $pajak = Pajak::all();
+    //     ($pajak);
+    //     return view('pajak.pajaksub', compact('pajak'));
+    //     //
+    // }
 
     // public function getpajak()
     // {
