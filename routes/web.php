@@ -111,3 +111,5 @@ Route::post('/dataadmin/import', [DataadminController::class, 'import'])->name('
 //Export Excel
 Route::get('/export-excel', [ExportController::class, 'export_excel_dataadmin'])->name('export.excel');
 Route::get('/export-pdf-dataadmin', [ExportController::class, 'exportPDF_dataadmin'])->name('export.pdf');
+Route::get('/export-excel', [ExportController::class, 'export_excel_pph21'])->name('export.excel');
+Route::get('/export-pdf-pph21', [ExportController::class, 'exportPDF_pph21'])->name('export.pph21');

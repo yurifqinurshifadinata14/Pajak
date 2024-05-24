@@ -216,7 +216,7 @@
             </div>
         </div>
     </div>
- 
+
     @endforeach
     @push('script')
 <script>
@@ -232,7 +232,7 @@
         initTable(dataadmins);
     });
 
-    
+
 
     function initTable(data) {
         $('#dataadminTable').DataTable({
@@ -334,7 +334,7 @@
             ]
         });
     }
-    
+
     function exportPDF() {
             const element = document.getElementById('dataadminTable');
             const { jsPDF } = window.jspdf;
