@@ -117,21 +117,21 @@
 
                 <div class="sidebar-menu">
                     <!-- Nav Item - Dashboard -->
-                    <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
+                    <!-- <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
                         <a class="nav-link" href="{{ route('beranda') }}">
                             <i class="fas fa-fw fa-tachometer-alt"></i>
                             <span>Dashboard</span>
                         </a>
-                    </li>
+                    </li> -->
                     <!-- Sidebar - Brand -->
-                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
+                    <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
                         <div class="sidebar-brand-icon">
                             {{-- <i class="fas fa-fw fa-user"></i> --}}
                             <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..."
                                 style="width: 100px; height:auto;">
                         </div>
                         {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
-                    </a>
+                    </a> -->
 
                     <!-- Divider -->
                     <hr class="sidebar-divider my-0">
