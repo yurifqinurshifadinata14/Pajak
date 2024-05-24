@@ -14,6 +14,7 @@
     <link href="{{ asset('css/styles.min.css') }}" rel="stylesheet">
     <link href="{{ asset('sbadmin2/css/styles.css') }}" rel="stylesheet">
 
+
     <!-- DataTables CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.6/css/dataTables.bootstrap5.css">
@@ -60,6 +61,7 @@
             width: 500px;
             height: auto;
         }
+        
 
         /* .sidebar-brand-icon img {
             max-width: 70%;
@@ -95,10 +97,9 @@
                 </div>
                 {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
             </a>
-            <br>
+
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
-
             <div class="sidebar-menu">
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
@@ -107,6 +108,8 @@
                         <span>Dashboard</span>
                     </a>
                 </li>
+
+
 
                 <!-- Nav Item - Pajak -->
                 <li class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }}">
@@ -378,6 +381,10 @@
         </div>
     </div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <!-- Include autotable plugin for jspdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.16/jspdf.plugin.autotable.min.js"></script>
+    
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- DataTables JavaScript -->

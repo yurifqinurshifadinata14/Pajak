@@ -10,6 +10,7 @@ use App\Http\Controllers\Pph21Controller;
 use App\Http\Controllers\PphController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PphunifikasiController;
+use App\Http\Controllers\ExportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -106,3 +107,7 @@ Route::post('/pph21/import_excel', [Pph21Controller::class, 'import_excel'])->na
 Route::post('/pajak/import_excel', [PajakController::class, 'import_excel'])->name('pajak.import_excel');
 Route::post('/karyawan/import_excel', [KaryawanController::class, 'import_excel'])->name('karyawan.import_excel');
 Route::post('/dataadmin/import', [DataadminController::class, 'import'])->name('dataadmin.import');
+
+//Export Excel
+Route::get('/export-excel', [ExportController::class, 'export_excel_dataadmin'])->name('export.excel');
+Route::get('/export-pdf-dataadmin', [ExportController::class, 'exportPDF_dataadmin'])->name('export.pdf');
