@@ -82,6 +82,8 @@
                                             <a href="{{ route('export.excel') }}" class="btn btn-success">Export to
                                                 Excel</a>
                                             <button class="btn btn-danger" onclick="exportPDF()">Export to PDF</button>
+                                            <button class="btn btn-secondary text-light"
+                                                onclick="copyToClipboard('#dataadminTable')">Copy Data</button>
                                         </div>
                                     </div>
                                 </div>
@@ -364,6 +366,32 @@
                         }
                     });
                     doc.save('dataadmin.pdf');
+                }
+
+                function copyToClipboard(selector) {
+                    var element = document.querySelector(selector);
+
+                    if (element) {
+                        var range = document.createRange();
+                        var selection = window.getSelection();
+
+                        selection.removeAllRanges();
+
+                        range.selectNodeContents(element);
+
+                        selection.addRange(range);
+
+                        try {
+                            document.execCommand('copy');
+                            alert('Data copied to clipboard!');
+                        } catch (err) {
+                            alert('Oops, unable to copy');
+                        }
+
+                        selection.removeAllRanges();
+                    } else {
+                        alert('Element not found');
+                    }
                 }
             </script>
         @endpush
