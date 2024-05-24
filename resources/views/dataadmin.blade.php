@@ -75,7 +75,7 @@
                         </div>
                         <div class="modal-body">
                             <a href="{{ route('export.excel') }}" class="btn btn-success">Export to Excel</a>
-                            <button onclick="exportPDF()">Export to PDF</button>
+                            <button class="btn btn-danger" onclick="exportPDF()">Export to PDF</button>
                         </div>
                     </div>
                 </div>
@@ -215,6 +215,7 @@
             </div>
         </div>
     </div>
+ 
     @endforeach
     @push('script')
 <script>
@@ -230,6 +231,8 @@
         initTable(dataadmins);
     });
 
+    
+
     function initTable(data) {
         $('#dataadminTable').DataTable({
             dom: 'Bfrtip',
@@ -238,18 +241,24 @@
                     text: '<i class="fas fa-copy"> </i> Copy',
                     className: 'btn-sm btn-secondary d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
                     titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
+                    responsive: true,
+                    responsivePriority: 1,
                 },
                 {
                     extend: 'excel',
                     text: '<i class="fas fa-file-excel"> </i> Excel',
                     className: 'btn-sm btn-success d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
                     titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
+                    responsive: true,
+                    responsivePriority: 2,
                 },
                 {
                     extend: 'pdf',
                     text: '<i class="fas fa-file-pdf"> </i> PDF',
                     className: 'btn-sm btn-danger d-none d-md-block', // Menambahkan kelas 'btn-danger' untuk tombol PDF
                     titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
+                    responsive: true,
+                    responsivePriority: 3,
                 }
             ],
             initComplete: function () {
@@ -265,6 +274,7 @@
                     // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
                 });
             },
+            responsive:true,
             data: data,
             columns: [{
                     data: null,
@@ -304,16 +314,30 @@
             ]
         });
     }
+    
     function exportPDF() {
-            // Buat objek PDF
+            const element = document.getElementById('dataadminTable');
+            const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
-            // Tambahkan tabel ke PDF
-            doc.autoTable({ html: '#dataadminTable' });
-            // Simpan dan unduh PDF
-            doc.save('data_admin.pdf');
+            doc.text('Data Admin', 14, 20);
+            doc.autoTable({
+                head: [['No', 'Nama', 'Email', 'Role']],
+                body: [...element.querySelectorAll('tbody tr')].map(row => [
+                    row.cells[0].textContent,
+                    row.cells[1].textContent,
+                    row.cells[2].textContent,
+                    row.cells[3].textContent
+                ]),
+                styles: {
+                    fontSize: 12,
+                    overflow: 'linebreak'
+                }
+            });
+            doc.save('dataadmin.pdf');
         }
 
 </script>
+
 
 @endpush
 
