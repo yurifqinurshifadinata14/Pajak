@@ -102,14 +102,14 @@
             <ul class="navbar-nav sidebar sidebar-dark bg-navy" id="accordionSidebar">
 
                     <!-- Sidebar - Brand -->
-                    <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
+                    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
                         <div class="sidebar-brand-icon">
                             {{-- <i class="fas fa-fw fa-user"></i> --}}
                             <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..."
                                 style="width: 100px; height:auto;">
                         </div>
                         {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
-                    </a> -->
+                    </a> 
 
                     <!-- Divider -->
                     <hr class="sidebar-divider my-0">
