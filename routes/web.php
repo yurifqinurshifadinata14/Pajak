@@ -113,5 +113,8 @@ Route::post('/dataadmin/import', [DataadminController::class, 'import'])->name('
 Route::get('/export-exceldataadmin', [DataadminController::class, 'export_excel_dataadmin'])->name('export.exceldataadmin');
 Route::get('/export-excel/karyawan', [KaryawanController::class, 'export_excel_karyawan'])->name('export.excelkaryawan');
 Route::get('/export-pdf-dataadmin', [ExportController::class, 'exportPDF_dataadmin'])->name('export.pdf');
-Route::get('/export-excel/pphunifikasi', [PphunifikasiController::class, 'export_excel_pphuni'])->name('export.excel');
-Route::get('/export-pdf-pphuni', [PphunifikasiController::class, 'exportPDF_pphuni'])->name('export.pdfuni');
+Route::get('/export-excel', [ExportController::class, 'export_excel_pphuni'])->name('export.excel');
+Route::get('/export-pdf-pphuni', [ExportController::class, 'exportPDF_pphuni'])->name('export.pdfuni');
+
+Route::get('/export_excelpajak', [ExportController::class, 'export_excelpajak'])->name('export.excelpajak');
+Route::get('/export-pdf-pajak', [ExportController::class, 'exportPDF_pajak'])->name('export.pajak');

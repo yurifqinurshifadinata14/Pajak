@@ -280,21 +280,18 @@
                         window.location.href = '{{ route("export.exceldataadmin") }}';
                     });
 
-                    // Menambahkan event listener untuk tombol "Export PDF"
-                    $('#exportPdfBtn').on('click', function (event) {
-                        event.preventDefault();
-                        // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
-                    });
-                },
-
-
-                responsive: {
-                    details: {
-                        renderer: (api, rowIdx, columns) => {
-                            let data = columns
-                                .map((col, i) => {
-                                    return col.hidden ? /html/
-                                    `
+                // Menambahkan event listener untuk tombol "Export PDF"
+                // $('#exportPdfBtn').on('click', function (event) {
+                //     event.preventDefault();
+                    // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
+                });
+            },
+            responsive: {
+                            details: {
+                                renderer: (api, rowIdx, columns) => {
+                                    let data = columns
+                                        .map((col, i) => {
+                                            return col.hidden ? /*html*/ `
                                                 <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
                                                     <th>${col.title}</th>
                                                     <td style="width: 100%;">${col.data}</td>
