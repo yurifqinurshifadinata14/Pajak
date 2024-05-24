@@ -265,6 +265,7 @@
                     // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
                 });
             },
+            responsive:true,
             data: data,
             columns: [{
                     data: null,

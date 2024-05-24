@@ -77,7 +77,7 @@
                         }
                     </style>
                     <div class="table-responsive">
-                        <table id="pajakTable" class="my-table">
+                        <table id="pajakTable" class="my-table" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -194,6 +194,7 @@
                                     titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
                                 }
                             ],
+                            responsive:true,
                             destroy: true,
                             data: pajak,
                             columns: [{
