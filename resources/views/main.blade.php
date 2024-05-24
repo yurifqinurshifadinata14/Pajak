@@ -99,7 +99,7 @@
             <!-- Divider -->
             <hr class="sidebar-divider my-0">
 
-            <div class="sidebar-menu">
+            <div class="sidebar-menu" >
                 <!-- Nav Item - Dashboard -->
                 <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
                     <a class="nav-link" href="{{ route('beranda') }}">
