@@ -78,6 +78,12 @@
                 height: auto;
             }
 
+            @media (min-width: 400px) {
+                .sidebar-card {
+                    display: none;
+                }
+            }
+
             /* .sidebar-brand-icon img {
             max-width: 70%;
             height: auto;
@@ -109,7 +115,7 @@
                                 style="width: 100px; height:auto;">
                         </div>
                         {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
-                    </a> 
+                    </a>
 
                     <!-- Divider -->
                     <hr class="sidebar-divider my-0">
@@ -398,7 +404,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Script Export Responsive -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
