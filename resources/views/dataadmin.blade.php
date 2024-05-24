@@ -130,7 +130,7 @@
                         }
                     </style>
                     <div class="table-responsive">
-                        <table id="dataadminTable" class="my-table responsive" style="width: 100px">
+                        <table id="dataadminTable" class="my-table responsive" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Nomor</th>
@@ -140,7 +140,7 @@
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            {{-- <tbody>
                                 @foreach ($dataadmins as $dataadmin)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td> <!-- Incremental number -->
@@ -165,7 +165,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            </tbody>
+                            </tbody> --}}
                         </table>
                     </div>
                 </div>
@@ -180,8 +180,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="edit{{ $dataadmin->id }}Label">Edit Data Admin</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <form action="/dataadminUpdate/{{ $dataadmin->id }}" method="POST">
@@ -303,6 +302,7 @@
                                 }
                             }
                         },
+                        destroy: true,
                         data: data,
                         columns: [{
                                 data: null,
@@ -322,7 +322,7 @@
                             {
                                 data: 'id',
                                 render: function(data, type, row, meta) {
-                                    return `
+                                    return /*html*/ `
                             <div class="button-container">
                                 <button type="button"
                                     class="btn btn-warning float-end ms-2"
