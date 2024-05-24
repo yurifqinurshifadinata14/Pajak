@@ -74,7 +74,7 @@
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <a href="{{ route('export.excel') }}" class="btn btn-success">Export to Excel</a>
+                        <a href="{{ route('export.exceldataadmin') }}" class="btn btn-success">Export to Excel</a>
                             <button class="btn btn-danger" onclick="exportPDF()">Export to PDF</button>
                             <button class="btn btn-secondary text-light" onclick="copyToClipboard('#dataadminTable')">Copy Data</button>
                         </div>
@@ -266,7 +266,7 @@
                 // Menambahkan event listener untuk tombol "Export Excel"
                 $('#exportExcelBtn').on('click', function (event) {
                     event.preventDefault();
-                    window.location.href = '{{ route("export.excel") }}';
+                    window.location.href = '{{ route("export.exceldataadmin") }}';
                 });
 
                 // Menambahkan event listener untuk tombol "Export PDF"
