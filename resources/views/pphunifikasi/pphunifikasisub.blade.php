@@ -16,18 +16,19 @@
                         <!-- Button trigger modal Import-->
                         <button type="button" class="btn btn-sm btn-success me-2" title="Import Excel" data-bs-toggle="modal"
                             data-bs-target="#importExcel">
-                            <i class="fas fa-file-excel d-inline d-md-none"></i>
+                            <i class="fas fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-sm btn-primary me-2" title="Tambah Data Pph Unifikasi"
                             data-bs-toggle="modal" data-bs-target="#tambah">
-                            <i class="fas fa-fw fa-solid fa-plus d-inline d-md-none"></i>
+                            <i class="fas fa-fw fa-solid fa-plus"></i>
                             <span class="d-none d-md-inline">Tambah</span>
                         </button>
                         <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
                             data-bs-target="#exportModal">
                             <i class="fas fa-fw fa-file-export"></i>
+                            <span class="d-none d-md-inline">Export</span>
                         </button>
 
                         <!-- Modal Button Tambah -->
@@ -38,7 +39,7 @@
                         <x-pphunifikasisub.modalimportpphu />
 
                         <!-- Export Button (Hidden on Desktop) -->
-                        <div class="d-sm-none">
+                        <div class="d-sm-flex">
                             <!-- Modal Export Mobile -->
                             <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
                                 aria-hidden="true">
