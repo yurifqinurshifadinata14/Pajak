@@ -11,18 +11,27 @@
                     </div>
 
                     <div class="d-flex align-items-center gap-2">
-                        <button type="button" class="btn btn-sm btn-success float-end mb-2" title="Import Excel"
+                        {{-- <button type="button" class="btn btn-sm btn-success float-end mb-2" title="Import Excel"
                             data-bs-toggle="modal" data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i> Import Excel
+                        </button> --}}
+                        <button id="importButton" aria-label="Import Excel" class="btn btn-sm btn-success float-end mb-2"
+                            title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
+                            <i class="fas fa-file-excel"></i>
                         </button>
                         {{-- <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Karyawan"
                             data-bs-toggle="modal" data-bs-target="#tambahkaryawan"
                             onclick="setTimeout(()=>tableKaryawan(karyawan),200)">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Karyawan
                         </button> --}}
-                        <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Pph 21"
+                        {{-- <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Pph 21"
                             data-bs-toggle="modal" data-bs-target="#tambah" @click="getDataKaryawan">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
+                        </button> --}}
+                        <button id="tambahButton" aria-label="Tambah" class="btn btn-sm btn-primary float-end mb-2"
+                            title="Tambah Data Pph 21" data-bs-toggle="modal" data-bs-target="#tambah"
+                            @click="getDataKaryawan">
+                            <i class="fas fa-plus"></i>
                         </button>
                     </div>
 
@@ -65,7 +74,7 @@
                         }
                     </style>
                     <div class="table-responsive">
-                        <table id="pph21Table" class="my-table">
+                        <table id="pph21Table" class="my-table" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>No</th>
@@ -178,10 +187,11 @@
                                 titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
                             }
                         ],
+                        responsive: true,
                         destroy: true,
                         data: pph21,
                         columns: [{
-                                data: 'null',
+                                data: 'id',
                                 render: (data, type, row, meta) => {
                                     return meta.row + 1
                                 }

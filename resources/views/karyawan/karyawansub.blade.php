@@ -94,10 +94,11 @@
                         titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
                     }
                 ],
+                responsive: true,
                 destroy: true,
                 data: karyawan,
                 columns: [{
-                        data: 'null',
+                        data: 'id',
                         render: (data, type, row, meta) => {
                             return meta.row + 1
                         }

@@ -9,7 +9,7 @@
         <meta name="author" content="">
 
         <title>Wajib Pajak</title>
-       
+
         <link rel="icon" href="{{ asset('KKP.png') }}" type="gambar/tipe ikon">
         <link href="{{ asset('sbadmin2/vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
         <link href="{{ asset('css/styles.min.css') }}" rel="stylesheet">
@@ -185,6 +185,8 @@
                         <p class="mb-2 text-center"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar
                             pajak Anda!</p>
                     </div>
+
+
 
             </ul>
             <!-- End of Sidebar -->
