@@ -38,7 +38,7 @@
                         <!-- Modal Button import -->
                         <x-pphunifikasisub.modalimportpphu />
 
-                        <!-- Export Button (Hidden on Desktop) -->
+                        <!-- Export Button -->
                         <div class="d-sm-flex">
                             <!-- Modal Export Mobile -->
                             <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
@@ -46,7 +46,7 @@
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="exportModalLabel">Export Data Admin</h5>
+                                            <h5 class="modal-title" id="exportModalLabel">Export Data PPH Unifikasi</h5>
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>

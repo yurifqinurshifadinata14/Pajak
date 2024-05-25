@@ -27,12 +27,14 @@
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
 
+                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#exportModal">
+                            <i class="fas fa-fw fa-file-export"></i>
+                            <span class="d-none d-md-inline">Export</span>
+                        </button>
+
                         <!-- Export Button (Hidden on Desktop) -->
-                        <div class="d-sm-none">
-                            <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                                data-bs-target="#exportModal">
-                                <i class="fas fa-fw fa-file-export"></i>
-                            </button>
+                        <div class="d-sm-flex">
                             <!-- Modal Export Mobile -->
                             <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
                                 aria-hidden="true">
@@ -110,7 +112,6 @@
                     $('#tableKaryawan').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-
                             {
                                 extend: 'copy',
                                 text: '<i class="fas fa-copy"> </i> Copy',
@@ -130,7 +131,8 @@
                                 titleAttr: 'Unduh sebagai PDF',
                             }
                         ],
-
+                        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                        pageLength: 10,
                         responsive: {
                             details: {
                                 renderer: (api, rowIdx, columns) => {
@@ -325,7 +327,6 @@
                     });
                     doc.save('datakaryawan.pdf');
                 }
-
 
                 window.copyToClipboard = function(selector) {
                     var element = document.querySelector(selector);

@@ -26,6 +26,12 @@
                         <i class="fas fa-fw fa-solid fa-plus d-inline d-md-none"></i>
                         <span class="d-none d-md-inline">Tambah</span>
                     </button>
+
+                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#exportModal">
+                            <i class="fas fa-fw fa-file-export"></i>
+                            <span class="d-none d-md-inline">Export</span>
+                        </button>
                     <!-- Modal Button Tambah -->
                     <x-dataadmin.modaltambahdataadmin />
 
@@ -61,11 +67,7 @@
                     </div>
 
                     <!-- Export Button (Hidden on Desktop) -->
-                    <div class="d-sm-none">
-                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                            data-bs-target="#exportModal">
-                            <i class="fas fa-fw fa-file-export"></i>
-                        </button>
+                    <div class="d-sm-flex">
                         <!-- Modal Export Mobile -->
                         <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
                             aria-hidden="true">
@@ -126,6 +128,7 @@
                             margin-bottom: 5px;
                         }
                     }
+
                 </style>
                 <div class="table-responsive">
                     <table id="dataadminTable" class="my-table responsive" style="width:100%">
@@ -244,57 +247,57 @@
 
         function initTable(data) {
             $('#dataadminTable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'copy',
-                        text: '<i class="fas fa-copy"> </i> Copy',
-                        className: 'btn-sm btn-secondary d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                        titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
-                        responsive: true,
-                        responsivePriority: 1,
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="fas fa-file-excel"> </i> Excel',
-                        className: 'btn-sm btn-success d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                        titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
-                        responsive: true,
-                        responsivePriority: 2,
-                    },
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"> </i> PDF',
-                        className: 'btn-sm btn-danger d-none d-md-block', // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                        titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
-                        responsive: true,
-                        responsivePriority: 3,
-                    }
-                ],
-              
-                initComplete: function () {
-                    // Menambahkan event listener untuk tombol "Export Excel"
-                    $('#exportExcelBtn').on('click', function (event) {
-                        event.preventDefault();
-                        window.location.href = '{{ route("export.exceldataadmin") }}';
-                    });
+                        dom: 'Bfrtip',
+                        buttons: [{
+                                extend: 'copy',
+                                text: '<i class="fas fa-copy"> </i> Copy',
+                                className: 'btn-sm btn-secondary d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
+                                responsive: true,
+                                responsivePriority: 1,
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fas fa-file-excel"> </i> Excel',
+                                className: 'btn-sm btn-success d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
+                                responsive: true,
+                                responsivePriority: 2,
+                            },
+                            {
+                                extend: 'pdf',
+                                text: '<i class="fas fa-file-pdf"> </i> PDF',
+                                className: 'btn-sm btn-danger d-none d-md-block', // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                                titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
+                                responsive: true,
+                                responsivePriority: 3,
+                            }
+                        ],
 
-                // Menambahkan event listener untuk tombol "Export PDF"
-                // $('#exportPdfBtn').on('click', function (event) {
-                //     event.preventDefault();
-                    // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
-                });
-            },
-            responsive: {
-                            details: {
-                                renderer: (api, rowIdx, columns) => {
-                                    let data = columns
-                                        .map((col, i) => {
-                                            return col.hidden ? /*html*/ `
+                        initComplete: function () {
+                            // Menambahkan event listener untuk tombol "Export Excel"
+                            $('#exportExcelBtn').on('click', function (event) {
+                                event.preventDefault();
+                                window.location.href = '{{ route("export.exceldataadmin") }}';
+                            });
+
+                            // Menambahkan event listener untuk tombol "Export PDF"
+                            // $('#exportPdfBtn').on('click', function (event) {
+                            //     event.preventDefault();
+                            // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
+                        });
+                },
+                responsive: {
+                    details: {
+                        renderer: (api, rowIdx, columns) => {
+                            let data = columns
+                                .map((col, i) => {
+                                    return col.hidden ? /*html*/ `
                                                 <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
                                                     <th>${col.title}</th>
                                                     <td style="width: 100%;">${col.data}</td>
                                                 </tr>
-                                            `: ``;
+                                            ` : ``;
                                 })
                                 .join('');
 
@@ -344,7 +347,7 @@
                         }
                     }
                 ]
-            });
+        });
         }
 
         function exportPDF() {
@@ -400,14 +403,15 @@
 
     </script>
 
-<script>
-    $(document).ready(function() {
-        $('#dataadminTable').DataTable({
-            responsive: true,
-            autoWidth: false
+    <script>
+        $(document).ready(function () {
+            $('#dataadminTable').DataTable({
+                responsive: true,
+                autoWidth: false
+            });
         });
-    });
-</script>
+
+    </script>
     @endpush
 
 </main>
