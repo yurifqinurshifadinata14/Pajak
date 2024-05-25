@@ -383,7 +383,7 @@
                             const element = document.getElementById('pphuniTable');
                             const { jsPDF } = window.jspdf;
                             const doc = new jsPDF();
-                            doc.text('Data Pph Unifikasi', 14, 20);
+                            doc.text('Data Pph Unifikasi', 14, 10);
                             doc.autoTable({
                                 head: [['No', 'Nama', 'NTPN', 'Jumlah Bayar', 'Biaya_bulan', 'BPF']],
                                 body: [...element.querySelectorAll('tbody tr')].map(row => [

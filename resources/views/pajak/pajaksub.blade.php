@@ -1,7 +1,7 @@
 @extends('main')
 @section('konten')
 <main x-data="{ pilih: '' }">
-    <div class="container-fluid px-2" x-data="app">
+    <div class="container-fluid px-0" x-data="app">
         <h5 class="mt-4 d-inline d-md-none"> Data Diri</h5>
         <h1 class="mt-4 d-none d-md-block"> Data Diri </h1>
 
@@ -341,7 +341,7 @@
                 const element = document.getElementById('pajakTable');
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.text('Data Pembayar', 14, 20);
+                doc.text('Data Pajak', 14, 10);
                 doc.autoTable({
                     head: [['No', 'Nama', 'Jenis WP', 'Status WP', 'NPWP', 'No Hp', 'No EFIN', 'Gmail', 'NIK', 'Alamat', 'Merk Dagang']],
                     body: [...element.querySelectorAll('tbody tr')].map(row => [
