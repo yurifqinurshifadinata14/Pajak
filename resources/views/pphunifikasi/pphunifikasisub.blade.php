@@ -50,7 +50,7 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
+                                        <div class="modal-body text-center">
                                             <a href="{{ route('export.excel') }}" class="btn btn-success">Export to Excel</a>
                                             <button class="btn btn-danger" x-on:click="exportPDF()">Export to PDF</button>
                                             <button class="btn btn-secondary text-light" x-on:click="copyToClipboard('#pphuniTable')">Copy Data</button>
