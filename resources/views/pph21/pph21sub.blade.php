@@ -231,32 +231,32 @@
                 })
                 var initTable = (pph21) => {
                     $('#pph21Table').DataTable({
-                        dom: 'Bfrtip',
-                        buttons: [{
-                                extend: 'copy',
-                                text: '<i class="fas fa-copy"> </i> Copy',
-                                className: 'btn-sm btn-secondary d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                                titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
-                                responsive: true,
-                                responsivePriority: 1,
-                            },
-                            {
-                                extend: 'excel',
-                                text: '<i class="fas fa-file-excel"> </i> Excel',
-                                className: 'btn-sm btn-success d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                                titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
-                                responsive: true,
-                                responsivePriority: 2,
-                            },
-                            {
-                                extend: 'pdf',
-                                text: '<i class="fas fa-file-pdf"> </i> PDF',
-                                className: 'btn-sm btn-danger d-none d-md-block', // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                                titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
-                                responsive: true,
-                                responsivePriority: 3,
-                            }
-                        ],
+                        // dom: 'Bfrtip',
+                        // buttons: [{
+                        //         extend: 'copy',
+                        //         text: '<i class="fas fa-copy"> </i> Copy',
+                        //         className: 'btn-sm btn-secondary d-none d-md-block',
+                        //         titleAttr: 'Salin ke Clipboard',
+                        //         responsive: true,
+                        //         responsivePriority: 1,
+                        //     },
+                        //     {
+                        //         extend: 'excel',
+                        //         text: '<i class="fas fa-file-excel"> </i> Excel',
+                        //         className: 'btn-sm btn-success d-none d-md-block',
+                        //         titleAttr: 'Ekspor ke Excel',
+                        //         responsive: true,
+                        //         responsivePriority: 2,
+                        //     },
+                        //     {
+                        //         extend: 'pdf',
+                        //         text: '<i class="fas fa-file-pdf"> </i> PDF',
+                        //         className: 'btn-sm btn-danger d-none d-md-block',
+                        //         titleAttr: 'Unduh sebagai PDF',
+                        //         responsive: true,
+                        //         responsivePriority: 3,
+                        //     }
+                        // ],
                         initComplete: function() {
                             // Menambahkan event listener untuk tombol "Export Excel"
                             $('#exportExcelBtn').on('click', function(event) {
