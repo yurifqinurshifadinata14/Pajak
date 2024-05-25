@@ -1,7 +1,7 @@
 @extends ('main')
 @section('konten')
     <main x-data="{ pilih: '' }">
-        <div class="container-fluid px-4" x-data="app">
+        <div class="container-fluid px-0" x-data="app">
             <h5 class="mt-4 d-inline d-md-none"> Pph</h5>
             <h1 class="mt-4 d-none d-md-block"> Pph</h1>
 

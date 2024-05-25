@@ -1,7 +1,7 @@
 @extends('main')
 @section('konten')
     <main x-data="karyawan">
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-0">
             <h5 class="d-inline d-md-none mt-4"> Data Karyawan </h5>
             <h1 class="d-none d-md-block mt-4"> Data Karyawan </h1>
 
