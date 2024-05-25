@@ -217,6 +217,7 @@
         </div>
     </div>
 
+
     @endforeach
     @push('script')
 <script>

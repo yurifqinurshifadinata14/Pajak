@@ -78,7 +78,7 @@
                 height: auto;
             }
 
-            @media (min-width: 400px) {
+            @media (min-width: 10px) {
                 .sidebar-card {
                     display: none;
                 }
@@ -186,7 +186,7 @@
                     </div>
 
                     <!-- Sidebar Message -->
-                    <div class="sidebar-card d-none d-lg-flex">
+                    <div class="sidebar-card d-none d-lg-flex mt-4 d-inline d-md-none">
                         {{-- <img class="sidebar-card-illustration mb-2" src="{{ asset('KKPLOGO.png') }}" style="width: 100%; height:auto;" alt="..."> --}}
                         <p class="mb-2 text-center"><strong>Wajib Pajak</strong> Jangan sampai terlambat untuk membayar
                             pajak Anda!</p>

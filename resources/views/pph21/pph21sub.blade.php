@@ -128,7 +128,7 @@
                         }
                     </style>
                     <div class="table-responsive">
-                        <table id="pph21Table" class="my-table" style="width: 100%">
+                        <table id="pph21Table" class="my-table responsive" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th>No</th>

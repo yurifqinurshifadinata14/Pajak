@@ -6,6 +6,7 @@ use App\Models\Karyawan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Imports\KaryawanImport;
+use App\Exports\KaryawanExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 class KaryawanController extends Controller
@@ -18,6 +19,11 @@ class KaryawanController extends Controller
         //
         $karyawan = Karyawan::all();
         return view('karyawan.karyawan', compact('karyawan'));
+    }
+
+    public function export_excel_karyawan()
+    {
+        return Excel::download(new KaryawanExport(), 'karyawan.xlsx');
     }
 
     public function import_excel(Request $request)
