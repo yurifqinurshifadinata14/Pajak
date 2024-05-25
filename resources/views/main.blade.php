@@ -121,7 +121,7 @@
                     <hr class="sidebar-divider my-0">
                     <div class="sidebar-menu">
                         <!-- Nav Item - Dashboard -->
-                        <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('beranda*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                             <a class="nav-link" href="{{ route('beranda') }}">
                                 <i class="fas fa-fw fa-tachometer-alt"></i>
                                 <span>Dashboard</span>
@@ -129,7 +129,7 @@
                         </li>
 
                         <!-- Nav Item - Pajak -->
-                        <li class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                             <a class="nav-link" href="{{ route('pajakSub') }}" aria-expanded="true">
                                 <i class="fas fa-fw fa-briefcase"></i>
                                 <span>Pajak</span>
@@ -137,7 +137,7 @@
                         </li>
 
                         <!-- Nav Item - Pph -->
-                        <li class="nav-item {{ Request::is('pphsub*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('pphsub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                             <a class="nav-link" href="{{ route('pphSub') }}" aria-expanded="true">
                                 <i class="fas fa-fw fa-briefcase"></i>
                                 <span>PPH</span>
@@ -145,14 +145,14 @@
                         </li>
 
                         <!-- Nav Item - Pph 21 -->
-                        <li class="nav-item {{ Request::is('pph21sub*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('pph21sub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                             <a class="nav-link" href="{{ route('pph21Sub') }}" aria-expanded="true">
                                 <i class="fas fa-fw fa-briefcase"></i>
                                 <span>PPH 21</span>
                             </a>
                         </li>
 
-                        <li class="nav-item {{ Request::is('karyawansub*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('karyawansub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                             <a class="nav-link" href="{{ route('karyawanSub') }}" aria-expanded="true">
                                 <i class="fas fa-fw fa-briefcase"></i>
                                 <span>Daftar Karyawan</span>
@@ -160,7 +160,7 @@
                         </li>
 
                         <!-- Nav Item - Pph Unifikasi -->
-                        <li class="nav-item {{ Request::is('pphunifikasisub*') ? 'active' : '' }}">
+                        <li class="nav-item {{ Request::is('pphunifikasisub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                             <a class="nav-link" href="{{ route('pphunifikasiSub') }}" aria-expanded="true">
                                 <i class="fas fa-fw fa-briefcase"></i>
                                 <span>PPH Unifikasi</span>
@@ -168,7 +168,7 @@
                         </li>
 
                         @if (auth()->user()->role == 'admin')
-                            <li class="nav-item {{ Request::is('dataadmin*') ? 'active' : '' }}">
+                            <li class="nav-item {{ Request::is('dataadmin*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                                 <a class="nav-link" href="{{ route('dataadmin') }}" aria-expanded="true">
                                     <i class="fas fa-fw fa-database"></i>
                                     <span>Data Admin</span>
