@@ -1,27 +1,11 @@
 @extends('main')
 @section('konten')
-    {{-- <style>
-    @media (max-width: 767px) {
-        #accordionSidebar {
-        display: none;
-    }
-
-
-        #content-wrapper {
-            margin-left: 0;
-        }
-
-        /* .sidebar-card {
-            display: none;
-        } */
-    }
-</style> --}}
-
 <main x-data="{ pilih: '' }">
     <div class="container-fluid px-2" x-data="app">
         <h5 class="mt-4 d-inline d-md-none"> Data Diri</h5>
         <h1 class="mt-4 d-none d-md-block"> Data Diri </h1>
-        <div class="card mb-4">
+
+        <div class="card mb-4 mt-3">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div>
                     <i class="fas fa-table me-1"></i>
@@ -30,34 +14,34 @@
                 </div>
 
                 <div class="d-flex align-items-center">
-                    <!-- Button Tambah -->
-                    <button type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal"
-                        data-bs-target="#tambah">
-                        <i class="fas fa-fw fa-solid fa-plus"></i>
-                        <span class="d-none d-md-inline">Tambah</span>
-                    </button>
+                    <!-- Button trigger modal Import-->
                     <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
                         data-bs-target="#importExcel">
                         <i class="fas fa-fw fa-file-excel"></i>
                         <span class="d-none d-md-inline">Import Excel</span>
                     </button>
-                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                    <!-- Button trigger modal Export-->
+                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal"
                         data-bs-target="#exportModal">
                         <i class="fas fa-fw fa-file-export"></i>
                         <span class="d-none d-md-inline">Export</span>
                     </button>
+                    <!-- Button trigger modal tambah-->
+                    <button type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal"
+                        data-bs-target="#tambah">
+                        <i class="fas fa-fw fa-solid fa-plus"></i>
+                        <span class="d-none d-md-inline">Tambah</span>
+                    </button>
+
                     <!-- Modal Button Tambah -->
                     <x-pajaksub.modalTambah />
-
                     <!-- Modal Button Edit -->
                     <x-pajaksub.modaledit />
-
                     <!-- Modal Button Import -->
                    <x-pajaksub.modalimportpajak />
-                    
-                    <!-- Export Button (Hidden on Desktop) -->
+
+                    <!-- Export Button  -->
                     <div class="d-flex">
-                       
                         <!-- Modal Export Mobile -->
                         <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
                             aria-hidden="true">
@@ -204,26 +188,26 @@
 
         var initTable = (pajak) => {
             $('#pajakTable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'copy',
-                        text: '<i class="fas fa-copy"> </i> Copy',
-                        className: 'btn-sm btn-secondary',
-                        titleAttr: 'Salin ke Clipboard',
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="fas fa-file-excel"> </i> Excel',
-                        className: 'btn-sm btn-success',
-                        titleAttr: 'Ekspor ke Excel',
-                    },
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"> </i> PDF',
-                        className: 'btn-sm btn-danger',
-                        titleAttr: 'Unduh sebagai PDF',
-                    }
-                ],
+                // dom: 'Bfrtip',
+                // buttons: [{
+                //         extend: 'copy',
+                //         text: '<i class="fas fa-copy"> </i> Copy',
+                //         className: 'btn-sm btn-secondary',
+                //         titleAttr: 'Salin ke Clipboard',
+                //     },
+                //     {
+                //         extend: 'excel',
+                //         text: '<i class="fas fa-file-excel"> </i> Excel',
+                //         className: 'btn-sm btn-success',
+                //         titleAttr: 'Ekspor ke Excel',
+                //     },
+                //     {
+                //         extend: 'pdf',
+                //         text: '<i class="fas fa-file-pdf"> </i> PDF',
+                //         className: 'btn-sm btn-danger',
+                //         titleAttr: 'Unduh sebagai PDF',
+                //     }
+                // ],
                 initComplete: function () {
                     $('#exportExcelBtn').on('click', function (event) {
                         event.preventDefault();
@@ -235,11 +219,11 @@
                         renderer: (api, rowIdx, columns) => {
                             let data = columns
                                 .map((col, i) => {
-                                    return col.hidden ? 
+                                    return col.hidden ?
                                         `<tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
                                             <th>${col.title}</th>
                                             <td style="width: 100%;">${col.data}</td>
-                                        </tr>` 
+                                        </tr>`
                                     : ``;
                                 })
                                 .join('');
@@ -315,7 +299,7 @@
             Alpine.data('app', () => ({
                 data: [],
                 editId: '',
-  
+
                 file: null,
                 select(id) {
                     this.data = pajak.filter(item => item.id_pajak == id)
@@ -380,25 +364,25 @@
                 });
                 doc.save('pajak.pdf');
             },
-            
+
             copyToClipboard(selector) {
                 var element = document.querySelector(selector);
-            
+
                 if (element) {
                     var range = document.createRange();
                     var selection = window.getSelection();
-            
+
                     range.selectNodeContents(element);
                     selection.removeAllRanges();
                     selection.addRange(range);
-            
+
                     try {
                         document.execCommand('copy');
                         alert('Data copied to clipboard!');
                     } catch (err) {
                         alert('Oops, unable to copy');
                     }
-            
+
                     selection.removeAllRanges();
                 } else {
                     alert('Element not found');

@@ -4,7 +4,8 @@
         <div class="container-fluid px-4">
             <h5 class="d-inline d-md-none mt-4"> Data Karyawan </h5>
             <h1 class="d-none d-md-block mt-4"> Data Karyawan </h1>
-            <div class="card mb-4">
+
+            <div class="card mb-4 mt-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div>
                         <i class="fas fa-table me-1"></i>
@@ -13,26 +14,26 @@
                     </div>
 
                     <div class="d-flex align-items-center">
+                        <!-- Button trigger modal Import-->
+                        <button type="button" class="btn btn-sm btn-success me-2" title="Import Excel"
+                            data-bs-toggle="modal" data-bs-target="#importExcel">
+                            <i class="fas fa-file-excel"></i>
+                            <span class="d-none d-md-inline">Import Excel</span>
+                        </button>
+                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal"
+                            data-bs-target="#exportModal">
+                            <i class="fas fa-fw fa-file-export"></i>
+                            <span class="d-none d-md-inline">Export</span>
+                        </button>
                         <!-- Button Tambah -->
-                        <button type="button" class="btn btn-sm btn-primary float-end me-1" title="Tambah Data Karyawan"
+                        <button type="button" class="btn btn-sm btn-primary float-end me-2" title="Tambah Data Karyawan"
                             data-bs-toggle="modal" data-bs-target="#tambah">
-                            <i class="fas fa-fw fa-solid fa-plus d-inline d-md-none"></i>
+                            <i class="fas fa-fw fa-solid fa-plus"></i>
                             <span class="d-none d-md-inline">Tambah</span>
                         </button>
 
-                        <!-- Button trigger modal Import-->
-                        <button type="button" class="btn btn-sm btn-success me-1" title="Import Excel"
-                            data-bs-toggle="modal" data-bs-target="#importExcel">
-                            <i class="fas fa-file-excel d-inline d-md-none"></i>
-                            <span class="d-none d-md-inline">Import Excel</span>
-                        </button>
-
-                        <!-- Export Button (Hidden on Desktop) -->
-                        <div class="d-sm-none">
-                            <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                                data-bs-target="#exportModal">
-                                <i class="fas fa-fw fa-file-export"></i>
-                            </button>
+                        <!-- Export Button  -->
+                        <div class="d-sm-flex">
                             <!-- Modal Export Mobile -->
                             <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
                                 aria-hidden="true">

@@ -7,10 +7,12 @@ use App\Models\Pajak;
 use App\Models\Status;
 use Illuminate\Http\Request;
 use App\Imports\PajakImport;
+use App\Exports\PajakExport;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Log;
-
+use PDF;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
 
 class PajakController extends Controller
 {
@@ -35,6 +37,10 @@ class PajakController extends Controller
     // }
 
 
+    public function export_excelpajak()
+    {
+        return Excel::download(new PajakExport(), 'pajak.xlsx');
+    }
 
     public function import_excel(Request $request)
     {
