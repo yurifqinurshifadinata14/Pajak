@@ -3,15 +3,15 @@
 @section('konten')
 <main x-data="{ pilih: '' }">
     <div class="container-fluid px-0" x-data="app">
-        <h5 class="d-inline d-md-none mt-4"> DATA ADMIN </h5>
-        <h1 class="d-none d-md-block mt-4"> DATA ADMIN </h1>
+        <h5 class="mt-4 d-inline d-md-none"> DATA ADMIN </h5>
+        <h1 class="mt-4 d-none d-md-block"> DATA ADMIN </h1>
         <div class="card mb-4">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <div>
-                    <i class="fas fa-table me-1"></i>
-                    <span class="d-inline d-md-none">Rekap</span>
-                    <span class="d-none d-md-inline">Data Admin Rekap</span>
-                </div>
+        <div class="card-header d-flex justify-content-between align-items-center">
+    <div>
+        <i class="fas fa-table me-1"></i>
+        <span class="d-inline d-md-none">Rekap</span>
+        <span class="d-none d-md-inline">Data Admin Rekap</span>
+    </div>
 
                 <div class="d-flex align-items-center">
                     <!-- Button Import -->
@@ -35,36 +35,39 @@
                     <!-- Modal Button Tambah -->
                     <x-dataadmin.modaltambahdataadmin />
 
-                    <!-- Modal Button Edit -->
-                    <x-dataadmin.modaleditdataadmin />
+        <!-- Modal Button Edit -->
+        <x-dataadmin.modaleditdataadmin />
 
-                    <!-- Modal Import -->
-                    <div class="modal fade" id="import" tabindex="-1" aria-labelledby="importLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="importLabel">Import Data Admin</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <form action="{{ route('dataadmin.import') }}" method="POST"
-                                        enctype="multipart/form-data">
-                                        @csrf
-                                        <div class="mb-3">
-                                            <label for="formFile" class="form-label">Upload File Excel</label>
-                                            <input class="form-control" type="file" id="formFile" name="file" required>
-                                        </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Import</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Button Import -->
+        <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
+            data-bs-target="#import">
+            <i class="fas fa-fw fa-file-excel d-inline d-md-none"></i>
+            <span class="d-none d-md-inline">Import Excel</span>
+        </button>
+        <!-- Modal Import -->
+        <div class="modal fade" id="import" tabindex="-1" aria-labelledby="importLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="importLabel">Import Data Admin</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
+                    <div class="modal-body">
+                        <form action="{{ route('dataadmin.import') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="formFile" class="form-label">Upload File Excel</label>
+                                <input class="form-control" type="file" id="formFile" name="file" required>
+                            </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Import</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
                     <!-- Export Button (Hidden on Desktop) -->
                     <div class="d-sm-flex">
@@ -131,7 +134,7 @@
 
                 </style>
                 <div class="table-responsive">
-                    <table id="dataadminTable" class="my-table responsive" style="width:100%">
+                    <table id="dataadminTable" class="my-table">
                         <thead>
                             <tr>
                                 <th>Nomor</th>
@@ -142,7 +145,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dataadmins as $dataadmin)
+                            @foreach($dataadmins as $dataadmin)
                             <tr>
                                 <td>{{ $loop->iteration }}</td> <!-- Nomor urut -->
                                 <td>{{ $dataadmin->name }}</td>
@@ -153,7 +156,7 @@
                                     <div class="button-container">
                                         <button type="button" class="btn btn-warning float-end ms-2"
                                             @click="select('{{ $dataadmin->id }}')" data-bs-toggle="modal"
-                                            :data-bs-target="'#edit{{ $dataadmin->id }}'">
+                                            :data-bs-target="'{{ route('dataadminEdit', ['id' => $dataadmin->id]) }}'">
                                             <i class="fas fa-fw fa-solid fa-pen"></i>
                                         </button> &nbsp; &nbsp;
 
@@ -225,23 +228,18 @@
     </div>
     @endforeach
     @push('script')
-    <script>
-        let dataadmins = {
-            !!json_encode($dataadmins) !!
-        };
+<script>
+    let dataadmins = {!! json_encode($dataadmins) !!};
 
+    document.addEventListener('alpine:init', function () {
+        Alpine.data('app', () => ({
+            select(id) {
+                this.pilih = id;
+            }
+        }));
 
-
-        document.addEventListener('alpine:init', function () {
-            Alpine.data('app', () => ({
-                select(id) {
-                    this.pilih = id;
-                }
-            }));
-
-            initTable(dataadmins);
-        });
-
+        initTable(dataadmins);
+    });
 
 
 
@@ -301,35 +299,32 @@
                                 })
                                 .join('');
 
-                            let table = document.createElement('table');
-                            table.innerHTML = data;
+                                    let table = document.createElement('table');
+                                    table.innerHTML = data;
 
-                            return data ? table : false;
-                        }
+                                    return data ? table : false;
+                                }
+                            }
+                        },            data: data,
+            columns: [{
+                    data: null,
+                    render: (data, type, row, meta) => {
+                        return meta.row + 1;
                     }
                 },
-                destroy: true,
-                data: data,
-                columns: [{
-                        data: null,
-                        render: (data, type, row, meta) => {
-                            return meta.row + 1;
-                        }
-                    },
-                    {
-                        data: 'name'
-                    },
-                    {
-                        data: 'email'
-                    },
-                    {
-                        data: 'role'
-                    },
-                    {
-                        data: 'id',
-                        render: function (data, type, row, meta) {
-                            return /html/
-                            `
+                {
+                    data: 'name'
+                },
+                {
+                    data: 'email'
+                },
+                {
+                    data: 'role'
+                },
+                {
+                    data: 'id',
+                    render: function (data, type, row, meta) {
+                        return `
                             <div class="button-container">
                                 <button type="button"
                                     class="btn btn-warning float-end ms-2"
@@ -350,17 +345,13 @@
         });
         }
 
-        function exportPDF() {
+    function exportPDF() {
             const element = document.getElementById('dataadminTable');
-            const {
-                jsPDF
-            } = window.jspdf;
+            const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             doc.text('Data Admin', 14, 20);
             doc.autoTable({
-                head: [
-                    ['No', 'Nama', 'Email', 'Role']
-                ],
+                head: [['No', 'Nama', 'Email', 'Role']],
                 body: [...element.querySelectorAll('tbody tr')].map(row => [
                     row.cells[0].textContent,
                     row.cells[1].textContent,

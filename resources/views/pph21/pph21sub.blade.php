@@ -2,26 +2,80 @@
 @section('konten')
     <main x-data="{ pilih: '' }">
         <div class="container-fluid px-4" x-data="app">
-            <h1 class="mt-4">Pph21</h1>
+            <h5 class="mt-4 d-inline d-md-none"> PPH21 </h5>
+            <h1 class="mt-4 d-none d-md-block"> PPH21 </h1>
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div>
                         <i class="fas fa-table me-1"></i>
-                        Data Pph21
+                        <span class="d-inline d-md-none">Rekap</span>
+                        <span class="d-none d-md-inline">Data Pph21</span>
                     </div>
 
-                    <div class="d-flex align-items-center gap-2">
+                    <div class="d-flex align-items-center">
+                        <!-- Button Tambah -->
+                        <button id="tambahButton" aria-label="Tambah" class="btn btn-sm btn-primary me-2"
+                            title="Tambah Data Pph 21" data-bs-toggle="modal" data-bs-target="#tambah"
+                            @click="getDataKaryawan">
+                            <i class="fas fa-plus"></i>
+                            <span class="d-none d-md-inline">Tambah</span>
+                        </button>
+                        <!-- Button Import -->
+                        <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
+                            data-bs-target="#import">
+                            <i class="fas fa-fw fa-file-excel"></i>
+                            <span class="d-none d-md-inline">Import Excel</span>
+                        </button>
+                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                            data-bs-target="#exportModal">
+                            <i class="fas fa-fw fa-file-export"></i>
+                            <span class="d-none d-md-inline">Export</span>
+                        </button>
+                        <!-- modal button tambah-->
+                        <x-pph21sub.modaltambah :pajaks="$pajaks" />
+
+                        <!-- modal button edit-->
+                        <x-pph21sub.modaledit />
+
+                        <x-pph21sub.modalkaryawan :karyawan="$karyawan" />
+
+                        <!-- Modal Button import -->
+                        <x-pph21sub.modalimportpph21 />
                         {{-- <button type="button" class="btn btn-sm btn-success float-end mb-2" title="Import Excel"
                             data-bs-toggle="modal" data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i> Import Excel
                         </button> --}}
-                        <button id="importButton" aria-label="Import Excel" class="btn btn-sm btn-success float-end mb-2"
+
+                        <!-- Button Import -->
+                        {{-- <button id="importButton" aria-label="Import Excel" class="btn btn-sm btn-success float-end mb-2"
                             title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i>
-                            <span class="d-none d-md-inline">
-                                Import Excel
-                            </span>
-                        </button>
+                        </button> --}}
+                        <!-- Modal Import -->
+                        <!-- Export Button (Hidden on Desktop) -->
+                        <div class="d-sm-flex">
+                            <!-- Modal Export Mobile -->
+                            <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exportModalLabel">Export Data Pph21</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <a href="{{ route('export.excel') }}" class="btn btn-success">Export to
+                                                Excel</a>
+                                            <button class="btn btn-danger" x-on:click="exportPDF()">Export to
+                                                PDF</button>
+                                            <button class="btn btn-secondary text-light"
+                                                x-on:click="copyToClipboard('#pph21Table')">Copy Data</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                         {{-- <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Karyawan"
                             data-bs-toggle="modal" data-bs-target="#tambahkaryawan"
                             onclick="setTimeout(()=>tableKaryawan(karyawan),200)">
@@ -31,26 +85,8 @@
                             data-bs-toggle="modal" data-bs-target="#tambah" @click="getDataKaryawan">
                             <i class="fas fa-fw fa-solid fa-plus"></i> Tambah
                         </button> --}}
-                        <button id="tambahButton" aria-label="Tambah" class="btn btn-sm btn-primary float-end mb-2"
-                            title="Tambah Data Pph 21" data-bs-toggle="modal" data-bs-target="#tambah"
-                            @click="getDataKaryawan">
-                            <i class="fas fa-plus"></i>
-                            <span class="d-none d-md-inline">
-                                Tambah
-                            </span>
-                        </button>
+
                     </div>
-
-                    <!-- modal button tambah-->
-                    <x-pph21sub.modaltambah :pajaks="$pajaks" />
-
-                    <!-- modal button edit-->
-                    <x-pph21sub.modaledit />
-
-                    <x-pph21sub.modalkaryawan :karyawan="$karyawan" />
-                    <!-- Modal Button import -->
-                    <x-pph21sub.modalimportpph21 />
-
                 </div>
 
                 <div class="card-body">
@@ -77,6 +113,18 @@
 
                         .my-table tr:nth-child(even) {
                             background-color: #f2f2f2;
+                        }
+
+                        @media (max-width: 768px) {
+                            #exportButtons {
+                                float: none;
+                                text-align: left;
+                            }
+
+                            #exportDropdown {
+                                width: 100%;
+                                margin-bottom: 5px;
+                            }
                         }
                     </style>
                     <div class="table-responsive">
@@ -133,6 +181,15 @@
             <script>
                 let pph21 = {!! json_encode($pph21) !!}
 
+                document.addEventListener('alpine:init', function() {
+                    Alpine.data('app', () => ({
+                        select(id) {
+                            this.pilih = id;
+                        }
+                    }));
+
+                    initTable(pph21);
+                });
                 var getpph21 = async () => {
                     await fetch("{{ route('getpph21sub') }}", {
                         method: 'GET',
@@ -172,27 +229,44 @@
                 var initTable = (pph21) => {
                     $('#pph21Table').DataTable({
                         dom: 'Bfrtip',
-                        buttons: [
-                            //'copy', 'excel', 'pdf'
-                            {
+                        buttons: [{
                                 extend: 'copy',
                                 text: '<i class="fas fa-copy"> </i> Copy',
-                                className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                className: 'btn-sm btn-secondary d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
                                 titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
+                                responsive: true,
+                                responsivePriority: 1,
                             },
                             {
                                 extend: 'excel',
                                 text: '<i class="fas fa-file-excel"> </i> Excel',
-                                className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                                className: 'btn-sm btn-success d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
                                 titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
+                                responsive: true,
+                                responsivePriority: 2,
                             },
                             {
                                 extend: 'pdf',
                                 text: '<i class="fas fa-file-pdf"> </i> PDF',
-                                className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                                className: 'btn-sm btn-danger d-none d-md-block', // Menambahkan kelas 'btn-danger' untuk tombol PDF
                                 titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
+                                responsive: true,
+                                responsivePriority: 3,
                             }
                         ],
+                        initComplete: function() {
+                            // Menambahkan event listener untuk tombol "Export Excel"
+                            $('#exportExcelBtn').on('click', function(event) {
+                                event.preventDefault();
+                                window.location.href = '{{ route('export.excel') }}';
+                            });
+
+                            // Menambahkan event listener untuk tombol "Export PDF"
+                            $('#exportPdfBtn').on('click', function(event) {
+                                event.preventDefault();
+                                // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
+                            });
+                        },
                         responsive: {
                             details: {
                                 renderer: (api, rowIdx, columns) => {
@@ -265,7 +339,9 @@
                     })
                 }
 
+
                 initTable(pph21)
+
 
                 const getDataKaryawan = async () => {
                     await fetch("{{ route('getKaryawan') }}", {
@@ -395,7 +471,61 @@
                             })
                         },
 
+                        exportPDF() {
+                            const element = document.getElementById('pph21Table');
+                            const {
+                                jsPDF
+                            } = window.jspdf;
+                            const doc = new jsPDF();
+                            doc.text('Data Admin', 14, 20);
+                            doc.autoTable({
+                                head: [
+                                    ['No', 'Nama Wp', 'Jumlah Bayar', 'BPF', 'Biaya Bulan',
+                                        'Daftar Karyawan'
+                                    ]
+                                ],
+                                body: [...element.querySelectorAll('tbody tr')].map(row => [
+                                    row.cells[0].textContent,
+                                    row.cells[1].textContent,
+                                    row.cells[2].textContent,
+                                    row.cells[3].textContent,
+                                    row.cells[4].textContent,
+                                    row.cells[5].textContent,
+                                    row.cells[6].textContent
+                                ]),
+                                styles: {
+                                    fontSize: 12,
+                                    overflow: 'linebreak'
+                                }
+                            });
+                            doc.save('pph21.pdf');
+                        },
 
+                        copyToClipboard(selector) {
+                            var element = document.querySelector(selector);
+
+                            if (element) {
+                                var range = document.createRange();
+                                var selection = window.getSelection();
+
+                                selection.removeAllRanges();
+
+                                range.selectNodeContents(element);
+
+                                selection.addRange(range);
+
+                                try {
+                                    document.execCommand('copy');
+                                    alert('Data copied to clipboard!');
+                                } catch (err) {
+                                    alert('Oops, unable to copy');
+                                }
+
+                                selection.removeAllRanges();
+                            } else {
+                                alert('Element not found');
+                            }
+                        },
                     }))
                 })
             </script>
