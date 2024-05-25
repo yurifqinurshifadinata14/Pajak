@@ -121,7 +121,6 @@
                             margin-bottom: 5px;
                         }
                     }
-
                 </style>
                 <div class="table-responsive">
                     <table id="dataadminTable" class="my-table">
@@ -137,12 +136,12 @@
                         <tbody>
                             @foreach($dataadmins as $dataadmin)
                             <tr>
-                                <td>{{ $loop->iteration }}</td> <!-- Incremental number -->
+                                <td>{{ $loop->iteration }}</td> <!-- Nomor urut -->
                                 <td>{{ $dataadmin->name }}</td>
                                 <td>{{ $dataadmin->email }}</td>
                                 <td>{{ $dataadmin->role }}</td>
                                 <td>
-                                    <!-- Buttons for actions -->
+                                    <!-- Tombol aksi -->
                                     <div class="button-container">
                                         <button type="button" class="btn btn-warning float-end ms-2"
                                             @click="select('{{ $dataadmin->id }}')" data-bs-toggle="modal"
@@ -210,14 +209,12 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
     </div>
-
-
     @endforeach
     @push('script')
 <script>
@@ -383,10 +380,17 @@
             }
         }
 
+    </script>
+
+<script>
+    $(document).ready(function() {
+        $('#dataadminTable').DataTable({
+            responsive: true,
+            autoWidth: false
+        });
+    });
 </script>
-
-
-@endpush
+    @endpush
 
 </main>
 @endsection

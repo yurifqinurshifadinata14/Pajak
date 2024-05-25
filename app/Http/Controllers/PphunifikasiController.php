@@ -8,8 +8,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Imports\PphuImport;
+use App\Exports\PphunifikasiExport;
 use Maatwebsite\Excel\Facades\Excel;
-
+use PDF;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
 
 class PphunifikasiController extends Controller
 {
@@ -22,6 +24,11 @@ class PphunifikasiController extends Controller
         $pphunifikasi=Pphunifikasi::all();
         $pajaks = Pajak::all();
         return view('pphunifikasi.pphunifikasisub', compact('pphunifikasi', 'pajaks'));
+    }
+
+    public function export_excel_pphuni()
+    {
+        return Excel::download(new PphunifikasiExport(), 'pph_unifikasi.xlsx');
     }
 
     public function import_excel(Request $request)
