@@ -14,12 +14,10 @@ class ExportController extends Controller
     {
         return Excel::download(new DataAdminExport(), 'data_admin.xlsx');
     }
-
     public function export_excel_pph21()
     {
         return Excel::download(new Pph21Export(), 'data_admin.xlsx');
     }
-
 
     public function exportPDF_dataadmin()
     {
