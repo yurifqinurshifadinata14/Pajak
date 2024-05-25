@@ -116,3 +116,7 @@ Route::get('/export-excel/pphunifikasi', [PphunifikasiController::class, 'export
 Route::get('/export-pdf-pphuni', [PphunifikasiController::class, 'exportPDF_pphuni'])->name('export.pdfuni');
 Route::get('/export_excelpajak', [PajakController::class, 'export_excelpajak'])->name('export.excelpajak');
 Route::get('/export-pdf-pajak', [PajakController::class, 'exportPDF_pajak'])->name('export.pajak');
+Route::get('/export_excel/pph21', [Pph21Controller::class, 'export_excel_pph21'])->name('export.excelpph21');
+Route::get('/export-pdf-pph21', [Pph21Controller::class, 'exportPDF_pph21'])->name('export.pph21');
+Route::get('/export_excel/pph', [PphController::class, 'export_excel_pph'])->name('export.excelpph');
+Route::get('/export-pdf-pph', [PphController::class, 'exportPDF_pph'])->name('export.pph');

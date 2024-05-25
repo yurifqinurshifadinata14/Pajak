@@ -55,11 +55,13 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
 
+                    <!-- modal button tambah-->
                     <x-karyawansub.modaltambah />
+                    <!-- modal button edit-->
                     <x-karyawansub.modaledit />
+                    <!-- Modal Button import -->
                     <x-karyawansub.modalimport />
                 </div>
                 <div class="card-body">
@@ -109,27 +111,27 @@
 
                 let tableKaryawan = (karyawan) => {
                     $('#tableKaryawan').DataTable({
-                        dom: 'Bfrtip',
-                        buttons: [
-                            {
-                                extend: 'copy',
-                                text: '<i class="fas fa-copy"> </i> Copy',
-                                className: 'btn-sm btn-secondary',
-                                titleAttr: 'Salin ke Clipboard',
-                            },
-                            {
-                                extend: 'excel',
-                                text: '<i class="fas fa-file-excel"> </i> Excel',
-                                className: 'btn-sm btn-success',
-                                titleAttr: 'Ekspor ke Excel',
-                            },
-                            {
-                                extend: 'pdf',
-                                text: '<i class="fas fa-file-pdf"> </i> PDF',
-                                className: 'btn-sm btn-danger',
-                                titleAttr: 'Unduh sebagai PDF',
-                            }
-                        ],
+                        // dom: 'Bfrtip',
+                        // buttons: [
+                        //     {
+                        //         extend: 'copy',
+                        //         text: '<i class="fas fa-copy"> </i> Copy',
+                        //         className: 'btn-sm btn-secondary',
+                        //         titleAttr: 'Salin ke Clipboard',
+                        //     },
+                        //     {
+                        //         extend: 'excel',
+                        //         text: '<i class="fas fa-file-excel"> </i> Excel',
+                        //         className: 'btn-sm btn-success',
+                        //         titleAttr: 'Ekspor ke Excel',
+                        //     },
+                        //     {
+                        //         extend: 'pdf',
+                        //         text: '<i class="fas fa-file-pdf"> </i> PDF',
+                        //         className: 'btn-sm btn-danger',
+                        //         titleAttr: 'Unduh sebagai PDF',
+                        //     }
+                        // ],
                         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                         pageLength: 10,
                         responsive: {

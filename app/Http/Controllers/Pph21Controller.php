@@ -10,7 +10,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Symfony\Component\Routing\Matcher\TraceableUrlMatcher;
 use App\Imports\Pph21Import;
+use App\Exports\Pph21Export;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
 
 class Pph21Controller extends Controller
 {
@@ -22,6 +25,11 @@ class Pph21Controller extends Controller
         //
         $pph21 = Pph21::all();
         return view('pph21.pph21sub', compact('pph21'));
+    }
+
+    public function export_excel_pph21()
+    {
+        return Excel::download(new Pph21Export(), 'pph21.xlsx');
     }
 
     public function import_excel(Request $request)

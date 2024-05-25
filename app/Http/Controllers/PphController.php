@@ -7,7 +7,10 @@ use App\Models\Pajak;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Imports\PphImport;
+use App\Exports\PphExport;
 use Maatwebsite\Excel\Facades\Excel;
+use PDF;
+use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
 
 class PphController extends Controller
 {
@@ -29,6 +32,10 @@ class PphController extends Controller
     //     ]);
     //     //
     // }
+    public function export_excel_pph()
+    {
+        return Excel::download(new PphExport(), 'pph.xlsx');
+    }
 
     public function import_excel(Request $request)
 	{

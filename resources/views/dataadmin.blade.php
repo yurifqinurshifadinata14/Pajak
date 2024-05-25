@@ -5,7 +5,8 @@
     <div class="container-fluid px-0" x-data="app">
         <h5 class="mt-4 d-inline d-md-none"> DATA ADMIN </h5>
         <h1 class="mt-4 d-none d-md-block"> DATA ADMIN </h1>
-        <div class="card mb-4">
+
+        <div class="card mb-4 mt-3">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div>
                     <i class="fas fa-table me-1"></i>
@@ -17,24 +18,24 @@
                     <!-- Button Import -->
                     <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
                         data-bs-target="#import">
-                        <i class="fas fa-fw fa-file-excel d-inline d-md-none"></i>
+                        <i class="fas fa-fw fa-file-excel"></i>
                         <span class="d-none d-md-inline">Import Excel</span>
                     </button>
-                    <!-- Button Tambah -->
-                    <button type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal"
-                        data-bs-target="#tambah">
-                        <i class="fas fa-fw fa-solid fa-plus d-inline d-md-none"></i>
-                        <span class="d-none d-md-inline">Tambah</span>
-                    </button>
-
-                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                    <!-- Button Export -->
+                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal"
                         data-bs-target="#exportModal">
                         <i class="fas fa-fw fa-file-export"></i>
                         <span class="d-none d-md-inline">Export</span>
                     </button>
+                    <!-- Button Tambah -->
+                    <button type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal"
+                        data-bs-target="#tambah">
+                        <i class="fas fa-fw fa-solid fa-plus"></i>
+                        <span class="d-none d-md-inline">Tambah</span>
+                    </button>
+
                     <!-- Modal Button Tambah -->
                     <x-dataadmin.modaltambahdataadmin />
-
                     <!-- Modal Button Edit -->
                     <x-dataadmin.modaleditdataadmin />
 
@@ -152,7 +153,7 @@
                                 <td>
                                     <!-- Tombol aksi -->
                                     <div class="button-container">
-                                        <button type="button" class="btn btn-warning float-end ms-2"
+                                        <button type="button" class="btn btn-sm btn-warning float-end ms-2"
                                             @click="select({{ $dataadmin->id }})" data-bs-toggle="modal"
                                             :data-bs-target="'#edit' + {{ $dataadmin->id }}">
                                             <i class="fas fa-fw fa-solid fa-pen"></i>
@@ -162,7 +163,7 @@
                                         &nbsp; &nbsp;
 
                                         <a href="{{ route('dataadminDelete', ['id' => $dataadmin->id]) }}"
-                                            class="btn btn-danger"
+                                            class="btn btn-sm btn-danger"
                                             onclick="return confirm('Yakin ingin menghapus data ?')">
                                             <i class="fa fa-trash"></i>
                                         </a>
@@ -170,7 +171,7 @@
                 </div>
                 </td>
                 </tr>
-                @endforeach
+                 @endforeach
                 </tbody>
                 </table>
             </div>
