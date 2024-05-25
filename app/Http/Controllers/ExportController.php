@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Exports\DataAdminExport;
-use App\Exports\Pph21Export;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
@@ -14,11 +13,7 @@ class ExportController extends Controller
     {
         return Excel::download(new DataAdminExport(), 'data_admin.xlsx');
     }
-    public function export_excel_pph21()
-    {
-        return Excel::download(new Pph21Export(), 'data_admin.xlsx');
-    }
-
+   
     public function exportPDF_dataadmin()
     {
         // Contoh logika untuk membuat PDF menggunakan library Dompdf

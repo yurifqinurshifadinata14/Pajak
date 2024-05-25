@@ -67,8 +67,8 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <a href="{{ route('export.excel') }}" class="btn btn-success">Export to
+                                        <div class="modal-body text-center">
+                                            <a href="{{ route('export.excelpph21') }}" class="btn btn-success">Export to
                                                 Excel</a>
                                             <button class="btn btn-danger" x-on:click="exportPDF()">Export to
                                                 PDF</button>
@@ -261,7 +261,7 @@
                             // Menambahkan event listener untuk tombol "Export Excel"
                             $('#exportExcelBtn').on('click', function(event) {
                                 event.preventDefault();
-                                window.location.href = '{{ route('export.excel') }}';
+                                window.location.href = '{{ route("export.excelpph21") }}';
                             });
 
                             // Menambahkan event listener untuk tombol "Export PDF"
