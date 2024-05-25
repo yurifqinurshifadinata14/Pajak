@@ -176,12 +176,14 @@
                 {
                     data: 'id',
                     render: (data) => {
-                        return `<div class="button-container gap-2">
+                        return /*html*/ `<div class="button-container gap-2">
                             <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
                                 @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                @if (auth()->user()->role == 'admin')
                             <button type="button" class="btn btn-sm btn-danger"
                                 @click="handleDelete(${data})"><i class="fas fa-fw fa-solid fa-trash"></i>
                             </button>
+                            @endif
                         </div>`;
                     }
                 },

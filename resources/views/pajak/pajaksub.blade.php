@@ -273,7 +273,7 @@
                     {
                         data: 'id_pajak',
                         render: (data) => {
-                            return `<div class="button-container gap-2">
+                            return /*html*/ `<div class="button-container gap-2">
                                         <a class="btn btn-sm btn-info" title="Detail Jenis & Status" href="{{ route('pajak.Detail', '') }}/${data}" ><i class="fas fa-fw fa-solid fa-search"></i></a>
                                         <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
