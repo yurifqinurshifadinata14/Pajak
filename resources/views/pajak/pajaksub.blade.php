@@ -1,7 +1,7 @@
 @extends('main')
 @section('konten')
 <main x-data="{ pilih: '' }">
-    <div class="container-fluid px-2" x-data="app">
+    <div class="container-fluid px-0" x-data="app">
         <h5 class="mt-4 d-inline d-md-none"> Data Diri</h5>
         <h1 class="mt-4 d-none d-md-block"> Data Diri </h1>
 
@@ -53,10 +53,10 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-center">
-                                        <a href="{{ route('export.excelpajak') }}" class="btn btn-success">Export to
+                                        <a href="{{ route('export.excelpajak') }}" class="btn btn-success btn-sm">Export to
                                             Excel</a>
-                                        <button class="btn btn-danger" x-on:click="exportPDF()">Export to PDF</button>
-                                        <button class="btn btn-secondary text-light"
+                                        <button class="btn btn-danger btn-sm" x-on:click="exportPDF()">Export to PDF</button>
+                                        <button class="btn btn-secondary text-light btn-sm"
                                            x-on:click="copyToClipboard('#pajakTable')">Copy Data</button>
                                         </div>
                                 </div>
@@ -273,7 +273,7 @@
                     {
                         data: 'id_pajak',
                         render: (data) => {
-                            return `<div class="button-container gap-2">
+                            return /*html*/ `<div class="button-container gap-2">
                                         <a class="btn btn-sm btn-info" title="Detail Jenis & Status" href="{{ route('pajak.Detail', '') }}/${data}" ><i class="fas fa-fw fa-solid fa-search"></i></a>
                                         <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
@@ -341,7 +341,7 @@
                 const element = document.getElementById('pajakTable');
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.text('Data Pembayar', 14, 20);
+                doc.text('Data Pajak', 14, 10);
                 doc.autoTable({
                     head: [['No', 'Nama', 'Jenis WP', 'Status WP', 'NPWP', 'No Hp', 'No EFIN', 'Gmail', 'NIK', 'Alamat', 'Merk Dagang']],
                     body: [...element.querySelectorAll('tbody tr')].map(row => [

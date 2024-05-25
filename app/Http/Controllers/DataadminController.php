@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Exports\DataAdminExport;
+use App\Exports\DataadminExport;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -22,7 +22,7 @@ class DataadminController extends Controller
 
     public function export_excel_dataadmin()
     {
-        return Excel::download(new DataAdminExport(), 'data_admin.xlsx');
+        return Excel::download(new DataadminExport(), 'data_admin.xlsx');
     }
 
     public function import(Request $request)

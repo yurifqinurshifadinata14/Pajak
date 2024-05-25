@@ -1,7 +1,7 @@
 @extends('main')
 @section('konten')
     <main x-data="karyawan">
-        <div class="container-fluid px-4">
+        <div class="container-fluid px-0">
             <h5 class="d-inline d-md-none mt-4"> Data Karyawan </h5>
             <h1 class="d-none d-md-block mt-4"> Data Karyawan </h1>
 
@@ -45,10 +45,10 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body text-center">
-                                            <a href="{{ route('export.excelkaryawan') }}" class="btn btn-success">Export to
+                                            <a href="{{ route('export.excelkaryawan') }}" class="btn btn-success btn-sm">Export to
                                                 Excel</a>
-                                            <button class="btn btn-danger" onclick="exportPDF()">Export to PDF</button>
-                                            <button class="btn btn-secondary text-light"
+                                            <button class="btn btn-danger btn-sm" onclick="exportPDF()">Export to PDF</button>
+                                            <button class="btn btn-secondary text-light btn-sm"
                                                 onclick="copyToClipboard('#tableKaryawan')">Copy Data</button>
                                         </div>
                                     </div>
@@ -176,12 +176,14 @@
                 {
                     data: 'id',
                     render: (data) => {
-                        return `<div class="button-container gap-2">
+                        return /*html*/ `<div class="button-container gap-2">
                             <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
                                 @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                @if (auth()->user()->role == 'admin')
                             <button type="button" class="btn btn-sm btn-danger"
                                 @click="handleDelete(${data})"><i class="fas fa-fw fa-solid fa-trash"></i>
                             </button>
+                            @endif
                         </div>`;
                     }
                 },
@@ -302,27 +304,31 @@
     });
 
     function exportPDF() {
-        const element = document.getElementById('tableKaryawan');
-        const jsPDF = window.jspdf.jsPDF;
-        const doc = new jsPDF();
-        doc.text('Data Karyawan', 14, 20);
-        doc.autoTable({
-            head: [
-                ['No', 'Nama', 'NIK', 'NPWP']
-            ],
-            body: Array.from(element.querySelectorAll('tbody tr')).map(row => [
-                row.cells[0].textContent,
-                row.cells[1].textContent,
-                row.cells[2].textContent,
-                row.cells[3].textContent
-            ]),
-            styles: {
-                fontSize: 12,
-                overflow: 'linebreak'
-            }
-        });
-        doc.save('datakaryawan.pdf');
-    }
+    const element = document.getElementById('tableKaryawan');
+    const jsPDF = window.jspdf.jsPDF;
+    const doc = new jsPDF();
+    
+   
+    doc.text('Data Karyawan', 14, 10);
+    
+    doc.autoTable({
+        head: [
+            ['No', 'Nama', 'NIK', 'NPWP']
+        ],
+        body: Array.from(element.querySelectorAll('tbody tr')).map(row => [
+            row.cells[0].textContent,
+            row.cells[1].textContent,
+            row.cells[2].textContent,
+            row.cells[3].textContent
+        ]),
+        styles: {
+            fontSize: 12,
+            overflow: 'linebreak'
+        }
+    });
+    doc.save('datakaryawan.pdf');
+}
+
 
     window.copyToClipboard = function(selector) {
         var element = document.querySelector(selector);

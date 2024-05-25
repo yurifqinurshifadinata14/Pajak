@@ -1,7 +1,7 @@
 @extends ('main')
 @section('konten')
     <main x-data="{ pilih: '' }">
-        <div class="container-fluid px-4" x-data="app">
+        <div class="container-fluid px-0" x-data="app">
             <h5 class="mt-4 d-inline d-md-none"> PPH21 </h5>
             <h1 class="mt-4 d-none d-md-block"> PPH21 </h1>
 
@@ -54,12 +54,12 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <a href="{{ route('export.excelpph21') }}" class="btn btn-success">Export to
+                                        <div class="modal-body text-center">
+                                            <a href="{{ route('export.excelpph21') }}" class="btn btn-success btn-sm">Export to
                                                 Excel</a>
-                                            <button class="btn btn-danger" x-on:click="exportPDF()">Export to
+                                            <button class="btn btn-danger btn-sm" x-on:click="exportPDF()">Export to
                                                 PDF</button>
-                                            <button class="btn btn-secondary text-light" x-on:click="copyToClipboard('#pph21Table')">Copy Data</button>
+                                            <button class="btn btn-secondary text-light btn-sm" x-on:click="copyToClipboard('#pph21Table')">Copy Data</button>
                                         </div>
                                     </div>
                                 </div>
@@ -462,7 +462,7 @@
                                 jsPDF
                             } = window.jspdf;
                             const doc = new jsPDF();
-                            doc.text('Data Pph21', 14, 20);
+                            doc.text('Data Pph21', 14, 10);
                             doc.autoTable({
                                 head: [
                                     ['No', 'Nama Wp', 'Jumlah Bayar', 'BPF', 'Biaya Bulan',

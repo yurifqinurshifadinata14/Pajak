@@ -83,17 +83,7 @@
                 }
             }
 
-            /* .sidebar-brand-icon img {
-            max-width: 70%;
-            height: auto;
-            margin-bottom: 20px;
-            margin-top: 20px;
-        }
-
-        .sidebar-card img{
-            max-width: 100%;
-            height: auto;
-        } */
+          
         </style>
         {{--  @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
     </head>
@@ -113,7 +103,7 @@
                             <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..."
                                 style="width: 100px; height:auto;">
                         </div>
-                        {{-- <div class="sidebar-brand-text mx-3">Wajib Pajak</div> --}}
+                     
                     </a>
                     <br>
                     <!-- Divider -->
@@ -351,7 +341,7 @@
                     </nav>
                     <!-- End of Topbar -->
 
-                    <!-- Begin Page Content -->
+                    <!-- Content -->
                     <div class="container-fluid">
                         @yield('konten')
                     </div>
