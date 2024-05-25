@@ -6,12 +6,12 @@
         <h5 class="mt-4 d-inline d-md-none"> DATA ADMIN </h5>
         <h1 class="mt-4 d-none d-md-block"> DATA ADMIN </h1>
         <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
-    <div>
-        <i class="fas fa-table me-1"></i>
-        <span class="d-inline d-md-none">Rekap</span>
-        <span class="d-none d-md-inline">Data Admin Rekap</span>
-    </div>
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <div>
+                    <i class="fas fa-table me-1"></i>
+                    <span class="d-inline d-md-none">Rekap</span>
+                    <span class="d-none d-md-inline">Data Admin Rekap</span>
+                </div>
 
                 <div class="d-flex align-items-center">
                     <!-- Button Import -->
@@ -28,46 +28,44 @@
                     </button>
 
                     <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                            data-bs-target="#exportModal">
-                            <i class="fas fa-fw fa-file-export"></i>
-                            <span class="d-none d-md-inline">Export</span>
-                        </button>
+                        data-bs-target="#exportModal">
+                        <i class="fas fa-fw fa-file-export"></i>
+                        <span class="d-none d-md-inline">Export</span>
+                    </button>
                     <!-- Modal Button Tambah -->
                     <x-dataadmin.modaltambahdataadmin />
 
-        <!-- Modal Button Edit -->
-        <x-dataadmin.modaleditdataadmin />
+                    <!-- Modal Button Edit -->
+                    <x-dataadmin.modaleditdataadmin />
 
-        <!-- Button Import -->
-        <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
-            data-bs-target="#import">
-            <i class="fas fa-fw fa-file-excel d-inline d-md-none"></i>
-            <span class="d-none d-md-inline">Import Excel</span>
-        </button>
-        <!-- Modal Import -->
-        <div class="modal fade" id="import" tabindex="-1" aria-labelledby="importLabel" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="importLabel">Import Data Admin</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ route('dataadmin.import') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="mb-3">
-                                <label for="formFile" class="form-label">Upload File Excel</label>
-                                <input class="form-control" type="file" id="formFile" name="file" required>
+
+                    <!-- Modal Import -->
+                    <div class="modal fade" id="import" tabindex="-1" aria-labelledby="importLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="importLabel">Import Data Admin</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{ route('dataadmin.import') }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        <div class="mb-3">
+                                            <label for="formFile" class="form-label">Upload File Excel</label>
+                                            <input class="form-control" type="file" id="formFile" name="file" required>
+                                        </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary"
+                                        data-bs-dismiss="modal">Close</button>
+                                    <button type="submit" class="btn btn-primary">Import</button>
+                                    </form>
+                                </div>
                             </div>
+                        </div>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Import</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
 
                     <!-- Export Button (Hidden on Desktop) -->
                     <div class="d-sm-flex">
@@ -155,10 +153,13 @@
                                     <!-- Tombol aksi -->
                                     <div class="button-container">
                                         <button type="button" class="btn btn-warning float-end ms-2"
-                                            @click="select('{{ $dataadmin->id }}')" data-bs-toggle="modal"
-                                            :data-bs-target="'{{ route('dataadminEdit', ['id' => $dataadmin->id]) }}'">
+                                            @click="select({{ $dataadmin->id }})" data-bs-toggle="modal"
+                                            :data-bs-target="'#edit' + {{ $dataadmin->id }}">
                                             <i class="fas fa-fw fa-solid fa-pen"></i>
-                                        </button> &nbsp; &nbsp;
+                                        </button>
+
+
+                                        &nbsp; &nbsp;
 
                                         <a href="{{ route('dataadminDelete', ['id' => $dataadmin->id]) }}"
                                             class="btn btn-danger"
@@ -166,17 +167,17 @@
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
                 </div>
+                </td>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
             </div>
         </div>
     </div>
+    </div>
 
-    <!-- Modal Edit -->
     @foreach($dataadmins as $dataadmin)
     <div class="modal fade" id="edit{{ $dataadmin->id }}" tabindex="-1" aria-labelledby="edit{{ $dataadmin->id }}Label"
         aria-hidden="true">
@@ -211,10 +212,8 @@
                         <div class="form-group mt-3">
                             <select name="role" id="exampleInputRole" class="form-select">
                                 <option value="" disabled>Pilih Role</option>
-                                <option value="admin" {{ $dataadmin->role == 'admin' ? 'selected' : '' }}>
-                                    Admin</option>
-                                <option value="staff" {{ $dataadmin->role == 'staff' ? 'selected' : '' }}>
-                                    Staff</option>
+                                <option value="admin" {{ $dataadmin->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="staff" {{ $dataadmin->role == 'staff' ? 'selected' : '' }}>Staff</option>
                             </select>
                         </div>
                 </div>
@@ -228,130 +227,102 @@
     </div>
     @endforeach
     @push('script')
-<script>
-    let dataadmins = {!! json_encode($dataadmins) !!};
+    <script>
+        let dataadmins = {
+            !!json_encode($dataadmins) !!
+        };
 
-    document.addEventListener('alpine:init', function () {
-        Alpine.data('app', () => ({
-            select(id) {
-                this.pilih = id;
-            }
-        }));
+        document.addEventListener('alpine:init', function () {
+            Alpine.data('app', () => ({
+                pilih: '',
+                select(id) {
+                    this.pilih = id;
+                }
+            }));
+        });
 
-        initTable(dataadmins);
-    });
 
 
 
         function initTable(data) {
             $('#dataadminTable').DataTable({
-                        dom: 'Bfrtip',
-                        buttons: [{
-                                extend: 'copy',
-                                text: '<i class="fas fa-copy"> </i> Copy',
-                                className: 'btn-sm btn-secondary d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                                titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
-                                responsive: true,
-                                responsivePriority: 1,
-                            },
-                            {
-                                extend: 'excel',
-                                text: '<i class="fas fa-file-excel"> </i> Excel',
-                                className: 'btn-sm btn-success d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                                titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
-                                responsive: true,
-                                responsivePriority: 2,
-                            },
-                            {
-                                extend: 'pdf',
-                                text: '<i class="fas fa-file-pdf"> </i> PDF',
-                                className: 'btn-sm btn-danger d-none d-md-block', // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                                titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
-                                responsive: true,
-                                responsivePriority: 3,
-                            }
-                        ],
-
-                        initComplete: function () {
-                            // Menambahkan event listener untuk tombol "Export Excel"
-                            $('#exportExcelBtn').on('click', function (event) {
-                                event.preventDefault();
-                                window.location.href = '{{ route("export.exceldataadmin") }}';
-                            });
-
-                            // Menambahkan event listener untuk tombol "Export PDF"
-                            // $('#exportPdfBtn').on('click', function (event) {
-                            //     event.preventDefault();
-                            // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
-                        });
-                },
+                dom: 'Bfrtip',
+                buttons: [{
+                        extend: 'copy',
+                        text: '<i class="fas fa-copy"></i> Copy',
+                        className: 'btn-sm btn-secondary d-none d-md-block',
+                        titleAttr: 'Salin ke Clipboard'
+                    },
+                    {
+                        extend: 'excel',
+                        text: '<i class="fas fa-file-excel"></i> Excel',
+                        className: 'btn-sm btn-success d-none d-md-block',
+                        titleAttr: 'Ekspor ke Excel'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fas fa-file-pdf"></i> PDF',
+                        className: 'btn-sm btn-danger d-none d-md-block',
+                        titleAttr: 'Unduh sebagai PDF'
+                    }
+                ],
                 responsive: {
                     details: {
                         renderer: (api, rowIdx, columns) => {
-                            let data = columns
-                                .map((col, i) => {
-                                    return col.hidden ? /*html*/ `
-                                                <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
-                                                    <th>${col.title}</th>
-                                                    <td style="width: 100%;">${col.data}</td>
-                                                </tr>
-                                            ` : ``;
-                                })
-                                .join('');
-
-                                    let table = document.createElement('table');
-                                    table.innerHTML = data;
-
-                                    return data ? table : false;
-                                }
-                            }
-                        },            data: data,
-            columns: [{
-                    data: null,
-                    render: (data, type, row, meta) => {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    data: 'name'
-                },
-                {
-                    data: 'email'
-                },
-                {
-                    data: 'role'
-                },
-                {
-                    data: 'id',
-                    render: function (data, type, row, meta) {
-                        return `
-                            <div class="button-container">
-                                <button type="button"
-                                    class="btn btn-warning float-end ms-2"
-                                    @click="select(${data})"
-                                    data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
-                                    <i class="fas fa-fw fa-solid fa-pen"></i>
-                                </button> &nbsp;  &nbsp;
-
-                                <a href="/dataadminDelete/${data}" class="btn btn-danger "
-                                    onclick="return confirm('Yakin ingin menghapus data ?')">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </div>
-                        `;
+                            let data = columns.map(col => {
+                                return col.hidden ? `<tr data-dt-row="${col.rowIndex}" data-dt-column="${col.columnIndex}">
+                                                <th>${col.title}</th>
+                                                <td>${col.data}</td>
+                                            </tr>` : '';
+                            }).join('');
+                            let table = document.createElement('table');
+                            table.innerHTML = data;
+                            return data ? table : false;
                         }
                     }
+                },
+                data: data,
+                columns: [{
+                        data: null,
+                        render: (data, type, row, meta) => meta.row + 1
+                    },
+                    {
+                        data: 'name'
+                    },
+                    {
+                        data: 'email'
+                    },
+                    {
+                        data: 'role'
+                    },
+                    {
+                        data: 'id',
+                        render: (data) => `
+                    <div class="button-container">
+                        <button type="button" class="btn btn-warning float-end ms-2" @click="select(${data})" data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
+                            <i class="fas fa-fw fa-solid fa-pen"></i>
+                        </button> &nbsp; &nbsp;
+                        <a href="/dataadminDelete/${data}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ?')">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>`
+                    }
                 ]
-        });
+            });
         }
 
-    function exportPDF() {
+
+        function exportPDF() {
             const element = document.getElementById('dataadminTable');
-            const { jsPDF } = window.jspdf;
+            const {
+                jsPDF
+            } = window.jspdf;
             const doc = new jsPDF();
             doc.text('Data Admin', 14, 20);
             doc.autoTable({
-                head: [['No', 'Nama', 'Email', 'Role']],
+                head: [
+                    ['No', 'Nama', 'Email', 'Role']
+                ],
                 body: [...element.querySelectorAll('tbody tr')].map(row => [
                     row.cells[0].textContent,
                     row.cells[1].textContent,
