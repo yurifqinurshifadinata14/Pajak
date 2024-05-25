@@ -54,12 +54,12 @@
                                             <button type="button" class="btn-close" data-bs-dismiss="modal"
                                                 aria-label="Close"></button>
                                         </div>
-                                        <div class="modal-body">
-                                            <a href="{{ route('export.excelpph21') }}" class="btn btn-success">Export to
+                                        <div class="modal-body text-center">
+                                            <a href="{{ route('export.excelpph21') }}" class="btn btn-success btn-sm">Export to
                                                 Excel</a>
-                                            <button class="btn btn-danger" x-on:click="exportPDF()">Export to
+                                            <button class="btn btn-danger btn-sm" x-on:click="exportPDF()">Export to
                                                 PDF</button>
-                                            <button class="btn btn-secondary text-light" x-on:click="copyToClipboard('#pph21Table')">Copy Data</button>
+                                            <button class="btn btn-secondary text-light btn-sm" x-on:click="copyToClipboard('#pph21Table')">Copy Data</button>
                                         </div>
                                     </div>
                                 </div>

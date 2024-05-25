@@ -45,10 +45,10 @@
                                                 aria-label="Close"></button>
                                         </div>
                                         <div class="modal-body text-center">
-                                            <a href="{{ route('export.excelkaryawan') }}" class="btn btn-success">Export to
+                                            <a href="{{ route('export.excelkaryawan') }}" class="btn btn-success btn-sm">Export to
                                                 Excel</a>
-                                            <button class="btn btn-danger" onclick="exportPDF()">Export to PDF</button>
-                                            <button class="btn btn-secondary text-light"
+                                            <button class="btn btn-danger btn-sm" onclick="exportPDF()">Export to PDF</button>
+                                            <button class="btn btn-secondary text-light btn-sm"
                                                 onclick="copyToClipboard('#tableKaryawan')">Copy Data</button>
                                         </div>
                                     </div>

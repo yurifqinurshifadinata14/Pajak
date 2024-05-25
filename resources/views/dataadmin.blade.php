@@ -81,11 +81,14 @@
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body text-center">
-                                        <a href="{{ route('export.exceldataadmin') }}" class="btn btn-success">Export to
+                                        <a href="{{ route('export.exceldataadmin') }}"
+                                            class="btn btn-success btn-sm">Export to
                                             Excel</a>
-                                        <button class="btn btn-danger" onclick="exportPDF()">Export to PDF</button>
-                                        <button class="btn btn-secondary text-light"
+                                        <button class="btn btn-danger btn-sm" onclick="exportPDF()">Export to
+                                            PDF</button>
+                                        <button class="btn btn-secondary text-light btn-sm"
                                             onclick="copyToClipboard('#dataadminTable')">Copy Data</button>
+
                                     </div>
                                 </div>
                             </div>
@@ -171,7 +174,7 @@
                 </div>
                 </td>
                 </tr>
-                 @endforeach
+                @endforeach
                 </tbody>
                 </table>
             </div>
@@ -228,154 +231,147 @@
     </div>
     @endforeach
     @push('script')
-    <script>
-        let dataadmins = {
-            !!json_encode($dataadmins) !!
-        };
+<script>
+    document.addEventListener('alpine:init', function () {
+        Alpine.data('app', () => ({
+            pilih: '',
+            select(id) {
+                this.pilih = id;
+            }
+        }));
+    });
 
-        document.addEventListener('alpine:init', function () {
-            Alpine.data('app', () => ({
-                pilih: '',
-                select(id) {
-                    this.pilih = id;
-                }
-            }));
-        });
-
-
-
-
-        function initTable(data) {
-            $('#dataadminTable').DataTable({
-                dom: 'Bfrtip',
-                buttons: [{
-                        extend: 'copy',
-                        text: '<i class="fas fa-copy"></i> Copy',
-                        className: 'btn-sm btn-secondary d-none d-md-block',
-                        titleAttr: 'Salin ke Clipboard'
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="fas fa-file-excel"></i> Excel',
-                        className: 'btn-sm btn-success d-none d-md-block',
-                        titleAttr: 'Ekspor ke Excel'
-                    },
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"></i> PDF',
-                        className: 'btn-sm btn-danger d-none d-md-block',
-                        titleAttr: 'Unduh sebagai PDF'
-                    }
-                ],
-                responsive: {
-                    details: {
-                        renderer: (api, rowIdx, columns) => {
-                            let data = columns.map(col => {
-                                return col.hidden ? `<tr data-dt-row="${col.rowIndex}" data-dt-column="${col.columnIndex}">
+    function initTable(data) {
+        $('#dataadminTable').DataTable({
+            // dom: 'Bfrtip',
+            // buttons: [{
+            //         extend: 'copy',
+            //         text: '<i class="fas fa-copy"></i> Copy',
+            //         className: 'btn-sm btn-secondary d-none d-md-block',
+            //         titleAttr: 'Salin ke Clipboard'
+            //     },
+            //     {
+            //         extend: 'excel',
+            //         text: '<i class="fas fa-file-excel"></i> Excel',
+            //         className: 'btn-sm btn-success d-none d-md-block',
+            //         titleAttr: 'Ekspor ke Excel'
+            //     },
+            //     {
+            //         extend: 'pdf',
+            //         text: '<i class="fas fa-file-pdf"></i> PDF',
+            //         className: 'btn-sm btn-danger d-none d-md-block',
+            //         titleAttr: 'Unduh sebagai PDF'
+            //     }
+            // ],
+            responsive: {
+                details: {
+                    renderer: (api, rowIdx, columns) => {
+                        let data = columns.map(col => {
+                            return col.hidden ? `<tr data-dt-row="${col.rowIndex}" data-dt-column="${col.columnIndex}">
                                                 <th>${col.title}</th>
                                                 <td>${col.data}</td>
                                             </tr>` : '';
-                            }).join('');
-                            let table = document.createElement('table');
-                            table.innerHTML = data;
-                            return data ? table : false;
-                        }
+                        }).join('');
+                        let table = document.createElement('table');
+                        table.innerHTML = data;
+                        return data ? table : false;
                     }
+                }
+            },
+            data: data,
+            columns: [{
+                    data: null,
+                    render: (data, type, row, meta) => meta.row + 1
                 },
-                data: data,
-                columns: [{
-                        data: null,
-                        render: (data, type, row, meta) => meta.row + 1
-                    },
-                    {
-                        data: 'name'
-                    },
-                    {
-                        data: 'email'
-                    },
-                    {
-                        data: 'role'
-                    },
-                    {
-                        data: 'id',
-                        render: (data) => `
-                    <div class="button-container">
-                        <button type="button" class="btn btn-warning float-end ms-2" @click="select(${data})" data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
-                            <i class="fas fa-fw fa-solid fa-pen"></i>
-                        </button> &nbsp; &nbsp;
-                        <a href="/dataadminDelete/${data}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ?')">
-                            <i class="fa fa-trash"></i>
-                        </a>
-                    </div>`
-                    }
-                ]
-            });
-        }
-
-
-        function exportPDF() {
-            const element = document.getElementById('dataadminTable');
-            const {
-                jsPDF
-            } = window.jspdf;
-            const doc = new jsPDF();
-            doc.text('Data Admin', 14, 20);
-            doc.autoTable({
-                head: [
-                    ['No', 'Nama', 'Email', 'Role']
-                ],
-                body: [...element.querySelectorAll('tbody tr')].map(row => [
-                    row.cells[0].textContent,
-                    row.cells[1].textContent,
-                    row.cells[2].textContent,
-                    row.cells[3].textContent
-                ]),
-                styles: {
-                    fontSize: 12,
-                    overflow: 'linebreak'
+                {
+                    data: 'name'
+                },
+                {
+                    data: 'email'
+                },
+                {
+                    data: 'role'
+                },
+                {
+                    data: 'id',
+                    render: (data) => `
+                        <div class="button-container">
+                            <button type="button" class="btn btn-warning float-end ms-2" @click="select(${data})" data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
+                                <i class="fas fa-fw fa-solid fa-pen"></i>
+                            </button> &nbsp; &nbsp;
+                            <a href="/dataadminDelete/${data}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ?')">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </div>`
                 }
-            });
-            doc.save('dataadmin.pdf');
-        }
-
-        function copyToClipboard(selector) {
-            var element = document.querySelector(selector);
-
-            if (element) {
-                var range = document.createRange();
-                var selection = window.getSelection();
-
-                selection.removeAllRanges();
-
-                range.selectNodeContents(element);
-
-                selection.addRange(range);
-
-                try {
-                    document.execCommand('copy');
-                    alert('Data copied to clipboard!');
-                } catch (err) {
-                    alert('Oops, unable to copy');
-                }
-
-                selection.removeAllRanges();
-            } else {
-                alert('Element not found');
-            }
-        }
-
-    </script>
-
-    <script>
-        $(document).ready(function () {
-            $('#dataadminTable').DataTable({
-                responsive: true,
-                autoWidth: false
-            });
+            ]
         });
+    }
 
-    </script>
-    @endpush
+    function exportPDF() {
+        const element = document.getElementById('dataadminTable');
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+        doc.text('Data Admin', 14, 20);
+        doc.autoTable({
+            head: [
+                ['No', 'Nama', 'Email', 'Role']
+            ],
+            body: [...element.querySelectorAll('tbody tr')].map(row => [
+                row.cells[0].textContent,
+                row.cells[1].textContent,
+                row.cells[2].textContent,
+                row.cells[3].textContent
+            ]),
+            styles: {
+                fontSize: 12,
+                overflow: 'linebreak'
+            }
+        });
+        doc.save('dataadmin.pdf');
+    }
+
+    function copyToClipboard(selector) {
+        var el = document.querySelector(selector);
+        var body = document.body;
+        var range, sel;
+
+        if (!el) {
+            alert('Element not found');
+            return;
+        }
+
+        if (document.createRange && window.getSelection) {
+            range = document.createRange();
+            sel = window.getSelection();
+            sel.removeAllRanges();
+            try {
+                range.selectNodeContents(el);
+                sel.addRange(range);
+            } catch (e) {
+                range.selectNode(el);
+                sel.addRange(range);
+            }
+            document.execCommand('copy');
+            sel.removeAllRanges();
+            alert('Data copied to clipboard!');
+        } else if (body.createTextRange) {
+            range = body.createTextRange();
+            range.moveToElementText(el);
+            range.select();
+            document.execCommand('copy');
+            alert('Data copied to clipboard!');
+        } else {
+            alert('Oops, unable to copy');
+        }
+    }
+
+    $(document).ready(function () {
+        initTable( {!! json_encode($dataadmins) !!} );
+    });
+</script>
+@endpush
+
 
 </main>
 @endsection
