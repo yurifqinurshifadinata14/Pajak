@@ -20,18 +20,20 @@
                         <i class="fas fa-fw fa-file-excel d-inline d-md-none"></i>
                         <span class="d-none d-md-inline">Import Excel</span>
                     </button>
+
+                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary  me-2" data-bs-toggle="modal"
+                        data-bs-target="#exportModal">
+                        <i class="fas fa-fw fa-file-export"></i>
+                        <span class="d-none d-md-inline">Export</span>
+                    </button>
                     <!-- Button Tambah -->
-                    <button type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal"
+                    <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
                         data-bs-target="#tambah">
                         <i class="fas fa-fw fa-solid fa-plus d-inline d-md-none"></i>
                         <span class="d-none d-md-inline">Tambah</span>
                     </button>
 
-                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                        data-bs-target="#exportModal">
-                        <i class="fas fa-fw fa-file-export"></i>
-                        <span class="d-none d-md-inline">Export</span>
-                    </button>
+                  
                     <!-- Modal Button Tambah -->
                     <x-dataadmin.modaltambahdataadmin />
 

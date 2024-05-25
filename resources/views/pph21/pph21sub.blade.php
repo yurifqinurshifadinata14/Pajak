@@ -20,17 +20,20 @@
                             <i class="fas fa-plus"></i>
                             <span class="d-none d-md-inline">Tambah</span>
                         </button>
-                        <!-- Button Import -->
-                        <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
-                            data-bs-target="#import">
-                            <i class="fas fa-fw fa-file-excel"></i>
-                            <span class="d-none d-md-inline">Import Excel</span>
-                        </button>
-                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+
+                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal"
                             data-bs-target="#exportModal">
                             <i class="fas fa-fw fa-file-export"></i>
                             <span class="d-none d-md-inline">Export</span>
                         </button>
+
+                        <!-- Button Import -->
+                        <button type="button" class="btn btn-sm btn-success" data-bs-toggle="modal"
+                            data-bs-target="#import">
+                            <i class="fas fa-fw fa-file-excel"></i>
+                            <span class="d-none d-md-inline">Import Excel</span>
+                        </button>
+                       
                         <!-- modal button tambah-->
                         <x-pph21sub.modaltambah :pajaks="$pajaks" />
 
