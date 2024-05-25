@@ -244,6 +244,7 @@
                             $('#exportExcelBtn').on('click', function(event) {
                                 event.preventDefault();
                                 window.location.href = '{{ route("export.excelpph21") }}';
+                                window.location.href = '{{ route("export.excelpph21") }}';
                             });
 
                             // Menambahkan event listener untuk tombol "Export PDF"

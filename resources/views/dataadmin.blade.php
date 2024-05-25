@@ -80,7 +80,7 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
+                                    <div class="modal-body text-center">
                                         <a href="{{ route('export.exceldataadmin') }}" class="btn btn-success">Export to
                                             Excel</a>
                                         <button class="btn btn-danger" onclick="exportPDF()">Export to PDF</button>
