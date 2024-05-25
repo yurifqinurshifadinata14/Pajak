@@ -34,7 +34,7 @@
                     </button>
 
                     <!-- Modal Button Tambah -->
-                    <x-pajaksub.modaltambah :pajaks="$pajaks" />
+                    <x-pajaksub.modaltambah />
                     <!-- Modal Button Edit -->
                     <x-pajaksub.modaledit />
                     <!-- Modal Button Import -->
