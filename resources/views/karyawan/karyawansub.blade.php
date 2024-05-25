@@ -111,7 +111,6 @@
                     $('#tableKaryawan').DataTable({
                         dom: 'Bfrtip',
                         buttons: [
-
                             {
                                 extend: 'copy',
                                 text: '<i class="fas fa-copy"> </i> Copy',
@@ -131,7 +130,8 @@
                                 titleAttr: 'Unduh sebagai PDF',
                             }
                         ],
-
+                        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                        pageLength: 10,
                         responsive: {
                             details: {
                                 renderer: (api, rowIdx, columns) => {
@@ -326,7 +326,6 @@
                     });
                     doc.save('datakaryawan.pdf');
                 }
-
 
                 window.copyToClipboard = function(selector) {
                     var element = document.querySelector(selector);

@@ -3,8 +3,8 @@
 @section('konten')
 <main x-data="{ pilih: '' }">
     <div class="container-fluid px-0" x-data="app">
-        <h5 class="d-inline d-md-none mt-4"> DATA ADMIN </h5>
-        <h1 class="d-none d-md-block mt-4"> DATA ADMIN </h1>
+        <h5 class="mt-4 d-inline d-md-none"> DATA ADMIN </h5>
+        <h1 class="mt-4 d-none d-md-block"> DATA ADMIN </h1>
         <div class="card mb-4">
             <div class="card-header d-flex justify-content-between align-items-center">
                 <div>
@@ -26,11 +26,18 @@
                         <i class="fas fa-fw fa-solid fa-plus d-inline d-md-none"></i>
                         <span class="d-none d-md-inline">Tambah</span>
                     </button>
+
+                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
+                        data-bs-target="#exportModal">
+                        <i class="fas fa-fw fa-file-export"></i>
+                        <span class="d-none d-md-inline">Export</span>
+                    </button>
                     <!-- Modal Button Tambah -->
                     <x-dataadmin.modaltambahdataadmin />
 
                     <!-- Modal Button Edit -->
                     <x-dataadmin.modaleditdataadmin />
+
 
                     <!-- Modal Import -->
                     <div class="modal fade" id="import" tabindex="-1" aria-labelledby="importLabel" aria-hidden="true">
@@ -61,11 +68,7 @@
                     </div>
 
                     <!-- Export Button (Hidden on Desktop) -->
-                    <div class="d-sm-none">
-                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                            data-bs-target="#exportModal">
-                            <i class="fas fa-fw fa-file-export"></i>
-                        </button>
+                    <div class="d-sm-flex">
                         <!-- Modal Export Mobile -->
                         <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
                             aria-hidden="true">
@@ -129,7 +132,7 @@
 
                 </style>
                 <div class="table-responsive">
-                    <table id="dataadminTable" class="my-table responsive" style="width:100%">
+                    <table id="dataadminTable" class="my-table">
                         <thead>
                             <tr>
                                 <th>Nomor</th>
@@ -140,20 +143,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($dataadmins as $dataadmin)
+                            @foreach($dataadmins as $dataadmin)
                             <tr>
-                                <td>{{ $loop->iteration }}</td> <!-- Incremental number -->
+                                <td>{{ $loop->iteration }}</td> <!-- Nomor urut -->
                                 <td>{{ $dataadmin->name }}</td>
                                 <td>{{ $dataadmin->email }}</td>
                                 <td>{{ $dataadmin->role }}</td>
                                 <td>
-                                    <!-- Buttons for actions -->
+                                    <!-- Tombol aksi -->
                                     <div class="button-container">
                                         <button type="button" class="btn btn-warning float-end ms-2"
-                                            @click="select('{{ $dataadmin->id }}')" data-bs-toggle="modal"
-                                            :data-bs-target="'#edit{{ $dataadmin->id }}'">
+                                            @click="select({{ $dataadmin->id }})" data-bs-toggle="modal"
+                                            :data-bs-target="'#edit' + {{ $dataadmin->id }}">
                                             <i class="fas fa-fw fa-solid fa-pen"></i>
-                                        </button> &nbsp; &nbsp;
+                                        </button>
+
+
+                                        &nbsp; &nbsp;
 
                                         <a href="{{ route('dataadminDelete', ['id' => $dataadmin->id]) }}"
                                             class="btn btn-danger"
@@ -161,17 +167,17 @@
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
-                                </td>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
                 </div>
+                </td>
+                </tr>
+                @endforeach
+                </tbody>
+                </table>
             </div>
         </div>
     </div>
+    </div>
 
-    <!-- Modal Edit -->
     @foreach($dataadmins as $dataadmin)
     <div class="modal fade" id="edit{{ $dataadmin->id }}" tabindex="-1" aria-labelledby="edit{{ $dataadmin->id }}Label"
         aria-hidden="true">
@@ -206,22 +212,19 @@
                         <div class="form-group mt-3">
                             <select name="role" id="exampleInputRole" class="form-select">
                                 <option value="" disabled>Pilih Role</option>
-                                <option value="admin" {{ $dataadmin->role == 'admin' ? 'selected' : '' }}>
-                                    Admin</option>
-                                <option value="staff" {{ $dataadmin->role == 'staff' ? 'selected' : '' }}>
-                                    Staff</option>
+                                <option value="admin" {{ $dataadmin->role == 'admin' ? 'selected' : '' }}>Admin</option>
+                                <option value="staff" {{ $dataadmin->role == 'staff' ? 'selected' : '' }}>Staff</option>
                             </select>
                         </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Simpan</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    </form>
                 </div>
-                </form>
             </div>
         </div>
     </div>
-
     @endforeach
     @push('script')
     <script>
@@ -229,16 +232,13 @@
             !!json_encode($dataadmins) !!
         };
 
-
-
         document.addEventListener('alpine:init', function () {
             Alpine.data('app', () => ({
+                pilih: '',
                 select(id) {
                     this.pilih = id;
                 }
             }));
-
-            initTable(dataadmins);
         });
 
 
@@ -249,71 +249,42 @@
                 dom: 'Bfrtip',
                 buttons: [{
                         extend: 'copy',
-                        text: '<i class="fas fa-copy"> </i> Copy',
-                        className: 'btn-sm btn-secondary d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                        titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
-                        responsive: true,
-                        responsivePriority: 1,
+                        text: '<i class="fas fa-copy"></i> Copy',
+                        className: 'btn-sm btn-secondary d-none d-md-block',
+                        titleAttr: 'Salin ke Clipboard'
                     },
                     {
                         extend: 'excel',
-                        text: '<i class="fas fa-file-excel"> </i> Excel',
-                        className: 'btn-sm btn-success d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                        titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
-                        responsive: true,
-                        responsivePriority: 2,
+                        text: '<i class="fas fa-file-excel"></i> Excel',
+                        className: 'btn-sm btn-success d-none d-md-block',
+                        titleAttr: 'Ekspor ke Excel'
                     },
                     {
                         extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"> </i> PDF',
-                        className: 'btn-sm btn-danger d-none d-md-block', // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                        titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
-                        responsive: true,
-                        responsivePriority: 3,
+                        text: '<i class="fas fa-file-pdf"></i> PDF',
+                        className: 'btn-sm btn-danger d-none d-md-block',
+                        titleAttr: 'Unduh sebagai PDF'
                     }
                 ],
-              
-                initComplete: function () {
-                    // Menambahkan event listener untuk tombol "Export Excel"
-                    $('#exportExcelBtn').on('click', function (event) {
-                        event.preventDefault();
-                        window.location.href = '{{ route("export.exceldataadmin") }}';
-                    });
-
-                // Menambahkan event listener untuk tombol "Export PDF"
-                // $('#exportPdfBtn').on('click', function (event) {
-                //     event.preventDefault();
-                    // Tambahkan logika untuk mengarahkan ke halaman export PDF jika diperlukan
-                });
-            },
-            responsive: {
-                            details: {
-                                renderer: (api, rowIdx, columns) => {
-                                    let data = columns
-                                        .map((col, i) => {
-                                            return col.hidden ? /*html*/ `
-                                                <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
-                                                    <th>${col.title}</th>
-                                                    <td style="width: 100%;">${col.data}</td>
-                                                </tr>
-                                            `: ``;
-                                })
-                                .join('');
-
+                responsive: {
+                    details: {
+                        renderer: (api, rowIdx, columns) => {
+                            let data = columns.map(col => {
+                                return col.hidden ? `<tr data-dt-row="${col.rowIndex}" data-dt-column="${col.columnIndex}">
+                                                <th>${col.title}</th>
+                                                <td>${col.data}</td>
+                                            </tr>` : '';
+                            }).join('');
                             let table = document.createElement('table');
                             table.innerHTML = data;
-
                             return data ? table : false;
                         }
                     }
                 },
-                destroy: true,
                 data: data,
                 columns: [{
                         data: null,
-                        render: (data, type, row, meta) => {
-                            return meta.row + 1;
-                        }
+                        render: (data, type, row, meta) => meta.row + 1
                     },
                     {
                         data: 'name'
@@ -326,28 +297,20 @@
                     },
                     {
                         data: 'id',
-                        render: function (data, type, row, meta) {
-                            return /html/
-                            `
-                            <div class="button-container">
-                                <button type="button"
-                                    class="btn btn-warning float-end ms-2"
-                                    @click="select(${data})"
-                                    data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
-                                    <i class="fas fa-fw fa-solid fa-pen"></i>
-                                </button> &nbsp;  &nbsp;
-
-                                <a href="/dataadminDelete/${data}" class="btn btn-danger "
-                                    onclick="return confirm('Yakin ingin menghapus data ?')">
-                                    <i class="fa fa-trash"></i>
-                                </a>
-                            </div>
-                        `;
-                        }
+                        render: (data) => `
+                    <div class="button-container">
+                        <button type="button" class="btn btn-warning float-end ms-2" @click="select(${data})" data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
+                            <i class="fas fa-fw fa-solid fa-pen"></i>
+                        </button> &nbsp; &nbsp;
+                        <a href="/dataadminDelete/${data}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ?')">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </div>`
                     }
                 ]
             });
         }
+
 
         function exportPDF() {
             const element = document.getElementById('dataadminTable');
@@ -399,6 +362,16 @@
                 alert('Element not found');
             }
         }
+
+    </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#dataadminTable').DataTable({
+                responsive: true,
+                autoWidth: false
+            });
+        });
 
     </script>
     @endpush
