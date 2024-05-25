@@ -5,7 +5,7 @@
             <h5 class="mt-4 d-inline d-md-none"> Pph Unifikasi</h5>
             <h1 class="mt-4 d-none d-md-block"> Pph Unifikasi</h1>
 
-            <div class="card mb-4">
+            <div class="card mb-4 mt-3">
                 <div class="card-header d-flex justify-content-between align-items-center">
                     <div>
                         <i class="fas fa-table me-1"></i>
@@ -159,28 +159,28 @@
 
                 var initTable = (pphunifikasi) => {
                     $('#pphuniTable').DataTable({
-                        dom: 'Bfrtip',
-                        buttons: [
-                            //'copy', 'excel', 'pdf'
-                            {
-                                extend: 'copy',
-                                text: '<i class="fas fa-copy"> </i> Copy',
-                                className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                                titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
-                            },
-                            {
-                                extend: 'excel',
-                                text: '<i class="fas fa-file-excel"> </i> Excel',
-                                className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                                titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
-                            },
-                            {
-                                extend: 'pdf',
-                                text: '<i class="fas fa-file-pdf"> </i> PDF',
-                                className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                                titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
-                            }
-                        ],
+                        // dom: 'Bfrtip',
+                        // buttons: [
+                        //     //'copy', 'excel', 'pdf'
+                        //     {
+                        //         extend: 'copy',
+                        //         text: '<i class="fas fa-copy"> </i> Copy',
+                        //         className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                        //         titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
+                        //     },
+                        //     {
+                        //         extend: 'excel',
+                        //         text: '<i class="fas fa-file-excel"> </i> Excel',
+                        //         className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
+                        //         titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
+                        //     },
+                        //     {
+                        //         extend: 'pdf',
+                        //         text: '<i class="fas fa-file-pdf"> </i> PDF',
+                        //         className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
+                        //         titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
+                        //     }
+                        // ],
                         initComplete: function () {
                             // Menambahkan event listener untuk tombol "Export Excel"
                             $('#exportExcelBtn').on('click', function (event) {

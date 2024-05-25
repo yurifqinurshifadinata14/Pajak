@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Exports\DataAdminExport;
-use App\Exports\PphunifikasiExport;
+use App\Exports\PajakExport;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
@@ -25,18 +25,18 @@ class ExportController extends Controller
         return $pdf->download('export.pdf');
     }
 
-    public function export_excel_pphuni()
+    public function export_excelpajak()
     {
-        return Excel::download(new PphunifikasiExport(), 'pph_unifikasi.xlsx');
+        return Excel::download(new PajakExport(), 'pajak.xlsx');
     }
 
-    public function exportPDF_pphuni()
+    public function exportPDF_pajak()
     {
         // Contoh logika untuk membuat PDF menggunakan library Dompdf
         $data = ['foo' => 'bar'];
         $pdf = PDF::loadView('pdf.export', $data);
 
         // Menghasilkan dan mengirimkan PDF ke browser
-        return $pdf->download('export.pdfuni');
+        return $pdf->download('export.pajak');
     }
 }
