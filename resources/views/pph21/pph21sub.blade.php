@@ -462,7 +462,7 @@
                                 jsPDF
                             } = window.jspdf;
                             const doc = new jsPDF();
-                            doc.text('Data Pph21', 14, 20);
+                            doc.text('Data Pph21', 14, 10);
                             doc.autoTable({
                                 head: [
                                     ['No', 'Nama Wp', 'Jumlah Bayar', 'BPF', 'Biaya Bulan',

@@ -312,7 +312,7 @@
         const element = document.getElementById('dataadminTable');
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-        doc.text('Data Admin', 14, 20);
+        doc.text('Data Admin', 14, 10);
         doc.autoTable({
             head: [
                 ['No', 'Nama', 'Email', 'Role']

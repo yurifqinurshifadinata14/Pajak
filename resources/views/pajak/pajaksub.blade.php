@@ -341,7 +341,7 @@
                 const element = document.getElementById('pajakTable');
                 const { jsPDF } = window.jspdf;
                 const doc = new jsPDF();
-                doc.text('Data Pembayar', 14, 20);
+                doc.text('Data Pajak', 14, 10);
                 doc.autoTable({
                     head: [['No', 'Nama', 'Jenis WP', 'Status WP', 'NPWP', 'No Hp', 'No EFIN', 'Gmail', 'NIK', 'Alamat', 'Merk Dagang']],
                     body: [...element.querySelectorAll('tbody tr')].map(row => [

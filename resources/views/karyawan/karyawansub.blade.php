@@ -302,27 +302,31 @@
     });
 
     function exportPDF() {
-        const element = document.getElementById('tableKaryawan');
-        const jsPDF = window.jspdf.jsPDF;
-        const doc = new jsPDF();
-        doc.text('Data Karyawan', 14, 20);
-        doc.autoTable({
-            head: [
-                ['No', 'Nama', 'NIK', 'NPWP']
-            ],
-            body: Array.from(element.querySelectorAll('tbody tr')).map(row => [
-                row.cells[0].textContent,
-                row.cells[1].textContent,
-                row.cells[2].textContent,
-                row.cells[3].textContent
-            ]),
-            styles: {
-                fontSize: 12,
-                overflow: 'linebreak'
-            }
-        });
-        doc.save('datakaryawan.pdf');
-    }
+    const element = document.getElementById('tableKaryawan');
+    const jsPDF = window.jspdf.jsPDF;
+    const doc = new jsPDF();
+    
+   
+    doc.text('Data Karyawan', 14, 10);
+    
+    doc.autoTable({
+        head: [
+            ['No', 'Nama', 'NIK', 'NPWP']
+        ],
+        body: Array.from(element.querySelectorAll('tbody tr')).map(row => [
+            row.cells[0].textContent,
+            row.cells[1].textContent,
+            row.cells[2].textContent,
+            row.cells[3].textContent
+        ]),
+        styles: {
+            fontSize: 12,
+            overflow: 'linebreak'
+        }
+    });
+    doc.save('datakaryawan.pdf');
+}
+
 
     window.copyToClipboard = function(selector) {
         var element = document.querySelector(selector);
