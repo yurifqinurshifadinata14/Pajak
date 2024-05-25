@@ -19,16 +19,17 @@
                             <i class="fas fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
-                        <!-- Button trigger modal -->
+                        <!-- Button trigger modal Export-->
+                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal"
+                            data-bs-target="#exportModal">
+                            <i class="fas fa-fw fa-file-export"></i>
+                            <span class="d-none d-md-inline">Export</span>
+                        </button>
+                        <!-- Button trigger modal tambah-->
                         <button type="button" class="btn btn-sm btn-primary me-2" title="Tambah Data Pph Unifikasi"
                             data-bs-toggle="modal" data-bs-target="#tambah">
                             <i class="fas fa-fw fa-solid fa-plus"></i>
                             <span class="d-none d-md-inline">Tambah</span>
-                        </button>
-                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary" data-bs-toggle="modal"
-                            data-bs-target="#exportModal">
-                            <i class="fas fa-fw fa-file-export"></i>
-                            <span class="d-none d-md-inline">Export</span>
                         </button>
 
                         <!-- Modal Button Tambah -->

@@ -28,14 +28,4 @@ class ExportController extends Controller
         // Menghasilkan dan mengirimkan PDF ke browser
         return $pdf->download('export.pdf');
     }
-
-    public function exportPDF_pph21()
-    {
-        // Contoh logika untuk membuat PDF menggunakan library Dompdf
-        $data = ['foo' => 'bar'];
-        $pdf = PDF::loadView('pdf.export', $data);
-
-        // Menghasilkan dan mengirimkan PDF ke browser
-        return $pdf->download('export.pdf');
-    }
 }
