@@ -54,7 +54,6 @@
 
             .bg-navy {
                 background-color: #12094a;
-                padding: 10px;
                 border-radius: 5px;
             }
 
