@@ -136,7 +136,7 @@
                     <table id="dataadminTable" class="my-table">
                         <thead>
                             <tr>
-                                <th>Nomor</th>
+                                <th>No</th>
                                 <th>Nama</th>
                                 <th>Email</th>
                                 <th>Role</th>
