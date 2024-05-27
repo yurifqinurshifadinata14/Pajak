@@ -180,7 +180,7 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <!-- Sidebar Toggler (Sidebar) -->
-            <div class="d-none d-md-inline text-center">
+            <div class="d-flex align-items-center justify-content-center">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
 
