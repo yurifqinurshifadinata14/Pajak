@@ -22,7 +22,7 @@
                         <span class="d-none d-md-inline">Import Excel</span>
                     </button>
                     <!-- Button Export -->
-                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal"
+                    <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
                         data-bs-target="#exportModal">
                         <i class="fas fa-fw fa-file-export"></i>
                         <span class="d-none d-md-inline">Export</span>
@@ -98,6 +98,14 @@
             </div>
             <div class="card-body">
                 <style>
+                     .dt-buttons {
+                        display: block !important;
+                        }
+                        @media (max-width: 768px) {
+                        .dt-buttons {
+                        display: none !important;
+                        }
+                        }
                     .button-container {
                         display: flex;
                     }
@@ -243,26 +251,27 @@
 
     function initTable(data) {
         $('#dataadminTable').DataTable({
-            // dom: 'Bfrtip',
-            // buttons: [{
-            //         extend: 'copy',
-            //         text: '<i class="fas fa-copy"></i> Copy',
-            //         className: 'btn-sm btn-secondary d-none d-md-block',
-            //         titleAttr: 'Salin ke Clipboard'
-            //     },
-            //     {
-            //         extend: 'excel',
-            //         text: '<i class="fas fa-file-excel"></i> Excel',
-            //         className: 'btn-sm btn-success d-none d-md-block',
-            //         titleAttr: 'Ekspor ke Excel'
-            //     },
-            //     {
-            //         extend: 'pdf',
-            //         text: '<i class="fas fa-file-pdf"></i> PDF',
-            //         className: 'btn-sm btn-danger d-none d-md-block',
-            //         titleAttr: 'Unduh sebagai PDF'
-            //     }
-            // ],
+            dom: 'Bfrtip',
+            responsive:true,
+            buttons: [{
+                    extend: 'copy',
+                    text: '<i class="fas fa-copy"></i> Copy',
+                    className: 'btn-sm btn-secondary',
+                    titleAttr: 'Salin ke Clipboard'
+                },
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"></i> Excel',
+                    className: 'btn-sm btn-success',
+                    titleAttr: 'Ekspor ke Excel'
+                },
+                {
+                    extend: 'pdf',
+                    text: '<i class="fas fa-file-pdf"></i> PDF',
+                    className: 'btn-sm btn-danger',
+                    titleAttr: 'Unduh sebagai PDF'
+                }
+            ],
             responsive: {
                 details: {
                     renderer: (api, rowIdx, columns) => {

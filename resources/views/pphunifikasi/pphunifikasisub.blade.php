@@ -20,7 +20,7 @@
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
                         <!-- Button trigger modal Export-->
-                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal"
+                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
                             data-bs-target="#exportModal">
                             <i class="fas fa-fw fa-file-export"></i>
                             <span class="d-none d-md-inline">Export</span>
@@ -64,6 +64,14 @@
                 </div>
                 <div class="card-body">
                     <style>
+                         .dt-buttons {
+                        display: block !important;
+                        }
+                        @media (max-width: 768px) {
+                        .dt-buttons {
+                        display: none !important;
+                        }
+                        }
                         .button-container {
                             display: flex;
                         }
@@ -160,28 +168,29 @@
 
                 var initTable = (pphunifikasi) => {
                     $('#pphuniTable').DataTable({
-                        // dom: 'Bfrtip',
-                        // buttons: [
-                        //     //'copy', 'excel', 'pdf'
-                        //     {
-                        //         extend: 'copy',
-                        //         text: '<i class="fas fa-copy"> </i> Copy',
-                        //         className: 'btn-sm btn-secondary', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                        //         titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
-                        //     },
-                        //     {
-                        //         extend: 'excel',
-                        //         text: '<i class="fas fa-file-excel"> </i> Excel',
-                        //         className: 'btn-sm btn-success', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                        //         titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
-                        //     },
-                        //     {
-                        //         extend: 'pdf',
-                        //         text: '<i class="fas fa-file-pdf"> </i> PDF',
-                        //         className: 'btn-sm btn-danger', // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                        //         titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
-                        //     }
-                        // ],
+                        dom: 'Bfrtip',
+                        responsive:true,
+                        buttons: [
+                            //'copy', 'excel', 'pdf'
+                            {
+                                extend: 'copy',
+                                text: '<i class="fas fa-copy"> </i> Copy',
+                                className: 'btn-sm btn-secondary',
+                                titleAttr: 'Salin ke Clipboard',
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fas fa-file-excel"> </i> Excel',
+                                className: 'btn-sm btn-success',
+                                titleAttr: 'Ekspor ke Excel',
+                            },
+                            {
+                                extend: 'pdf',
+                                text: '<i class="fas fa-file-pdf"> </i> PDF',
+                                className: 'btn-sm btn-danger',
+                                titleAttr: 'Unduh sebagai PDF',
+                            }
+                        ],
                         initComplete: function () {
                             // Menambahkan event listener untuk tombol "Export Excel"
                             $('#exportExcelBtn').on('click', function (event) {

@@ -20,7 +20,7 @@
                             <i class="fas fa-fw fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
-                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2" data-bs-toggle="modal"
+                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
                             data-bs-target="#exportModal">
                             <i class="fas fa-fw fa-file-export"></i>
                             <span class="d-none d-md-inline">Export</span>
@@ -80,6 +80,14 @@
 
                 <div class="card-body">
                     <style>
+                         .dt-buttons {
+                        display: block !important;
+                        }
+                        @media (max-width: 768px) {
+                        .dt-buttons {
+                        display: none !important;
+                        }
+                        }
                         .button-container {
                             display: flex;
                         }
@@ -213,32 +221,33 @@
                 })
                 var initTable = (pph21) => {
                     $('#pph21Table').DataTable({
-                        // dom: 'Bfrtip',
-                        // buttons: [{
-                        //         extend: 'copy',
-                        //         text: '<i class="fas fa-copy"> </i> Copy',
-                        //         className: 'btn-sm btn-secondary d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                        //         titleAttr: 'Salin ke Clipboard', // Keterangan tambahan untuk tooltip
-                        //         responsive: true,
-                        //         responsivePriority: 1,
-                        //     },
-                        //     {
-                        //         extend: 'excel',
-                        //         text: '<i class="fas fa-file-excel"> </i> Excel',
-                        //         className: 'btn-sm btn-success d-none d-md-block', // Menambahkan kelas 'btn-success' untuk tombol Excel
-                        //         titleAttr: 'Ekspor ke Excel', // Keterangan tambahan untuk tooltip
-                        //         responsive: true,
-                        //         responsivePriority: 2,
-                        //     },
-                        //     {
-                        //         extend: 'pdf',
-                        //         text: '<i class="fas fa-file-pdf"> </i> PDF',
-                        //         className: 'btn-sm btn-danger d-none d-md-block', // Menambahkan kelas 'btn-danger' untuk tombol PDF
-                        //         titleAttr: 'Unduh sebagai PDF', // Keterangan tambahan untuk tooltip
-                        //         responsive: true,
-                        //         responsivePriority: 3,
-                        //     }
-                        // ],
+                        dom: 'Bfrtip',
+                        responsive:true,
+                        buttons: [{
+                                extend: 'copy',
+                                text: '<i class="fas fa-copy"> </i> Copy',
+                                className: 'btn-sm btn-secondary',
+                                titleAttr: 'Salin ke Clipboard',
+                                responsive: true,
+                                responsivePriority: 1,
+                            },
+                            {
+                                extend: 'excel',
+                                text: '<i class="fas fa-file-excel"> </i> Excel',
+                                className: 'btn-sm btn-success',
+                                titleAttr: 'Ekspor ke Excel',
+                                responsive: true,
+                                responsivePriority: 2,
+                            },
+                            {
+                                extend: 'pdf',
+                                text: '<i class="fas fa-file-pdf"> </i> PDF',
+                                className: 'btn-sm btn-danger',
+                                titleAttr: 'Unduh sebagai PDF',
+                                responsive: true,
+                                responsivePriority: 3,
+                            }
+                        ],
                         initComplete: function() {
                             // Menambahkan event listener untuk tombol "Export Excel"
                             $('#exportExcelBtn').on('click', function(event) {
