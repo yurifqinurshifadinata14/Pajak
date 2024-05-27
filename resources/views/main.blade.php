@@ -100,7 +100,7 @@
         <ul class="navbar-nav sidebar sidebar-dark bg-navy" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/pajaksub">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
                 <div class="sidebar-brand-icon">
                     {{-- <i class="fas fa-fw fa-user"></i> --}}
                     <img src="{{ asset('KKPLOGO.png') }}" class="img-fluid mx-auto" alt="..."
