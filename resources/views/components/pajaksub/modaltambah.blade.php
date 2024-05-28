@@ -23,7 +23,6 @@
                         {{-- <option selected>--Select--</option> --}}
                         <option value="Pribadi">Pribadi</option>
                         <option value="Badan" @click="showJenis=!showJenis">Badan</option>
-
                     </select>
                 </div>
                 <div id="jenisBadan" x-show="showJenis">
@@ -125,7 +124,7 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary"
                     data-bs-dismiss="modal">Batal</button>
-                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Simpan</button>
             </div>
         </form>
     </div>

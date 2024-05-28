@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/beranda', [BerandaController::class, 'index'])->name('beranda');
 
         Route::get('/pajak', [PajakController::class, 'index'])->name('pajak');
+        Route::get('/getpajaksub', [PajakController::class, 'getPajakSub'])->name('getpajaksub');
         Route::post('/pajakstore', [PajakController::class, 'store'])->name('pajakStore');
         Route::get('/pajaksub', [PajakController::class, 'pajaksub'])->name('pajakSub');
         Route::get('/pajak/pajakDetail/{id_pajak}', [PajakController::class, 'show'])->name('pajak.Detail');

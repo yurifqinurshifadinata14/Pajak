@@ -19,13 +19,12 @@ class PajakController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     $pajak = Pajak::all();
-    //     ($pajak);
-    //     return view('pajak.pajaksub', compact('pajak'));
-    //     //
-    // }
+    public function index()
+    {
+        $pajak = Pajak::all();
+        return view('pajak.pajaksub', compact('pajak'));
+        //
+    }
 
     // public function getpajak()
     // {
@@ -100,6 +99,7 @@ class PajakController extends Controller
         $pajak->nik = $request->nik;
         $pajak->alamat = $request->alamat;
         $pajak->merk_dagang = $request->merk_dagang;
+        $pajak->save();
 
         $jenis = new Jenis();
         $jenis->id_pajak = $id_pajak;
@@ -108,6 +108,7 @@ class PajakController extends Controller
         $jenis->jabatan = $request->jabatan;
         $jenis->saham = $request->saham;
         $jenis->npwpBadan = $request->npwpBadan;
+        $jenis->save();
 
         $status = new Status();
         $status->id_pajak = $id_pajak;
@@ -116,12 +117,13 @@ class PajakController extends Controller
         $status->user_efaktur = $request->user_efaktur;
         $status->passphrese = $request->passphrese;
         $status->password_efaktur = $request->password_efaktur;
+        $status->save();
 
         //dd($pajak, $jenis, $status);
-        if ($pajak->save() && $jenis->save() && $status->save()) {
+       /*  if ($pajak->save() && $jenis->save() && $status->save()) {
 
             return redirect()->route('pajakSub');
-        }
+        } */
     }
 
     public function pajaksub()
@@ -129,7 +131,6 @@ class PajakController extends Controller
         $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
             ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
             ->get();
-        // dd($pajak);
         return view('pajak.pajaksub', compact('pajak'));
     }
 

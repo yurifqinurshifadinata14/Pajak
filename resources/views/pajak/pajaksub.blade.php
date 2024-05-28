@@ -165,7 +165,7 @@
     </script>
     @push('script')
     <script>
-      let pajak = {!! json_encode($pajak) !!};
+        let pajak = {!! json_encode($pajak) !!};
 
         var getPajak = async () => {
             await fetch("{{ route('getpajaksub') }}", {
@@ -175,9 +175,13 @@
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
                 }
             }).then(res => res.json()).then(res => {
+                console.log('get pajak')
                 i = 1
                 pajak = res.pajak
                 initTable(pajak)
+            }).catch(err=>{
+                console.log('get pajak error:')
+                console.log(err)
             })
         };
 
@@ -305,7 +309,56 @@
         }
 
         initTable(pajak)
+
         document.addEventListener('alpine:init', () => {
+            Alpine.data('formTambah', () => ({
+                formData: {
+                    nama_wp: '',
+                    jenis: 'Pribadi',
+                    status: 'Non PKP',
+                    npwp: '',
+                    no_hp: '',
+                    no_efin: '',
+                    gmail: '',
+                    nik: '',
+                    alamat: '',
+                    merk_dagang: '',
+                },
+                showJenis: false,
+                showStatus: false,
+
+                handleSubmit() {
+                    console.log(this.formData)
+                    fetch("{{ route('pajakStore') }}", {
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": "application/json",
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify(this.formData)
+                    })
+                    .then(res => {
+                        $('#tambah').modal('hide');
+                        this.formData = {
+                            nama_wp: '',
+                            jenis: '',
+                            status: '',
+                            npwp: '',
+                            no_hp: '',
+                            no_efin: '',
+                            gmail: '',
+                            nik: '',
+                            alamat: '',
+                            merk_dagang: ''
+                        };
+                        getPajak(); // Panggil fungsi getPajak untuk memperbarui data yang ditampilkan
+                    })
+                    .catch(err => console.log('Error:', err));
+                }
+
+            }))
+
+
             Alpine.data('app', () => ({
                 data: [],
                 editId: '',
@@ -315,6 +368,7 @@
                     this.data = pajak.filter(item => item.id_pajak == id)
                     this.data = this.data[0]
                 },
+
                 editSubmit() {
                     fetch(`{{ route('pajakUpdate', '') }}/${this.data.id_pajak}`, {
                         method: 'PUT',
