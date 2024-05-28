@@ -16,7 +16,9 @@ class PajakController extends Controller
      */
     public function get()
     {
-        $pajak =  Pajak::all();
+        $pajak = Pajak::join('jenis', 'jenis.id_pajak', '=', 'pajaks.id_pajak')
+            ->join('statuses', 'statuses.id_pajak', '=', 'pajaks.id_pajak')
+            ->get();
         return response()->json([
             'pajak' => $pajak
         ]);
@@ -114,7 +116,7 @@ class PajakController extends Controller
         $pajak = Pajak::where('id_pajak', $id_pajak)->first();
 
         // Perbarui data Pajak dengan data yang diterima dari request
-        if(!$pajak) {
+        if (!$pajak) {
             return response()->json([
                 'message' => "Data pajak dengan ID $id_pajak tidak ditemukan",
             ], 404);
@@ -153,5 +155,4 @@ class PajakController extends Controller
             'message' => "Data pajak dengan ID $id_pajak berhasil dihapus",
         ]);
     }
-
 }

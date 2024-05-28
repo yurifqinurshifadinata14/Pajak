@@ -120,7 +120,7 @@ class PajakController extends Controller
         $status->save();
 
         //dd($pajak, $jenis, $status);
-       /*  if ($pajak->save() && $jenis->save() && $status->save()) {
+        /*  if ($pajak->save() && $jenis->save() && $status->save()) {
 
             return redirect()->route('pajakSub');
         } */
