@@ -20,11 +20,11 @@
                             <i class="fas fa-fw fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
-                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
+                        <!-- <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
                             data-bs-target="#exportModal">
                             <i class="fas fa-fw fa-file-export"></i>
                             <span class="d-none d-md-inline">Export</span>
-                        </button>
+                        </button> -->
                         <!-- Button Tambah -->
                         <button id="tambahButton" aria-label="Tambah" class="btn btn-sm btn-primary me-2"
                             title="Tambah Data Pph 21" data-bs-toggle="modal" data-bs-target="#tambah"
@@ -42,9 +42,9 @@
                         <!-- Modal Button import -->
                         <x-pph21sub.modalimportpph21 />
 
-                        <!-- Export Button -->
-                        <div class="d-sm-flex">
-                            <!-- Modal Export Mobile -->
+                       
+                        <!-- <div class="d-sm-flex">
+                           
                             <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
@@ -64,7 +64,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                         {{-- <button type="button" class="btn btn-sm btn-primary float-end mb-2" title="Tambah Data Karyawan"
                             data-bs-toggle="modal" data-bs-target="#tambahkaryawan"
                             onclick="setTimeout(()=>tableKaryawan(karyawan),200)">
@@ -84,9 +84,7 @@
                         display: block !important;
                         }
                         @media (max-width: 768px) {
-                        .dt-buttons {
-                        display: none !important;
-                        }
+                       
                         }
                         .button-container {
                             display: flex;

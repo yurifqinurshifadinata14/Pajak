@@ -20,11 +20,11 @@
                             <i class="fas fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
-                        <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
+                        <!-- <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
                             data-bs-target="#exportModal">
                             <i class="fas fa-fw fa-file-export"></i>
                             <span class="d-none d-md-inline">Export</span>
-                        </button>
+                        </button> -->
                         <!-- Button Tambah -->
                         <button type="button" class="btn btn-sm btn-primary float-end me-2" title="Tambah Data Karyawan"
                             data-bs-toggle="modal" data-bs-target="#tambah">
@@ -32,9 +32,9 @@
                             <span class="d-none d-md-inline">Tambah</span>
                         </button>
 
-                        <!-- Export Button  -->
+<!--                       
                         <div class="d-sm-flex">
-                            <!-- Modal Export Mobile -->
+                          
                             <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
                                 aria-hidden="true">
                                 <div class="modal-dialog">
@@ -54,7 +54,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
 
                     <!-- modal button tambah-->
@@ -66,13 +66,21 @@
                 </div>
                 <div class="card-body">
                     <style>
+                        /* CSS untuk mode mobile */
+                        @media (max-width: 767px) {
+                            .mobile-top-left {
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                z-index: 1000;
+                            }
+                        }
+
                         .dt-buttons {
                         display: block !important;
                         }
                         @media (max-width: 768px) {
-                        .dt-buttons {
-                        display: none !important;
-                        }
+                        
                         }
                         .button-container {
                             display: flex;
@@ -117,30 +125,36 @@
 <script>
     let karyawan = {!! json_encode($karyawan) !!};
 
-                let tableKaryawan = (karyawan) => {
-                    $('#tableKaryawan').DataTable({
-                        dom: 'Bfrtip',
-                        responsive:true,
-                        buttons: [
-                            {
-                                extend: 'copy',
-                                text: '<i class="fas fa-copy"> </i> Copy',
-                                className: 'btn-sm btn-secondary',
-                                titleAttr: 'Salin ke Clipboard',
-                            },
-                            {
-                                extend: 'excel',
-                                text: '<i class="fas fa-file-excel"> </i> Excel',
-                                className: 'btn-sm btn-success',
-                                titleAttr: 'Ekspor ke Excel',
-                            },
-                            {
-                                extend: 'pdf',
-                                text: '<i class="fas fa-file-pdf"> </i> PDF',
-                                className: 'btn-sm btn-danger',
-                                titleAttr: 'Unduh sebagai PDF',
-                            }
-                        ],
+    let tableKaryawan = (karyawan) => {
+    $('#tableKaryawan').DataTable({
+        dom: 'Bfrtip',
+        responsive: true,
+        buttons: [
+            {
+                extend: 'copy',
+                text: '<i class="fas fa-copy"></i> Copy',
+                className: 'btn-sm btn-secondary',
+                titleAttr: 'Salin ke Clipboard',
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fas fa-file-excel"></i> Excel',
+                className: 'btn-sm btn-success',
+                titleAttr: 'Ekspor ke Excel',
+            },
+            {
+                extend: 'pdf',
+                text: '<i class="fas fa-file-pdf"></i> PDF',
+                className: 'btn-sm btn-danger',
+                titleAttr: 'Unduh sebagai PDF',
+            }
+        ],
+        initComplete: function () {
+            // Menerapkan perubahan CSS untuk mode mobile
+            if ($(window).width() < 768) {
+                $('.dt-buttons').addClass('mobile-top-left');
+            }
+        },
                         lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
                         pageLength: 10,
                         responsive: {
