@@ -155,35 +155,29 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dataadmins as $dataadmin)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td> <!-- Nomor urut -->
-                                <td>{{ $dataadmin->name }}</td>
-                                <td>{{ $dataadmin->email }}</td>
-                                <td>{{ $dataadmin->role }}</td>
-                                <td>
-                                    <!-- Tombol aksi -->
-                                    <div class="button-container">
-                                        <button type="button" class="btn btn-sm btn-warning float-end ms-2"
-                                            @click="select({{ $dataadmin->id }})" data-bs-toggle="modal"
-                                            :data-bs-target="'#edit' + {{ $dataadmin->id }}">
-                                            <i class="fas fa-fw fa-solid fa-pen"></i>
-                                        </button>
+    @foreach($dataadmins as $dataadmin)
+    <tr id="dataadmin-{{ $dataadmin->id }}">
+        <td>{{ $loop->iteration }}</td>
+        <td>{{ $dataadmin->name }}</td>
+        <td>{{ $dataadmin->email }}</td>
+        <td>{{ $dataadmin->role }}</td>
+        <td>
+            <div class="button-container">
+                <button type="button" class="btn btn-sm btn-warning float-end ms-2"
+                    @click="select({{ $dataadmin->id }})" data-bs-toggle="modal"
+                    :data-bs-target="'#edit' + {{ $dataadmin->id }}">
+                    <i class="fas fa-fw fa-solid fa-pen"></i>
+                </button>
+                &nbsp; &nbsp;
+                <button onclick="deleteDataAdmin({{ $dataadmin->id }})" class="btn btn-sm btn-danger">
+                    <i class="fa fa-trash"></i>
+                </button>
+            </div>
+        </td>
+    </tr>
+    @endforeach
+</tbody>
 
-
-                                        &nbsp; &nbsp;
-
-                                        <a href="{{ route('dataadminDelete', ['id' => $dataadmin->id]) }}" 
-                                                class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ?')">
-                                                <i class="fa fa-trash"></i>
-                                        </a>
-
-                                    </div>
-                </div>
-                </td>
-                </tr>
-                @endforeach
-                </tbody>
                 </table>
             </div>
         </div>
@@ -238,8 +232,32 @@
         </div>
     </div>
     @endforeach
-    @push('script')
+  @push('script')
 <script>
+    function deleteDataAdmin(id) {
+        if (confirm('Yakin ingin menghapus data?')) {
+            $.ajax({
+                url: '/dataadminDelete/' + id,
+                type: 'DELETE',
+                data: {
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Menghapus baris tabel
+                        $('#dataadmin-' + id).remove();
+                        alert(response.message);
+                    } else {
+                        alert('Error: ' + response.message);
+                    }
+                },
+                error: function(xhr) {
+                    alert('Terjadi kesalahan saat menghapus data');
+                }
+            });
+        }
+    }
+
     document.addEventListener('alpine:init', function () {
         Alpine.data('app', () => ({
             pilih: '',
@@ -252,25 +270,25 @@
     function initTable(data) {
         $('#dataadminTable').DataTable({
             dom: 'Bfrtip',
-            responsive:true,
+            responsive: true,
             buttons: [{
-                    extend: 'copy',
-                    text: '<i class="fas fa-copy"></i> Copy',
-                    className: 'btn-sm btn-secondary',
-                    titleAttr: 'Salin ke Clipboard'
-                },
-                {
-                    extend: 'excel',
-                    text: '<i class="fas fa-file-excel"></i> Excel',
-                    className: 'btn-sm btn-success',
-                    titleAttr: 'Ekspor ke Excel'
-                },
-                {
-                    extend: 'pdf',
-                    text: '<i class="fas fa-file-pdf"></i> PDF',
-                    className: 'btn-sm btn-danger',
-                    titleAttr: 'Unduh sebagai PDF'
-                }
+                extend: 'copy',
+                text: '<i class="fas fa-copy"></i> Copy',
+                className: 'btn-sm btn-secondary',
+                titleAttr: 'Salin ke Clipboard'
+            },
+            {
+                extend: 'excel',
+                text: '<i class="fas fa-file-excel"></i> Excel',
+                className: 'btn-sm btn-success',
+                titleAttr: 'Ekspor ke Excel'
+            },
+            {
+                extend: 'pdf',
+                text: '<i class="fas fa-file-pdf"></i> PDF',
+                className: 'btn-sm btn-danger',
+                titleAttr: 'Unduh sebagai PDF'
+            }
             ],
             responsive: {
                 details: {
@@ -289,30 +307,30 @@
             },
             data: data,
             columns: [{
-                    data: null,
-                    render: (data, type, row, meta) => meta.row + 1
-                },
-                {
-                    data: 'name'
-                },
-                {
-                    data: 'email'
-                },
-                {
-                    data: 'role'
-                },
-                {
-                    data: 'id',
-                    render: (data) => `
-                        <div class="button-container">
-                            <button type="button" class="btn btn-warning float-end ms-2" @click="select(${data})" data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
-                                <i class="fas fa-fw fa-solid fa-pen"></i>
-                            </button> &nbsp; &nbsp;
-                            <a href="/dataadminDelete/${data}" class="btn btn-danger" onclick="return confirm('Yakin ingin menghapus data ?')">
-                                <i class="fa fa-trash"></i>
-                            </a>
-                        </div>`
-                }
+                data: null,
+                render: (data, type, row, meta) => meta.row + 1
+            },
+            {
+                data: 'name'
+            },
+            {
+                data: 'email'
+            },
+            {
+                data: 'role'
+            },
+            {
+                data: 'id',
+                render: (data) => `
+                    <div class="button-container">
+                        <button type="button" class="btn btn-warning float-end ms-2" @click="select(${data})" data-bs-toggle="modal" :data-bs-target="'#edit' + ${data}">
+                            <i class="fas fa-fw fa-solid fa-pen"></i>
+                        </button> &nbsp; &nbsp;
+                        <button onclick="deleteDataAdmin(${data})" class="btn btn-danger">
+                            <i class="fa fa-trash"></i>
+                        </button>
+                    </div>`
+            }
             ]
         });
     }
@@ -376,10 +394,12 @@
     }
 
     $(document).ready(function () {
-        initTable( {!! json_encode($dataadmins) !!} );
+        initTable({!! json_encode($dataadmins) !!});
     });
 </script>
 @endpush
+
+
 
 
 </main>

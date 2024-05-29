@@ -77,7 +77,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/getDataadmin', [DataadminController::class, 'getDataadmin'])->name('getDataadmin');
         Route::get('/dataadmin', [DataadminController::class, 'index'])->name('dataadmin');
         Route::post('/dataadmin', [DataadminController::class, 'store'])->name('dataadminStore');
-        Route::get('/dataadminDelete/{id}', [DataadminController::class, 'destroy'])->name('dataadminDelete');
+        Route::delete('/dataadminDelete/{id}', [DataAdminController::class, 'dataadminDelete'])->name('dataadminDelete');
         Route::get('/dataadminEdit/{id}', [DataadminController::class, 'edit'])->name('dataadminEdit');
         Route::put('/dataadminUpdate/{id}', [DataadminController::class, 'update'])->name('dataadminUpdate');
 

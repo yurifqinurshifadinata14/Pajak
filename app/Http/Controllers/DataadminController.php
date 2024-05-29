@@ -109,19 +109,16 @@ class DataadminController extends Controller
      */
 
 
-    public function destroy($id)
-    {
-        // Temukan data berdasarkan ID
-        $dataadmin = User::find($id); // Ganti dengan model yang sesuai, misalnya User
-
-        if ($dataadmin) {
-            // Hapus data jika ditemukan
-            $dataadmin->delete();
-            return redirect()->route('dataadmin')->with('success', 'Data berhasil dihapus.');
-        } else {
-            // Jika data tidak ditemukan, kembalikan dengan pesan error
-            return redirect()->route('dataadmin')->with('error', 'Data tidak ditemukan.');
-        }
-    }
+     public function dataadminDelete($id)
+     {
+         $dataadmin = User::find($id);
+         if ($dataadmin) {
+             $dataadmin->delete();
+             return response()->json(['success' => true, 'message' => 'Data Admin deleted successfully']);
+         } else {
+             return response()->json(['success' => false, 'message' => 'Data Admin not found']);
+         }
+     }
+     
     
 }
