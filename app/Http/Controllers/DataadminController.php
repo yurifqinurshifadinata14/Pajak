@@ -107,10 +107,21 @@ class DataadminController extends Controller
     /**
      * Remove the specified resource from storage.
      */
+
+
     public function destroy($id)
     {
-        $deleted = User::where('id', $id)->delete();
-        return redirect('dataadmin');
+        // Temukan data berdasarkan ID
+        $dataadmin = User::find($id); // Ganti dengan model yang sesuai, misalnya User
+
+        if ($dataadmin) {
+            // Hapus data jika ditemukan
+            $dataadmin->delete();
+            return redirect()->route('dataadmin')->with('success', 'Data berhasil dihapus.');
+        } else {
+            // Jika data tidak ditemukan, kembalikan dengan pesan error
+            return redirect()->route('dataadmin')->with('error', 'Data tidak ditemukan.');
+        }
     }
     
 }

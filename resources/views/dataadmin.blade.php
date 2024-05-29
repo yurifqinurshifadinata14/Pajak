@@ -173,11 +173,11 @@
 
                                         &nbsp; &nbsp;
 
-                                        <a href="{{ route('dataadminDelete', ['id' => $dataadmin->id]) }}"
-                                            class="btn btn-sm btn-danger"
-                                            onclick="return confirm('Yakin ingin menghapus data ?')">
-                                            <i class="fa fa-trash"></i>
+                                        <a href="{{ route('dataadminDelete', ['id' => $dataadmin->id]) }}" 
+                                                class="btn btn-sm btn-danger" onclick="return confirm('Yakin ingin menghapus data ?')">
+                                                <i class="fa fa-trash"></i>
                                         </a>
+
                                     </div>
                 </div>
                 </td>
