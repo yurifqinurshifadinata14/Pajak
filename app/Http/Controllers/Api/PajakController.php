@@ -7,6 +7,8 @@ use App\Models\Jenis;
 use App\Models\Pajak;
 use App\Models\Status;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
 class PajakController extends Controller
@@ -37,8 +39,8 @@ class PajakController extends Controller
      */
     public function store(Request $request)
     {
+        Log::info($request->all());
         $validated = Validator::make($request->all(), [
-            'id_pajak' => 'required',
             'nama_wp' => 'required|max:255',
             'npwp' => 'required',
             'no_hp' => 'required',
@@ -50,18 +52,60 @@ class PajakController extends Controller
             'merk_dagang' => 'required',
         ]);
 
+
         if ($validated->fails()) {
             return response()->json([
                 'error' => $validated->errors()->first(),
             ], 422);
         }
 
-        $pajak = Pajak::create($request->all());
+        $max = DB::table('pajaks')->select(DB::raw('MAX(RIGHT(id_pajak,3)) as autoid'));
+        $kd = "";
 
-        if ($pajak) {
+        if ($max->count() > 0) {
+            foreach ($max->get() as $a) {
+                $tmp = ((int) $a->autoid) + 1;
+                $kd = sprintf("%03s", $tmp);
+                $id_pajak = "P-" . $kd;
+            }
+        } else {
+            $id_pajak = "P-001";
+        }
+
+        $pajak = new Pajak;
+        $pajak->id_pajak = $id_pajak;
+        $pajak->nama_wp = $request->nama_wp;
+        $pajak->npwp = $request->npwp;
+        $pajak->no_hp = $request->no_hp;
+        $pajak->no_efin = $request->no_efin;
+        $pajak->gmail = $request->gmail;
+        $pajak->password = $request->password;
+        $pajak->nik = $request->nik;
+        $pajak->alamat = $request->alamat;
+        $pajak->merk_dagang = $request->merk_dagang;
+        $pajak->save();
+
+        $jenis = new Jenis();
+        $jenis->id_pajak = $id_pajak;
+        $jenis->jenis = $request->jenis;
+        $jenis->alamatBadan = $request->alamatBadan;
+        $jenis->jabatan = $request->jabatan;
+        $jenis->saham = $request->saham;
+        $jenis->npwpBadan = $request->npwpBadan;
+        $jenis->save();
+
+        $status = new Status();
+        $status->id_pajak = $id_pajak;
+        $status->status = $request->status;
+        $status->enofa_password = $request->enofa_password;
+        $status->user_efaktur = $request->user_efaktur;
+        $status->passphrese = $request->passphrese;
+        $status->password_efaktur = $request->password_efaktur;
+        $status->save();
+
+        if ($pajak->save()) {
             return response()->json([
                 'message' => "Data telah tersimpan",
-                'pajak' => $pajak,
             ], 201);
         } else {
             return response()->json([
