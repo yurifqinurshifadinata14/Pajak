@@ -103,7 +103,7 @@ class PajakController extends Controller
 
 
         if ($pajak->save() && $jenis->save() && $status->save()) {
-
+            dd($request->all());
 
             return response()->json([
                 'message' => "Data telah tersimpan",
