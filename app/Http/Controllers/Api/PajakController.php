@@ -83,9 +83,9 @@ class PajakController extends Controller
         $pajak->nik = $request->nik;
         $pajak->alamat = $request->alamat;
         $pajak->merk_dagang = $request->merk_dagang;
-        /*   $pajak->save(); */
+        $pajak->save();
 
-        if ($request->jenis == "Badan") {
+        if ($pajak->save()) {
             $jenis = new Jenis();
             $jenis->id_pajak = $id_pajak;
             $jenis->jenis = $request->jenis;
@@ -93,9 +93,9 @@ class PajakController extends Controller
             $jenis->jabatan = $request->jabatan;
             $jenis->saham = $request->saham;
             $jenis->npwpBadan = $request->npwpBadan;
+            $jenis->save();
         }
-        /*   $jenis->save(); */
-        if ($request->status == "PKP") {
+        if ($pajak->save()) {
             $status = new Status();
             $status->id_pajak = $id_pajak;
             $status->status = $request->status;
@@ -103,10 +103,13 @@ class PajakController extends Controller
             $status->user_efaktur = $request->user_efaktur;
             $status->passphrese = $request->passphrese;
             $status->password_efaktur = $request->password_efaktur;
+            $status->save();
         }
-        /*   $status->save(); */
 
-        if ($pajak->save() && $jenis->save() && $status->save()) {
+        return response()->json([
+            'message' => "Data telah tersimpan",
+        ], 200);
+        /*   if ($pajak->save() && $jenis->save() && $status->save()) {
             return response()->json([
                 'message' => "Data telah tersimpan",
             ], 201);
@@ -114,7 +117,7 @@ class PajakController extends Controller
             return response()->json([
                 'error' => "Gagal menyimpan data",
             ], 500);
-        }
+        } */
     }
 
 
