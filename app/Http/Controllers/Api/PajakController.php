@@ -86,6 +86,7 @@ class PajakController extends Controller
 
 
         $jenis = new Jenis;
+        $jenis->id_pajak = $id_pajak;
         $jenis->jenis = $request->jenis;
         $jenis->alamatBadan = $request->alamatBadan;
         $jenis->jabatan = $request->jabatan;
@@ -93,6 +94,7 @@ class PajakController extends Controller
         $jenis->npwpBadan = $request->npwpBadan;
 
         $status = new Status;
+        $status->id_pajak = $id_pajak;
         $status->status = $request->status;
         $status->enofa_password = $request->enofa_password;
         $status->user_efaktur = $request->user_efaktur;
