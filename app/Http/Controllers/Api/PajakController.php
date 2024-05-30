@@ -86,21 +86,26 @@ class PajakController extends Controller
         $pajak->save();
 
 
+        $jenis = new Jenis;
+        $jenis->id_pajak = $id_pajak;
+        $jenis->save();
         $jenis = Jenis::where('id_pajak', $id_pajak)->first();
         $jenis->jenis = $request->jenis;
         $jenis->alamatBadan = $request->alamatBadan;
         $jenis->jabatan = $request->jabatan;
         $jenis->saham = $request->saham;
         $jenis->npwpBadan = $request->npwpBadan;
-        $jenis->save();
+        $jenis->update();
 
+        $status = new Status;
+        $status->id_pajak = $id_pajak;
+        $status->save();
         $status = Status::where('id_pajak', $id_pajak)->first();
         $status->status = $request->status;
         $status->enofa_password = $request->enofa_password;
         $status->user_efaktur = $request->user_efaktur;
         $status->passphrese = $request->passphrese;
         $status->password_efaktur = $request->password_efaktur;
-        $status->save();
 
 
 
