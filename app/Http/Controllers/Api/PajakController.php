@@ -86,8 +86,7 @@ class PajakController extends Controller
         $pajak->save();
 
 
-        $jenis = new Jenis;
-        $jenis->id_pajak = $id_pajak;
+        $jenis = Jenis::where('id_pajak', $id_pajak)->first();
         $jenis->jenis = $request->jenis;
         $jenis->alamatBadan = $request->alamatBadan;
         $jenis->jabatan = $request->jabatan;
@@ -95,8 +94,7 @@ class PajakController extends Controller
         $jenis->npwpBadan = $request->npwpBadan;
         $jenis->save();
 
-        $status = new Status;
-        $status->id_pajak = $id_pajak;
+        $status = Status::where('id_pajak', $id_pajak)->first();
         $status->status = $request->status;
         $status->enofa_password = $request->enofa_password;
         $status->user_efaktur = $request->user_efaktur;
