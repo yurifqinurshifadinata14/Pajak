@@ -145,12 +145,12 @@ class PajakController extends Controller
         // Validasi data yang diterima dari request
         $validated = Validator::make($request->all(), [
             'nama_wp' => 'string|max:255',
-            'npwp' => 'string|max:255',
+            'npwp' => 'digits:11',
             'no_hp' => 'string|max:255',
             'no_efin' => 'string|max:255',
             'gmail' => 'email',
             'password' => 'string',
-            'nik' => 'string|max:255',
+            'nik' => 'digits:11',
             'alamat' => 'string|max:255',
             'merk_dagang' => 'string|max:255',
         ]);
@@ -164,6 +164,8 @@ class PajakController extends Controller
 
         // Temukan data Pajak berdasarkan id_pajak
         $pajak = Pajak::where('id_pajak', $id_pajak)->first();
+        $jenis = Jenis::where('id_pajak', $id_pajak)->first();
+        $status = Status::where('id_pajak', $id_pajak)->first();
 
         // Perbarui data Pajak dengan data yang diterima dari request
         if (!$pajak) {
@@ -173,6 +175,8 @@ class PajakController extends Controller
         }
 
         $pajak->update($request->all());
+        $jenis->update($request->all());
+        $status->update($request->all());
 
         // Kembalikan respons JSON yang menyatakan data telah tersimpan
         return response()->json([
