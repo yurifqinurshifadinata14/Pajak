@@ -83,24 +83,18 @@ class PajakController extends Controller
         $pajak->nik = $request->nik;
         $pajak->alamat = $request->alamat;
         $pajak->merk_dagang = $request->merk_dagang;
-        $pajak->save();
 
 
         $jenis = new Jenis;
         $jenis->id_pajak = $id_pajak;
-        $jenis->save();
-        $jenis = Jenis::where('id_pajak', $id_pajak)->first();
         $jenis->jenis = $request->jenis;
         $jenis->alamatBadan = $request->alamatBadan;
         $jenis->jabatan = $request->jabatan;
         $jenis->saham = $request->saham;
         $jenis->npwpBadan = $request->npwpBadan;
-        $jenis->update();
 
         $status = new Status;
         $status->id_pajak = $id_pajak;
-        $status->save();
-        $status = Status::where('id_pajak', $id_pajak)->first();
         $status->status = $request->status;
         $status->enofa_password = $request->enofa_password;
         $status->user_efaktur = $request->user_efaktur;
@@ -108,13 +102,14 @@ class PajakController extends Controller
         $status->password_efaktur = $request->password_efaktur;
 
 
+        if ($pajak->save() && $jenis->save() && $status->save()) {
 
 
+            return response()->json([
+                'message' => "Data telah tersimpan",
+            ], 200);
+        }
 
-
-        return response()->json([
-            'message' => "Data telah tersimpan",
-        ], 200);
         /*   if ($pajak->save() && $jenis->save() && $status->save()) {
             return response()->json([
                 'message' => "Data telah tersimpan",
