@@ -83,28 +83,29 @@ class PajakController extends Controller
         $pajak->nik = $request->nik;
         $pajak->alamat = $request->alamat;
         $pajak->merk_dagang = $request->merk_dagang;
-        $pajak->save();
 
-        if ($pajak->save()) {
-            $jenis = new Jenis();
-            $jenis->id_pajak = $id_pajak;
-            $jenis->jenis = $request->jenis;
-            $jenis->alamatBadan = $request->alamatBadan;
-            $jenis->jabatan = $request->jabatan;
-            $jenis->saham = $request->saham;
-            $jenis->npwpBadan = $request->npwpBadan;
-            $jenis->save();
-        }
-        if ($pajak->save()) {
-            $status = new Status();
-            $status->id_pajak = $id_pajak;
-            $jenis->jenis = $request->jenis;
-            $jenis->alamatBadan = $request->alamatBadan;
-            $jenis->jabatan = $request->jabatan;
-            $jenis->saham = $request->saham;
-            $jenis->npwpBadan = $request->npwpBadan;
-            $status->save();
-        }
+
+        $jenis = new Jenis;
+        $jenis->jenis = $request->jenis;
+        $jenis->alamatBadan = $request->alamatBadan;
+        $jenis->jabatan = $request->jabatan;
+        $jenis->saham = $request->saham;
+        $jenis->npwpBadan = $request->npwpBadan;
+
+        $status = new Status;
+        $status->status = $request->status;
+        $status->enofa_password = $request->enofa_password;
+        $status->user_efaktur = $request->user_efaktur;
+        $status->passphrese = $request->passphrese;
+        $status->password_efaktur = $request->password_efaktur;
+
+        $pajak->save();
+        $jenis->save();
+        $status->save();
+
+
+
+
 
         return response()->json([
             'message' => "Data telah tersimpan",
@@ -217,6 +218,8 @@ class PajakController extends Controller
     {
         // Temukan data Pajak berdasarkan id_pajak
         $pajak = Pajak::where('id_pajak', $id_pajak)->first();
+        $jenis = Jenis::where('id_pajak', $id_pajak)->first();
+        $status = Status::where('id_pajak', $id_pajak)->first();
 
         // Periksa apakah data Pajak ditemukan
         if (!$pajak) {
@@ -227,6 +230,8 @@ class PajakController extends Controller
 
         // Hapus data Pajak
         $pajak->delete();
+        $jenis->delete();
+        $status->delete();
 
         // Kembalikan respons sukses
         return response()->json([
