@@ -98,11 +98,11 @@ class PajakController extends Controller
         if ($pajak->save()) {
             $status = new Status();
             $status->id_pajak = $id_pajak;
-            $status->status = $request->status;
-            $status->enofa_password = $request->enofa_password;
-            $status->user_efaktur = $request->user_efaktur;
-            $status->passphrese = $request->passphrese;
-            $status->password_efaktur = $request->password_efaktur;
+            $jenis->jenis = $request->jenis;
+            $jenis->alamatBadan = $request->alamatBadan;
+            $jenis->jabatan = $request->jabatan;
+            $jenis->saham = $request->saham;
+            $jenis->npwpBadan = $request->npwpBadan;
             $status->save();
         }
 
@@ -164,8 +164,32 @@ class PajakController extends Controller
 
         // Temukan data Pajak berdasarkan id_pajak
         $pajak = Pajak::where('id_pajak', $id_pajak)->first();
+        $pajak->nama_wp = $request->nama_wp;
+        $pajak->npwp = $request->npwp;
+        $pajak->no_hp = $request->no_hp;
+        $pajak->no_efin = $request->no_efin;
+        $pajak->gmail = $request->gmail;
+        $pajak->password = $request->password;
+        $pajak->nik = $request->nik;
+        $pajak->alamat = $request->alamat;
+        $pajak->merk_dagang = $request->merk_dagang;
+        $pajak->update();
+
         $jenis = Jenis::where('id_pajak', $id_pajak)->first();
+        $jenis->jenis = $request->jenis;
+        $jenis->alamatBadan = $request->alamatBadan;
+        $jenis->jabatan = $request->jabatan;
+        $jenis->saham = $request->saham;
+        $jenis->npwpBadan = $request->npwpBadan;
+        $jenis->update();
+
         $status = Status::where('id_pajak', $id_pajak)->first();
+        $jenis->jenis = $request->jenis;
+        $jenis->alamatBadan = $request->alamatBadan;
+        $jenis->jabatan = $request->jabatan;
+        $jenis->saham = $request->saham;
+        $jenis->npwpBadan = $request->npwpBadan;
+        $status->update();
 
         // Perbarui data Pajak dengan data yang diterima dari request
         if (!$pajak) {
@@ -174,9 +198,9 @@ class PajakController extends Controller
             ], 404);
         }
 
-        $pajak->update($request->all());
+        /*  $pajak->update($request->all());
         $jenis->update($request->all());
-        $status->update($request->all());
+        $status->update($request->all()); */
 
         // Kembalikan respons JSON yang menyatakan data telah tersimpan
         return response()->json([
