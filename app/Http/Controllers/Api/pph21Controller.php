@@ -14,7 +14,6 @@ class Pph21Controller extends Controller
      */
 
     //jhvjhjh
-    //asda
     public function get()
     {
         $pph21 = Pph21::join('karyawans', 'karyawans.nik', '=', 'pph21s.nik')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
