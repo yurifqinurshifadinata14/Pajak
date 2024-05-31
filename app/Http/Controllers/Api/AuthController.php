@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Laravel\Sanctum\Contracts\HasApiTokens;
 
 class AuthController extends Controller
 {
@@ -67,7 +68,6 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
             if ($user && Hash::check($request->password, $user->password)) {
                 $token = $user->createToken($user->name)->plainTextToken;
-                $user->remember_token = $token;
 
                 return response()->json([
                     'token' => $token
@@ -82,7 +82,10 @@ class AuthController extends Controller
     {
         $user = Auth::guard('sanctum')->user();
         /*   dd($user->tokens[0]->delete()); */
-        $user->tokens[0]->delete();
+        /*  $user->tokens()->delete(); */
+        if ($user instanceof HasApiTokens) {
+            $user->tokens()->delete();
+        }
         return response()->json([
             'Logout' => "Success"
         ]);
