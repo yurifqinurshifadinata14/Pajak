@@ -139,6 +139,7 @@ class Pph21Controller extends Controller
         // dd($pph21);
         return view('pph21.pph21sub', compact(['pph21', 'pajaks', 'karyawan']));
     }
+
     public function getPph21Sub()
     {
         $pph21 = Pph21::join('karyawans', 'karyawans.nik', '=', 'pph21s.nik')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
