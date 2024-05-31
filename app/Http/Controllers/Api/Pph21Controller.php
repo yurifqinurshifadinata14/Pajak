@@ -17,7 +17,7 @@ class Pph21Controller extends Controller
     public function get()
     {
         $pph21 = Pph21::join('karyawans', 'karyawans.nik', '=', 'pph21s.nik')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
-            ->get(['pph21s.id', 'pph21s.id_pajak', 'karyawans.nik', 'jumlah_bayar', 'biaya_bulan', 'bpf', 'nama_wp']);
+            ->get(['pph21s.id', 'pph21s.id_pajak', 'karyawans.nik', 'karyawans.nama', 'jumlah_bayar', 'biaya_bulan', 'bpf', 'nama_wp']);
         return response()->json([
             'pph21' => $pph21
         ]);
