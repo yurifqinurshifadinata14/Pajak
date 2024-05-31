@@ -83,9 +83,9 @@ class DataadminController extends Controller
         $validated = Validator::make($request->all(), [
             'name' => 'string|max:255',
             'email' => 'string|email:dns|unique:users,email,' . $id,
-            'password' => 'nullable|string|min:5|max:255',
-            'password_confirmation' => 'nullable|string|min:5|max:255|same:password',
             'role' => 'string',
+            /*  'password' => 'nullable|string|min:5|max:255',
+            'password_confirmation' => 'nullable|string|min:5|max:255|same:password', */
         ]);
 
         if ($validated->fails()) {
