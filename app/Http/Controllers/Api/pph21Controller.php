@@ -14,6 +14,7 @@ class Pph21Controller extends Controller
      */
 
     //jhvjhjh
+    //asda
     public function get()
     {
         $pph21 = Pph21::all();
