@@ -106,7 +106,6 @@ class Pph21Controller extends Controller
                 'bpf' => (int) $request->bpf,
                 'biaya_bulan' => (int) $request->biaya_bulan,
             ]);
-            dd($pph21);
             if ($pph21) {
                 return response()->json([
                     'message' => "Data telah tersimpan",
