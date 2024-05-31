@@ -37,11 +37,10 @@ class PphController extends Controller
         //
         $validated = Validator::make($request->all(), [
             'id_pajak' => 'required|max:255',
-            'id_pph' => 'required',
             'ntpn' => 'required|numeric',
             'biaya_bulan' => 'required|numeric',
             'jumlah_bayar' => 'required|numeric',
-     ]);
+        ]);
 
         if ($validated->fails()) {
             return response()->json([
@@ -63,11 +62,11 @@ class PphController extends Controller
             }
 
             Pph::create([
-            'id_pajak' => $request->id_pajak,
-            'id_pph' => $id_pph,
-            'ntpn' => $request->ntpn,
-            'biaya_bulan' => $request->biaya_bulan,
-            'jumlah_bayar' => $request->jumlah_bayar,
+                'id_pajak' => $request->id_pajak,
+                'id_pph' => $id_pph,
+                'ntpn' => $request->ntpn,
+                'biaya_bulan' => $request->biaya_bulan,
+                'jumlah_bayar' => $request->jumlah_bayar,
             ]);
 
             return response()->json([
@@ -102,7 +101,7 @@ class PphController extends Controller
             'ntpn' => 'numeric',
             'biaya_bulan' => 'numeric',
             'jumlah_bayar' => 'numeric',
-     ]);
+        ]);
 
         if ($validated->fails()) {
             return response()->json([
@@ -110,7 +109,7 @@ class PphController extends Controller
             ]);
         } else {
 
-            $pph=Pph::where('id_pph',$id_pph)->update([
+            $pph = Pph::where('id_pph', $id_pph)->update([
                 'ntpn' => (int)$request->ntpn,
                 'biaya_bulan' => (int)$request->biaya_bulan,
                 'jumlah_bayar' => (int)$request->jumlah_bayar,
