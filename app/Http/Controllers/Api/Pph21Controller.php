@@ -113,7 +113,7 @@ class Pph21Controller extends Controller
             }
             return response()->json([
                 'message' => "Data gagal tersimpan",
-                'error' => $pph21->errors(),
+                'error' => $pph21,
             ]);
         }
     }
