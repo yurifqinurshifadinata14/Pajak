@@ -83,9 +83,10 @@ class AuthController extends Controller
         $user = Auth::guard('sanctum')->user();
         /*   dd($user->tokens[0]->delete()); */
         /*  $user->tokens()->delete(); */
-        if ($user instanceof HasApiTokens) {
-            $user->tokens()->delete();
-        }
+        //logout token sanctum
+
+        $request->user()->currentAccessToken()->delete();
+
         return response()->json([
             'Logout' => "Success"
         ]);
