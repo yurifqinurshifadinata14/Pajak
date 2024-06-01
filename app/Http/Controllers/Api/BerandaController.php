@@ -8,6 +8,7 @@ use App\Models\Pajak;
 use App\Models\Pph;
 use App\Models\Pph21;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BerandaController extends Controller
 {
@@ -16,6 +17,9 @@ class BerandaController extends Controller
      */
     public function get()
     {
+        $name = Auth::guard('sanctum')->user()->name;
+        $role = Auth::guard('sanctum')->user()->role;
+
         $pembayar = Pajak::all();
         $totalpembayar = Pajak::count();
         $jumlahkaryawan = Karyawan::count();
@@ -26,12 +30,13 @@ class BerandaController extends Controller
 
         return response()->json([
             'totalpembayar' => $totalpembayar,
-            'jumlahkaryawan'=> $jumlahkaryawan,
-            'totalbayarpph'=> $totalbayarpph,
-            'totalbayarpph21'=> $totalbayarpph21
-            
+            'jumlahkaryawan' => $jumlahkaryawan,
+            'totalbayarpph' => $totalbayarpph,
+            'totalbayarpph21' => $totalbayarpph21,
+            'name' => $name,
+            'role' => $role
+
         ]);
-        
     }
 
     /**
