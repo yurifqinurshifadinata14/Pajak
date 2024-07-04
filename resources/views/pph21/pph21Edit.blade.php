@@ -18,8 +18,8 @@
                             <input type="text" class="form-control" id="jumlah_bayar" name="jumlah_bayar" value="{{ $pph21->jumlah_bayar }}" placeholder="jumlah bayar">
                         </div>
                         <div class="form-group">
-                            <label for="nama">BPF</label>
-                            <input type="text" class="form-control" id="bpf" name="bpf" value="{{ $pph21->bpf}}" placeholder="BPF">
+                            <label for="nama">BPE</label>
+                            <input type="text" class="form-control" id="bpe" name="bpe" value="{{ $pph21->bpe}}" placeholder="BPE">
                         </div>
                         <div class="form-group">
                             <label for="nama">Biaya Bulan</label>

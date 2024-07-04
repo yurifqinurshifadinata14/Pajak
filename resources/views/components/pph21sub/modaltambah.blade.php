@@ -29,9 +29,9 @@
                             x-mask:dynamic="$money($input, ',')" required>
                     </div>
                     <div class="form-group">
-                        <label for="bpf">BPF</label>
-                        <input type="text" class="form-control" id="bpf" name="bpf" placeholder="BPF"
-                            x-model="formData.bpf" required>
+                        <label for="bpe">BPE</label>
+                        <input type="text" class="form-control" id="bpe" name="bpe" placeholder="BPE"
+                            x-model="formData.bpe" required>
                     </div>
                     <div class="form-group">
                         <label for="biaya">Biaya Bulan</label>

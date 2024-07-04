@@ -85,7 +85,7 @@ class PphunifikasiController extends Controller
             'ntpn' => (int)$request->ntpn,
             'jumlah_bayar' => (int)$request->jumlah_bayar,
             'biaya_bulan' => (int)$request->biaya_bulan,
-            'bpf' => (string)$request->bpf,
+            'bpe' => (string)$request->bpe,
         ]);
         return redirect()->route('pphunifikasiSub');
     }
@@ -94,13 +94,13 @@ class PphunifikasiController extends Controller
     {
        /*  $pph =  Pph::with('pajak')->get();*/
         $pajaks =  Pajak::get(['id_pajak','nama_wp']);
-        $pphunifikasi = Pphunifikasi::join('pajaks','pphunifikasis.id_pajak','=','pajaks.id_pajak')->get(['pphunifikasis.id','id_pphuni','pphunifikasis.id_pajak','nama_wp','ntpn','biaya_bulan','jumlah_bayar','bpf']);
+        $pphunifikasi = Pphunifikasi::join('pajaks','pphunifikasis.id_pajak','=','pajaks.id_pajak')->get(['pphunifikasis.id','id_pphuni','pphunifikasis.id_pajak','nama_wp','ntpn','biaya_bulan','jumlah_bayar','bpe']);
         return view('pphunifikasi.pphunifikasisub', compact(['pphunifikasi','pajaks']));
     }
 
     public function getPphunifikasi(){
         $pajaks =  Pajak::get(['id_pajak','nama_wp']);
-        $pphunifikasi = Pphunifikasi::join('pajaks','pphunifikasis.id_pajak','=','pajaks.id_pajak')->get(['pphunifikasis.id','id_pphuni','pphunifikasis.id_pajak','nama_wp','ntpn','biaya_bulan','jumlah_bayar','bpf']);
+        $pphunifikasi = Pphunifikasi::join('pajaks','pphunifikasis.id_pajak','=','pajaks.id_pajak')->get(['pphunifikasis.id','id_pphuni','pphunifikasis.id_pajak','nama_wp','ntpn','biaya_bulan','jumlah_bayar','bpe']);
         return response()->json(['pphunifikasi' => $pphunifikasi]);
     }
 
@@ -138,13 +138,13 @@ class PphunifikasiController extends Controller
         // $pphunifikasi->ntpn = $request->ntpn;
         // $pphunifikasi->jumlah_bayar = $request->jumlah_bayar;
         // $pphunifikasi->bayar_bulan = $request->bayar_bulan;
-        // $pphunifikasi->bpf = $request->bpf;
+        // $pphunifikasi->bpe = $request->bpe;
         Log::info($id_pphuni);
         $pphunifikasi=Pphunifikasi::where('id_pphuni',$id_pphuni)->update([
             'ntpn' => (int)$request->ntpn,
             'jumlah_bayar' => (int)$request->jumlah_bayar,
             'biaya_bulan' => (int)$request->biaya_bulan,
-            'bpf' => (string)$request->bpf,
+            'bpe' => (string)$request->bpe,
         ]);
 
         return redirect()->route('pphunifikasiSub');

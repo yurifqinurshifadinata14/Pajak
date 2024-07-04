@@ -83,7 +83,7 @@ class Pph21Controller extends Controller
         $pph21->id_pajak = $request->id_pajak;
         $pph21->nik = (int) $request->nik;
         $pph21->jumlah_bayar = (int) $request->jumlah_bayar;
-        $pph21->bpf = (int) $request->bpf;
+        $pph21->bpe = (int) $request->bpe;
         $pph21->biaya_bulan = (int) $request->biaya_bulan;
         $pph21->save();
 
@@ -104,7 +104,7 @@ class Pph21Controller extends Controller
         //     'id_pajak' => $request->id_pajak,
         //     'id_pph21' => $request->id_pph21,
         //     'jumlah_bayar' => $request->jumlah_bayar,
-        //     'bpf' => $request->bpf,
+        //     'bpe' => $request->bpe,
         //     'biaya_bulan' => $request->biaya_bulan,
         //     'karyawan' => $request->karyawan,
         // ]);
@@ -135,7 +135,7 @@ class Pph21Controller extends Controller
         $pajaks = Pajak::get(['id_pajak', 'nama_wp']);
         $karyawan = Karyawan::all();
         $pph21 = Pph21::join('karyawans', 'karyawans.nik', '=', 'pph21s.nik')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
-            ->get(['pph21s.id', 'pph21s.id_pajak', 'karyawans.nik', 'jumlah_bayar', 'biaya_bulan', 'bpf', 'nama_wp']);
+            ->get(['pph21s.id', 'pph21s.id_pajak', 'karyawans.nik', 'jumlah_bayar', 'biaya_bulan', 'bpe', 'nama_wp']);
         // dd($pph21);
         return view('pph21.pph21sub', compact(['pph21', 'pajaks', 'karyawan']));
     }
@@ -143,7 +143,7 @@ class Pph21Controller extends Controller
     public function getPph21Sub()
     {
         $pph21 = Pph21::join('karyawans', 'karyawans.nik', '=', 'pph21s.nik')->join('pajaks', 'pajaks.id_pajak', '=', 'pph21s.id_pajak')
-            ->get(['pph21s.id', 'pph21s.id_pajak', 'karyawans.nik', 'jumlah_bayar', 'biaya_bulan', 'bpf', 'nama_wp']);
+            ->get(['pph21s.id', 'pph21s.id_pajak', 'karyawans.nik', 'jumlah_bayar', 'biaya_bulan', 'bpe', 'nama_wp']);
         return response()->json(['pph21' => $pph21]);
     }
 
@@ -178,7 +178,7 @@ class Pph21Controller extends Controller
         //
         $pph21 = Pph21::where('id', $id)->first();
         $pph21->jumlah_bayar = $request->jumlah_bayar;
-        $pph21->bpf = $request->bpf;
+        $pph21->bpe = $request->bpe;
         $pph21->nik = $request->nik;
         $pph21->biaya_bulan = $request->biaya_bulan;
         $pph21->save();
@@ -191,7 +191,7 @@ class Pph21Controller extends Controller
 
         // $pph21->update([
         //     'jumlah_bayar' => $request->jumlah_bayar,
-        //     'bpf' => $request->bpf,
+        //     'bpe' => $request->bpe,
         //     'biaya_bulan' => $request->biaya_bulan,
         //     'karyawan' => $request->karyawan,
         // ]);

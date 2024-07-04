@@ -28,9 +28,9 @@
                             placeholder="Jumlah Bayar" x-model="data.jumlah_bayar" x-mask:dynamic="$money($input, ',')">
                     </div>
                     <div class="form-group">
-                        <label for="bpf">BPF</label>
-                        <input type="text" class="form-control" id="bpf" name="bpf" {{-- value="data.bpf" --}}
-                            placeholder="BPF" x-model="data.bpf">
+                        <label for="bpe">BPE</label>
+                        <input type="text" class="form-control" id="bpe" name="bpe" {{-- value="data.bpe" --}}
+                            placeholder="BPE" x-model="data.bpe">
                     </div>
                     <div class="form-group">
                         <label for="biaya">Biaya Bulan</label>

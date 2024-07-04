@@ -33,8 +33,8 @@
                     <input type="text" class="form-control" id="biaya_bulan" name="biaya_bulan" placeholder="Biaya Bulan" x-model="formData.biaya_bulan" x-mask:dynamic="$money($input,',')" required>
                 </div>
                 <div class="form-group">
-                    <label for="nama">BPF</label>
-                    <input type="text" class="form-control" id="bpf" name="bpf" placeholder="BPF" x-model="formData.bpf" required>
+                    <label for="nama">BPE</label>
+                    <input type="text" class="form-control" id="bpe" name="bpe" placeholder="BPE" x-model="formData.bpe" required>
                 </div>
             </div>
             <div class="modal-footer">

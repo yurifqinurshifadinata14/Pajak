@@ -129,7 +129,7 @@
                                     <th>No</th>
                                     <th>Nama WP</th>
                                     <th>Jumlah Bayar</th>
-                                    <th>BPF</th>
+                                    <th>BPE</th>
                                     <th>Biaya Bulan</th>
                                     <th>Daftar Karyawan</th>
                                     <th>Aksi</th>
@@ -299,7 +299,7 @@
                                 }
                             },
                             {
-                                data: 'bpf'
+                                data: 'bpe'
                             },
                             {
                                 data: 'biaya_bulan',
@@ -349,7 +349,7 @@
                         formData: {
                             id_pajak: '',
                             jumlah_bayar: '',
-                            bpf: '',
+                            bpe: '',
                             biaya_bulan: '',
                             nik: '',
                         },
@@ -369,7 +369,7 @@
                             const data = {
                                 id_pajak: this.formData.id_pajak,
                                 jumlah_bayar: this.formData.jumlah_bayar.replaceAll('.', ''),
-                                bpf: this.formData.bpf,
+                                bpe: this.formData.bpe,
                                 biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
                                 nik: this.formData.nik,
                             }
@@ -386,7 +386,7 @@
                                 this.formData = {
                                     id_pajak: '',
                                     jumlah_bayar: '',
-                                    bpf: '',
+                                    bpe: '',
                                     biaya_bulan: '',
                                     nik: '',
                                 }
@@ -411,7 +411,7 @@
                                 id_pajak: findData.id_pajak,
                                 nama_wp: findData.nama_wp,
                                 jumlah_bayar: rupiah.format(findData.jumlah_bayar),
-                                bpf: findData.bpf,
+                                bpe: findData.bpe,
                                 biaya_bulan: rupiah.format(findData.biaya_bulan),
                                 nik: findData.nik,
                             }
@@ -429,7 +429,7 @@
                                 nama_wp: this.data.nama_wp,
                                 jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '')
                                     .trim()),
-                                bpf: this.data.bpf,
+                                bpe: this.data.bpe,
                                 biaya_bulan: Number(this.data.biaya_bulan.replaceAll(/[.Rp_]/g, '').trim()),
                                 nik: this.data.nik,
                             }
@@ -472,7 +472,7 @@
                             doc.text('Data Pph21', 14, 10);
                             doc.autoTable({
                                 head: [
-                                    ['No', 'Nama Wp', 'Jumlah Bayar', 'BPF', 'Biaya Bulan',
+                                    ['No', 'Nama Wp', 'Jumlah Bayar', 'bpe', 'Biaya Bulan',
                                         'Daftar Karyawan'
                                     ]
                                 ],

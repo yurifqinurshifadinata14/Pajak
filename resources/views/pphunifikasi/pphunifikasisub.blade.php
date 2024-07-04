@@ -115,7 +115,7 @@
                                     <th>NTPN</th>
                                     <th>Jumlah Bayar</th>
                                     <th>Biaya Bulan</th>
-                                    <th>BPF</th>
+                                    <th>BPE</th>
                                     <th>Aksi</th>
                                 </tr>
                             </thead>
@@ -251,7 +251,7 @@
                                 }
                             },
                             {
-                                data: 'bpf'
+                                data: 'bpe'
                             },
                             {
                                 data: 'id_pphuni',
@@ -281,7 +281,7 @@
                             ntpn: '',
                             jumlah_bayar: '',
                             biaya_bulan: '',
-                            bpf: '',
+                            bpe: '',
                         },
 
                         handleSubmit() {
@@ -290,7 +290,7 @@
                                 ntpn: this.formData.ntpn,
                                 jumlah_bayar: this.formData.jumlah_bayar.replaceAll('.', ''),
                                 biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
-                                bpf: this.formData.bpf,
+                                bpe: this.formData.bpe,
                             }
                             console.log(data)
                             console.log(this.formData)
@@ -308,7 +308,7 @@
                                     ntpn: '',
                                     jumlah_bayar: '',
                                     biaya_bulan: '',
-                                    bpf: '',
+                                    bpe: '',
                                 }
                                 getPphunifikasi()
                             }).catch(err => console.log(err))
@@ -336,7 +336,7 @@
                                 ntpn: findData.ntpn,
                                 jumlah_bayar: rupiah.format(findData.jumlah_bayar),
                                 biaya_bulan: rupiah.format(findData.biaya_bulan),
-                                bpf: findData.bpf,
+                                bpe: findData.bpe,
                             }
                             //this.data = pphunifikasi[id]
                         },
@@ -349,7 +349,7 @@
                                 jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '')
                                     .trim()),
                                 biaya_bulan: Number(this.data.biaya_bulan.replaceAll(/[.Rp_]/g, '').trim()),
-                                bpf: this.data.bpf,
+                                bpe: this.data.bpe,
                             }
                             console.log(this.data.id_pphuni)
                             fetch(`{{ route('pphunifikasiUpdate', '') }}/${this.data.id_pphuni}`, {
@@ -392,7 +392,7 @@
                             const doc = new jsPDF();
                             doc.text('Data Pph Unifikasi', 14, 10);
                             doc.autoTable({
-                                head: [['No', 'Nama', 'NTPN', 'Jumlah Bayar', 'Biaya_bulan', 'BPF']],
+                                head: [['No', 'Nama', 'NTPN', 'Jumlah Bayar', 'Biaya_bulan', 'bpe']],
                                 body: [...element.querySelectorAll('tbody tr')].map(row => [
                                     row.cells[0].textContent,
                                     row.cells[1].textContent,

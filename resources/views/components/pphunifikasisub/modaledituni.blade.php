@@ -32,8 +32,8 @@
                         <input type="text" class="form-control" id="biaya_bulan" name="biaya_bulan" placeholder="Biaya Bulan" value="biaya_bulan" x-model="data.biaya_bulan"  x-mask:dynamic="$money($input,',')">
                     </div>
                     <div class="form-group">
-                        <label for="bpf">BPF</label>
-                        <input type="text" class="form-control" id="bpf" name="bpf" placeholder="BPF" x-model="data.bpf" value="bpf">
+                        <label for="bpe">BPE</label>
+                        <input type="text" class="form-control" id="bpe" name="bpe" placeholder="BPE" x-model="data.bpe" value="bpe">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

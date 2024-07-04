@@ -32,8 +32,8 @@
                             <input type="number" class="form-control" id="biaya_bulan" name="biaya_bulan" value="{{ $pphunifikasi->biaya_bulan }}" placeholder="Biaya Bulan">
                         </div>
                         <div class="form-group">
-                            <label for="bpf">BPF</label>
-                            <input type="text" class="form-control" id="bpf" name="bpf" value="{{ $pphunifikasi->bpf }}" placeholder="BPF">
+                            <label for="bpe">BPE</label>
+                            <input type="text" class="form-control" id="bpe" name="bpe" value="{{ $pphunifikasi->bpe }}" placeholder="BPE">
                         </div>
 
                         <button type="submit" class="btn btn-navy">Submit</button>

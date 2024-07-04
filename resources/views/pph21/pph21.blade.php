@@ -22,8 +22,8 @@
                                 placeholder="jumlah bayar">
                         </div>
                         <div class="form-group">
-                            <label for="nama">BPF</label>
-                            <input type="text" class="form-control" id="bpf" name="bpf" placeholder="BPF">
+                            <label for="nama">BPE</label>
+                            <input type="text" class="form-control" id="bpe" name="bpe" placeholder="BPE">
                         </div>
                         <div class="form-group">
                             <label for="nama">Biaya Bulan</label>

@@ -1,6 +1,6 @@
 <div class="modal fade" id="edit" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true"
     x-data="formEdit">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h1 class="modal-title fs-5" id="editModalLabel"><b>Edit Data Pajak</b></h1>
