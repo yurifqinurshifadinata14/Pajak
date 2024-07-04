@@ -165,7 +165,7 @@
                     </a>
                 </li>
 
-                <!-- @if (auth()->user()->role == 'admin')
+                @if (auth()->user()->role == 'admin')
                 <li
                     class="nav-item {{ Request::is('dataadmin*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                     <a class="nav-link" href="{{ route('dataadmin') }}" aria-expanded="true">
@@ -173,7 +173,7 @@
                         <span>Data Admin</span>
                     </a>
                 </li>
-                @endif -->
+                @endif
             </div>
             <!-- Divider -->
             <!-- Divider -->
