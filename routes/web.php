@@ -11,6 +11,7 @@ use App\Http\Controllers\PphController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\PphunifikasiController;
 use App\Http\Controllers\ExportController;
+use App\Http\Controllers\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -26,6 +27,8 @@ Route::get('/', function () {
 // Route::get('/coba', function () {
 //     return view('coba');
 // });
+Route::get('/user/profile', [UserController::class, 'index'])->name('user.profile');
+
 
 Route::get('/login', [AuthController::class, 'login'])->name('loginView');
 Route::post('/login', [AuthController::class, 'authenticate'])->name('login');
