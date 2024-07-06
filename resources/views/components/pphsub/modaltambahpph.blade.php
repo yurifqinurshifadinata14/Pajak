@@ -11,8 +11,13 @@
                 @csrf <!-- Laravel CSRF Protection -->
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="nama_wp">Nama WP</label>
-                        <input type="text" name="nama_wp" id="nama_wp" class="form-control" value="{{ $pajaks->first()->nama_wp ?? '' }}" readonly>
+                        <label for="id_pajak">Nama WP</label>
+                        <select name="id_pajak" id="id_pajak" class="form-select" x-model="formData.id_pajak" required>
+                            <option value="" disabled selected>Pilih Nama</option>
+                            @foreach ($pajaks as $pajak)
+                            <option value="{{$pajak->id_pajak}}">{{$pajak->nama_wp}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div class="form-group">
                         <label for="ntpn">NTPN</label>

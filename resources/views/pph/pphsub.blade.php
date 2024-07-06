@@ -14,23 +14,8 @@
                     </div>
 
                     <div class="d-flex align-items-center">
-                        <!-- Button trigger modal Import-->
-                        <button type="button" class="btn btn-sm btn-success me-2" title="Import Excel" data-bs-toggle="modal" data-bs-target="#importExcel">
-                            <i class="fas fa-file-excel"></i>
-                            <span class="d-none d-md-inline">Import Excel</span>
-                        </button>
-                        <!-- Button trigger modal Export-->
-                        <button type="button" class="btn btn-sm btn-primary me-2" title="Tambah Data Pph" data-bs-toggle="modal" data-bs-target="#tambah">
-                            <i class="fas fa-fw fa-solid fa-plus"></i>
-                            <span class="d-none d-md-inline">Tambah</span>
-                        </button>
-                        
-                        <!-- Modal Button Tambah -->
-                        <x-pphsub.modaltambahpph :pajaks="$pajaks" />
                         <!-- Modal Button Edit -->
                         <x-pphsub.modaleditpph />
-                        <!-- Modal Button import -->
-                        <x-pphsub.modalimportpph />
                     </div>
                 </div>
                 <div class="card-body">
