@@ -1,4 +1,4 @@
-@extends ('admin.main')
+@extends ('user.main')
 @section('konten')
     <main x-data="{ pilih: '' }">
         <div class="container-fluid px-0" x-data="app">

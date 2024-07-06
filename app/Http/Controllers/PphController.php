@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Imports\PphImport;
 use App\Exports\PphExport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
@@ -17,21 +18,46 @@ class PphController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $pph =  Pph::all();
+   // Controller PphController
+   public function index()
+{
+    if (Auth::guard('admin')->check()) {
+        $pph = Pph::join('pajaks', 'pphs.id_pajak', '=', 'pajaks.id_pajak')
+            ->select('pphs.*', 'pajaks.nama_wp')
+            ->get();
         $pajaks = Pajak::all();
-        return view('pph.pph', compact('pph', 'pajaks'));
-        //
+    } elseif (Auth::guard('user')->check()) {
+        $pph = Pph::join('pajaks', 'pphs.id_pajak', '=', 'pajaks.id_pajak')
+            ->where('pphs.id_pajak', Auth::guard('user')->user()->id_pajak)
+            ->select('pphs.*', 'pajaks.nama_wp')
+            ->get();
+        $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
+    } else {
+        return redirect()->route('login');
     }
-    // public function getPph()
-    // {
-    //     return response()->json([
-    //         'pph' => $pph,
-    //         'pajaks'=> $pajaks,
-    //     ]);
-    //     //
-    // }
+
+    return view('pph.pphsub', compact('pph', 'pajaks'));
+}
+   public function indexUser()
+{
+    if (Auth::guard('admin')->check()) {
+        $pph = Pph::join('pajaks', 'pphs.id_pajak', '=', 'pajaks.id_pajak')
+            ->select('pphs.*', 'pajaks.nama_wp')
+            ->get();
+        $pajaks = Pajak::all();
+    } elseif (Auth::guard('user')->check()) {
+        $pph = Pph::join('pajaks', 'pphs.id_pajak', '=', 'pajaks.id_pajak')
+            ->where('pphs.id_pajak', Auth::guard('user')->user()->id_pajak)
+            ->select('pphs.*', 'pajaks.nama_wp')
+            ->get();
+        $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
+    } else {
+        return redirect()->route('login');
+    }
+
+    return view('user.pphsub', compact('pph', 'pajaks'));
+}
+
     public function export_excel_pph()
     {
         return Excel::download(new PphExport(), 'pph.xlsx');

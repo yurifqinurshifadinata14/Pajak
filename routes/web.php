@@ -30,16 +30,27 @@ Route::get('/user/login', [UserLoginController::class, 'showLoginForm'])->name('
 Route::post('/user/login', [UserLoginController::class, 'login'])->name('user.login.post');
 Route::post('/user/logout', [UserLoginController::class, 'logout'])->name('user.logout');
 
-Route::middleware(['auth:user'])->group(function () {
-    Route::get('/user/beranda', [BerandaUserController::class, 'index'])->name('user.beranda');
-    Route::get('/user/profil', [UserController::class, 'index'])->name('user.profil');
-});
-
 // Admin Routes
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
 
+Route::middleware(['auth:user'])->group(function () {
+    Route::get('/user/beranda', [BerandaUserController::class, 'index'])->name('user.beranda');
+    Route::get('/user/profil', [UserController::class, 'index'])->name('user.profil');
+    //pph
+    Route::get('/user/pph', [PphController::class, 'indexUser'])->name('user.pph');
+     Route::get('/getpph', [PphController::class, 'getPph'])->name('getPph');
+    Route::post('/pphstore', [PphController::class, 'store'])->name('pphStore');
+    Route::get('/pphsub', [PphController::class, 'pphsub'])->name('pphSub');
+    Route::get('/pphEdit/{pph}', [PphController::class, 'edit'])->name('pphEdit');
+    Route::put('/pphUpdate/{id_pph}', [PphController::class, 'update'])->name('pphUpdate');
+
+    Route::delete('/pphDelete/{pph}', [PphController::class, 'destroy'])->name('pphDestroy');
+});
+
+
 Route::middleware(['auth:admin'])->group(function () {
+    Route::get('/admin/pph', [PphController::class, 'index'])->name('admin.pph');
     Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.beranda');
     Route::get('/pajak', [PajakController::class, 'index'])->name('pajak');
@@ -51,15 +62,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/pajakUpdate/{id_pajak}', [PajakController::class, 'update'])->name('pajakUpdate');
 
     Route::delete('/pajakDelete/{id_pajak}', [PajakController::class, 'destroy'])->name('pajakDestroy');
-
-    Route::get('/pph', [PphController::class, 'index'])->name('getpphsub');
-    Route::get('/getpph', [PphController::class, 'getPph'])->name('getPph');
-    Route::post('/pphstore', [PphController::class, 'store'])->name('pphStore');
-    Route::get('/pphsub', [PphController::class, 'pphsub'])->name('pphSub');
-    Route::get('/pphEdit/{pph}', [PphController::class, 'edit'])->name('pphEdit');
-    Route::put('/pphUpdate/{id_pph}', [PphController::class, 'update'])->name('pphUpdate');
-
-    Route::delete('/pphDelete/{pph}', [PphController::class, 'destroy'])->name('pphDestroy');
 
     Route::get('/pphunifikasi', [PphunifikasiController::class, 'index'])->name('getpphunifikasisub');
     Route::get('/getpphunifikasi', [PphunifikasiController::class, 'getPphunifikasi'])->name('getPphunifikasi');
