@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 use App\Models\Pajak;
 use App\Models\Karyawan;
 use App\Models\Pph;
@@ -8,7 +8,8 @@ use App\Models\Pph21;
 use App\Models\Beranda;
 use Illuminate\Http\Request;
 
-class BerandaController extends Controller
+
+class BerandaAdminController extends \App\Http\Controllers\Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,7 +24,7 @@ class BerandaController extends Controller
 
 
 
-        return view('beranda',[
+        return view('admin.beranda',[
             'totalpembayar' => $totalpembayar,
             'jumlahkaryawan'=> $jumlahkaryawan,
             'totalbayarpph'=> $totalbayarpph,

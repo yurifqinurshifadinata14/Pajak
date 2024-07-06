@@ -1,25 +1,46 @@
 <?php
-
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Pajak extends Model
+class Pajak extends Authenticatable
 {
-    use HasFactory;
-    protected $guarded = [];
     protected $fillable = [
-        'id_pajak', 'nama_wp', 'npwp', 'no_hp', 'no_efin', 'gmail', 'password', 'nik', 'alamat', 'merk_dagang', 'jenis', 'status'
+        'id_pajak', 'id_user', 'nama_wp', 'npwp', 'no_hp', 'no_efin', 'gmail', 'password', 
+        'nik', 'alamat', 'merk_dagang'
     ];
 
-    public function jenis()
+    // Jika Anda menggunakan hashed password
+    protected $hidden = ['password'];
+
+    // Implement the necessary methods from the Authenticatable contract
+    public function getAuthIdentifierName()
     {
-        return $this->hasOne(Jenis::class, 'id_pajak');
+        return 'id';
     }
 
-    public function status()
+    public function getAuthIdentifier()
     {
-        return $this->hasOne(Status::class, 'id_pajak');
+        return $this->getKey();
+    }
+
+    public function getAuthPassword()
+    {
+        return $this->password;
+    }
+
+    public function getRememberToken()
+    {
+        return $this->remember_token;
+    }
+
+    public function setRememberToken($value)
+    {
+        $this->remember_token = $value;
+    }
+
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
     }
 }

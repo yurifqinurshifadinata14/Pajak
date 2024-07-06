@@ -1,4 +1,4 @@
-@extends('main')
+@extends('admin.main')
 
 @section('konten')
 <main x-data="{ pilih: '' }">

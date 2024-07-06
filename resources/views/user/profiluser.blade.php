@@ -1,4 +1,4 @@
-@extends ('main')
+@extends ('user.main')
 @section('konten')
 <div class="row">
     <div class="col-md-6 stretch-card grid-margin">
@@ -11,7 +11,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">Nama WP</label>:
                                 <div class="col-sm-9">
-                                    Mitra ABC
+                                Nama
                                 </div>
                             </div>
                         </div>

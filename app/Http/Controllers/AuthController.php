@@ -26,7 +26,7 @@ class AuthController extends Controller
         $validatedData['password'] = Hash::make($validatedData['password']);
 
         User::create([
-            'name' => $request->name,
+            'name' => $request->name,   
             'email' => $request->email,
             'password' => $request->password,
             'role' => "staff",
@@ -42,20 +42,27 @@ class AuthController extends Controller
     }
 
     public function authenticate(Request $request)
-    {
-        $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
-        ]);
+{
+    $credentials = $request->validate([
+        'email' => ['required', 'email'],
+        'password' => ['required'],
+    ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+    if (Auth::attempt($credentials)) {
+        $request->session()->regenerate();
 
-            return redirect()->intended('beranda');
+        // Get user role
+        $user = Auth::user();
+        if ($user->role === 'admin' || $user->role === 'staff') {
+            return redirect()->intended('/beranda');
         }
 
-        return back()->with('loginError', 'Login Failed!');
+        return redirect()->intended('/user/beranda');
     }
+
+    return back()->with('loginError', 'Login Failed!');
+}
+
 
     public function logout(Request $request)
     {

@@ -14,12 +14,23 @@ class Auth
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next, ...$guards): Response
     {
-        if (FacadesAuth::check()) {
-            # code...
-            return $next($request);
+        $guards = empty($guards) ? [null] : $guards;
+
+        foreach ($guards as $guard) {
+            if (FacadesAuth::guard($guard)->check()) {
+                return $next($request);
+            }
         }
-        return redirect()->route('login');
+
+        // Redirect to the appropriate login page based on the guard
+        if (in_array('admin', $guards)) {
+            return redirect()->route('admin.login');
+        } elseif (in_array('user', $guards)) {
+            return redirect()->route('user.login');
+        } else {
+            return redirect()->route('login'); // Default fallback
+        }
     }
 }

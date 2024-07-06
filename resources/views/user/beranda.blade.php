@@ -1,4 +1,4 @@
-@extends ('main')
+@extends ('user.main')
 @section('konten')
 <main>
     <!-- Begin Page Content -->
@@ -12,14 +12,16 @@
         </div>
 
         <h4>
-            @if(Auth::check())
+            <!-- @if(Auth::check())
             Selamat Datang
             <b>{{ Auth::user()->name }}</b>,
             Anda Login sebagai
             <b>{{ Auth::user()->role }}</b>
             @else
             Anda belum login.
-            @endif
+            @endif -->
+
+            WELCOME, User!
         </h4>
         <br>
         <!-- Content Row -->

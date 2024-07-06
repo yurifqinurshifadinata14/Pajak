@@ -216,10 +216,10 @@
                                     return /*html*/ `<div class="button-container gap-2">
                                         <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
                                             <i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                                            @if (auth()->user()->role == 'admin')
+                                          
                                                         <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
                                                             <i class="fas fa-fw fa-solid fa-trash"></i> </button>
-                                                        @endif
+                                                        
                                     </div>`
                                 }
                             },

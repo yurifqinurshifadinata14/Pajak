@@ -115,7 +115,7 @@
                 <!-- Nav Item - Dashboard -->
                 <li
                     class="nav-item {{ Request::is('beranda*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
-                    <a class="nav-link" href="{{ route('beranda') }}">
+                    <a class="nav-link" href="{{ route('user.beranda') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
@@ -123,8 +123,8 @@
 
                 <!-- Nav Item - Pajak -->
                 <li
-                    class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
-                    <a class="nav-link" href="{{ route('pajakSub') }}" aria-expanded="true">
+                    class="nav-item {{ Request::is('profil*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    <a class="nav-link" href="{{ route('user.profil') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Profil</span>
                     </a>
@@ -164,16 +164,6 @@
                         <span>PPH Unifikasi</span>
                     </a>
                 </li>
-
-                @if (auth()->user()->role == 'admin')
-                <li
-                    class="nav-item {{ Request::is('dataadmin*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
-                    <a class="nav-link" href="{{ route('dataadmin') }}" aria-expanded="true">
-                        <i class="fas fa-fw fa-database"></i>
-                        <span>Data Admin</span>
-                    </a>
-                </li>
-                @endif
             </div>
             <!-- Divider -->
             <!-- Divider -->
@@ -388,7 +378,7 @@
                     <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                     <div class="modal-footer">
                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <form action="{{ route('logout') }}" method="POST">
+                        <form action="{{ route('user.logout') }}" method="POST">
                             @csrf
                             <button type="submit" class="btn btn-primary">Logout</button>
                         </form>

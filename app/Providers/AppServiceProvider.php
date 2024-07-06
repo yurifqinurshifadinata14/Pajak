@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\RedirectIfUserAuthenticated;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -17,8 +19,9 @@ class AppServiceProvider extends ServiceProvider
     /**
      * Bootstrap any application services.
      */
-    public function boot(): void
+    public function boot()
     {
-        //
+        $router = $this->app['router'];
+        $router->aliasMiddleware('user.auth', RedirectIfUserAuthenticated::class);
     }
 }
