@@ -10,6 +10,7 @@ class Pajak extends Authenticatable
         'nik', 'alamat', 'merk_dagang'
     ];
 
+    
     // Jika Anda menggunakan hashed password
     protected $hidden = ['password'];
 

@@ -25,6 +25,16 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/register', [AuthController::class, 'store'])->name('register');
 
+// User Routes
+Route::get('/user/login', [UserLoginController::class, 'showLoginForm'])->name('user.login');
+Route::post('/user/login', [UserLoginController::class, 'login'])->name('user.login.post');
+Route::post('/user/logout', [UserLoginController::class, 'logout'])->name('user.logout');
+
+Route::middleware(['auth:user'])->group(function () {
+    Route::get('/user/beranda', [BerandaUserController::class, 'index'])->name('user.beranda');
+    Route::get('/user/profil', [UserController::class, 'index'])->name('user.profil');
+});
+
 // Admin Routes
 Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name('admin.login');
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
@@ -93,19 +103,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/karyawanUpdate/{karyawan}', [KaryawanController::class, 'update'])->name('karyawanUpdate');
     Route::delete('/karyawanDelete/{id}', [KaryawanController::class, 'destroy'])->name('karyawanDestroy');
 
-});
-
-// User Routes
-Route::get('/user/login', [UserLoginController::class, 'showLoginForm'])->name('user.login');
-Route::post('/user/login', [UserLoginController::class, 'login'])->name('user.login.post');
-Route::post('/user/logout', [UserLoginController::class, 'logout'])->name('user.logout');
-
-Route::middleware(['auth:user'])->group(function () {
-    Route::get('/user/beranda', [BerandaUserController::class, 'index'])->name('user.beranda');
-    Route::get('/user/profil', [UserController::class, 'index'])->name('user.profil');
-});
-
-Route::middleware(['auth:pajak'])->group(function () {
 });
 
 

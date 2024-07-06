@@ -11,7 +11,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">Nama WP</label>:
                                 <div class="col-sm-9">
-                                Nama
+                                {{$pajak->nama_wp}}
                                 </div>
                             </div>
                         </div>
@@ -21,7 +21,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">Jenis WP</label>:
                                 <div class="col-sm-9">
-                                    mitra@example.com
+                                {{$pajak->jenis}}
                                 </div>
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">Status WP</label>:
                                 <div class="col-sm-9">
-                                    +123-456-789
+                                {{$pajak->status}}
                                 </div>
                             </div>
                         </div>
@@ -41,7 +41,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">NPWP</label>:
                                 <div class="col-sm-9">
-                                    1234567890
+                                {{$pajak->npwp}}
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">NO HP</label>:
                                 <div class="col-sm-9">
-                                    1234567890
+                                {{$pajak->no_hp}}
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">Gmail</label>:
                                 <div class="col-sm-9">
-                                    111
+                                {{$pajak->gmail}}
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">NIK</label>:
                                 <div class="col-sm-9">
-                                    111
+                                {{$pajak->nik}}
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">ALAMAT</label>:
                                 <div class="col-sm-9">
-                                    111
+                                {{$pajak->alamat}}
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2">MERK DAGANG</label>:
                                 <div class="col-sm-9">
-                                    111
+                                {{$pajak->merk_dagang}}
                                 </div>
                             </div>
                         </div>
@@ -130,49 +130,57 @@
             <div class="modal-body">
                 <h6><b>=> Detail Jenis</b></h6>
                 <div class="table-responsive">
-                    <table class="table" cellspacing="0" cellpadding="2px">
-                        <thead>
-                            <tr>
-                                <th style="border: 2px solid #dee2e6;">Jenis</th>
-                                <th style="border: 2px solid #dee2e6;">Jabatan</th>
-                                <th style="border: 2px solid #dee2e6;">Alamat Badan</th>
-                                <th style="border: 2px solid #dee2e6;">NPWP Badan</th>
-                                <th style="border: 2px solid #dee2e6;">Saham</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td style="border: 2px solid #dee2e6;">Badan</td>
-                                <td style="border: 2px solid #dee2e6;">Direktur Utama</td>
-                                <td style="border: 2px solid #dee2e6;">Jalan Badan No. 123</td>
-                                <td style="border: 2px solid #dee2e6;">1234567890</td>
-                                <td style="border: 2px solid #dee2e6;">50%</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br>
-                <h6><b>=> Detail Status</b></h6>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th style="border: 2px solid #dee2e6;">Status</th>
-                            <th style="border: 2px solid #dee2e6;">User Efaktur</th>
-                            <th style="border: 2px solid #dee2e6;">Password Efaktur</th>
-                            <th style="border: 2px solid #dee2e6;">Enofa Password</th>
-                            <th style="border: 2px solid #dee2e6;">Passphrase</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td style="border: 2px solid #dee2e6;">PKP</td>
-                            <td style="border: 2px solid #dee2e6;">user_efaktur123</td>
-                            <td style="border: 2px solid #dee2e6;">password_efaktur123</td>
-                            <td style="border: 2px solid #dee2e6;">enofa_password123</td>
-                            <td style="border: 2px solid #dee2e6;">passphrase123</td>
-                        </tr>
-                    </tbody>
-                </table>
+                        <table class="table" cellspacing="0" cellpading="2px">
+                            <thead>
+                                <tr>
+                                    <th style="border: 2px solid #dee2e6;">Jenis</th>
+                                    @if ($pajak->jenis == 'Badan')
+                                        <th style="border: 2px solid #dee2e6;">Jabatan</th>
+                                        <th style="border: 2px solid #dee2e6;">Alamat Badan</th>
+                                        <th style="border: 2px solid #dee2e6;">NPWP Badan</th>
+                                        <th style="border: 2px solid #dee2e6;">Saham</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border: 2px solid #dee2e6;">{{ $pajak->jenis }}</td>
+                                    @if ($pajak->jenis == 'Badan')
+                                        <td style="border: 2px solid #dee2e6;">{{ $pajak->jabatan }}</td>
+                                        <td style="border: 2px solid #dee2e6;">{{ $pajak->alamatBadan }}</td>
+                                        <td style="border: 2px solid #dee2e6;">{{ $pajak->npwpBadan }}</td>
+                                        <td style="border: 2px solid #dee2e6;">{{ $pajak->saham }}</td>
+                                    @endif
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br>
+                        <h6><b>=> Detail Status</b></h6>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th style="border: 2px solid #dee2e6;">Status</th>
+                                    @if ($pajak->status == 'PKP')
+                                        <th style="border: 2px solid #dee2e6;">User Efaktur</th>
+                                        <th style="border: 2px solid #dee2e6;">Password Efaktur</th>
+                                        <th style="border: 2px solid #dee2e6;">Enofa Password</th>
+                                        <th style="border: 2px solid #dee2e6;">Passphrase</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td style="border: 2px solid #dee2e6;">{{ $pajak->status }}</td>
+                                    @if ($pajak->status == 'PKP')
+                                        <td style="border: 2px solid #dee2e6;">{{ $pajak->user_efaktur }}</td>
+                                        <td style="border: 2px solid #dee2e6;">{{ $pajak->password_efaktur }}</td>
+                                        <td style="border: 2px solid #dee2e6;">{{ $pajak->enofa_password }}</td>
+                                        <td style="border: 2px solid #dee2e6;">{{ $pajak->passphrese }}</td>
+                                    @endif
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>

@@ -114,16 +114,17 @@
             <div class="sidebar-menu">
                 <!-- Nav Item - Dashboard -->
                 <li
-                    class="nav-item {{ Request::is('beranda*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    class="nav-item {{ Request::is('user/beranda*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                     <a class="nav-link" href="{{ route('user.beranda') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
                     </a>
+
                 </li>
 
                 <!-- Nav Item - Pajak -->
                 <li
-                    class="nav-item {{ Request::is('profil*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    class="nav-item {{ Request::is('user/profil*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                     <a class="nav-link" href="{{ route('user.profil') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Profil</span>
@@ -413,6 +414,29 @@
             const dataTable = new DataTable('datatables');
 
         </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Ambil path dari URL saat ini
+        var currentPath = window.location.pathname;
+
+        // Ambil semua elemen sidebar menu
+        var sidebarItems = document.querySelectorAll('.sidebar-menu li');
+
+        // Loop melalui setiap elemen menu sidebar
+        sidebarItems.forEach(function(item) {
+            // Ambil link dari elemen menu
+            var link = item.querySelector('a');
+
+            // Bandingkan href dari link dengan currentPath
+            if (link.getAttribute('href') === currentPath) {
+                // Tambahkan kelas 'active' ke elemen menu yang sesuai
+                item.classList.add('active');
+            }
+        });
+    });
+</script>
+
 
         <script>
             document.addEventListener("DOMContentLoaded", function () {

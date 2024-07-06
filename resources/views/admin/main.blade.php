@@ -114,7 +114,7 @@
             <div class="sidebar-menu">
                 <!-- Nav Item - Dashboard -->
                 <li
-                    class="nav-item {{ Request::is('beranda*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    class="nav-item {{ Request::is('admin/beranda*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                     <a class="nav-link" href="{{ route('admin.beranda') }}">
                         <i class="fas fa-fw fa-tachometer-alt"></i>
                         <span>Dashboard</span>
@@ -123,7 +123,7 @@
 
                 <!-- Nav Item - Pajak -->
                 <li
-                    class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    class="nav-item {{ Request::is('admin/pajaksub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                     <a class="nav-link" href="{{ route('pajakSub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Profil</span>
