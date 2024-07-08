@@ -1,4 +1,4 @@
-@extends('main')
+@extends('user.main')
 @section('konten')
     <main x-data="karyawan">
         <div class="container-fluid px-0">
@@ -20,41 +20,12 @@
                             <i class="fas fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
-                        <!-- <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
-                            data-bs-target="#exportModal">
-                            <i class="fas fa-fw fa-file-export"></i>
-                            <span class="d-none d-md-inline">Export</span>
-                        </button> -->
                         <!-- Button Tambah -->
                         <button type="button" class="btn btn-sm btn-primary float-end me-2" title="Tambah Data Karyawan"
                             data-bs-toggle="modal" data-bs-target="#tambah">
                             <i class="fas fa-fw fa-solid fa-plus"></i>
                             <span class="d-none d-md-inline">Tambah</span>
                         </button>
-
-<!--                       
-                        <div class="d-sm-flex">
-                          
-                            <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
-                                aria-hidden="true">
-                                <div class="modal-dialog">
-                                    <div class="modal-content">
-                                        <div class="modal-header">
-                                            <h5 class="modal-title" id="exportModalLabel">Export Data Karyawan</h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                aria-label="Close"></button>
-                                        </div>
-                                        <div class="modal-body text-center">
-                                            <a href="{{ route('export.excelkaryawan') }}" class="btn btn-success btn-sm">Export to
-                                                Excel</a>
-                                            <button class="btn btn-danger btn-sm" onclick="exportPDF()">Export to PDF</button>
-                                            <button class="btn btn-secondary text-light btn-sm"
-                                                onclick="copyToClipboard('#tableKaryawan')">Copy Data</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> -->
                     </div>
 
                     <!-- modal button tambah-->
@@ -202,11 +173,11 @@
                         return /*html*/ `<div class="button-container gap-2">
                             <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
                                 @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                                @if (auth()->user()->role == 'admin')
+                               
                             <button type="button" class="btn btn-sm btn-danger"
                                 @click="handleDelete(${data})"><i class="fas fa-fw fa-solid fa-trash"></i>
                             </button>
-                            @endif
+                          
                         </div>`;
                     }
                 },

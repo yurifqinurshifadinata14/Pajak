@@ -8,7 +8,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form @submit.prevent="handleSubmit">
-                @csrf <!-- Laravel CSRF Protection -->
+                @csrf 
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="id_pajak">Nama WP</label>

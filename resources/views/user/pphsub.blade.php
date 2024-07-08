@@ -230,43 +230,44 @@
                 }));
 
                 
-
                 Alpine.data('app', () => ({
-                    data: {},
-                    editId: '',
-                    file: null,
+                        data: {},
+                        editId: '',
+                        file: null,
 
-                    select(id) {
-                        const findData = pph.find(item => item.id_pph == id);
-                        this.data = {
-                            id_pph: findData.id_pph,
-                            id_pajak: findData.id_pajak,
-                            ntpn: findData.ntpn,
-                            jumlah_bayar: rupiah.format(findData.jumlah_bayar),
-                            biaya_bulan: rupiah.format(findData.biaya_bulan),
-                        };
-                    },
+                        select(id) {
+                            const findData = pph.find(item => item.id_pph == id)
+                            this.data = {
+                                id_pph: findData.id_pph,
+                                id_pajak: findData.id_pajak,
+                                ntpn: findData.ntpn,
+                                jumlah_bayar: rupiah.format(findData.jumlah_bayar),
+                                biaya_bulan: rupiah.format(findData.biaya_bulan),
+                            }
+                        },
 
-                    editSubmit() {
-                        const data = {
-                            id_pajak: this.data.id_pajak,
-                            ntpn: this.data.ntpn,
-                            biaya_bulan: this.data.biaya_bulan ? this.data.biaya_bulan.replaceAll('.', '') : null,
-                            jumlah_bayar: this.data.jumlah_bayar ? this.data.jumlah_bayar.replaceAll('.', '') : null,
-                        };
-
-                        fetch(`{{ route('pphUpdate', '') }}/${this.data.id_pph}`, {
-                            method: 'PUT',
-                            headers: {
-                                "Content-Type": "application/json",
-                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                            },
-                            body: JSON.stringify(data)
-                        }).then(res => {
-                            $('#edit').modal('hide');
-                            location.reload();
-                            getData();
-                        }).catch(err => console.log(err));
+                        editSubmit() {
+                            const Data = {
+                                id_pajak: this.data.id_pph,
+                                //nama_wp: this.data.nama_wp,
+                                ntpn: this.data.ntpn,
+                                jumlah_bayar: Number(this.data.jumlah_bayar.replaceAll(/[.Rp_]/g, '')
+                                    .trim()),
+                                biaya_bulan: Number(this.data.biaya_bulan.replaceAll(/[.Rp_]/g, '').trim()),
+                            }
+                            console.log(this.data.id_pph)
+                            fetch(`{{ route('pphUpdate', '') }}/${this.data.id_pph}`, {
+                                method: 'PUT',
+                                headers: {
+                                    "Content-Type": "application/json",
+                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                },
+                                body: JSON.stringify(Data)
+                            }).then(res => {
+                                $('#edit').modal('hide');
+                                location.reload();
+                                getPph()
+                            }).catch(err => console.log(err))
                     },
                 }));
             });

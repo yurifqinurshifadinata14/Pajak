@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use App\Imports\PphuImport;
 use App\Exports\PphunifikasiExport;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 use PhpOffice\PhpSpreadsheet\Writer\Pdf as WriterPdf;
@@ -20,10 +21,22 @@ class PphunifikasiController extends Controller
      */
     public function index()
     {
-        //
-        $pphunifikasi=Pphunifikasi::all();
-        $pajaks = Pajak::all();
-        return view('pphunifikasi.pphunifikasisub', compact('pphunifikasi', 'pajaks'));
+        // if (Auth::guard('admin')->check()) {
+        //     $pph = Pphunifikasi::join('pajaks', 'pphunifikasis.id_pajak', '=', 'pajaks.id_pajak')
+        //         ->select('pphunifikasis.*', 'pajaks.nama_wp')
+        //         ->get();
+        //     $pajaks = Pajak::all();
+        // } elseif (Auth::guard('user')->check()) {
+        //     $pph = Pphunifikasi::join('pajaks', 'pphunifikasis.id_pajak', '=', 'pajaks.id_pajak')
+        //         ->where('pphunifikasis.id_pajak', Auth::guard('user')->user()->id_pajak)
+        //         ->select('pphunifikasis.*', 'pajaks.nama_wp')
+        //         ->get();
+        //     $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
+        // } else {
+        //     return redirect()->route('login');
+        // }
+    
+        // return view('pphunifikasi.pphunifikasisub', compact('pph', 'pajaks'));
     }
 
     public function export_excel_pphuni()
@@ -92,10 +105,39 @@ class PphunifikasiController extends Controller
 
     public function pphunifikasisub()
     {
-       /*  $pph =  Pph::with('pajak')->get();*/
-        $pajaks =  Pajak::get(['id_pajak','nama_wp']);
-        $pphunifikasi = Pphunifikasi::join('pajaks','pphunifikasis.id_pajak','=','pajaks.id_pajak')->get(['pphunifikasis.id','id_pphuni','pphunifikasis.id_pajak','nama_wp','ntpn','biaya_bulan','jumlah_bayar','bpe']);
-        return view('pphunifikasi.pphunifikasisub', compact(['pphunifikasi','pajaks']));
+        if (Auth::guard('admin')->check()) {
+            $pphunifikasi = Pphunifikasi::join('pajaks', 'pphunifikasis.id_pajak', '=', 'pajaks.id_pajak')
+                ->select('pphunifikasis.*', 'pajaks.nama_wp')
+                ->get();
+            $pajaks = Pajak::all();
+        } elseif (Auth::guard('user')->check()) {
+            $pphunifikasi = Pphunifikasi::join('pajaks', 'pphunifikasis.id_pajak', '=', 'pajaks.id_pajak')
+                ->where('pphunifikasis.id_pajak', Auth::guard('user')->user()->id_pajak)
+                ->select('pphunifikasis.*', 'pajaks.nama_wp')
+                ->get();
+            $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
+        } else {
+            return redirect()->route('login');
+        }
+        return view('pphunifikasi.pphunifikasisub', compact('pphunifikasi', 'pajaks'));
+    }
+    public function pphunifikasisubUser()
+    {
+        if (Auth::guard('admin')->check()) {
+            $pphunifikasi = Pphunifikasi::join('pajaks', 'pphunifikasis.id_pajak', '=', 'pajaks.id_pajak')
+                ->select('pphunifikasis.*', 'pajaks.nama_wp')
+                ->get();
+            $pajaks = Pajak::all();
+        } elseif (Auth::guard('user')->check()) {
+            $pphunifikasi = Pphunifikasi::join('pajaks', 'pphunifikasis.id_pajak', '=', 'pajaks.id_pajak')
+                ->where('pphunifikasis.id_pajak', Auth::guard('user')->user()->id_pajak)
+                ->select('pphunifikasis.*', 'pajaks.nama_wp')
+                ->get();
+            $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
+        } else {
+            return redirect()->route('login');
+        }
+        return view('user.pphunifikasisub', compact('pphunifikasi', 'pajaks'));
     }
 
     public function getPphunifikasi(){

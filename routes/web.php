@@ -37,6 +37,7 @@ Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.
 Route::middleware(['auth:user'])->group(function () {
     Route::get('/user/beranda', [BerandaUserController::class, 'index'])->name('user.beranda');
     Route::get('/user/profil', [UserController::class, 'index'])->name('user.profil');
+
     //pph
     Route::get('/user/pph', [PphController::class, 'indexUser'])->name('user.pph');
     Route::get('/getpph', [PphController::class, 'getPph'])->name('getPph');
@@ -44,17 +45,41 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/pphsub', [PphController::class, 'pphsub'])->name('pphSub');
     Route::get('/pphEdit/{pph}', [PphController::class, 'edit'])->name('pphEdit');
     Route::put('/pphUpdate/{id_pph}', [PphController::class, 'update'])->name('pphUpdate');
-
     Route::delete('/pphDelete/{pph}', [PphController::class, 'destroy'])->name('pphDestroy');
+
+    //karyawan
+    Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
+    Route::get('/karyawansub', [KaryawanController::class, 'karyawansub'])->name('karyawanSub');
+    Route::post('/karyawanstore', [KaryawanController::class, 'store'])->name('karyawanStore');
+    Route::get('/getkaryawan', [Pph21Controller::class, 'getKaryawan'])->name('getKaryawan');
+    Route::post('/addkaryawan', [Pph21Controller::class, 'addKaryawan'])->name('addKaryawan');
+    Route::delete('/deletekaryawan/{id}', [Pph21Controller::class, 'deleteKaryawan'])->name('deleteKaryawan');
+    Route::get('/getkaryawansub', [KaryawanController::class, 'getKaryawanSub'])->name('getkaryawansub');
+    Route::get('/karyawanEdit/{karyawan}', [KaryawanController::class, 'edit'])->name('karyawanEdit');
+    Route::put('/karyawanUpdate/{karyawan}', [KaryawanController::class, 'update'])->name('karyawanUpdate');
+    Route::delete('/karyawanDelete/{id}', [KaryawanController::class, 'destroy'])->name('karyawanDestroy');
+
+    //pphunifikasi
+    Route::get('/pphunifikasi', [PphunifikasiController::class, 'index'])->name('getpphunifikasisub');
+    Route::get('/getpphunifikasi', [PphunifikasiController::class, 'getPphunifikasi'])->name('getPphunifikasi');
+    Route::post('/pphunifikasistore', [PphunifikasiController::class, 'store'])->name('pphunifikasiStore');
+    Route::get('/user/pphunifikasisub', [PphunifikasiController::class, 'pphunifikasisubUser'])->name('user.pphunifikasisub');
+    Route::get('/pphunifikasiEdit/{pphunifikasi}', [PphunifikasiController::class, 'edit'])->name('pphunifikasiEdit');
+    Route::put('/pphunifikasiUpdate/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('pphunifikasiUpdate');
+
+    Route::delete('/pphunifikasiDelete/{pphunifikasi}', [PphunifikasiController::class, 'destroy'])->name('pphunifikasiDestroy');
 });
+
 
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/pph', [PphController::class, 'index'])->name('admin.pph');
+    Route::get('/admin/pphunifikasisub', [PphunifikasiController::class, 'pphunifikasisub'])->name('admin.pphunifikasiSub');
     Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.beranda');
-    Route::get('/pajaksub', [PajakController::class, 'pajaksub'])->name('pajak.pajakSub');
 
+    //profil pajak
+    Route::get('/pajaksub', [PajakController::class, 'pajaksub'])->name('pajak.pajakSub');
     Route::get('/pajak', [PajakController::class, 'index'])->name('pajak');
     Route::get('/getpajaksub', [PajakController::class, 'getPajakSub'])->name('getpajaksub');
     Route::post('/pajakstore', [PajakController::class, 'store'])->name('pajakStore');
@@ -63,16 +88,6 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::put('/pajakUpdate/{id_pajak}', [PajakController::class, 'update'])->name('pajakUpdate');
 
     Route::delete('/pajakDelete/{id_pajak}', [PajakController::class, 'destroy'])->name('pajakDestroy');
-
-    Route::get('/pphunifikasi', [PphunifikasiController::class, 'index'])->name('getpphunifikasisub');
-    Route::get('/getpphunifikasi', [PphunifikasiController::class, 'getPphunifikasi'])->name('getPphunifikasi');
-    Route::post('/pphunifikasistore', [PphunifikasiController::class, 'store'])->name('pphunifikasiStore');
-    Route::get('/pphunifikasisub', [PphunifikasiController::class, 'pphunifikasisub'])->name('pphunifikasiSub');
-    Route::get('/pphunifikasiEdit/{pphunifikasi}', [PphunifikasiController::class, 'edit'])->name('pphunifikasiEdit');
-    Route::put('/pphunifikasiUpdate/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('pphunifikasiUpdate');
-
-    Route::delete('/pphunifikasiDelete/{pphunifikasi}', [PphunifikasiController::class, 'destroy'])->name('pphunifikasiDestroy');
-
     Route::get('/pph21', [Pph21Controller::class, 'index'])->name('pph21');
     Route::post('/pph21store', [Pph21Controller::class, 'store'])->name('pph21Store');
     Route::get('/pph21sub', [Pph21Controller::class, 'pph21sub'])->name('pph21Sub');
@@ -94,19 +109,10 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/jenissub', [JenisController::class, 'jenissub'])->name('jenisSub');
 
     Route::get('/statussub', [StatusController::class, 'statussub'])->name('statusSub');
-
-    Route::get('/karyawan', [KaryawanController::class, 'index'])->name('karyawan');
-    Route::get('/karyawansub', [KaryawanController::class, 'karyawansub'])->name('karyawanSub');
-    Route::post('/karyawanstore', [KaryawanController::class, 'store'])->name('karyawanStore');
-    Route::get('/getkaryawan', [Pph21Controller::class, 'getKaryawan'])->name('getKaryawan');
-    Route::post('/addkaryawan', [Pph21Controller::class, 'addKaryawan'])->name('addKaryawan');
-    Route::delete('/deletekaryawan/{id}', [Pph21Controller::class, 'deleteKaryawan'])->name('deleteKaryawan');
-    Route::get('/getkaryawansub', [KaryawanController::class, 'getKaryawanSub'])->name('getkaryawansub');
-    Route::get('/karyawanEdit/{karyawan}', [KaryawanController::class, 'edit'])->name('karyawanEdit');
-    Route::put('/karyawanUpdate/{karyawan}', [KaryawanController::class, 'update'])->name('karyawanUpdate');
-    Route::delete('/karyawanDelete/{id}', [KaryawanController::class, 'destroy'])->name('karyawanDestroy');
-
+    
 });
+
+  
 
 
 //Route untuk semua import

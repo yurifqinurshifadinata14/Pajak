@@ -1,4 +1,4 @@
-@extends ('admin.main')
+@extends ('user.main')
 @section('konten')
     <main x-data="{ pilih: '' }">
         <div class="container-fluid px-0" x-data="app">
@@ -13,21 +13,24 @@
                         <span class="d-none d-md-inline">Data Pph Unifikasi</span>
                     </div>
                     <div class="d-flex align-items-center">
-                        <!-- <button type="button" class="btn btn-sm btn-success me-2" title="Import Excel" data-bs-toggle="modal"
+                        <!-- Button trigger modal Import-->
+                        <button type="button" class="btn btn-sm btn-success me-2" title="Import Excel" data-bs-toggle="modal"
                             data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
-
+                        <!-- Button trigger modal Export-->
+                        <!-- <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
+                            data-bs-target="#exportModal">
+                            <i class="fas fa-fw fa-file-export"></i>
+                            <span class="d-none d-md-inline">Export</span>
+                        </button> -->
+                        <!-- Button trigger modal tambah-->
                         <button type="button" class="btn btn-sm btn-primary me-2" title="Tambah Data Pph Unifikasi"
                             data-bs-toggle="modal" data-bs-target="#tambah">
                             <i class="fas fa-fw fa-solid fa-plus"></i>
                             <span class="d-none d-md-inline">Tambah</span>
-                        </button> -->
-
-                        <select id="namaWpSelect" class="form-select me-2" style="width: 200px;">
-                            <option value="">Pilih Nama WP</option>
-                        </select>
+                        </button>
 
                         <!-- Modal Button Tambah -->
                         <x-pphunifikasisub.modaltambahuni :pajaks="$pajaks" />
@@ -35,6 +38,28 @@
                         <x-pphunifikasisub.modaledituni />
                         <!-- Modal Button import -->
                         <x-pphunifikasisub.modalimportpphu />
+
+                        
+                        <!-- <div class="d-sm-flex">
+                          
+                            <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exportModalLabel">Export Data PPH Unifikasi</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body text-center">
+                                            <a href="{{ route('export.excel') }}" class="btn btn-success btn-sm">Export to Excel</a>
+                                            <button class="btn btn-danger btn-sm" x-on:click="exportPDF()">Export to PDF</button>
+                                            <button class="btn btn-secondary text-light btn-sm" x-on:click="copyToClipboard('#pphuniTable')">Copy Data</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        <!-- </div> -->
                     </div>
                 </div>
                 <div class="card-body">
@@ -91,7 +116,7 @@
                                     <th>Jumlah Bayar</th>
                                     <th>Biaya Bulan</th>
                                     <th>BPE</th>
-                                    <!-- <th>Aksi</th> -->
+                                    <th>Aksi</th>
                                 </tr>
                             </thead>
 
@@ -131,6 +156,7 @@
                             }
                         }).then(res => getPphunifikasi()).catch(err => console.log(err));
                     }
+                    location.reload();
                 }
 
                 let rupiah = new Intl.NumberFormat("id-ID", {
@@ -228,18 +254,18 @@
                             {
                                 data: 'bpe'
                             },
-                            // {
-                            //     data: 'id_pphuni',
-                            //     render: (data, type, full, meta) => {
-                            //         return /*html*/ `<div class="button-container gap-2">
-                            //                             <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
-                            //                                 <i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                            //                             <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
-                            //                                 <i class="fas fa-fw fa-solid fa-trash"></i> </button>
-                            //                         </div>`
+                            {
+                                data: 'id_pphuni',
+                                render: (data, type, full, meta) => {
+                                    return /*html*/ `<div class="button-container gap-2">
+                                                        <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
+                                                            <i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                                        <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
+                                                            <i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                                                    </div>`
 
-                            //     }
-                            // },
+                                }
+                            },
                         ]
                     })
 
@@ -283,6 +309,7 @@
                                     biaya_bulan: '',
                                     bpe: '',
                                 }
+                                location.reload();
                                 getPphunifikasi()
                             }).catch(err => console.log(err))
                         },
@@ -334,6 +361,7 @@
                                 body: JSON.stringify(Data)
                             }).then(res => {
                                 $('#edit').modal('hide');
+                                location.reload();
                                 getPphunifikasi()
                             }).catch(err => console.log(err))
                         },
@@ -357,30 +385,7 @@
 
                         init() {
                             console.log('data:', this.data)
-                            this.initNamaWpSelect();
                         },
-
-                        initNamaWpSelect() {
-                        const uniqueNamaWp = [...new Set(pphunifikasi.map(item => item.nama_wp))];
-
-                        // select dropdown dengan data nama_wp yang unik
-                        const selectElement = document.getElementById('namaWpSelect');
-                        selectElement.innerHTML = '<option value="">Pilih Nama WP</option>';
-
-                        uniqueNamaWp.forEach(nama_wp => {
-                            const option = document.createElement('option');
-                            option.value = nama_wp;
-                            option.textContent = nama_wp;
-                            selectElement.appendChild(option);
-                        });
-
-                        // Tambahkan event listener untuk pencarian langsung
-                        selectElement.addEventListener('change', (event) => {
-                            const selectedNamaWp = event.target.value;
-                            const table = $('#pphuniTable').DataTable();
-                            table.columns(1).search(selectedNamaWp).draw();
-                        });
-                    },
 
                         exportPDF() {
                             const element = document.getElementById('pphuniTable');
@@ -436,10 +441,6 @@
                             getPphunifikasi()
                             $('#excelModal').modal('hide')
                         },
-
-                        init() {
-                    this.initNamaWpSelect();
-                },
                     }))
                 })
             </script>

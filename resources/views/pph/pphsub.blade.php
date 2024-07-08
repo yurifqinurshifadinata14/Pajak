@@ -14,7 +14,7 @@
                     </div>
 
                     <div class="d-flex align-items-center">
-                    <select id="namaWpSelect" class="form-select me-2" style="width: 200px;">
+                         <select id="namaWpSelect" class="form-select me-2" style="width: 200px;">
                             <option value="">Pilih Nama WP</option>
                         </select>
                         <!-- Modal Button Edit -->
