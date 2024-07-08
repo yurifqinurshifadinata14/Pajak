@@ -39,7 +39,7 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/user/profil', [UserController::class, 'index'])->name('user.profil');
     //pph
     Route::get('/user/pph', [PphController::class, 'indexUser'])->name('user.pph');
-     Route::get('/getpph', [PphController::class, 'getPph'])->name('getPph');
+    Route::get('/getpph', [PphController::class, 'getPph'])->name('getPph');
     Route::post('/pphstore', [PphController::class, 'store'])->name('pphStore');
     Route::get('/pphsub', [PphController::class, 'pphsub'])->name('pphSub');
     Route::get('/pphEdit/{pph}', [PphController::class, 'edit'])->name('pphEdit');

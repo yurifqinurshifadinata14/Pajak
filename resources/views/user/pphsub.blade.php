@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        @push('script')
+@push('script')
     <script>
         let rupiah = new Intl.NumberFormat("id-ID", {
             style: "currency",
@@ -97,95 +97,74 @@
         let i = 1;
 
         var initTable = (pph) => {
-            if ($.fn.DataTable.isDataTable('#pphTable')) {
-                $('#pphTable').DataTable().destroy();
-            }
+        if ($.fn.DataTable.isDataTable('#pphTable')) {
+            $('#pphTable').DataTable().destroy();
+        }
 
-            $('#pphTable').DataTable({
-                dom: 'Bfrtip',
-                responsive: true,
-                buttons: [
-                    {
-                        extend: 'copy',
-                        text: '<i class="fas fa-copy"> </i> Copy',
-                        className: 'btn-sm btn-secondary',
-                        titleAttr: 'Salin ke Clipboard',
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="fas fa-file-excel"> </i> Excel',
-                        className: 'btn-sm btn-success',
-                        titleAttr: 'Ekspor ke Excel',
-                    },
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"> </i> PDF',
-                        className: 'btn-sm btn-danger',
-                        titleAttr: 'Unduh sebagai PDF',
-                    }
-                ],
-                responsive: {
-                    details: {
-                        renderer: (api, rowIdx, columns) => {
-                            let data = columns
-                                .map((col, i) => {
-                                    return col.hidden ? /*html*/ `
-                                        <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
-                                            <th>${col.title}</th>
-                                            <td style="width: 100%;">${col.data}</td>
-                                        </tr>
-                                    ` : ``;
-                                })
-                                .join('');
-
-                            let table = document.createElement('table');
-                            table.innerHTML = data;
-
-                            return data ? table : false;
-                        }
-                    }
+        $('#pphTable').DataTable({
+            dom: 'Bfrtip',
+            responsive: true,
+            buttons: [
+                {
+                    extend: 'copy',
+                    text: '<i class="fas fa-copy"> </i> Copy',
+                    className: 'btn-sm btn-secondary',
+                    titleAttr: 'Salin ke Clipboard',
                 },
-                destroy: true,
-                data: pph,
-                columns: [{
-                        data: 'id_pph',
-                        render: (data, type, row, meta) => {
-                            return meta.row + 1;
-                        }
-                    },
-                    {
-                        data: 'nama_wp'
-                    },
-                    {
-                        data: 'ntpn'
-                    },
-                    {
-                        data: 'biaya_bulan',
-                        render: (data, type, full, meta) => {
-                            return rupiah.format(data);
-                        }
-                    },
-                    {
-                        data: 'jumlah_bayar',
-                        render: (data, type, full, meta) => {
-                            return rupiah.format(data);
-                        }
-                    },
-                    {
-                        data: 'id_pph',
-                        render: (data, type, full, meta) => {
-                            return /*html*/ `<div class="button-container gap-2">
-                                <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
-                                    <i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                                
-                                                <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
-                                                    <i class="fas fa-fw fa-solid fa-trash"></i> </button>
-                                                
-                            </div>`;
-                        }
-                    },
-                ]
-            });
+                {
+                    extend: 'excel',
+                    text: '<i class="fas fa-file-excel"> </i> Excel',
+                    className: 'btn-sm btn-success',
+                    titleAttr: 'Ekspor ke Excel',
+                },
+                {
+                    extend: 'pdf',
+                    text: '<i class="fas fa-file-pdf"> </i> PDF',
+                    className: 'btn-sm btn-danger',
+                    titleAttr: 'Unduh sebagai PDF',
+                }
+            ],
+            responsive: {
+                details: {
+                    renderer: (api, rowIdx, columns) => {
+                        let data = columns
+                            .map((col, i) => {
+                                return col.hidden ? /*html*/ `
+                                    <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
+                                        <th>${col.title}</th>
+                                        <td style="width: 100%;">${col.data}</td>
+                                    </tr>
+                                ` : ``;
+                            })
+                            .join('');
+
+                        let table = document.createElement('table');
+                        table.innerHTML = data;
+
+                        return data ? table : false;
+                    }
+                }
+            },
+            destroy: true,
+            data: pph,
+            columns: [
+                { data: 'id_pph', render: (data, type, row, meta) => meta.row + 1 },
+                { data: 'nama_wp' },
+                { data: 'ntpn' },
+                { data: 'biaya_bulan', render: (data, type, full, meta) => rupiah.format(data) },
+                { data: 'jumlah_bayar', render: (data, type, full, meta) => rupiah.format(data) },
+                { data: 'id_pph', render: (data, type, full, meta) => /*html*/ `
+                    <div class="button-container gap-2">
+                        <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
+                            <i class="fas fa-fw fa-solid fa-pen"></i> 
+                        </a>
+                        <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
+                            <i class="fas fa-fw fa-solid fa-trash"></i> 
+                        </button>
+                    </div>
+                ` },
+            ]
+        });
         }
 
         initTable(pph);
@@ -210,82 +189,82 @@
         }
 
         document.addEventListener('alpine:init', () => {
-            Alpine.data('formTambah', () => ({
-                formData: {
-                    id_pajak: '',
-                    ntpn: '',
-                    biaya_bulan: '',
-                    jumlah_bayar: '',
-                },
+        Alpine.data('formTambah', () => ({
+            formData: {
+                id_pajak: '',
+                ntpn: '',
+                biaya_bulan: '',
+                jumlah_bayar: '',
+            },
 
-                handleSubmit() {
-                    const data = {
-                        id_pajak: this.formData.id_pajak,
-                        ntpn: this.formData.ntpn,
-                        biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
-                        jumlah_bayar: this.formData.jumlah_bayar.replaceAll('.', ''),
+            handleSubmit() {
+                const data = {
+                    id_pajak: this.formData.id_pajak,
+                    ntpn: this.formData.ntpn,
+                    biaya_bulan: this.formData.biaya_bulan.replaceAll('.', ''),
+                    jumlah_bayar: this.formData.jumlah_bayar.replaceAll('.', ''),
+                };
+
+                fetch("{{ route('pphStore') }}", {
+                    method: 'POST',
+                    headers: {
+                        "Content-Type": "application/json",
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    },
+                    body: JSON.stringify(data)
+                }).then(() => {
+                    $('#tambah').modal('hide');
+                    this.formData = {
+                        id_pajak: '',
+                        ntpn: '',
+                        biaya_bulan: '',
+                        jumlah_bayar: '',
                     };
-                    console.log(this.formData);
-                    fetch("{{ route('pphStore') }}", {
-                        method: 'POST',
-                        headers: {
-                            "Content-Type": "application/json",
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify(data)
-                    }).then(res => {
-                        $('#tambah').modal('hide');
-                        console.log(res);
-                        this.formData = {
-                            id_pajak: '',
-                            ntpn: '',
-                            biaya_bulan: '',
-                            jumlah_bayar: '',
+                    location.reload();
+                            getData();
+                        }).catch(err => console.log(err));
+                    },
+
+                }));
+
+                Alpine.data('app', () => ({
+                    data: {},
+                    editId: '',
+                    file: null,
+
+                    select(id) {
+                        const findData = pph.find(item => item.id_pph == id);
+                        this.data = {
+                            id_pph: findData.id_pph,
+                            id_pajak: findData.id_pajak,
+                            ntpn: findData.ntpn,
+                            jumlah_bayar: rupiah.format(findData.jumlah_bayar),
+                            biaya_bulan: rupiah.format(findData.biaya_bulan),
                         };
-                        getData();
-                    }).catch(err => console.log(err));
-                },
+                    },
 
-            }));
+                    editSubmit() {
+                        const data = {
+                            id_pajak: this.data.id_pajak,
+                            ntpn: this.data.ntpn,
+                            biaya_bulan: this.data.biaya_bulan ? this.data.biaya_bulan.replaceAll('.', '') : null,
+                            jumlah_bayar: this.data.jumlah_bayar ? this.data.jumlah_bayar.replaceAll('.', '') : null,
+                        };
 
-            Alpine.data('app', () => ({
-                data: {},
-                editId: '',
-                file: null,
-
-                select(id) {
-                    const findData = pph.find(item => item.id_pph == id);
-                    this.data = {
-                        id_pph: findData.id_pph,
-                        id_pajak: findData.id_pajak,
-                        ntpn: findData.ntpn,
-                        jumlah_bayar: rupiah.format(findData.jumlah_bayar),
-                        biaya_bulan: rupiah.format(findData.biaya_bulan),
-                    };
-                },
-
-                editSubmit() {
-                    const data = {
-                        id_pajak: this.data.id_pajak,
-                        ntpn: this.data.ntpn,
-                        biaya_bulan: this.data.biaya_bulan.replaceAll('.', ''),
-                        jumlah_bayar: this.data.jumlah_bayar.replaceAll('.', ''),
-                    };
-
-                    fetch(`{{ route('pphUpdate', '') }}/${this.data.id_pph}`, {
-                        method: 'PUT',
-                        headers: {
-                            "Content-Type": "application/json",
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        },
-                        body: JSON.stringify(data)
-                    }).then(res => {
-                        $('#edit').modal('hide');
-                        getData();
-                    }).catch(err => console.log(err));
-                },
-            }));
-        });
+                        fetch(`{{ route('pphUpdate', '') }}/${this.data.id_pph}`, {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify(data)
+                        }).then(res => {
+                            $('#edit').modal('hide');
+                            getData();
+                        }).catch(err => console.log(err));
+                    },
+                }));
+            });
     </script>
 @endpush
 

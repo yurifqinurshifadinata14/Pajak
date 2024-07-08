@@ -97,9 +97,9 @@ class PphController extends Controller
      */
     public function store(Request $request)
     {
+        // Generate ID
         $max = DB::table('pphs')->select(DB::raw('MAX(RIGHT(id_pph,3)) as autoid'));
         $kd = "";
-
         if ($max->count() > 0) {
             foreach ($max->get() as $a) {
                 $tmp = ((int) $a->autoid) + 1;
@@ -109,18 +109,25 @@ class PphController extends Controller
         } else {
             $id_pph = "PPH-001";
         }
-
-        $pph = Pph::create([
+    
+        // Create new PPH
+        Pph::create([
             'id_pajak' => $request->id_pajak,
             'id_pph' => $id_pph,
             'ntpn' => (int)$request->ntpn,
             'biaya_bulan' => (int)$request->biaya_bulan,
             'jumlah_bayar' => (int)$request->jumlah_bayar,
         ]);
-
-        return redirect()->route('pphSub');
-        //
+    
+        // Get updated data for the user
+        $pph = Pph::join('pajaks', 'pphs.id_pajak', '=', 'pajaks.id_pajak')
+            ->where('pphs.id_pajak', Auth::guard('user')->user()->id_pajak)
+            ->select('pphs.*', 'pajaks.nama_wp')
+            ->get();
+    
+        return view('user.pphsub', compact('pph'));
     }
+    
 
     public function pphsub()
     {
