@@ -229,6 +229,8 @@
 
                 }));
 
+                
+
                 Alpine.data('app', () => ({
                     data: {},
                     editId: '',

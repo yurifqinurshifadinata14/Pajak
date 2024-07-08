@@ -53,10 +53,11 @@ Route::middleware(['auth:admin'])->group(function () {
     Route::get('/admin/pph', [PphController::class, 'index'])->name('admin.pph');
     Route::post('/admin/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
     Route::get('/admin/beranda', [BerandaAdminController::class, 'index'])->name('admin.beranda');
+    Route::get('/pajaksub', [PajakController::class, 'pajaksub'])->name('pajak.pajakSub');
+
     Route::get('/pajak', [PajakController::class, 'index'])->name('pajak');
     Route::get('/getpajaksub', [PajakController::class, 'getPajakSub'])->name('getpajaksub');
     Route::post('/pajakstore', [PajakController::class, 'store'])->name('pajakStore');
-    Route::get('/pajaksub', [PajakController::class, 'pajaksub'])->name('pajakSub');
     Route::get('/pajak/pajakDetail/{id_pajak}', [PajakController::class, 'show'])->name('pajak.Detail');
     Route::get('/pajakEdit/{pajak}', [PajakController::class, 'edit'])->name('pajakEdit');
     Route::put('/pajakUpdate/{id_pajak}', [PajakController::class, 'update'])->name('pajakUpdate');

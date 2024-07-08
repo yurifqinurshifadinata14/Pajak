@@ -14,18 +14,12 @@
                 </div>
 
                 <div class="d-flex align-items-center">
-                    <!-- Button trigger modal Import-->
+                     <!-- Button trigger modal Import-->
                     <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
                         data-bs-target="#importExcel">
                         <i class="fas fa-fw fa-file-excel"></i>
                         <span class="d-none d-md-inline">Import Excel</span>
                     </button>
-                    <!-- Button trigger modal Export-->
-                    <!-- <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
-                        data-bs-target="#exportModal">
-                        <i class="fas fa-fw fa-file-export"></i>
-                        <span class="d-none d-md-inline">Export</span>
-                    </button> -->
 
                     <!-- Button trigger modal tambah-->
                     <button type="button" class="btn btn-sm btn-primary me-2" data-bs-toggle="modal"
@@ -34,6 +28,10 @@
                         <span class="d-none d-md-inline">Tambah</span>
                     </button>
 
+                    <select id="namaWpSelect" class="form-select me-2" style="width: 200px;">
+                        <option value="">Pilih Nama WP</option>
+                    </select>
+
                     <!-- Modal Button Tambah -->
                     <x-pajaksub.modaltambah />
                     <!-- Modal Button Edit -->
@@ -41,29 +39,6 @@
                     <!-- Modal Button Import -->
                    <x-pajaksub.modalimportpajak />
 
-                  
-                    <!-- <div class="d-flex">
-                     
-                        <div class="modal fade" id="exportModal" tabindex="-1" aria-labelledby="exportModalLabel"
-                            aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exportModalLabel">Export Data Pembayar</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body text-center">
-                                        <a href="{{ route('export.excelpajak') }}" class="btn btn-success btn-sm">Export to
-                                            Excel</a>
-                                        <button class="btn btn-danger btn-sm" x-on:click="exportPDF()">Export to PDF</button>
-                                        <button class="btn btn-secondary text-light btn-sm"
-                                           x-on:click="copyToClipboard('#pajakTable')">Copy Data</button>
-                                        </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
                 </div>
 
             </div>
@@ -397,7 +372,31 @@
                 },
                 init() {
                     console.log('data:', this.data)
+                    this.initNamaWpSelect();
                 },
+
+                 initNamaWpSelect() {
+                        // Mengumpulkan nama_wp yang unik
+                        const uniqueNamaWp = [...new Set(pajak.map(item => item.nama_wp))];
+
+                        // select dropdown dengan data nama_wp yang unik
+                        const selectElement = document.getElementById('namaWpSelect');
+                        selectElement.innerHTML = '<option value="">Pilih Nama WP</option>';
+
+                        uniqueNamaWp.forEach(nama_wp => {
+                            const option = document.createElement('option');
+                            option.value = nama_wp;
+                            option.textContent = nama_wp;
+                            selectElement.appendChild(option);
+                        });
+
+                        // Tambahkan event listener untuk pencarian langsung
+                        selectElement.addEventListener('change', (event) => {
+                            const selectedNamaWp = event.target.value;
+                            const table = $('#pajakTable').DataTable();
+                            table.columns(1).search(selectedNamaWp).draw();
+                        });
+                    },
 
                 exportPDF() {
                 const element = document.getElementById('pajakTable');

@@ -123,8 +123,8 @@
 
                 <!-- Nav Item - Pajak -->
                 <li
-                    class="nav-item {{ Request::is('admin/pajaksub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
-                    <a class="nav-link" href="{{ route('pajakSub') }}" aria-expanded="true">
+                    class="nav-item {{ Request::is('pajaksub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    <a class="nav-link" href="{{ route('pajak.pajakSub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Profil</span>
                     </a>
@@ -132,7 +132,7 @@
 
                 <!-- Nav Item - Pph -->
                 <li
-                    class="nav-item {{ Request::is('admin/pphsub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    class="nav-item {{ Request::is('admin/pph*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                     <a class="nav-link" href="{{ route('admin.pph') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH</span>

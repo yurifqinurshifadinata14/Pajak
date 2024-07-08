@@ -14,6 +14,9 @@
                     </div>
 
                     <div class="d-flex align-items-center">
+                    <select id="namaWpSelect" class="form-select me-2" style="width: 200px;">
+                            <option value="">Pilih Nama WP</option>
+                        </select>
                         <!-- Modal Button Edit -->
                         <x-pphsub.modaleditpph />
                     </div>
@@ -59,7 +62,7 @@
                                     <th>NTPN</th>
                                     <th>Biaya Bulan</th>
                                     <th>Jumlah Bayar</th>
-                                    <th>Aksi</th>
+                                    <!-- <th>Aksi</th> -->
                                 </tr>
                             </thead>
                         </table>
@@ -156,19 +159,19 @@
                             return rupiah.format(data);
                         }
                     },
-                    {
-                        data: 'id_pph',
-                        render: (data, type, full, meta) => {
-                            return /*html*/ `<div class="button-container gap-2">
-                                <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
-                                    <i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                    // {
+                    //     data: 'id_pph',
+                    //     render: (data, type, full, meta) => {
+                    //         return /*html*/ `<div class="button-container gap-2">
+                    //             <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')">
+                    //                 <i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                 
-                                                <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
-                                                    <i class="fas fa-fw fa-solid fa-trash"></i> </button>
+                    //                             <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
+                    //                                 <i class="fas fa-fw fa-solid fa-trash"></i> </button>
                                                 
-                            </div>`;
-                        }
-                    },
+                    //         </div>`;
+                    //     }
+                    // },
                 ]
             });
         }
@@ -269,6 +272,34 @@
                         getData();
                     }).catch(err => console.log(err));
                 },
+
+                init() {
+                    this.initNamaWpSelect();
+                },
+
+                initNamaWpSelect() {
+                        // Mengumpulkan nama_wp yang unik
+                        const uniqueNamaWp = [...new Set(pph.map(item => item.nama_wp))];
+
+                        // select dropdown dengan data nama_wp yang unik
+                        const selectElement = document.getElementById('namaWpSelect');
+                        selectElement.innerHTML = '<option value="">Pilih Nama WP</option>';
+
+                        uniqueNamaWp.forEach(nama_wp => {
+                            const option = document.createElement('option');
+                            option.value = nama_wp;
+                            option.textContent = nama_wp;
+                            selectElement.appendChild(option);
+                        });
+
+                        // Tambahkan event listener untuk pencarian langsung
+                        selectElement.addEventListener('change', (event) => {
+                            const selectedNamaWp = event.target.value;
+                            const table = $('#pphTable').DataTable();
+                            table.columns(1).search(selectedNamaWp).draw();
+                        });
+                    }
+
             }));
         });
     </script>
