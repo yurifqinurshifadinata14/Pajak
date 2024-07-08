@@ -177,15 +177,17 @@
                         "Content-Type": "application/json",
                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
                     }
-                }).then(res => getData()).catch(err => console.log(err));
+                });
             }
+            location.reload();
         };
-
+      
         async function getData() {
             await fetch(`{{ route('getPph') }}`).then(res => res.json()).then(data => {
                 i = 1;
                 initTable(data);
             });
+           
         }
 
         document.addEventListener('alpine:init', () => {
@@ -260,6 +262,7 @@
                             body: JSON.stringify(data)
                         }).then(res => {
                             $('#edit').modal('hide');
+                            location.reload();
                             getData();
                         }).catch(err => console.log(err));
                     },

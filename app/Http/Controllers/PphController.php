@@ -110,7 +110,6 @@ class PphController extends Controller
             $id_pph = "PPH-001";
         }
     
-        // Create new PPH
         Pph::create([
             'id_pajak' => $request->id_pajak,
             'id_pph' => $id_pph,
@@ -153,36 +152,59 @@ class PphController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Pph $pph)
-    {
+    /**
+ * Show the form for editing the specified resource.
+ */
+public function edit(Pph $pph)
+{
+   
+    if (Auth::guard('user')->check() && $pph->id_pajak == Auth::guard('user')->user()->id_pajak) {
         return response()->json($pph);
-        // return view('pph.pphEdit', compact('pph'));
-        //
+    } else {
+        abort(403); 
     }
+}
+
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id_pph)
     {
-        $pph=Pph::where('id_pph',$id_pph)->update([
-            'ntpn' => (int)$request->ntpn,
-            'biaya_bulan' => (int)$request->biaya_bulan,
-            'jumlah_bayar' => (int)$request->jumlah_bayar,
-        ]);
-
-        return redirect()->route('pphSub');
-        //
+        if (Auth::guard('user')->check()) {
+            $pph = Pph::where('id_pph', $id_pph)
+                ->where('id_pajak', Auth::guard('user')->user()->id_pajak)
+                ->update([
+                    'ntpn' => (int)$request->ntpn,
+                    'biaya_bulan' => (int)$request->biaya_bulan,
+                    'jumlah_bayar' => (int)$request->jumlah_bayar,
+                ]);
+    
+            return redirect()->route('user.pphsub');
+        } else {
+            abort(403); 
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy($id)
-    {
+{
+    if (Auth::guard('user')->check()) {
+        $pph = Pph::where('id_pph', $id)
+            ->where('id_pajak', Auth::guard('user')->user()->id_pajak)
+            ->delete();
 
-        $pph = Pph::where('id_pph',$id)->delete();
-        return redirect()->route('pphSub');
-        //
+        if ($pph) {
+            return redirect()->route('pphSub')->with('success', 'Data berhasil dihapus.');
+        } else {
+            return redirect()->route('pphSub')->with('error', 'Data tidak ditemukan atau Anda tidak memiliki izin untuk menghapus data ini.');
+        }
+    } else {
+        abort(403); // Akses ditolak jika bukan pengguna user atau tidak memiliki akses yang sesuai
     }
+}
+
+    
 }
