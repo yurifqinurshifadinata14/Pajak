@@ -1,4 +1,4 @@
-@extends ('admin.main')
+@extends ('user.main')
 @section('konten')
     <main x-data="{ pilih: '' }">
         <div class="container-fluid px-0" x-data="app">
@@ -209,6 +209,7 @@
                                 'X-CSRF-TOKEN': '{{ csrf_token() }}'
                             }
                         }).then(res => getpph21()).catch(err => console.log(err));
+                        location.reload();
                     }
                 }
 
@@ -319,10 +320,11 @@
                                 render: (data) => {
                                     return /*html*/ `<div class="button-container gap-2">
                                                         <a href="#" data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning" title="Edit Data" @click="select('${data}')"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                                                       
+                                         
                                                             <button type="button" class="btn btn-sm btn-danger" title="Hapus Data" onclick="deleteData('${data}')">
                                                                 <i class="fas fa-fw fa-solid fa-trash"></i> </button>
-                                                          
+                                                     
+
                                                 </div>`
                                 }
                             },
@@ -389,6 +391,7 @@
                                     biaya_bulan: '',
                                     nik: '',
                                 }
+                                location.reload();
                                 getpph21()
                             }).catch(err => console.log(err))
                         },
@@ -441,6 +444,7 @@
                                 body: JSON.stringify(dataSubmit)
                             }).then(res => {
                                 $('#edit').modal('hide');
+                                location.reload();
                                 getpph21()
                             }).catch(err => console.log(err))
                         },

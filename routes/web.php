@@ -35,17 +35,17 @@ Route::get('/admin/login', [AdminAuthController::class, 'showLoginForm'])->name(
 Route::post('/admin/login', [AdminAuthController::class, 'login'])->name('admin.login.post');
 
 Route::middleware(['auth:user'])->group(function () {
+
+    //auth
     Route::get('/user/beranda', [BerandaUserController::class, 'index'])->name('user.beranda');
     Route::get('/user/profil', [UserController::class, 'index'])->name('user.profil');
 
     //pph
     Route::get('/user/pph', [PphController::class, 'indexUser'])->name('user.pph');
-    Route::get('/getpph', [PphController::class, 'getPph'])->name('getPph');
     Route::post('/pphstore', [PphController::class, 'store'])->name('pphStore');
-    Route::get('/pphsub', [PphController::class, 'pphsub'])->name('pphSub');
-    Route::get('/pphEdit/{pph}', [PphController::class, 'edit'])->name('pphEdit');
-    Route::put('/pphUpdate/{id_pph}', [PphController::class, 'update'])->name('pphUpdate');
-    Route::delete('/pphDelete/{pph}', [PphController::class, 'destroy'])->name('pphDestroy');
+
+    //pph21
+    Route::get('/user/pph21sub', [Pph21Controller::class, 'pph21subUser'])->name('user.pph21Sub');
 
     //karyawan
     Route::get('/user/karyawansub', [KaryawanController::class, 'karyawansubUser'])->name('user.karyawanSub');
@@ -88,13 +88,11 @@ Route::middleware(['auth:admin'])->group(function () {
     //karyawan
     Route::get('/admin/karyawansub', [KaryawanController::class, 'karyawansub'])->name('admin.karyawanSub');
 
-    Route::get('/pph21', [Pph21Controller::class, 'index'])->name('pph21');
-    Route::post('/pph21store', [Pph21Controller::class, 'store'])->name('pph21Store');
-    Route::get('/pph21sub', [Pph21Controller::class, 'pph21sub'])->name('pph21Sub');
-    Route::delete('/pph21Delete/{ppph21}', [Pph21Controller::class, 'destroy'])->name('pph21Destroy');
-    Route::get('/pph21Edit/{pph21}', [Pph21Controller::class, 'edit'])->name('pph21Edit');
-    Route::put('/pph21Update/{id}', [Pph21Controller::class, 'update'])->name('pph21Update');
-    Route::get('/getpph21sub', [Pph21Controller::class, 'getPph21Sub'])->name('getpph21sub');
+    //pph21
+    Route::get('/admin/pph21sub', [Pph21Controller::class, 'pph21sub'])->name('admin.pph21Sub');
+
+ 
+   
 
     Route::get('/getDataadmin', [DataadminController::class, 'getDataadmin'])->name('getDataadmin');
     Route::get('/dataadmin', [DataadminController::class, 'index'])->name('dataadmin');
@@ -124,6 +122,19 @@ Route::middleware(['auth:user,admin'])->group(function () {
     Route::get('/karyawanEdit/{karyawan}', [KaryawanController::class, 'edit'])->name('karyawanEdit');
     Route::put('/karyawanUpdate/{karyawan}', [KaryawanController::class, 'update'])->name('karyawanUpdate');
     Route::delete('/karyawanDelete/{id}', [KaryawanController::class, 'destroy'])->name('karyawanDestroy');
+
+    Route::get('/getpph', [PphController::class, 'getPph'])->name('getPph');
+    Route::get('/pphsub', [PphController::class, 'pphsub'])->name('pphSub');
+    Route::get('/pphEdit/{pph}', [PphController::class, 'edit'])->name('pphEdit');
+    Route::put('/pphUpdate/{id_pph}', [PphController::class, 'update'])->name('pphUpdate');
+    Route::delete('/pphDelete/{pph}', [PphController::class, 'destroy'])->name('pphDestroy');
+
+    Route::delete('/pph21Delete/{ppph21}', [Pph21Controller::class, 'destroy'])->name('pph21Destroy');
+    Route::get('/pph21Edit/{pph21}', [Pph21Controller::class, 'edit'])->name('pph21Edit');
+    Route::put('/pph21Update/{id}', [Pph21Controller::class, 'update'])->name('pph21Update');
+    Route::get('/getpph21sub', [Pph21Controller::class, 'getPph21Sub'])->name('getpph21sub');
+       // Route::get('/pph21', [Pph21Controller::class, 'index'])->name('pph21');
+    Route::post('/pph21store', [Pph21Controller::class, 'store'])->name('pph21Store');
 });
 
   

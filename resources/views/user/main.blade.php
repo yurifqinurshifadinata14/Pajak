@@ -142,8 +142,8 @@
 
                 <!-- Nav Item - Pph 21 -->
                 <li
-                    class="nav-item {{ Request::is('pph21sub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
-                    <a class="nav-link" href="{{ route('pph21Sub') }}" aria-expanded="true">
+                    class="nav-item {{ Request::is('user/pph21sub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    <a class="nav-link" href="{{ route('user.pph21Sub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH 21</span>
                     </a>
