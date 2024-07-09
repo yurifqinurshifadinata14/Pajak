@@ -48,11 +48,9 @@
                         }
 
                         .dt-buttons {
-                        display: block !important;
+                            display: block !important;
                         }
-                        @media (max-width: 768px) {
-                        
-                        }
+
                         .button-container {
                             display: flex;
                         }
@@ -86,69 +84,68 @@
                                 <th>NPWP</th>
                                 <th>Aksi</th>
                             </thead>
+                            <tbody>
+                                @foreach($karyawan as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->nik }}</td>
+                                    <td>{{ $item->npwp }}</td>
+                                    <td>
+                                        <div class="button-container gap-2">
+                                            <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
+                                                @click="getEdit({{ $item->id }})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                @click="handleDelete({{ $item->id }})"><i class="fas fa-fw fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
 
-@push('script')
+        @push('script')
         <script>
             let karyawan = {!! json_encode($karyawan) !!};
 
             let tableKaryawan = (karyawan) => {
-            $('#tableKaryawan').DataTable({
-                dom: 'Bfrtip',
-                responsive: true,
-                buttons: [
-                    {
-                        extend: 'copy',
-                        text: '<i class="fas fa-copy"></i> Copy',
-                        className: 'btn-sm btn-secondary',
-                        titleAttr: 'Salin ke Clipboard',
-                    },
-                    {
-                        extend: 'excel',
-                        text: '<i class="fas fa-file-excel"></i> Excel',
-                        className: 'btn-sm btn-success',
-                        titleAttr: 'Ekspor ke Excel',
-                    },
-                    {
-                        extend: 'pdf',
-                        text: '<i class="fas fa-file-pdf"></i> PDF',
-                        className: 'btn-sm btn-danger',
-                        titleAttr: 'Unduh sebagai PDF',
-                    }
-                ],
-                initComplete: function () {
-                    // Menerapkan perubahan CSS untuk mode mobile
-                    if ($(window).width() < 768) {
-                        $('.dt-buttons').addClass('mobile-top-left');
-                    }
-                },
-                                lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                                pageLength: 10,
-                                responsive: {
-                                    details: {
-                                        renderer: (api, rowIdx, columns) => {
-                                            let data = columns
-                                                .map((col, i) => {
-                                                    return col.hidden ? /*html*/ `
-                                                <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
-                                                    <th>${col.title}</th>
-                                                    <td style="width: 100%;">${col.data}</td>
-                                                </tr>
-                                            ` : ``;
-                                                })
-                                                .join('');
-
-                                let table = document.createElement('table');
-                                table.innerHTML = data;
-
-                                return data ? table : false;
-                            }
+                $('#tableKaryawan').DataTable({
+                    dom: 'Bfrtip',
+                    responsive: true,
+                    buttons: [
+                        {
+                            extend: 'copy',
+                            text: '<i class="fas fa-copy"></i> Copy',
+                            className: 'btn-sm btn-secondary',
+                            titleAttr: 'Salin ke Clipboard',
+                        },
+                        {
+                            extend: 'excel',
+                            text: '<i class="fas fa-file-excel"></i> Excel',
+                            className: 'btn-sm btn-success',
+                            titleAttr: 'Ekspor ke Excel',
+                        },
+                        {
+                            extend: 'pdf',
+                            text: '<i class="fas fa-file-pdf"></i> PDF',
+                            className: 'btn-sm btn-danger',
+                            titleAttr: 'Unduh sebagai PDF',
+                        }
+                    ],
+                    initComplete: function () {
+                        // Menerapkan perubahan CSS untuk mode mobile
+                        if ($(window).width() < 768) {
+                            $('.dt-buttons').addClass('mobile-top-left');
                         }
                     },
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    pageLength: 10,
                     destroy: true,
                     data: karyawan,
                     columns: [
@@ -170,14 +167,13 @@
                         {
                             data: 'id',
                             render: (data) => {
-                                return /*html*/ `<div class="button-container gap-2">
+                                return `<div class="button-container gap-2">
                                     <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
                                         @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
                                     
                                     <button type="button" class="btn btn-sm btn-danger"
                                         @click="handleDelete(${data})"><i class="fas fa-fw fa-solid fa-trash"></i>
                                     </button>
-                                
                                 </div>`;
                             }
                         },
@@ -301,31 +297,30 @@
             });
 
             function exportPDF() {
-            const element = document.getElementById('tableKaryawan');
-            const jsPDF = window.jspdf.jsPDF;
-            const doc = new jsPDF();
-            
-        
-            doc.text('Data Karyawan', 14, 10);
-            
-            doc.autoTable({
-                head: [
-                    ['No', 'Nama', 'NIK', 'NPWP']
-                ],
-                body: Array.from(element.querySelectorAll('tbody tr')).map(row => [
-                    row.cells[0].textContent,
-                    row.cells[1].textContent,
-                    row.cells[2].textContent,
-                    row.cells[3].textContent
-                ]),
-                styles: {
-                    fontSize: 12,
-                    overflow: 'linebreak'
-                }
-            });
-            doc.save('datakaryawan.pdf');
-        }
-
+                const element = document.getElementById('tableKaryawan');
+                const jsPDF = window.jspdf.jsPDF;
+                const doc = new jsPDF();
+                
+                doc.text('Data Karyawan', 14, 10);
+                
+                doc.autoTable({
+                    head: [
+                        ['No', 'Nama', 'NIK', 'NPWP', 'Nama WP']
+                    ],
+                    body: Array.from(element.querySelectorAll('tbody tr')).map(row => [
+                        row.cells[0].textContent,
+                        row.cells[1].textContent,
+                        row.cells[2].textContent,
+                        row.cells[3].textContent,
+                        row.cells[4].textContent, // Tambahkan Nama WP di PDF
+                    ]),
+                    styles: {
+                        fontSize: 12,
+                        overflow: 'linebreak'
+                    }
+                });
+                doc.save('datakaryawan.pdf');
+            }
 
             window.copyToClipboard = function(selector) {
                 var element = document.querySelector(selector);
@@ -359,8 +354,6 @@
                 });
             });
         </script>
-@endpush
-
+        @endpush
     </main>
 @endsection
-

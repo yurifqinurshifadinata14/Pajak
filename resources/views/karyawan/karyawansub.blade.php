@@ -77,15 +77,37 @@
                             background-color: #f2f2f2;
                         }
                     </style>
-                    <div class="table-responsive">
+                      <div class="table-responsive">
                         <table class="my-table" id="tableKaryawan" style="width: 100%">
                             <thead>
                                 <th>No</th>
+                                <th>Nama WP</th>
                                 <th>Nama</th>
                                 <th>NIK</th>
                                 <th>NPWP</th>
                                 <th>Aksi</th>
                             </thead>
+                            <tbody>
+                                @foreach($karyawan as $item)
+                                <tr>
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $item->nama_wp }}</td>
+                                    <td>{{ $item->nama }}</td>
+                                    <td>{{ $item->nik }}</td>
+                                    <td>{{ $item->npwp }}</td>
+                                    <td>
+                                        <div class="button-container gap-2">
+                                            <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
+                                                @click="getEdit({{ $item->id }})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+
+                                            <button type="button" class="btn btn-sm btn-danger"
+                                                @click="handleDelete({{ $item->id }})"><i class="fas fa-fw fa-solid fa-trash"></i>
+                                            </button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -93,176 +115,156 @@
         </div>
 
         @push('script')
-<script>
-    let karyawan = {!! json_encode($karyawan) !!};
+        <script>
+            let karyawan = {!! json_encode($karyawan) !!};
 
-    let tableKaryawan = (karyawan) => {
-    $('#tableKaryawan').DataTable({
-        dom: 'Bfrtip',
-        responsive: true,
-        buttons: [
-            {
-                extend: 'copy',
-                text: '<i class="fas fa-copy"></i> Copy',
-                className: 'btn-sm btn-secondary',
-                titleAttr: 'Salin ke Clipboard',
-            },
-            {
-                extend: 'excel',
-                text: '<i class="fas fa-file-excel"></i> Excel',
-                className: 'btn-sm btn-success',
-                titleAttr: 'Ekspor ke Excel',
-            },
-            {
-                extend: 'pdf',
-                text: '<i class="fas fa-file-pdf"></i> PDF',
-                className: 'btn-sm btn-danger',
-                titleAttr: 'Unduh sebagai PDF',
-            }
-        ],
-        initComplete: function () {
-            // Menerapkan perubahan CSS untuk mode mobile
-            if ($(window).width() < 768) {
-                $('.dt-buttons').addClass('mobile-top-left');
-            }
-        },
-                        lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
-                        pageLength: 10,
-                        responsive: {
-                            details: {
-                                renderer: (api, rowIdx, columns) => {
-                                    let data = columns
-                                        .map((col, i) => {
-                                            return col.hidden ? /*html*/ `
-                                        <tr data-dt-row="${col.rowIndex}" data-dt-column="${i}">
-                                            <th>${col.title}</th>
-                                            <td style="width: 100%;">${col.data}</td>
-                                        </tr>
-                                    ` : ``;
-                                        })
-                                        .join('');
-
-                        let table = document.createElement('table');
-                        table.innerHTML = data;
-
-                        return data ? table : false;
-                    }
-                }
-            },
-            destroy: true,
-            data: karyawan,
-            columns: [
-                {
-                    data: 'id',
-                    render: (data, type, row, meta) => {
-                        return meta.row + 1;
-                    }
-                },
-                {
-                    data: 'nama',
-                },
-                {
-                    data: 'nik'
-                },
-                {
-                    data: 'npwp',
-                },
-                {
-                    data: 'id',
-                    render: (data) => {
-                        return /*html*/ `<div class="button-container gap-2">
-                            <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
-                                @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
-                               
-                            <button type="button" class="btn btn-sm btn-danger"
-                                @click="handleDelete(${data})"><i class="fas fa-fw fa-solid fa-trash"></i>
-                            </button>
-                          
-                        </div>`;
-                    }
-                },
-            ]
-        });
-    };
-
-    tableKaryawan(karyawan);
-
-    const getKaryawan = async () => {
-        await fetch("{{ route('getKaryawan') }}", {
-            method: 'GET',
-        }).then(res => res.json()).then(res => {
-            karyawan = res;
-            tableKaryawan(karyawan);
-        });
-    };
-
-    document.addEventListener('alpine:init', () => {
-        Alpine.store('karyawanEdit', {
-            formData: {
-                id: '',
-                id_pajak:'',
-                nama: '',
-                nik: '',
-                npwp: ''
-            }
-        });
-
-        Alpine.data('karyawan', () => ({
-            file: null,
-            formData: {
-                id: '',
-                id_pajak:'',
-                nama: '',
-                nik: '',
-                npwp: ''
-            },
-
-            getEdit(id) {
-                const findKaryawan = karyawan.find(item => item.id === id);
-                this.formData = { ...findKaryawan };
-                Alpine.store('karyawanEdit').formData = { ...findKaryawan };
-            },
-
-            handleReset() {
-                this.formData = {
-                    id: '',
-                    id_pajak:'',
-                    nama: '',
-                    nik: '',
-                    npwp: ''
-                };
-            },
-
-            handleSubmit() {
-                fetch("{{ route('addKaryawan') }}", {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json",
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            let tableKaryawan = (karyawan) => {
+                $('#tableKaryawan').DataTable({
+                    dom: 'Bfrtip',
+                    responsive: true,
+                    buttons: [
+                        {
+                            extend: 'copy',
+                            text: '<i class="fas fa-copy"></i> Copy',
+                            className: 'btn-sm btn-secondary',
+                            titleAttr: 'Salin ke Clipboard',
+                        },
+                        {
+                            extend: 'excel',
+                            text: '<i class="fas fa-file-excel"></i> Excel',
+                            className: 'btn-sm btn-success',
+                            titleAttr: 'Ekspor ke Excel',
+                        },
+                        {
+                            extend: 'pdf',
+                            text: '<i class="fas fa-file-pdf"></i> PDF',
+                            className: 'btn-sm btn-danger',
+                            titleAttr: 'Unduh sebagai PDF',
+                        }
+                    ],
+                    initComplete: function () {
+                        // Menerapkan perubahan CSS untuk mode mobile
+                        if ($(window).width() < 768) {
+                            $('.dt-buttons').addClass('mobile-top-left');
+                        }
                     },
-                    body: JSON.stringify(this.formData)
-                }).then(res => {
-                    this.handleReset();
-                    $('#tambah').modal('hide');
-                    getKaryawan();
-                }).catch(err => console.log(err));
-            },
+                    lengthMenu: [[10, 25, 50, -1], [10, 25, 50, "All"]],
+                    pageLength: 10,
+                    destroy: true,
+                    data: karyawan,
+                    columns: [
+                        {
+                            data: 'id',
+                            render: (data, type, row, meta) => {
+                                return meta.row + 1;
+                            }
+                        },
+                        {
+                            data: 'nama_wp',
+                        },
+                        {
+                            data: 'nama',
+                        },
+                        {
+                            data: 'nik'
+                        },
+                        {
+                            data: 'npwp',
+                        },
+                        {
+                            data: 'id',
+                            render: (data) => {
+                                return `<div class="button-container gap-2">
+                                    <a data-bs-toggle="modal" data-bs-target="#edit" class="btn btn-sm btn-warning"
+                                        @click="getEdit(${data})"><i class="fas fa-fw fa-solid fa-pen"></i> </a>
+                                    
+                                    <button type="button" class="btn btn-sm btn-danger"
+                                        @click="handleDelete(${data})"><i class="fas fa-fw fa-solid fa-trash"></i>
+                                    </button>
+                                </div>`;
+                            }
+                        },
+                    ]
+                });
+            };
 
-            handleDelete(id) {
-                fetch(`{{ route('deleteKaryawan', '') }}/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        "Content-Type": "application/json",
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+            tableKaryawan(karyawan);
+
+            const getKaryawan = async () => {
+                await fetch("{{ route('getKaryawan') }}", {
+                    method: 'GET',
+                }).then(res => res.json()).then(res => {
+                    karyawan = res;
+                    tableKaryawan(karyawan);
+                });
+            };
+
+            document.addEventListener('alpine:init', () => {
+                Alpine.store('karyawanEdit', {
+                    formData: {
+                        id: '',
+                        nama: '',
+                        nik: '',
+                        npwp: ''
                     }
-                }).then(res => getKaryawan()).catch(err => console.log(err));
-            },
+                });
 
-            init() {
+                Alpine.data('karyawan', () => ({
+                    file: null,
+                    formData: {
+                        id: '',
+                        nama: '',
+                        nik: '',
+                        npwp: ''
+                    },
+
+                    getEdit(id) {
+                        const findKaryawan = karyawan.find(item => item.id === id);
+                        this.formData = { ...findKaryawan };
+                        Alpine.store('karyawanEdit').formData = { ...findKaryawan };
+                    },
+
+                    handleReset() {
+                        this.formData = {
+                            id: '',
+                            nama: '',
+                            nik: '',
+                            npwp: ''
+                        };
+                    },
+
+                    handleSubmit() {
+                        fetch("{{ route('addKaryawan') }}", {
+                            method: 'POST',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify(this.formData)
+                        }).then(res => {
+                            this.handleReset();
+                            $('#tambah').modal('hide');
+                            location.reload();
+                            getKaryawan();
+                        }).catch(err => console.log(err));
+                    },
+
+                    handleDelete(id) {
+                        fetch(`{{ route('deleteKaryawan', '') }}/${id}`, {
+                            method: 'DELETE',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            }
+                        }).then(res => getKaryawan()).catch(err => console.log(err));
+                        location.reload();
+                    },
+
+                    init() {
                     this.initNamaWpSelect();
                 },
 
-                initNamaWpSelect() {
+                 initNamaWpSelect() {
                         // Mengumpulkan nama_wp yang unik
                         const uniqueNamaWp = [...new Set(karyawan.map(item => item.nama_wp))];
 
@@ -280,112 +282,112 @@
                         // Tambahkan event listener untuk pencarian langsung
                         selectElement.addEventListener('change', (event) => {
                             const selectedNamaWp = event.target.value;
-                            const table = $('#tableKaryawan').DataTable();
+                            const table = $('#tableKaryawan ').DataTable();
                             table.columns(1).search(selectedNamaWp).draw();
                         });
                     },
 
-            handleImport() {
-                let formData = new FormData();
-                formData.append('file', this.file[0]);
+                    handleImport() {
+                        let formData = new FormData();
+                        formData.append('file', this.file[0]);
 
-                fetch("{{ route('karyawan.import_excel') }}", {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        fetch("{{ route('karyawan.import_excel') }}", {
+                            method: 'POST',
+                            headers: {
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: formData
+                        }).then(res => {
+                            getKaryawan();
+                            $('#importExcel').modal('hide');
+                        });
                     },
-                    body: formData
-                }).then(res => {
-                    getKaryawan();
-                    $('#importExcel').modal('hide');
+                }));
+
+                Alpine.data('formEdit', () => ({
+                    get formData() {
+                        return Alpine.store('karyawanEdit').formData;
+                    },
+
+                    set formData(data) {
+                        Alpine.store('karyawanEdit').formData = data;
+                    },
+
+                    editSubmit() {
+                        fetch(`{{ route('karyawanUpdate', '') }}/${this.formData.id}`, {
+                            method: 'PUT',
+                            headers: {
+                                "Content-Type": "application/json",
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify(this.formData)
+                        }).then(res => {
+                            $('#edit').modal('hide');
+                            location.reload();
+                            getKaryawan();
+                        }).catch(err => console.log(err));
+                    }
+                }));
+            });
+
+            function exportPDF() {
+                const element = document.getElementById('tableKaryawan');
+                const jsPDF = window.jspdf.jsPDF;
+                const doc = new jsPDF();
+                
+                doc.text('Data Karyawan', 14, 10);
+                
+                doc.autoTable({
+                    head: [
+                        ['No', 'Nama', 'NIK', 'NPWP', 'Nama WP']
+                    ],
+                    body: Array.from(element.querySelectorAll('tbody tr')).map(row => [
+                        row.cells[0].textContent,
+                        row.cells[1].textContent,
+                        row.cells[2].textContent,
+                        row.cells[3].textContent,
+                        row.cells[4].textContent, // Tambahkan Nama WP di PDF
+                    ]),
+                    styles: {
+                        fontSize: 12,
+                        overflow: 'linebreak'
+                    }
                 });
-            },
-        }));
-
-        Alpine.data('formEdit', () => ({
-            get formData() {
-                return Alpine.store('karyawanEdit').formData;
-            },
-
-            set formData(data) {
-                Alpine.store('karyawanEdit').formData = data;
-            },
-
-            editSubmit() {
-                fetch(`{{ route('karyawanUpdate', '') }}/${this.formData.id}`, {
-                    method: 'PUT',
-                    headers: {
-                        "Content-Type": "application/json",
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify(this.formData)
-                }).then(res => {
-                    $('#edit').modal('hide');
-                    getKaryawan();
-                }).catch(err => console.log(err));
-            }
-        }));
-    });
-
-    function exportPDF() {
-    const element = document.getElementById('tableKaryawan');
-    const jsPDF = window.jspdf.jsPDF;
-    const doc = new jsPDF();
-    
-   
-    doc.text('Data Karyawan', 14, 10);
-    
-    doc.autoTable({
-        head: [
-            ['No', 'Nama', 'NIK', 'NPWP']
-        ],
-        body: Array.from(element.querySelectorAll('tbody tr')).map(row => [
-            row.cells[0].textContent,
-            row.cells[1].textContent,
-            row.cells[2].textContent,
-            row.cells[3].textContent
-        ]),
-        styles: {
-            fontSize: 12,
-            overflow: 'linebreak'
-        }
-    });
-    doc.save('datakaryawan.pdf');
-}
-
-
-    window.copyToClipboard = function(selector) {
-        var element = document.querySelector(selector);
-
-        if (element) {
-            var range = document.createRange();
-            var selection = window.getSelection();
-
-            selection.removeAllRanges();
-
-            range.selectNodeContents(element);
-
-            selection.addRange(range);
-
-            try {
-                document.execCommand('copy');
-                alert('Data copied to clipboard!');
-            } catch (err) {
-                alert('Oops, unable to copy');
+                doc.save('datakaryawan.pdf');
             }
 
-            selection.removeAllRanges();
-        } else {
-            alert('Element not found');
-        }
-    }
+            window.copyToClipboard = function(selector) {
+                var element = document.querySelector(selector);
 
-    document.addEventListener('DOMContentLoaded', function() {
-        document.getElementById('copyToClipboardBtn').addEventListener('click', function() {
-            window.copyToClipboard('#tableKaryawan');
-        });
-    });
-</script>
+                if (element) {
+                    var range = document.createRange();
+                    var selection = window.getSelection();
+
+                    selection.removeAllRanges();
+
+                    range.selectNodeContents(element);
+
+                    selection.addRange(range);
+
+                    try {
+                        document.execCommand('copy');
+                        alert('Data copied to clipboard!');
+                    } catch (err) {
+                        alert('Oops, unable to copy');
+                    }
+
+                    selection.removeAllRanges();
+                } else {
+                    alert('Element not found');
+                }
+            }
+
+            document.addEventListener('DOMContentLoaded', function() {
+                document.getElementById('copyToClipboardBtn').addEventListener('click', function() {
+                    window.copyToClipboard('#tableKaryawan');
+                });
+            });
+        </script>
 @endpush
 
     </main>

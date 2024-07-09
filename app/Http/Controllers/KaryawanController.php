@@ -93,15 +93,17 @@ class KaryawanController extends Controller
     public function karyawansub()
     {
         if (Auth::guard('admin')->check()) {
-            // Admin sees all data
-            $karyawan = Karyawan::all();
+            $karyawan = Karyawan::join('pajaks', 'karyawans.id_pajak', '=', 'pajaks.id_pajak')
+                                ->select('karyawans.*', 'pajaks.nama_wp')
+                                ->get();
         } elseif (Auth::guard('user')->check()) {
-            // User sees only their data
             $idPajak = Auth::guard('user')->user()->id_pajak;
-            $karyawan = Karyawan::where('id_pajak', $idPajak)->get();
-            // $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
-        } else {
-            return redirect()->route('login');
+            $karyawan = Karyawan::join('pajaks', 'karyawans.id_pajak', '=', 'pajaks.id_pajak')
+                                ->where('karyawans.id_pajak', $idPajak)
+                                ->select('karyawans.*', 'pajaks.nama_wp')
+                                ->get();
+
+        //  $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
         }
     
         return view('karyawan.karyawansub', compact('karyawan'));
@@ -111,17 +113,25 @@ class KaryawanController extends Controller
     public function karyawansubUser()
     {
         if (Auth::guard('admin')->check()) {
-            // Admin sees all data
-            $karyawan = Karyawan::all();
+            $karyawan = Karyawan::join('pajaks', 'karyawans.id_pajak', '=', 'pajaks.id_pajak')
+                                ->select('karyawans.*', 'pajaks.nama_wp')
+                                ->get();
         } elseif (Auth::guard('user')->check()) {
-            // User sees only their data
             $idPajak = Auth::guard('user')->user()->id_pajak;
-            $karyawan = Karyawan::where('id_pajak', $idPajak)->get();
-            $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
-        }
+            $karyawan = Karyawan::join('pajaks', 'karyawans.id_pajak', '=', 'pajaks.id_pajak')
+                                ->where('karyawans.id_pajak', $idPajak)
+                                ->select('karyawans.*', 'pajaks.nama_wp')
+                                ->get();
 
+         $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
+        }
+    
         return view('user.karyawansub', compact('karyawan', 'pajaks'));
     }
+    
+    
+
+
 
     public function getKaryawan()
     {
