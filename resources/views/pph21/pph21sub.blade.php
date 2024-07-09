@@ -15,23 +15,26 @@
 
                     <div class="d-flex align-items-center">
                         <!-- Button Import -->
-                        <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
+                        <!-- <button type="button" class="btn btn-sm btn-success me-2" data-bs-toggle="modal"
                             data-bs-target="#importExcel">
                             <i class="fas fa-fw fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
-                        </button>
+                        </button> -->
                         <!-- <button id="exportBtn" type="button" class="btn btn-sm btn-secondary me-2 d-sm-none" data-bs-toggle="modal"
                             data-bs-target="#exportModal">
                             <i class="fas fa-fw fa-file-export"></i>
                             <span class="d-none d-md-inline">Export</span>
                         </button> -->
                         <!-- Button Tambah -->
-                        <button id="tambahButton" aria-label="Tambah" class="btn btn-sm btn-primary me-2"
+                        <!-- <button id="tambahButton" aria-label="Tambah" class="btn btn-sm btn-primary me-2"
                             title="Tambah Data Pph 21" data-bs-toggle="modal" data-bs-target="#tambah"
                             @click="getDataKaryawan">
                             <i class="fas fa-plus"></i>
                             <span class="d-none d-md-inline">Tambah</span>
-                        </button>
+                        </button> -->
+                        <select id="namaWpSelect" class="form-select me-2" style="width: 200px;">
+                            <option value="">Pilih Nama WP</option>
+                        </select>
 
                         <!-- modal button tambah-->
                         <x-pph21sub.modaltambah :pajaks="$pajaks" />
@@ -516,6 +519,33 @@
                                 alert('Element not found');
                             }
                         },
+
+                        init() {
+                    this.initNamaWpSelect();
+                },
+
+                 initNamaWpSelect() {
+                        // Mengumpulkan nama_wp yang unik
+                        const uniqueNamaWp = [...new Set(pph21.map(item => item.nama_wp))];
+
+                        // select dropdown dengan data nama_wp yang unik
+                        const selectElement = document.getElementById('namaWpSelect');
+                        selectElement.innerHTML = '<option value="">Pilih Nama WP</option>';
+
+                        uniqueNamaWp.forEach(nama_wp => {
+                            const option = document.createElement('option');
+                            option.value = nama_wp;
+                            option.textContent = nama_wp;
+                            selectElement.appendChild(option);
+                        });
+
+                        // Tambahkan event listener untuk pencarian langsung
+                        selectElement.addEventListener('change', (event) => {
+                            const selectedNamaWp = event.target.value;
+                            const table = $('#pph21Table').DataTable();
+                            table.columns(1).search(selectedNamaWp).draw();
+                        });
+                    },
                     }))
                 })
             </script>

@@ -11,18 +11,11 @@
                                 class="fas fa-download fa-sm text-white-50"></i> Generate Report</a> -->
         </div>
 
-        <h4>
-            <!-- @if(Auth::check())
-            Selamat Datang
-            <b>{{ Auth::user()->name }}</b>,
-            Anda Login sebagai
-            <b>{{ Auth::user()->role }}</b>
-            @else
-            Anda belum login.
-            @endif -->
-
-            WELCOME, User!
-        </h4>
+        @if (Auth::guard('admin')->check())
+        <h4>Selamat Datang, <b>{{ Auth::guard('admin')->user()->nama_wp }}!</b></h4>
+        @elseif (Auth::guard('user')->check())
+            <h4>Selamat Datang,<b> {{ Auth::guard('user')->user()->nama_wp }}!</b></h4>
+        @endif
         <br>
         <!-- Content Row -->
         <div class="row">

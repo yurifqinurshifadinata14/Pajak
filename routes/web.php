@@ -51,14 +51,8 @@ Route::middleware(['auth:user'])->group(function () {
     Route::get('/user/karyawansub', [KaryawanController::class, 'karyawansubUser'])->name('user.karyawanSub');
 
     //pphunifikasi
-    Route::get('/pphunifikasi', [PphunifikasiController::class, 'index'])->name('getpphunifikasisub');
-    Route::get('/getpphunifikasi', [PphunifikasiController::class, 'getPphunifikasi'])->name('getPphunifikasi');
-    Route::post('/pphunifikasistore', [PphunifikasiController::class, 'store'])->name('pphunifikasiStore');
     Route::get('/user/pphunifikasisub', [PphunifikasiController::class, 'pphunifikasisubUser'])->name('user.pphunifikasisub');
-    Route::get('/pphunifikasiEdit/{pphunifikasi}', [PphunifikasiController::class, 'edit'])->name('pphunifikasiEdit');
-    Route::put('/pphunifikasiUpdate/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('pphunifikasiUpdate');
-
-    Route::delete('/pphunifikasiDelete/{pphunifikasi}', [PphunifikasiController::class, 'destroy'])->name('pphunifikasiDestroy');
+   
 });
 
 
@@ -90,9 +84,6 @@ Route::middleware(['auth:admin'])->group(function () {
 
     //pph21
     Route::get('/admin/pph21sub', [Pph21Controller::class, 'pph21sub'])->name('admin.pph21Sub');
-
- 
-   
 
     Route::get('/getDataadmin', [DataadminController::class, 'getDataadmin'])->name('getDataadmin');
     Route::get('/dataadmin', [DataadminController::class, 'index'])->name('dataadmin');
@@ -135,6 +126,13 @@ Route::middleware(['auth:user,admin'])->group(function () {
     Route::get('/getpph21sub', [Pph21Controller::class, 'getPph21Sub'])->name('getpph21sub');
        // Route::get('/pph21', [Pph21Controller::class, 'index'])->name('pph21');
     Route::post('/pph21store', [Pph21Controller::class, 'store'])->name('pph21Store');
+
+    Route::get('/pphunifikasi', [PphunifikasiController::class, 'index'])->name('getpphunifikasisub');
+    Route::get('/getpphunifikasi', [PphunifikasiController::class, 'getPphunifikasi'])->name('getPphunifikasi');
+    Route::post('/pphunifikasistore', [PphunifikasiController::class, 'store'])->name('pphunifikasiStore');
+    Route::get('/pphunifikasiEdit/{pphunifikasi}', [PphunifikasiController::class, 'edit'])->name('pphunifikasiEdit');
+    Route::put('/pphunifikasiUpdate/{id_pphuni}', [PphunifikasiController::class, 'update'])->name('pphunifikasiUpdate');
+    Route::delete('/pphunifikasiDelete/{pphunifikasi}', [PphunifikasiController::class, 'destroy'])->name('pphunifikasiDestroy');
 });
 
   

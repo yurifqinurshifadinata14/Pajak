@@ -212,19 +212,6 @@ class Pph21Controller extends Controller
         $pph21->biaya_bulan = $request->biaya_bulan;
         $pph21->save();
 
-        /*  $karyawan = Karyawan::where('id_pph21', $id_pph21)->first();
-        $karyawan->nik = $request->nik;
-        $karyawan->npwp = $request->npwp;
-        $karyawan->save(); */
-
-
-        // $pph21->update([
-        //     'jumlah_bayar' => $request->jumlah_bayar,
-        //     'bpe' => $request->bpe,
-        //     'biaya_bulan' => $request->biaya_bulan,
-        //     'karyawan' => $request->karyawan,
-        // ]);
-
         return redirect()->route('pph21Sub');
     }
 
