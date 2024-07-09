@@ -132,7 +132,7 @@
 
                 <!-- Nav Item - Pph -->
                 <li
-                    class="nav-item {{ Request::is('admin/pph*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    class="nav-item {{ Request::is('admin/pph') ? 'active' : '' }} d-flex align-items-center justify-content-center">
                     <a class="nav-link" href="{{ route('admin.pph') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>PPH</span>
@@ -149,8 +149,8 @@
                 </li>
 
                 <li
-                    class="nav-item {{ Request::is('karyawansub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
-                    <a class="nav-link" href="{{ route('karyawanSub') }}" aria-expanded="true">
+                    class="nav-item {{ Request::is('admin/karyawansub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    <a class="nav-link" href="{{ route('admin.karyawanSub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Daftar Karyawan</span>
                     </a>

@@ -150,8 +150,8 @@
                 </li>
 
                 <li
-                    class="nav-item {{ Request::is('karyawansub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
-                    <a class="nav-link" href="{{ route('karyawanSub') }}" aria-expanded="true">
+                    class="nav-item {{ Request::is('user/karyawansub*') ? 'active' : '' }} d-flex align-items-center justify-content-center">
+                    <a class="nav-link" href="{{ route('user.karyawanSub') }}" aria-expanded="true">
                         <i class="fas fa-fw fa-briefcase"></i>
                         <span>Daftar Karyawan</span>
                     </a>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Imports\KaryawanImport;
 use App\Exports\KaryawanExport;
+use App\Models\Pajak;
+use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 
 class KaryawanController extends Controller
@@ -75,17 +77,50 @@ class KaryawanController extends Controller
         }
 
         $karyawan = Karyawan::create([
+            'id_pajak' => $request->id_pajak,
             'id_pph21' => null,
             'nik' => $request->nik,
             'npwp' => $request->npwp,
 
         ]);
+
+        $karyawan = Karyawan::join('pajaks', 'karyawans.id_pajak', '=', 'pajaks.id_pajak')
+            ->where('karyawans.id_pajak', Auth::guard('user')->user()->id_pajak)
+            ->select('karyawans.*', 'pajaks.nama_wp')
+            ->get();
         return redirect()->route('karyawanSub');
     }
     public function karyawansub()
     {
-        $karyawan = karyawan::all();
+        if (Auth::guard('admin')->check()) {
+            // Admin sees all data
+            $karyawan = Karyawan::all();
+        } elseif (Auth::guard('user')->check()) {
+            // User sees only their data
+            $idPajak = Auth::guard('user')->user()->id_pajak;
+            $karyawan = Karyawan::where('id_pajak', $idPajak)->get();
+            // $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
+        } else {
+            return redirect()->route('login');
+        }
+    
         return view('karyawan.karyawansub', compact('karyawan'));
+    }
+    
+
+    public function karyawansubUser()
+    {
+        if (Auth::guard('admin')->check()) {
+            // Admin sees all data
+            $karyawan = Karyawan::all();
+        } elseif (Auth::guard('user')->check()) {
+            // User sees only their data
+            $idPajak = Auth::guard('user')->user()->id_pajak;
+            $karyawan = Karyawan::where('id_pajak', $idPajak)->get();
+            $pajaks = Pajak::where('id_pajak', Auth::guard('user')->user()->id_pajak)->get();
+        }
+
+        return view('user.karyawansub', compact('karyawan', 'pajaks'));
     }
 
     public function getKaryawan()
@@ -118,6 +153,7 @@ class KaryawanController extends Controller
     public function update(Request $request, $id)
     {
         $karyawan = Karyawan::findOrFail($id);
+        $karyawan->id_pajak = $request->id_pajak;
         $karyawan->nama = $request->nama;
         $karyawan->nik = $request->nik;
         $karyawan->npwp = $request->npwp;

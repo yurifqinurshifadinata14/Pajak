@@ -1,4 +1,4 @@
-{{-- @props(['pajaks']) --}}
+@props(['pajaks'])
 
 <div class="modal fade" id="tambah" tabindex="-1" aria-labelledby="tambahModalLabel" aria-hidden="true"
     x-data="formTambah">
@@ -13,15 +13,15 @@
                 <div class="modal-body">
                     @csrf
                     <!-- Input Data -->
-                    {{-- <div class="form-group">
-                        <label for="id_pph21">Nama WP</label>
-                        <select name="id_pph21" id="id_pph21" class="form-select" x-model="formData.id_pph21">
+                    <div class="form-group">
+                        <label for="id_pajak">Nama WP</label>
+                        <select name="id_pajak" id="id_pajak" class="form-select" x-model="formData.id_pajak" required>
                             <option value="" disabled selected>Pilih Nama</option>
                             @foreach ($pajaks as $pajak)
-                                <option value="{{ $pajak->id_pajak }}">{{ $pajak->nama_wp }}</option>
+                            <option value="{{$pajak->id_pajak}}">{{$pajak->nama_wp}}</option>
                             @endforeach
                         </select>
-                    </div> --}}
+                    </div>
                     <div class="form-group">
                         <label for="nama">Nama</label>
                         <input type="text" class="form-control" id="nama" name="nama"

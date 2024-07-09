@@ -1,4 +1,4 @@
-@extends('user.main')
+@extends('admin.main')
 @section('konten')
     <main x-data="karyawan">
         <div class="container-fluid px-0">
@@ -14,22 +14,22 @@
                     </div>
 
                     <div class="d-flex align-items-center">
-                        <!-- Button trigger modal Import-->
-                        <button type="button" class="btn btn-sm btn-success me-2" title="Import Excel"
+                        <select id="namaWpSelect" class="form-select me-2" style="width: 200px;">
+                            <option value="">Pilih Nama WP</option>
+                        </select>
+                        <!-- <button type="button" class="btn btn-sm btn-success me-2" title="Import Excel"
                             data-bs-toggle="modal" data-bs-target="#importExcel">
                             <i class="fas fa-file-excel"></i>
                             <span class="d-none d-md-inline">Import Excel</span>
                         </button>
-                        <!-- Button Tambah -->
                         <button type="button" class="btn btn-sm btn-primary float-end me-2" title="Tambah Data Karyawan"
                             data-bs-toggle="modal" data-bs-target="#tambah">
                             <i class="fas fa-fw fa-solid fa-plus"></i>
                             <span class="d-none d-md-inline">Tambah</span>
-                        </button>
+                        </button> -->
                     </div>
 
                     <!-- modal button tambah-->
-                    <x-karyawansub.modaltambah />
                     <!-- modal button edit-->
                     <x-karyawansub.modaledit />
                     <!-- Modal Button import -->
@@ -200,6 +200,7 @@
         Alpine.store('karyawanEdit', {
             formData: {
                 id: '',
+                id_pajak:'',
                 nama: '',
                 nik: '',
                 npwp: ''
@@ -210,6 +211,7 @@
             file: null,
             formData: {
                 id: '',
+                id_pajak:'',
                 nama: '',
                 nik: '',
                 npwp: ''
@@ -224,6 +226,7 @@
             handleReset() {
                 this.formData = {
                     id: '',
+                    id_pajak:'',
                     nama: '',
                     nik: '',
                     npwp: ''
@@ -254,6 +257,33 @@
                     }
                 }).then(res => getKaryawan()).catch(err => console.log(err));
             },
+
+            init() {
+                    this.initNamaWpSelect();
+                },
+
+                initNamaWpSelect() {
+                        // Mengumpulkan nama_wp yang unik
+                        const uniqueNamaWp = [...new Set(karyawan.map(item => item.nama_wp))];
+
+                        // select dropdown dengan data nama_wp yang unik
+                        const selectElement = document.getElementById('namaWpSelect');
+                        selectElement.innerHTML = '<option value="">Pilih Nama WP</option>';
+
+                        uniqueNamaWp.forEach(nama_wp => {
+                            const option = document.createElement('option');
+                            option.value = nama_wp;
+                            option.textContent = nama_wp;
+                            selectElement.appendChild(option);
+                        });
+
+                        // Tambahkan event listener untuk pencarian langsung
+                        selectElement.addEventListener('change', (event) => {
+                            const selectedNamaWp = event.target.value;
+                            const table = $('#tableKaryawan').DataTable();
+                            table.columns(1).search(selectedNamaWp).draw();
+                        });
+                    },
 
             handleImport() {
                 let formData = new FormData();

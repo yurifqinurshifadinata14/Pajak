@@ -86,7 +86,7 @@
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="exampleInputPassword" placeholder="NPWP" name="npwp">
+                                                id="exampleInputPassword" placeholder="Password" name="npwp">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
