@@ -339,7 +339,7 @@
                 file: null,
                 select(id) {
                     this.data = pajak.filter(item => item.id_pajak == id)
-                    this.data = this.data[0]
+                    this.data = this.data[0] 
                 },
 
                 editSubmit() {
